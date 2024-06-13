@@ -1,7 +1,7 @@
 package model;
 
 public class Karyawan { // OK
-    private int id_karyawan;
+    private String id_karyawan;
     private String nama_karyawan;
     private String jabatan;
     private float gaji;
@@ -12,7 +12,7 @@ public class Karyawan { // OK
         this.gaji = gaji;
     } // konstruktor tanpa id_karyawan
 
-    public Karyawan(int id_karyawan, String nama_karyawan, String jabatan, float gaji) {
+    public Karyawan(String id_karyawan, String nama_karyawan, String jabatan, float gaji) {
         this.id_karyawan = id_karyawan;
         this.nama_karyawan = nama_karyawan;
         this.jabatan = jabatan;
@@ -20,7 +20,7 @@ public class Karyawan { // OK
     } // konstruktor lengkap
 
     // getter
-    public int getId_karyawan() {
+    public String getId_karyawan() {
         return id_karyawan;
     }
 
@@ -37,7 +37,7 @@ public class Karyawan { // OK
     }
 
     // setter
-    public void setId_karyawan(int id_karyawan) {
+    public void setId_karyawan(String id_karyawan) {
         this.id_karyawan = id_karyawan;
     }
 
