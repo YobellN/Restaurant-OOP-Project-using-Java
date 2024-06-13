@@ -4,23 +4,23 @@
  */
 package panelView;
 
-import control.ProdukControl;
-import control.TitipanControl;
-import control.OriginalControl;
+import control.MenuControl;
+import control.MinumanControl;
+import control.MakananControl;
 import java.awt.Component;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
-import model.Produk;
-import model.Titipan;
-import model.Original;
+import model.Menu;
+import model.Minuman;
+import model.Makanan;
 
-public class ProdukMainPanel extends javax.swing.JPanel {
-    private ProdukControl parentControl = new ProdukControl();
-    private OriginalControl leftChildControl = new OriginalControl();
-    private TitipanControl rightChildControl = new TitipanControl();
-    private Produk parentModel = null;
-    private Titipan rightChildModel = null;
-    private Original leftChildModel = null;
+public class MenuMainPanel extends javax.swing.JPanel {
+    private MenuControl menuControl = new MenuControl();
+    private MakananControl makananControl = new MakananControl();
+    private MinumanControl minumanControl = new MinumanControl();
+    private Menu menu = null;
+    private Minuman minuman = null;
+    private Makanan makanan = null;
     String action = null;
     private Component rootPane;
     
@@ -29,7 +29,6 @@ public class ProdukMainPanel extends javax.swing.JPanel {
      */
     
    
-    
     public boolean isInteger(String str) {
         try {
             Integer.parseInt(str);
@@ -39,9 +38,10 @@ public class ProdukMainPanel extends javax.swing.JPanel {
         }
     }
     
-    public ProdukMainPanel() {
+    public MenuMainPanel() {
         initComponents();
-        showProduk();
+        showTableMakanan();
+        showTableMinuman();
         setComponentsData(false);
         
         setDataEditDeleteButton(false);
@@ -84,29 +84,32 @@ public class ProdukMainPanel extends javax.swing.JPanel {
         }
     }
     
-    private void showProduk(){
-        titipanTextArea.setText("List Titipan: \n ============= \n"+rightChildControl.showStringProduk());
-        originalTextArea.setText("List Original: \n ============= \n"+leftChildControl.showStringProduk());
+    public void showTableMakanan(){
+        tabelMakanan.setModel(makananControl.showTable());
+    }
+    
+    public void showTableMinuman(){
+        tabelMinuman.setModel(minumanControl.showTable());
     }
     
     private boolean originalIsSelected(){
         return jenisProdukInputButton.getText().equals("Original");
     }
     
-    private void doSearchProduk(){
+    private void doSearchMenu(){
         if(searchProdukInputTextField.getText().isEmpty())
             return;
         
-            parentModel = parentControl.searchDataProduk(searchProdukInputTextField.getText());
+            menu = menuControl.searchDataMenu(searchProdukInputTextField.getText());
             
-        if(parentModel != null){
+        if(menu != null){
             setDataEditDeleteButton(true);
-            idProdukInputTextField.setText(parentModel.getId_produk());
-            namaProdukInputTextField.setText(parentModel.getNama());
-            hargaProdukInputTextfield.setText(Float.toString(parentModel.getHarga()));
-            jenisProdukInputButton.setText(parentModel.getJenis());
+            idProdukInputTextField.setText(menu.getId_menu());
+            namaProdukInputTextField.setText(menu.getNama_menu());
+            hargaProdukInputTextfield.setText(Float.toString(menu.getHarga()));
+            jenisProdukInputButton.setText(menu.getJenis_menu());
             setSpecialAtributeLabel();
-            specialAtributeInputTextfield.setText(parentModel.getSpecial());
+            specialAtributeInputTextfield.setText(menu.getSpecial());
         }else{
             JOptionPane.showMessageDialog(rootPane, "NOT FOUND !!!");
         }
@@ -149,10 +152,10 @@ public class ProdukMainPanel extends javax.swing.JPanel {
         specialAtributeInputPanel = new javax.swing.JPanel();
         specialAtributeInputLabel = new javax.swing.JLabel();
         specialAtributeInputTextfield = new javax.swing.JTextField();
-        originalScrollPane = new javax.swing.JScrollPane();
-        originalTextArea = new javax.swing.JTextArea();
-        titipanScrollPane = new javax.swing.JScrollPane();
-        titipanTextArea = new javax.swing.JTextArea();
+        makananScrollPane = new javax.swing.JScrollPane();
+        tabelMakanan = new javax.swing.JTable();
+        minumanScrollPane = new javax.swing.JScrollPane();
+        tabelMinuman = new javax.swing.JTable();
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -185,12 +188,11 @@ public class ProdukMainPanel extends javax.swing.JPanel {
             .addGroup(searchProdukInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(searchProdukInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(searchProdukInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchProdukInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 1564, Short.MAX_VALUE)
                     .addGroup(searchProdukInputPanelLayout.createSequentialGroup()
                         .addComponent(searchProdukInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(searchProdukInputButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(searchProdukInputButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         searchProdukInputPanelLayout.setVerticalGroup(
@@ -426,7 +428,7 @@ public class ProdukMainPanel extends javax.swing.JPanel {
                 .addGroup(ProdukFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(namaProdukInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jenisProdukInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         kendaraanFormPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -497,21 +499,31 @@ public class ProdukMainPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        originalScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        tabelMakanan.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        makananScrollPane.setViewportView(tabelMakanan);
 
-        originalTextArea.setColumns(20);
-        originalTextArea.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
-        originalTextArea.setRows(5);
-        originalTextArea.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        originalScrollPane.setViewportView(originalTextArea);
-
-        titipanScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        titipanScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
-        titipanTextArea.setColumns(20);
-        titipanTextArea.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
-        titipanTextArea.setRows(5);
-        titipanScrollPane.setViewportView(titipanTextArea);
+        tabelMinuman.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        minumanScrollPane.setViewportView(tabelMinuman);
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -522,13 +534,13 @@ public class ProdukMainPanel extends javax.swing.JPanel {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(searchProdukInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(ProdukFormPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(kendaraanFormPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(originalScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ProdukFormPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(makananScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(titipanScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)))
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(kendaraanFormPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(minumanScrollPane))))
                 .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
@@ -540,11 +552,11 @@ public class ProdukMainPanel extends javax.swing.JPanel {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ProdukFormPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(kendaraanFormPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titipanScrollPane)
-                    .addComponent(originalScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(makananScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 796, Short.MAX_VALUE)
+                    .addComponent(minumanScrollPane))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -568,13 +580,13 @@ public class ProdukMainPanel extends javax.swing.JPanel {
     private void searchProdukInputTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchProdukInputTextFieldKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyChar()=='\n'){
-            doSearchProduk();
+            doSearchMenu();
         }
     }//GEN-LAST:event_searchProdukInputTextFieldKeyPressed
 
     private void searchProdukInputButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchProdukInputButtonActionPerformed
         // TODO add your handling code here:
-        doSearchProduk();
+        doSearchMenu();
     }//GEN-LAST:event_searchProdukInputButtonActionPerformed
 
     private void barukanProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barukanProdukButtonActionPerformed
@@ -590,11 +602,12 @@ public class ProdukMainPanel extends javax.swing.JPanel {
         if( opsi == JOptionPane.NO_OPTION || opsi == JOptionPane.CLOSED_OPTION)
         return;
 
-        parentControl.deleteDataProduk(idProdukInputTextField.getText());
+        menuControl.deleteDataMenu(idProdukInputTextField.getText());
         clearTextData();
         setDataEditDeleteButton(false);
         setComponentsData(false);
-        showProduk();
+        showTableMakanan();
+        showTableMinuman();
     }//GEN-LAST:event_hapusProdukButtonActionPerformed
 
     private void tambahProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahProdukButtonActionPerformed
@@ -606,8 +619,8 @@ public class ProdukMainPanel extends javax.swing.JPanel {
         setDataEditDeleteButton(false);
 
         idProdukInputTextField.setEnabled(false);
-        idProdukInputTextField.setText(parentControl.generateId());
-        jenisProdukInputButton.setText("Titipan");
+        idProdukInputTextField.setText(menuControl.generateId());
+        jenisProdukInputButton.setText("Minuman");
         setSpecialAtributeLabel();
     }//GEN-LAST:event_tambahProdukButtonActionPerformed
 
@@ -628,8 +641,8 @@ public class ProdukMainPanel extends javax.swing.JPanel {
     private void jenisProdukInputButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jenisProdukInputButtonActionPerformed
         // TODO add your handling code here:
         switch(jenisProdukInputButton.getText()){
-            case "Original": jenisProdukInputButton.setText("Titipan"); break;
-            case "Titipan": jenisProdukInputButton.setText("Original"); break;
+            case "Makanan": jenisProdukInputButton.setText("Minuman"); break;
+            case "Minuman": jenisProdukInputButton.setText("Makanan"); break;
         }
         setSpecialAtributeLabel();
     }//GEN-LAST:event_jenisProdukInputButtonActionPerformed
@@ -646,33 +659,35 @@ public class ProdukMainPanel extends javax.swing.JPanel {
             switch (action){
                 case "add":
                 if(originalIsSelected()){
-                    leftChildModel = new Original(specialAtributeInputTextfield.getText(), namaProdukInputTextField.getText(),
+                    makanan = new Makanan(specialAtributeInputTextfield.getText(), namaProdukInputTextField.getText(),
                         jenisProdukInputButton.getText(), Float.parseFloat(hargaProdukInputTextfield.getText()));
-                    leftChildControl.insertDataProduk(leftChildModel);
+                    makananControl.insertDataMenu(makanan);
                 }else{
-                    rightChildModel = new Titipan(Integer.parseInt(specialAtributeInputTextfield.getText()), namaProdukInputTextField.getText(),
+                    minuman = new Minuman(specialAtributeInputTextfield.getText(), namaProdukInputTextField.getText(),
                         jenisProdukInputButton.getText(), Float.parseFloat(hargaProdukInputTextfield.getText()));
-                    rightChildControl.insertDataProduk(rightChildModel);
+                    minumanControl.insertDataMenu(minuman);
                 }
                 clearTextData();
                 setDataEditDeleteButton(false);
                 setComponentsData(false);
-                showProduk();
+                showTableMakanan();
+                showTableMinuman();
                 break;
                 case "update":
                 if(originalIsSelected()){
-                    leftChildModel = new Original(specialAtributeInputTextfield.getText(),idProdukInputTextField.getText(), namaProdukInputTextField.getText(),
+                    makanan = new Makanan(specialAtributeInputTextfield.getText(),idProdukInputTextField.getText(), namaProdukInputTextField.getText(),
                         jenisProdukInputButton.getText(), Float.parseFloat(hargaProdukInputTextfield.getText()));
-                    leftChildControl.updateDataProduk(leftChildModel);
+                    makananControl.updateDataProduk(makanan);
                 }else{
-                    rightChildModel = new Titipan(Integer.parseInt(specialAtributeInputTextfield.getText()),idProdukInputTextField.getText(), namaProdukInputTextField.getText(),
+                    minuman = new Minuman(specialAtributeInputTextfield.getText(),idProdukInputTextField.getText(), namaProdukInputTextField.getText(),
                         jenisProdukInputButton.getText(), Float.parseFloat(hargaProdukInputTextfield.getText()));
-                    rightChildControl.updateDataProduk(rightChildModel);
+                    minumanControl.updateDataProduk(minuman);
                 }
                 clearTextData();
                 setDataEditDeleteButton(false);
                 setComponentsData(false);
-                showProduk();
+                showTableMakanan();
+                showTableMinuman();
                 break;
                 default:
                 break;
@@ -702,11 +717,11 @@ public class ProdukMainPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jenisProdukInputPanel;
     private javax.swing.JPanel kendaraanFormPanel2;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JScrollPane makananScrollPane;
+    private javax.swing.JScrollPane minumanScrollPane;
     private javax.swing.JLabel namaProdukInputLabel;
     private javax.swing.JPanel namaProdukInputPanel;
     private javax.swing.JTextField namaProdukInputTextField;
-    private javax.swing.JScrollPane originalScrollPane;
-    private javax.swing.JTextArea originalTextArea;
     private javax.swing.JButton searchProdukInputButton;
     private javax.swing.JLabel searchProdukInputLabel;
     private javax.swing.JPanel searchProdukInputPanel;
@@ -715,8 +730,8 @@ public class ProdukMainPanel extends javax.swing.JPanel {
     private javax.swing.JLabel specialAtributeInputLabel;
     private javax.swing.JPanel specialAtributeInputPanel;
     private javax.swing.JTextField specialAtributeInputTextfield;
+    private javax.swing.JTable tabelMakanan;
+    private javax.swing.JTable tabelMinuman;
     private javax.swing.JButton tambahProdukButton;
-    private javax.swing.JScrollPane titipanScrollPane;
-    private javax.swing.JTextArea titipanTextArea;
     // End of variables declaration//GEN-END:variables
 }

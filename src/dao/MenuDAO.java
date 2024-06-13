@@ -48,7 +48,7 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
                     "WHERE menu.id_menu = '"
                 + id_menu
                 + "'";
-        System.out.println("Searching Produk...");
+        System.out.println("Searching Menu...");
         Menu m = null;
         
         try{
@@ -160,7 +160,7 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
     public void delete(String id_menu){
         con = dbCon.makeConnection();
         String sql = "DELETE FROM `menu` WHERE `id_menu` = '"+id_menu+"'";
-        System.out.println("Deleting Produk...");
+        System.out.println("Deleting Menu...");
         
         try{
             Statement statement = con.createStatement();
@@ -168,7 +168,7 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
             System.out.println("Edited" + result + " Menu " + id_menu);
             statement.close();
         }catch(Exception e){
-            System.out.println("Error Updating Produk...");
+            System.out.println("Error Updating Menu...");
             System.out.println(e);
         }
         dbCon.closeConnection();
@@ -178,7 +178,7 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
     
     public int generateId(){
         con = dbCon.makeConnection();
-        String sql = "SELECT MAX(CAST(SUBSTRING(id_menu, 2) AS SIGNED)) AS highest_number FROM produk WHERE id_produk LIKE 'M%';";
+        String sql = "SELECT MAX(CAST(SUBSTRING(id_menu, 2) AS SIGNED)) AS highest_number FROM menu WHERE id_menu LIKE 'M%';";
         //mendapatkan nilai tertinggi dari id yang ada di database
         
         System.out.println("Generating Id...");
@@ -297,10 +297,10 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
                 + m.getJenis_menu()
                 + "` SET `deskripsi`='"
                 + m.getSpecial()
-                + "' WHERE `original`.id_produk = '"
+                + "' WHERE `makanan`.id_menu = '"
                 + id_menu
                 + "'";
-        System.out.println("Updating Jenis Produk...");
+        System.out.println("Updating Jenis Menu...");
         
         try{
             Statement statement = con.createStatement();

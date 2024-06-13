@@ -4,6 +4,7 @@ import java.sql.Statement;
 import model.Menu;
 import model.Makanan;
 import interfaceDAO.IMenuDAO;
+import java.util.List;
 
 public class MakananDAO extends MenuDAO implements IMenuDAO{
 
@@ -45,10 +46,10 @@ public class MakananDAO extends MenuDAO implements IMenuDAO{
         try{
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
-            System.out.println("Edited" + result + " Produk " + id_menu);
+            System.out.println("Edited" + result + " Menu " + id_menu);
             statement.close();
         }catch(Exception e){
-            System.out.println("Error Updating Produk...");
+            System.out.println("Error Updating Menu...");
             System.out.println(e);
         }
         dbCon.closeConnection();
@@ -64,4 +65,6 @@ public class MakananDAO extends MenuDAO implements IMenuDAO{
         }
         super.update(m, id_menu);
     }
+
+
 }
