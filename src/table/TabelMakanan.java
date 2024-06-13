@@ -6,8 +6,8 @@ package table;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import model.Menu;
 import model.Makanan;
+import model.Menu;
 
 public class TabelMakanan extends AbstractTableModel{
     private List<Menu> list;

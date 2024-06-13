@@ -10,6 +10,7 @@ import control.MakananControl;
 import java.awt.Component;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
 import model.Menu;
 import model.Minuman;
 import model.Makanan;
@@ -23,6 +24,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
     private Makanan makanan = null;
     String action = null;
     private Component rootPane;
+    private String selectedId = "";
     
     /**
      * Creates new form KendaraanView
@@ -44,7 +46,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
         showTableMinuman();
         setComponentsData(false);
         
-        setDataEditDeleteButton(false);
+        setEditDeleteButton(false);
         
         clearTextData();
     }
@@ -58,7 +60,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
         jenisProdukInputButton.setEnabled(value);
     }
     
-    private void setDataEditDeleteButton(boolean value){
+    private void setEditDeleteButton(boolean value){
         barukanProdukButton.setEnabled(value);
         hapusProdukButton.setEnabled(value);
     }
@@ -77,10 +79,10 @@ public class MenuMainPanel extends javax.swing.JPanel {
     
     // Customer Clear Text    
     private void setSpecialAtributeLabel(){
-        if(jenisProdukInputButton.getText().equals("Original")){
-            specialAtributeInputLabel.setText("Deskripsi");
+        if(jenisProdukInputButton.getText().equals("Makanan")){
+            specialAtributeInputLabel.setText("Catatan");
         }else{
-            specialAtributeInputLabel.setText("Stok");
+            specialAtributeInputLabel.setText("Ukuran");
         }
     }
     
@@ -92,8 +94,8 @@ public class MenuMainPanel extends javax.swing.JPanel {
         tabelMinuman.setModel(minumanControl.showTable());
     }
     
-    private boolean originalIsSelected(){
-        return jenisProdukInputButton.getText().equals("Original");
+    private boolean makananIsSelected(){
+        return jenisProdukInputButton.getText().equals("Makanan");
     }
     
     private void doSearchMenu(){
@@ -103,7 +105,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
             menu = menuControl.searchDataMenu(searchProdukInputTextField.getText());
             
         if(menu != null){
-            setDataEditDeleteButton(true);
+            setEditDeleteButton(true);
             idProdukInputTextField.setText(menu.getId_menu());
             namaProdukInputTextField.setText(menu.getNama_menu());
             hargaProdukInputTextfield.setText(Float.toString(menu.getHarga()));
@@ -149,6 +151,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
         jenisProdukInputButton = new javax.swing.JButton();
         kendaraanFormPanel2 = new javax.swing.JPanel();
         simpanProdukButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
         specialAtributeInputPanel = new javax.swing.JPanel();
         specialAtributeInputLabel = new javax.swing.JLabel();
         specialAtributeInputTextfield = new javax.swing.JTextField();
@@ -437,16 +440,27 @@ public class MenuMainPanel extends javax.swing.JPanel {
         simpanProdukButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         simpanProdukButton.setForeground(new java.awt.Color(255, 255, 255));
         simpanProdukButton.setText("Simpan");
+        simpanProdukButton.setPreferredSize(new java.awt.Dimension(81, 21));
         simpanProdukButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 simpanProdukButtonActionPerformed(evt);
             }
         });
 
+        cancelButton.setBackground(new java.awt.Color(237, 8, 0));
+        cancelButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        cancelButton.setForeground(new java.awt.Color(255, 255, 255));
+        cancelButton.setText("Batalkan");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+
         specialAtributeInputPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         specialAtributeInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        specialAtributeInputLabel.setText("Stok");
+        specialAtributeInputLabel.setText("Catatan");
 
         specialAtributeInputTextfield.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         specialAtributeInputTextfield.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -464,7 +478,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 .addGroup(specialAtributeInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(specialAtributeInputTextfield, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
                     .addComponent(specialAtributeInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(549, Short.MAX_VALUE))
         );
         specialAtributeInputPanelLayout.setVerticalGroup(
             specialAtributeInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -483,10 +497,12 @@ public class MenuMainPanel extends javax.swing.JPanel {
             .addGroup(kendaraanFormPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(kendaraanFormPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(specialAtributeInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kendaraanFormPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(simpanProdukButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(specialAtributeInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(simpanProdukButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         kendaraanFormPanel2Layout.setVerticalGroup(
@@ -495,7 +511,9 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(specialAtributeInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(simpanProdukButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(kendaraanFormPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(simpanProdukButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -510,6 +528,11 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabelMakanan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelMakananMouseClicked(evt);
+            }
+        });
         makananScrollPane.setViewportView(tabelMakanan);
 
         tabelMinuman.setModel(new javax.swing.table.DefaultTableModel(
@@ -523,6 +546,11 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabelMinuman.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelMinumanMouseClicked(evt);
+            }
+        });
         minumanScrollPane.setViewportView(tabelMinuman);
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
@@ -536,11 +564,14 @@ public class MenuMainPanel extends javax.swing.JPanel {
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ProdukFormPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(makananScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(makananScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(kendaraanFormPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(minumanScrollPane))))
+                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addGap(191, 191, 191)
+                                .addComponent(kendaraanFormPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(minumanScrollPane)))))
                 .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
@@ -604,7 +635,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
 
         menuControl.deleteDataMenu(idProdukInputTextField.getText());
         clearTextData();
-        setDataEditDeleteButton(false);
+        setEditDeleteButton(false);
         setComponentsData(false);
         showTableMakanan();
         showTableMinuman();
@@ -614,9 +645,9 @@ public class MenuMainPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         action = "add";
         clearTextData();
-        setDataEditDeleteButton(false);
+        setEditDeleteButton(false);
         setComponentsData(true);
-        setDataEditDeleteButton(false);
+        setEditDeleteButton(false);
 
         idProdukInputTextField.setEnabled(false);
         idProdukInputTextField.setText(menuControl.generateId());
@@ -641,8 +672,12 @@ public class MenuMainPanel extends javax.swing.JPanel {
     private void jenisProdukInputButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jenisProdukInputButtonActionPerformed
         // TODO add your handling code here:
         switch(jenisProdukInputButton.getText()){
-            case "Makanan": jenisProdukInputButton.setText("Minuman"); break;
-            case "Minuman": jenisProdukInputButton.setText("Makanan"); break;
+            case "Makanan": 
+                jenisProdukInputButton.setText("Minuman"); 
+                break;
+            case "Minuman": 
+                jenisProdukInputButton.setText("Makanan"); 
+                break;
         }
         setSpecialAtributeLabel();
     }//GEN-LAST:event_jenisProdukInputButtonActionPerformed
@@ -658,7 +693,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
 
             switch (action){
                 case "add":
-                if(originalIsSelected()){
+                if(makananIsSelected()){
                     makanan = new Makanan(specialAtributeInputTextfield.getText(), namaProdukInputTextField.getText(),
                         jenisProdukInputButton.getText(), Float.parseFloat(hargaProdukInputTextfield.getText()));
                     makananControl.insertDataMenu(makanan);
@@ -668,13 +703,13 @@ public class MenuMainPanel extends javax.swing.JPanel {
                     minumanControl.insertDataMenu(minuman);
                 }
                 clearTextData();
-                setDataEditDeleteButton(false);
+                setEditDeleteButton(false);
                 setComponentsData(false);
                 showTableMakanan();
                 showTableMinuman();
                 break;
                 case "update":
-                if(originalIsSelected()){
+                if(makananIsSelected()){
                     makanan = new Makanan(specialAtributeInputTextfield.getText(),idProdukInputTextField.getText(), namaProdukInputTextField.getText(),
                         jenisProdukInputButton.getText(), Float.parseFloat(hargaProdukInputTextfield.getText()));
                     makananControl.updateDataProduk(makanan);
@@ -684,7 +719,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
                     minumanControl.updateDataProduk(minuman);
                 }
                 clearTextData();
-                setDataEditDeleteButton(false);
+                setEditDeleteButton(false);
                 setComponentsData(false);
                 showTableMakanan();
                 showTableMinuman();
@@ -699,11 +734,74 @@ public class MenuMainPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_specialAtributeInputTextfieldKeyTyped
 
+    private void tabelMakananMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMakananMouseClicked
+        tabelMinuman.clearSelection();
+        action = "baharui";
+        
+        tambahProdukButton.setEnabled(false);
+        cancelButton.setEnabled(true);
+        simpanProdukButton.setEnabled(true);        
+        setEditDeleteButton(true);
+        
+        setComponentsData(false);
+        
+        int clickedRow = tabelMakanan.getSelectedRow();
+        TableModel tableModel = tabelMakanan.getModel();
+        
+        selectedId = tableModel.getValueAt(clickedRow, 0).toString();
+
+        idProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 0).toString());
+        namaProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
+        jenisProdukInputButton.setText(tableModel.getValueAt(clickedRow, 2).toString());
+        specialAtributeInputTextfield.setText(tableModel.getValueAt(clickedRow, 3).toString());
+        hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString());
+        setSpecialAtributeLabel();
+        cancelButton.setEnabled(true);
+    }//GEN-LAST:event_tabelMakananMouseClicked
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        clearTextData();
+        setEditDeleteButton(false);
+        setComponentsData(false);
+        setEditDeleteButton(false);
+        tambahProdukButton.setEnabled(true);
+        tabelMakanan.clearSelection();
+        tabelMinuman.clearSelection();
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void tabelMinumanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMinumanMouseClicked
+        tabelMakanan.clearSelection();
+
+        action = "baharui";
+        
+        tambahProdukButton.setEnabled(false);
+        cancelButton.setEnabled(true);
+        simpanProdukButton.setEnabled(true);        
+        setEditDeleteButton(true);
+        
+        setComponentsData(false);
+
+        
+        int clickedRow = tabelMinuman.getSelectedRow();
+        TableModel tableModel = tabelMinuman.getModel();
+        
+        selectedId = tableModel.getValueAt(clickedRow, 0).toString();
+        
+        idProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 0).toString());
+        namaProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
+        jenisProdukInputButton.setText(tableModel.getValueAt(clickedRow, 2).toString());
+        specialAtributeInputTextfield.setText(tableModel.getValueAt(clickedRow, 3).toString());
+        hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString());
+        setSpecialAtributeLabel();
+        cancelButton.setEnabled(true);
+    }//GEN-LAST:event_tabelMinumanMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ProdukButtonPanel;
     private javax.swing.JPanel ProdukFormPanel;
     private javax.swing.JButton barukanProdukButton;
+    private javax.swing.JButton cancelButton;
     private javax.swing.JButton hapusProdukButton;
     private javax.swing.JLabel hargaProdukInputLabel;
     private javax.swing.JPanel hargaProdukInputPanel;
