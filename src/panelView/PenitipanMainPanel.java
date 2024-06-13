@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 import java.awt.Component;
 
-import model.Penitip;
+import model.Karyawan;
 import model.Produk;
 import model.Penitipan;
 
@@ -29,7 +29,7 @@ public class PenitipanMainPanel extends javax.swing.JPanel {
     String action = null;
     int selectedId = 0;
     
-    List<Penitip> singleList;
+    List<Karyawan> singleList;
     List<Produk> multiList;
 
     private Component rootPane;
@@ -705,7 +705,7 @@ public class PenitipanMainPanel extends javax.swing.JPanel {
             // MENCARI INDEX YANG DITUNJUK OLEH DROPDOWN
             // CUSTOMER
             int selectedIndexSingle = namaData1Dropdown.getSelectedIndex();            
-            Penitip selectedSingle = singleList.get(selectedIndexSingle);
+            Karyawan selectedSingle = singleList.get(selectedIndexSingle);
             
             // KENDARAAN
             int selectedIndexMulti = namaData2Dropdown.getSelectedIndex();
@@ -838,7 +838,7 @@ public class PenitipanMainPanel extends javax.swing.JPanel {
                 break;
         }
 
-        for(Penitip first : singleList){
+        for(Karyawan first : singleList){
             if(first.getId_penitip() == Integer.parseInt(tableModel.getValueAt(clickedRow, 7).toString())){
                 indexSingle = singleList.indexOf(first);
             }
@@ -882,7 +882,7 @@ public class PenitipanMainPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
-    private javax.swing.JComboBox<Penitip> namaData1Dropdown;
+    private javax.swing.JComboBox<Karyawan> namaData1Dropdown;
     private javax.swing.JLabel namaData1Panel;
     private javax.swing.JComboBox<Produk> namaData2Dropdown;
     private javax.swing.JLabel namaData2Panel;

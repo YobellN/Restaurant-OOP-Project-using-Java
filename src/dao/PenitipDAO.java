@@ -7,16 +7,16 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import model.Penitip;
+import model.Karyawan;
 import interfaceDAO.IShowForDropdown;
 import interfaceDAO.ISearchData;
 
-public class PenitipDAO implements IDAO<Penitip, Integer>, IShowForDropdown<Penitip>, ISearchData<Penitip, Integer>{ // OK , i guess
+public class PenitipDAO implements IDAO<Karyawan, Integer>, IShowForDropdown<Karyawan>, ISearchData<Karyawan, Integer>{ // OK , i guess
     protected DbConnection dbCon = new DbConnection();
     protected Connection con;
     
     @Override
-    public void insert(Penitip C){
+    public void insert(Karyawan C){
         con = dbCon.makeConnection();
         
     String sql = 
@@ -39,12 +39,12 @@ public class PenitipDAO implements IDAO<Penitip, Integer>, IShowForDropdown<Peni
     
 //    @Override
     @Override
-    public Penitip search(Integer id_penitip){ 
+    public Karyawan search(Integer id_penitip){ 
         con = dbCon.makeConnection();
         
         String sql = "SELECT * FROM `penitip` WHERE id_penitip='"+id_penitip+"'";
         System.out.println("Searching Penitip...");
-        Penitip c = null;
+        Karyawan c = null;
         
         try{
             Statement statement = con.createStatement();
@@ -52,7 +52,7 @@ public class PenitipDAO implements IDAO<Penitip, Integer>, IShowForDropdown<Peni
             
             if(rs != null)
                 while(rs.next())
-                    c = new Penitip(
+                    c = new Karyawan(
                         rs.getInt("id_penitip"),
                         rs.getString("nama_penitip"),
                         rs.getString("alamat"),
@@ -69,12 +69,12 @@ public class PenitipDAO implements IDAO<Penitip, Integer>, IShowForDropdown<Peni
     }
     
     @Override
-    public List<Penitip> showData(Integer data){
+    public List<Karyawan> showData(Integer data){
         con = dbCon.makeConnection();
         
         String sql = "SELECT * FROM penitip";
         System.out.println("Fetching Data...");
-        List<Penitip> c = new ArrayList();
+        List<Karyawan> c = new ArrayList();
         
         try{
             Statement statement = con.createStatement();
@@ -82,7 +82,7 @@ public class PenitipDAO implements IDAO<Penitip, Integer>, IShowForDropdown<Peni
             
             if(rs != null)
                 while(rs.next())
-                    c.add(new Penitip(
+                    c.add(new Karyawan(
                         rs.getInt("id_penitip"),
                         rs.getString("nama_penitip"),
                         rs.getString("alamat"),
@@ -99,7 +99,7 @@ public class PenitipDAO implements IDAO<Penitip, Integer>, IShowForDropdown<Peni
     }
     
     @Override
-    public void update(Penitip c, Integer id_penitip){
+    public void update(Karyawan c, Integer id_penitip){
         con = dbCon.makeConnection();
         
         String sql = "UPDATE `penitip` SET "
@@ -140,12 +140,12 @@ public class PenitipDAO implements IDAO<Penitip, Integer>, IShowForDropdown<Peni
     }
     
     @Override
-    public List<Penitip> IShowForDropdown() {
+    public List<Karyawan> IShowForDropdown() {
         con = dbCon.makeConnection();
         
         String sql = "SELECT * FROM `penitip`;";
         System.out.println("Fetching Data...");
-        List<Penitip> data = new ArrayList();
+        List<Karyawan> data = new ArrayList();
         
         try{
             Statement statement = con.createStatement();
@@ -153,7 +153,7 @@ public class PenitipDAO implements IDAO<Penitip, Integer>, IShowForDropdown<Peni
             
             if(rs != null)
                 while(rs.next())
-                    data.add(new Penitip(
+                    data.add(new Karyawan(
                             rs.getInt("id_penitip"), 
                             rs.getString("nama_penitip"), 
                             rs.getString("alamat"), 

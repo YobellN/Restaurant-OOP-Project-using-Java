@@ -1,18 +1,18 @@
 package model;
 
-public class Penitip { // OK
+public class Karyawan { // OK
     private int id_penitip;
     private String nama;
     private String alamat;
     private String no_telepon;
 
-    public Penitip(String nama, String alamat, String no_telepon) {
+    public Karyawan(String nama, String alamat, String no_telepon) {
         this.nama = nama;
         this.alamat = alamat;
         this.no_telepon = no_telepon;
     }
 
-    public Penitip(int id_penitip, String nama, String alamat, String no_telepon) {
+    public Karyawan(int id_penitip, String nama, String alamat, String no_telepon) {
         this.id_penitip = id_penitip;
         this.nama = nama;
         this.alamat = alamat;

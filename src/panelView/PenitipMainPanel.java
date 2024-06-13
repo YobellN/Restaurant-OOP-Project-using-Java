@@ -7,11 +7,11 @@ package panelView;
 import control.PenitipControl;
 import java.awt.Component;
 import javax.swing.JOptionPane;
-import model.Penitip;
+import model.Karyawan;
 
 public class PenitipMainPanel extends javax.swing.JPanel {
     private PenitipControl dataControl = new PenitipControl();
-    private Penitip dataModel = null;
+    private Karyawan dataModel = null;
 
 
     String actionCustomer = null;
@@ -67,7 +67,7 @@ public class PenitipMainPanel extends javax.swing.JPanel {
     private void doSearchCustomer(){
         if(searchPenitipInputTextField.getText().isEmpty())
             return;
-            Penitip c = dataControl.searchCustomerById(Integer.parseInt(searchPenitipInputTextField.getText()));
+            Karyawan c = dataControl.searchCustomerById(Integer.parseInt(searchPenitipInputTextField.getText()));
             if(c == null ){
                 JOptionPane.showMessageDialog(rootPane, "NOT FOUND !!!");
                 return;
@@ -492,7 +492,7 @@ public class PenitipMainPanel extends javax.swing.JPanel {
             return;
             switch(actionCustomer){
                 case "add":
-                dataModel = new Penitip(namaPenitipInputTextField.getText(), nomorTeleponInputTextField.getText(), alamatInputTextField.getText());
+                dataModel = new Karyawan(namaPenitipInputTextField.getText(), nomorTeleponInputTextField.getText(), alamatInputTextField.getText());
                 dataControl.insertDataPenitip(dataModel);
                 clearTextData();
                 setEditDeleteButtonData(false);
@@ -500,7 +500,7 @@ public class PenitipMainPanel extends javax.swing.JPanel {
                 break;
                 
                 case "update":
-                dataModel = new Penitip(namaPenitipInputTextField.getText(), nomorTeleponInputTextField.getText(), alamatInputTextField.getText());
+                dataModel = new Karyawan(namaPenitipInputTextField.getText(), nomorTeleponInputTextField.getText(), alamatInputTextField.getText());
                 dataControl.updateDataCustomer(dataModel, idCustomer);
                 clearTextData();
                 setEditDeleteButtonData(false);

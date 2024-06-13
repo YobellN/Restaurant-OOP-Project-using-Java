@@ -1,7 +1,7 @@
 package model;
 
 import model.Produk; // ganti E menjadi normal i guess
-import model.Penitip;
+import model.Karyawan;
 
 public class Penitipan {
     
@@ -12,14 +12,14 @@ public class Penitipan {
     private String status_penitipan;
     private String tanggal_penitipan;
     private int jumlah_titipan;
-    private Penitip penitip;
+    private Karyawan penitip;
     private Produk produk;
 
-    public Penitip getPenitip() {
+    public Karyawan getPenitip() {
         return penitip;
     }
 
-    public void setPenitip(Penitip penitip) {
+    public void setPenitip(Karyawan penitip) {
         this.penitip = penitip;
     }
 
@@ -31,7 +31,7 @@ public class Penitipan {
         this.produk = produk;
     }
 
-    public Penitipan(int id_penitipan, int id_penitip, String id_produk, String catatan, String status_penitipan, String tanggal_penitipan, int jumlah_titipan, Penitip penitip, Produk produk) {
+    public Penitipan(int id_penitipan, int id_penitip, String id_produk, String catatan, String status_penitipan, String tanggal_penitipan, int jumlah_titipan, Karyawan penitip, Produk produk) {
         this.id_penitipan = id_penitipan;
         this.id_penitip = id_penitip;
         this.id_produk = id_produk;
@@ -43,7 +43,7 @@ public class Penitipan {
         this.produk = produk;
     }
 
-    public Penitipan(int id_penitip, String id_produk, String catatan, String status_penitipan, String tanggal_penitipan, int jumlah_titipan, Penitip penitip, Produk produk) {
+    public Penitipan(int id_penitip, String id_produk, String catatan, String status_penitipan, String tanggal_penitipan, int jumlah_titipan, Karyawan penitip, Produk produk) {
         this.id_penitip = id_penitip;
         this.id_produk = id_produk;
         this.catatan = catatan;
