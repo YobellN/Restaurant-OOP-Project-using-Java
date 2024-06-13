@@ -53,7 +53,7 @@ public class KaryawanDAO implements IDAO<Karyawan, String>, IShowForDropdown<Kar
             if(rs != null)
                 while(rs.next())
                     c = new Karyawan(
-                        rs.getInt("id_karyawan"),
+                        rs.getString("id_karyawan"),
                         rs.getString("nama_karyawan"),
                         rs.getString("jabatan"),
                         rs.getFloat("gaji"));
@@ -83,7 +83,7 @@ public class KaryawanDAO implements IDAO<Karyawan, String>, IShowForDropdown<Kar
             if(rs != null)
                 while(rs.next())
                     c.add(new Karyawan(
-                        rs.getInt("id_karyawan"),
+                        rs.getString("id_karyawan"),
                         rs.getString("nama_karyawan"),
                         rs.getString("jabatan"),
                         rs.getFloat("gaji")));
@@ -155,7 +155,7 @@ public class KaryawanDAO implements IDAO<Karyawan, String>, IShowForDropdown<Kar
             if(rs != null)
                 while(rs.next())
                     data.add(new Karyawan(
-                            rs.getInt("id_karyawan"),
+                            rs.getString("id_karyawan"),
                             rs.getString("nama_karyawan"),
                             rs.getString("jabatan"),
                             rs.getFloat("gaji")
