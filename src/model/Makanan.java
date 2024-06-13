@@ -12,7 +12,8 @@ public class Makanan extends Menu {
         super(id_menu, nama_menu, jenis_produk, harga);
         this.catatan = catatan;
     } //Konstruktor lengkap
-
+    
+    //
     public String getCatatan() {
         return catatan;
     }

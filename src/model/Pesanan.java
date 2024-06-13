@@ -4,10 +4,7 @@
  */
 package model;
 
-/**
- *
- * @author Tok Se Ka 220711904
- */
+
 public class Pesanan {
     private String id_pesanan; // SQL : id_pesanan
     private String id_menu; // SQL : id_menu

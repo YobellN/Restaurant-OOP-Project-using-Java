@@ -4,10 +4,7 @@
  */
 package model;
 
-/**
- *
- * @author Tok Se Ka 220711904
- */
+
 public class Reservasi {
     private String id_reservasi; // SQL : id_reservasi
     private String id_pelanggan; // SQL : id_pelanggan
