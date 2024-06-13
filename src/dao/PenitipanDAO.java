@@ -59,7 +59,7 @@ public class PenitipanDAO implements IDAO<Penitipan, String>{
         System.out.println("Mengambil data Pembelian Kendaraan...");
         List<Penitipan> list = new ArrayList();
         
-        Penitip targetSingleData = null;
+        Karyawan targetSingleData = null;
         Produk targetMultiData = null;
         
         try{
@@ -68,7 +68,7 @@ public class PenitipanDAO implements IDAO<Penitipan, String>{
             
             if(rs != null){
                 while(rs.next()){
-                    targetSingleData = new Penitip(
+                    targetSingleData = new Karyawan(
                         rs.getInt("P.id_penitip"),
                         rs.getString("P.nama_penitip"),
                         rs.getString("P.nomor_telepon"),
