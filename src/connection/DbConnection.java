@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 public class DbConnection {
     public static Connection CON;
     public static final String URL = "jdbc:mysql://";
-    public static final String DBNAME = "tipe_b";
+    public static final String DBNAME = "restoran";
     public static final String PATH = "localhost:3306/"+DBNAME;
     
     public Connection makeConnection (){

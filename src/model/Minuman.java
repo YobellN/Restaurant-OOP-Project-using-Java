@@ -13,11 +13,12 @@ public class Minuman extends Menu {
         this.ukuran = ukuran;
     }//Konstruktor tanpa id
 
-    //getter & setter
+    //getter
     public String getUkuran() {
         return ukuran;
     }
 
+    //setter
     public void setUkuran(String ukuran) {
         this.ukuran = ukuran;
     }
