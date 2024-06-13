@@ -288,38 +288,38 @@ public class MainViewForm extends javax.swing.JFrame {
         
         recolorDefaultSwitchPanel();
         singlePanel.setBackground(new Color(241, 53, 21, 200));
-        setForm(new PenitipMainPanel());
+        setForm(new MenuMainPanel());
         selectedIndex = 1;
     }//GEN-LAST:event_singlePanelMouseClicked
 
     private void multiplePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_multiplePanelMouseClicked
-        if(selectedIndex == 2)
-            return;
-        
-        recolorDefaultSwitchPanel();
-        multiplePanel.setBackground(new Color(241, 53, 21, 200));
-        setForm(new ProdukMainPanel());
-        selectedIndex = 2;
+//        if(selectedIndex == 2)
+//            return;
+//        
+//        recolorDefaultSwitchPanel();
+//        multiplePanel.setBackground(new Color(241, 53, 21, 200));
+//        setForm(new ProdukMainPanel());
+//        selectedIndex = 2;
     }//GEN-LAST:event_multiplePanelMouseClicked
 
     private void transaksiLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transaksiLabelMouseClicked
-        if(selectedIndex == 3)
-            return;
-        
-        recolorDefaultSwitchPanel();
-        transaksiPanel.setBackground(new Color(241, 53, 21, 200));
-        setForm(new PenitipanMainPanel());
-        selectedIndex = 3;
+//        if(selectedIndex == 3)
+//            return;
+//        
+//        recolorDefaultSwitchPanel();
+//        transaksiPanel.setBackground(new Color(241, 53, 21, 200));
+//        setForm(new PenitipanMainPanel());
+//        selectedIndex = 3;
     }//GEN-LAST:event_transaksiLabelMouseClicked
 
     private void transaksiLabelDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transaksiLabelDateMouseClicked
-        if(selectedIndex == 4)
-            return;
-        
-        recolorDefaultSwitchPanel();
-        transaksiPanelDate.setBackground(new Color(241, 53, 21, 200));
-        setForm(new PenitipanMainPanelDate());
-        selectedIndex = 4;
+//        if(selectedIndex == 4)
+//            return;
+//        
+//        recolorDefaultSwitchPanel();
+//        transaksiPanelDate.setBackground(new Color(241, 53, 21, 200));
+//        setForm(new PenitipanMainPanelDate());
+//        selectedIndex = 4;
     }//GEN-LAST:event_transaksiLabelDateMouseClicked
 
     /**

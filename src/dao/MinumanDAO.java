@@ -47,7 +47,7 @@ public class MinumanDAO extends MenuDAO implements IMenuDAO{
             System.out.println("Edited" + result + " Menu " + id_menu);
             statement.close();
         }catch(Exception e){
-            System.out.println("Error Updating Produk...");
+            System.out.println("Error Updating Menu...");
             System.out.println(e);
         }
         dbCon.closeConnection();
