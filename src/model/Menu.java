@@ -50,11 +50,10 @@ public abstract class Menu{
         this.harga = harga;
     }
     
-    
-    public abstract String getSpecial();
-    
     @Override
     public String toString(){
         return getNama_menu();
     }
+    
+    public abstract String getSpecial();
 }
