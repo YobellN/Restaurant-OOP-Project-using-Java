@@ -13,11 +13,12 @@ public class Makanan extends Menu {
         this.catatan = catatan;
     } //Konstruktor lengkap
     
-    //
+    //getter
     public String getCatatan() {
         return catatan;
     }
-
+    
+    //setter
     public void setCatatan(String catatan) {
         this.catatan = catatan;
     }
@@ -25,5 +26,11 @@ public class Makanan extends Menu {
     @Override
     public String getSpecial() {
         return catatan;
-    } 
+    }
+
+    @Override
+    public String toString() {
+        return "Makanan{" + "catatan=" + catatan + '}';
+    }
+    
 }

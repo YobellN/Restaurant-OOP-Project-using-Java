@@ -12,7 +12,8 @@ public class Minuman extends Menu {
         super(id_menu, nama_menu, jenis_produk, harga);
         this.ukuran = ukuran;
     }//Konstruktor lengkap
-
+    
+    //getter & setter
     public String getUkuran() {
         return ukuran;
     }
@@ -21,9 +22,14 @@ public class Minuman extends Menu {
         this.ukuran = ukuran;
     }
     
-
     @Override
     public String getSpecial() {
         return ukuran;
     }
+
+    @Override
+    public String toString() {
+        return "Minuman{" + "ukuran=" + ukuran + '}';
+    }
+    
 }

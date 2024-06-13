@@ -8,48 +8,48 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import model.Produk;
-import model.Original;
-import model.Titipan;
+import model.Menu;
+import model.Makanan;
+import model.Minuman;
 
-public class ProdukDAO implements IDAO<Produk, String>, IShowForDropdown<Produk>, ISearchData<Produk, String>{
+public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISearchData<Menu, String>{
     protected DbConnection dbCon = new DbConnection();
     protected Connection con;
     
     @Override
-    public void insert(Produk P){
+    public void insert(Menu M){
         con = dbCon.makeConnection();
 
         String sql = 
-                "INSERT INTO `produk`(`id_produk`, `nama_produk`, `jenis`, `harga`) "
-                + "VALUES ('"+P.getId_produk()+"','"+P.getNama()+"','"+P.getJenis()+"','"+P.getHarga()+"')";
+                "INSERT INTO `menu`(`id_menu`, `nama_menu`, `jenis_menu`, `harga`) "
+                + "VALUES ('"+M.getId_menu()+"','"+M.getNama_menu()+"','"+M.getJenis_menu()+"','"+M.getHarga()+"')";
 
-        System.out.println("Adding Produk...");
+        System.out.println("Adding Menu...");
 
         try{
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
-            System.out.println("Added " + result + " Produk");
+            System.out.println("Added " + result + " Menu");
             statement.close();
         }catch (Exception e){
-            System.out.println("Error adding Produk...");
+            System.out.println("Error adding Menu...");
             System.out.println(e);
         }
         dbCon.closeConnection();
     };
     
     @Override
-    public Produk search(String id_produk){
+    public Menu search(String id_menu){
         con = dbCon.makeConnection();
         
-        String sql = "SELECT produk.*, titipan.stok, original.deskripsi FROM produk\n" +
-                    "LEFT JOIN titipan ON produk.id_produk = titipan.id_produk\n" +
-                    "LEFT JOIN original on produk.id_produk = original.id_produk\n" +
-                    "WHERE produk.id_produk = '"
-                + id_produk
+        String sql = "SELECT menu.*, minuman.ukuran, makanan.catatan FROM menu\n" +
+                    "LEFT JOIN minuman ON menu.id_menu = minuman.id_menu\n" +
+                    "LEFT JOIN makanan on menu.id_menu = makanan.id_menu\n" +
+                    "WHERE menu.id_menu = '"
+                + id_menu
                 + "'";
         System.out.println("Searching Produk...");
-        Produk k = null;
+        Menu m = null;
         
         try{
             Statement statement = con.createStatement();
@@ -57,21 +57,21 @@ public class ProdukDAO implements IDAO<Produk, String>, IShowForDropdown<Produk>
             
             if(rs != null) 
                 while(rs.next()){
-                    if(rs.getString("jenis").equals("Titipan")){
-                        k = new Titipan(
-                            rs.getInt("stok"),
-                            rs.getString("id_produk"), 
-                            rs.getString("nama_produk"), 
-                            rs.getString("jenis"),
-                            rs.getInt("harga"));
+                    if(rs.getString("jenis_menu").equals("Minuman")){
+                        m = new Minuman(
+                            rs.getString("ukuran"),
+                            rs.getString("id_menu"), 
+                            rs.getString("nama_menu"), 
+                            rs.getString("jenis_menu"),
+                            rs.getFloat("harga"));
                     }
                     else{
-                        k = new Original(
-                            rs.getString("deskripsi"),
-                            rs.getString("id_produk"), 
-                            rs.getString("nama_produk"), 
-                            rs.getString("jenis"),
-                            rs.getInt("harga"));
+                        m = new Makanan(
+                            rs.getString("catatan"),
+                            rs.getString("id_menu"), 
+                            rs.getString("nama_menu"), 
+                            rs.getString("jenis_menu"),
+                            rs.getFloat("harga"));
                     }
                 }
                 
@@ -82,45 +82,45 @@ public class ProdukDAO implements IDAO<Produk, String>, IShowForDropdown<Produk>
             System.out.println(e);
         }
         dbCon.closeConnection();
-        return k;
+        return m;
     }
     
     @Override
-    public List<Produk> showData (String jenis){
+    public List<Menu> showData (String jenis_menu){
         con = dbCon.makeConnection();
         
-        String sql = "SELECT produk.*, titipan.stok, original.deskripsi FROM produk\n" +
-                    "LEFT JOIN titipan ON produk.id_produk = titipan.id_produk\n" +
-                    "LEFT JOIN original on produk.id_produk = original.id_produk\n" +
-                    "WHERE produk.jenis = '"
-                + jenis
+        String sql = "SELECT menu.*, minuman.ukuran, makanan.catatan FROM menu\n" +
+                    "LEFT JOIN minuman ON menu.id_menu = minuman.id_menu\n" +
+                    "LEFT JOIN makanan on menu.id_menu = makanan.id_menu\n" +
+                    "WHERE menu.jenis_menu = '"
+                + jenis_menu
                 + "';";
         System.out.println("Fetching Data...");
         
-        List<Produk> list = new ArrayList();
+        List<Menu> list = new ArrayList();
         
         try{
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
-            Produk k = null;
+            Menu m = null;
             
             if(rs != null) 
                 while(rs.next()){
-                    if(rs.getString("jenis").equals("Titipan")){
-                        k = new Titipan(
-                            rs.getInt("stok"),
-                            rs.getString("id_produk"), 
-                            rs.getString("nama_produk"), 
-                            rs.getString("jenis"),
-                            rs.getInt("harga"));
+                    if(rs.getString("jenis_menu").equals("Minuman")){
+                        m = new Minuman(
+                            rs.getString("ukuran"),
+                            rs.getString("id_menu"), 
+                            rs.getString("nama_menu"), 
+                            rs.getString("jenis_menu"),
+                            rs.getFloat("harga"));
                     }
                     else{
-                        k = new Original(
-                            rs.getString("deskripsi"),
-                            rs.getString("id_produk"), 
-                            rs.getString("nama_produk"), 
-                            rs.getString("jenis"),
-                            rs.getInt("harga"));
+                        m = new Makanan(
+                            rs.getString("catatan"),
+                            rs.getString("id_menu"), 
+                            rs.getString("nama_menu"), 
+                            rs.getString("jenis_menu"),
+                            rs.getFloat("harga"));
                     }
                     list.add(k);
                 }
@@ -135,15 +135,15 @@ public class ProdukDAO implements IDAO<Produk, String>, IShowForDropdown<Produk>
     }
     
     @Override
-    public void update (Produk k, String id_produk){
+    public void update (Menu m, String id_menu){
         con = dbCon.makeConnection();
         
-        String sql = "UPDATE `produk` SET "
-                + "`nama_produk`='" + k.getNama() + "',"
-                + "`jenis`='"+ k.getJenis() + "',"
-                + "`harga`='" + k.getHarga() + "' "
-                + "WHERE id_produk='" + id_produk + "'";
-        System.out.println("Updating Produk...");
+        String sql = "UPDATE `menu` SET "
+                + "`nama_menu`='" + m.getNama_menu()+ "',"
+                + "`jenis_menu`='"+ m.getJenis_menu()+ "',"
+                + "`harga`='" + m.getHarga()+ "' "
+                + "WHERE id_menu='" + id_menu + "'";
+        System.out.println("Updating Menu...");
         
         try{
             Statement statement = con.createStatement();
