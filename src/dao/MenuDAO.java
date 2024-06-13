@@ -42,9 +42,9 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
     public Menu search(String id_menu){
         con = dbCon.makeConnection();
         
-        String sql = "SELECT menu.*, minuman.ukuran, makanan.catatan FROM menu\n" +
-                    "LEFT JOIN minuman ON menu.id_menu = minuman.id_menu\n" +
-                    "LEFT JOIN makanan on menu.id_menu = makanan.id_menu\n" +
+        String sql = "SELECT menu.*, minuman.ukuran, makanan.catatan FROM menu\n" + 
+                    "LEFT JOIN minuman ON menu.id_menu = minuman.id_menu\n" + //Constraint FK id_menu
+                    "LEFT JOIN makanan on menu.id_menu = makanan.id_menu\n" + 
                     "WHERE menu.id_menu = '"
                 + id_menu
                 + "'";
@@ -59,22 +59,21 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
                 while(rs.next()){
                     if(rs.getString("jenis_menu").equals("Minuman")){
                         m = new Minuman(
-                            rs.getString("ukuran"),
-                            rs.getString("id_menu"), 
-                            rs.getString("nama_menu"), 
-                            rs.getString("jenis_menu"),
-                            rs.getFloat("harga"));
+                            rs.getString("ukuran"), //SQL ukuran
+                            rs.getString("id_menu"), //SQL id_menu
+                            rs.getString("nama_menu"), //SQL nama_menu
+                            rs.getString("jenis_menu"), //SQL jenis_menu
+                            rs.getFloat("harga")); //SQL harga
                     }
                     else{
                         m = new Makanan(
-                            rs.getString("catatan"),
-                            rs.getString("id_menu"), 
-                            rs.getString("nama_menu"), 
-                            rs.getString("jenis_menu"),
-                            rs.getFloat("harga"));
+                            rs.getString("catatan"), //SQL catatan
+                            rs.getString("id_menu"), //SQL id_menu
+                            rs.getString("nama_menu"), //SQL nama_menu
+                            rs.getString("jenis_menu"), //SQL jenis_menu
+                            rs.getFloat("harga")); //SQL harga
                     }
                 }
-                
             rs.close();
             statement.close();
         }catch(Exception e){
@@ -90,7 +89,7 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
         con = dbCon.makeConnection();
         
         String sql = "SELECT menu.*, minuman.ukuran, makanan.catatan FROM menu\n" +
-                    "LEFT JOIN minuman ON menu.id_menu = minuman.id_menu\n" +
+                    "LEFT JOIN minuman ON menu.id_menu = minuman.id_menu\n" + //Constraint FK id_menu
                     "LEFT JOIN makanan on menu.id_menu = makanan.id_menu\n" +
                     "WHERE menu.jenis_menu = '"
                 + jenis_menu
@@ -108,21 +107,21 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
                 while(rs.next()){
                     if(rs.getString("jenis_menu").equals("Minuman")){
                         m = new Minuman(
-                            rs.getString("ukuran"),
-                            rs.getString("id_menu"), 
-                            rs.getString("nama_menu"), 
-                            rs.getString("jenis_menu"),
-                            rs.getFloat("harga"));
+                            rs.getString("ukuran"), //SQL ukuran
+                            rs.getString("id_menu"), //SQL id_menu
+                            rs.getString("nama_menu"), //SQL nama_menu
+                            rs.getString("jenis_menu"), //SQL jenis_menu
+                            rs.getFloat("harga")); //SQL harga
                     }
                     else{
                         m = new Makanan(
-                            rs.getString("catatan"),
-                            rs.getString("id_menu"), 
-                            rs.getString("nama_menu"), 
-                            rs.getString("jenis_menu"),
-                            rs.getFloat("harga"));
+                            rs.getString("catatan"), //SQL catatan
+                            rs.getString("id_menu"), //SQL id_menu
+                            rs.getString("nama_menu"), //SQL nama_menu
+                            rs.getString("jenis_menu"), //SQL jenis_menu
+                            rs.getFloat("harga")); //SQL harga
                     }
-                    list.add(k);
+                    list.add(m);
                 }
             rs.close();
             statement.close();
@@ -138,7 +137,7 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
     public void update (Menu m, String id_menu){
         con = dbCon.makeConnection();
         
-        String sql = "UPDATE `menu` SET "
+        String sql = "UPDATE `menu` SET " 
                 + "`nama_menu`='" + m.getNama_menu()+ "',"
                 + "`jenis_menu`='"+ m.getJenis_menu()+ "',"
                 + "`harga`='" + m.getHarga()+ "' "
@@ -148,25 +147,25 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
         try{
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
-            System.out.println("Edited" + result + " Produk " + id_produk);
+            System.out.println("Edited" + result + " Menu " + id_menu);
             statement.close();
         }catch(Exception e){
-            System.out.println("Error Updating Produk...");
+            System.out.println("Error Updating Menu...");
             System.out.println(e);
         }
         dbCon.closeConnection();
     }
     
     @Override
-    public void delete(String id_produk){
+    public void delete(String id_menu){
         con = dbCon.makeConnection();
-        String sql = "DELETE FROM `produk` WHERE `id_produk` = '"+id_produk+"'";
+        String sql = "DELETE FROM `menu` WHERE `id_menu` = '"+id_menu+"'";
         System.out.println("Deleting Produk...");
         
         try{
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
-            System.out.println("Edited" + result + " Produk " + id_produk);
+            System.out.println("Edited" + result + " Menu " + id_menu);
             statement.close();
         }catch(Exception e){
             System.out.println("Error Updating Produk...");
@@ -179,7 +178,7 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
     
     public int generateId(){
         con = dbCon.makeConnection();
-        String sql = "SELECT MAX(CAST(SUBSTRING(id_produk, 2) AS SIGNED)) AS highest_number FROM produk WHERE id_produk LIKE 'P%';";
+        String sql = "SELECT MAX(CAST(SUBSTRING(id_menu, 2) AS SIGNED)) AS highest_number FROM produk WHERE id_produk LIKE 'M%';";
         //mendapatkan nilai tertinggi dari id yang ada di database
         
         System.out.println("Generating Id...");
@@ -206,16 +205,16 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
         return id;
     }
     
-    public boolean cekPerubahanJenis(String jenis, String id_produk){
+    public boolean cekPerubahanJenis(String jenis_menu, String id_menu){
         con = dbCon.makeConnection();
         
-        String sql = "SELECT  jenis!='"
-                + jenis
+        String sql = "SELECT  jenis_menu!='"
+                + jenis_menu
                 + "'"
                 + "as result"
-                + " FROM `produk`"
-                + " WHERE id_produk = '"
-                + id_produk
+                + " FROM `menu`"
+                + " WHERE id_menu = '"
+                + id_menu
                 + "';";
         System.out.println(sql);
         System.out.println("Checking Result...");
@@ -242,43 +241,41 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
     }
     
     @Override
-    public List<Produk> IShowForDropdown() {
+    public List<Menu> IShowForDropdown() {
         con = dbCon.makeConnection();
         
-        String sql = "SELECT PR.*, O.deskripsi, T.stok FROM produk PR "
-                + "LEFT JOIN original O ON PR.id_produk = O.id_produk "
-                + "LEFT JOIN titipan T ON PR.id_produk = T.id_produk;";
+        String sql = "SELECT M.*, MK.catatan, MN.ukuran FROM menu M "
+                + "LEFT JOIN makanan MK ON M.id_menu = MK.id_menu "
+                + "LEFT JOIN minuman MN ON M.id_menu = MK.id_menu;";
         
         System.out.println("Fetching Data...");
         
-        List<Produk> list = new ArrayList();
+        List<Menu> list = new ArrayList();
         
         try{
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
-            Produk data = null;
+            Menu data = null;
             
             int i = 0;
             
             if(rs != null) 
                 while(rs.next()){
-                    if(rs.getString("jenis").equals("Titipan")){
-                        data = new Titipan(
-                            rs.getInt("T.stok"),
-                            rs.getString("PR.id_produk"), 
-                            rs.getString("PR.nama_produk"), 
-                            rs.getString("PR.jenis"),
-                            rs.getFloat("PR.harga")
-                        );
+                    if(rs.getString("jenis_menu").equals("Minuman")){
+                        data = new Minuman(
+                            rs.getString("ukuran"), //SQL ukuran
+                            rs.getString("id_menu"), //SQL id_menu
+                            rs.getString("nama_menu"), //SQL nama_menu
+                            rs.getString("jenis_menu"), //SQL jenis_menu
+                            rs.getFloat("harga")); //SQL harga
                     }
                     else{
-                        data = new Original(
-                            rs.getString("O.deskripsi"),
-                            rs.getString("PR.id_produk"), 
-                            rs.getString("PR.nama_produk"), 
-                            rs.getString("PR.jenis"),
-                            rs.getFloat("PR.harga")
-                        );
+                        data = new Makanan(
+                            rs.getString("catatan"), //SQL catatan
+                            rs.getString("id_menu"), //SQL id_menu
+                            rs.getString("nama_menu"), //SQL nama_menu
+                            rs.getString("jenis_menu"), //SQL jenis_menu
+                            rs.getFloat("harga")); //SQL harga
                     }
                     list.add(data);
                 }            
@@ -293,25 +290,25 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
         return list;
     }
     
-    public void updateRole (Produk k, String id_produk){
+    public void updateJenis (Menu m, String id_menu){
         con = dbCon.makeConnection();
         
         String sql = "UPDATE `"
-                + k.getJenis() 
+                + m.getJenis_menu()
                 + "` SET `deskripsi`='"
-                + k.getSpecial()
+                + m.getSpecial()
                 + "' WHERE `original`.id_produk = '"
-                + id_produk
+                + id_menu
                 + "'";
         System.out.println("Updating Jenis Produk...");
         
         try{
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
-            System.out.println("Edited" + result + " Produk " + id_produk);
+            System.out.println("Edited" + result + " Menu " + id_menu);
             statement.close();
         }catch(Exception e){
-            System.out.println("Error Updating Produk...");
+            System.out.println("Error Updating Menu...");
             System.out.println(e);
         }
         dbCon.closeConnection();
