@@ -5,18 +5,24 @@ public class Karyawan { // OK
     private String nama_karyawan;
     private String jabatan;
     private float gaji;
+    private String username;
+    private String password;
 
-    public Karyawan(String nama_karyawan, String jabatan, float gaji) {
+    public Karyawan(String nama_karyawan, String jabatan, float gaji, String username, String password) {
         this.nama_karyawan = nama_karyawan;
         this.jabatan = jabatan;
         this.gaji = gaji;
+        this.username = username;
+        this.password = password;
     } // konstruktor tanpa id_karyawan
 
-    public Karyawan(String id_karyawan, String nama_karyawan, String jabatan, float gaji) {
+    public Karyawan(String id_karyawan, String nama_karyawan, String jabatan, float gaji, String username, String password) {
         this.id_karyawan = id_karyawan;
         this.nama_karyawan = nama_karyawan;
         this.jabatan = jabatan;
         this.gaji = gaji;
+        this.username = username;
+        this.password = password;
     } // konstruktor lengkap
 
     // getter
@@ -36,6 +42,14 @@ public class Karyawan { // OK
         return gaji;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+    
     // setter
     public void setId_karyawan(String id_karyawan) {
         this.id_karyawan = id_karyawan;
@@ -52,9 +66,18 @@ public class Karyawan { // OK
     public void setGaji(float gaji) {
         this.gaji = gaji;
     }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
     
     @Override
     public String toString(){
-        return getNama_karyawan();
+        return getNama_karyawan() ;
     } // toString untuk return nama karyawan
+    
 }

@@ -293,13 +293,13 @@ public class MainViewForm extends javax.swing.JFrame {
     }//GEN-LAST:event_singlePanelMouseClicked
 
     private void multiplePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_multiplePanelMouseClicked
-//        if(selectedIndex == 2)
-//            return;
-//        
-//        recolorDefaultSwitchPanel();
-//        multiplePanel.setBackground(new Color(241, 53, 21, 200));
-//        setForm(new ProdukMainPanel());
-//        selectedIndex = 2;
+        if(selectedIndex == 2)
+            return;
+        
+        recolorDefaultSwitchPanel();
+        multiplePanel.setBackground(new Color(241, 53, 21, 200));
+        setForm(new KaryawanMainPanel());
+        selectedIndex = 2;
     }//GEN-LAST:event_multiplePanelMouseClicked
 
     private void transaksiLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transaksiLabelMouseClicked

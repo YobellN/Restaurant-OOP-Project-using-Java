@@ -20,8 +20,8 @@ public class KaryawanDAO implements IDAO<Karyawan, String>, IShowForDropdown<Kar
         con = dbCon.makeConnection();
         
     String sql = 
-        "INSERT INTO `karyawan`(`id_karyawan`, `nama_karyawan`, `jabatan`, `gaji`) " +
-        "VALUES ('"+ C.getId_karyawan()+"', '"+ C.getNama_karyawan()+"', '"+ C.getJabatan()+"', '"+ C.getGaji()+"')";
+        "INSERT INTO `karyawan`(`id_karyawan`, `nama_karyawan`, `jabatan`, `gaji`, `username`, `password`) " +
+        "VALUES ('"+ C.getId_karyawan()+"', '"+ C.getNama_karyawan()+"', '"+ C.getJabatan()+"', '"+ C.getGaji()+ "', '" + C.getUsername()+ "', '" + C.getPassword()+ "')";
     
         System.out.println("Adding Karyawan...");
         
@@ -52,11 +52,14 @@ public class KaryawanDAO implements IDAO<Karyawan, String>, IShowForDropdown<Kar
             
             if(rs != null)
                 while(rs.next())
-                    c = new Karyawan(
+                    c = new Karyawan( 
                         rs.getString("id_karyawan"),
                         rs.getString("nama_karyawan"),
                         rs.getString("jabatan"),
-                        rs.getFloat("gaji"));
+                        rs.getFloat("gaji"),
+                        rs.getString("username"),
+                        rs.getString("password")
+                    );
             
             rs.close();
             statement.close();
@@ -86,7 +89,10 @@ public class KaryawanDAO implements IDAO<Karyawan, String>, IShowForDropdown<Kar
                         rs.getString("id_karyawan"),
                         rs.getString("nama_karyawan"),
                         rs.getString("jabatan"),
-                        rs.getFloat("gaji")));
+                        rs.getFloat("gaji"),
+                        rs.getString("username"),
+                        rs.getString("password"))
+                    );
             
             rs.close();
             statement.close();
@@ -106,7 +112,9 @@ public class KaryawanDAO implements IDAO<Karyawan, String>, IShowForDropdown<Kar
                 + "`id_karyawan`='" + c.getId_karyawan()+ "',"
                 + "`nama_karyawan`='" + c.getNama_karyawan()+ "',"
                 + "`jabatan`='" + c.getJabatan()+ "',"
-                + "`gaji`='" + c.getGaji()+ "' "
+                + "`gaji`='" + c.getGaji()+ "', "
+                + "`username`='" + c.getUsername()+ "', "
+                + "`password`='" + c.getPassword()+ "' "
                 + "WHERE `id_karyawan`='" + id_karyawan + "'";
         System.out.println("Updating karyawan");
         
@@ -125,7 +133,7 @@ public class KaryawanDAO implements IDAO<Karyawan, String>, IShowForDropdown<Kar
     @Override
     public void delete(String id_karyawan){
         con = dbCon.makeConnection();
-        String sql = "DELETE FROM `karyawan` WHERE `id_karyawan` = " + id_karyawan + "";
+        String sql = "DELETE FROM `karyawan` WHERE `id_karyawan` = '" + id_karyawan + "'";
         System.out.println("Deleting Karyawan...");
         
         try{
@@ -134,7 +142,7 @@ public class KaryawanDAO implements IDAO<Karyawan, String>, IShowForDropdown<Kar
             System.out.println("Edited" + result + " Karyawan " + id_karyawan);
             statement.close();
         }catch(Exception e){
-            System.out.println("Error Updating Karyawan...");
+            System.out.println("Error Deleting Karyawan...");
             System.out.println(e);
         }
         dbCon.closeConnection();
@@ -158,7 +166,9 @@ public class KaryawanDAO implements IDAO<Karyawan, String>, IShowForDropdown<Kar
                             rs.getString("id_karyawan"),
                             rs.getString("nama_karyawan"),
                             rs.getString("jabatan"),
-                            rs.getFloat("gaji")
+                            rs.getFloat("gaji"),
+                            rs.getString("username"),
+                            rs.getString("password")
                         )
                     );
             
