@@ -1,20 +1,25 @@
 package model;
 
 public abstract class Menu{ 
-    private String id_menu, nama_menu, jenis_menu;
+    private String id_menu;
+    private String nama_menu;
+    private String jenis_menu;
     private float harga;
+    private byte[] gambar;
 
-    public Menu(String id_menu, String nama_menu, String jenis_menu, float harga) {
+    public Menu(String id_menu, String nama_menu, String jenis_menu, float harga,  byte[] gambar) {
         this.id_menu = id_menu;
         this.nama_menu = nama_menu;
         this.jenis_menu = jenis_menu;
         this.harga = harga;
+        this.gambar = gambar;
     } //Konstruktor lengkap
 
-    public Menu(String nama_menu, String jenis_menu, float harga) {
+    public Menu(String nama_menu, String jenis_menu, float harga,  byte[] gambar) {
         this.nama_menu = nama_menu;
         this.jenis_menu = jenis_menu;
         this.harga = harga;
+        this.gambar = gambar;
     } //Konstukror tanpa id
     
     //getter and setter
@@ -48,6 +53,14 @@ public abstract class Menu{
 
     public void setHarga(float harga) {
         this.harga = harga;
+    }
+
+    public byte[] getGambar() {
+        return gambar;
+    }
+
+    public void setGambar(byte[] gambar) {
+        this.gambar = gambar;
     }
     
     @Override

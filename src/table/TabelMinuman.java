@@ -6,6 +6,7 @@ package table;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import model.Minuman;
 import model.Menu;
 
 public class TabelMinuman extends AbstractTableModel{
@@ -27,17 +28,20 @@ public class TabelMinuman extends AbstractTableModel{
     
     @Override
     public Object getValueAt(int rowIndex, int columnIndex){
+        Minuman minuman = (Minuman) list.get(rowIndex);
         switch(columnIndex){
             case 0:
-                return list.get(rowIndex).getId_menu();
+                return minuman.getId_menu();
             case 1:
-                return list.get(rowIndex).getNama_menu();
+                return minuman.getNama_menu();
             case 2:
-                return list.get(rowIndex).getJenis_menu();
+                return minuman.getJenis_menu();
             case 3:
-                return list.get(rowIndex).getSpecial();
+                return minuman.getSpecial();
             case 4:
-                return list.get(rowIndex).getHarga();
+                return minuman.getHarga();
+            case 5:
+                return minuman.getGambar();
             default:
                 return null;
         }

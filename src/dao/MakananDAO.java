@@ -56,7 +56,7 @@ public class MakananDAO extends MenuDAO implements IMenuDAO{
     }
 
     public void update(Menu m, String id_menu, String catatan) {
-        Makanan mk = new Makanan(catatan, m.getId_menu(), m.getNama_menu(), m.getJenis_menu(), m.getHarga());
+        Makanan mk = new Makanan(catatan, m.getId_menu(), m.getNama_menu(), m.getJenis_menu(), m.getHarga(), m.getGambar());
         if(cekPerubahanJenis("Makanan",id_menu)){
             deleteOldJenis(id_menu);
             insertNewJenis(mk);
