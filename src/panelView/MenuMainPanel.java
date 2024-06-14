@@ -7,9 +7,20 @@ package panelView;
 import control.MenuControl;
 import control.MinumanControl;
 import control.MakananControl;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableModel;
 import model.Menu;
 import model.Minuman;
@@ -25,7 +36,9 @@ public class MenuMainPanel extends javax.swing.JPanel {
     String action = null;
     private Component rootPane;
     private String selectedId = "";
-    
+    private File selectedFile;
+    private String selectedFilePath;
+    private byte[] gambarBytes;
     /**
      * Creates new form KendaraanView
      */
@@ -65,6 +78,30 @@ public class MenuMainPanel extends javax.swing.JPanel {
         hapusProdukButton.setEnabled(value);
     }
     
+    private void setImageIcon(byte[] gambarBytes) {
+        if (gambarBytes != null) {
+            try {
+                BufferedImage img = ImageIO.read(new ByteArrayInputStream(gambarBytes));
+                Image dimg = img.getScaledInstance(gambarLabel.getWidth(), gambarLabel.getHeight(), Image.SCALE_SMOOTH);
+                ImageIcon icon = new ImageIcon(dimg);
+                gambarLabel.setIcon(icon);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            gambarLabel.setIcon(null);
+        }
+    }
+    
+    private String getFileExtension(File file) {
+        String name = file.getName();
+        int lastIndexOf = name.lastIndexOf(".");
+        if (lastIndexOf == -1) {
+            return ""; // Jika tidak ada ekstensi
+        }
+        return name.substring(lastIndexOf + 1).toLowerCase();
+    }
+
     // Customer Set Edit Delete Button
     
     private void clearTextData(){
@@ -75,6 +112,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
         searchProdukInputTextField.setText("");
         specialAtributeInputTextfield.setText("");
         specialAtributeInputLabel.setText("");
+        gambarLabel.setBackground(Color.gray);
     }
     
     // Customer Clear Text    
@@ -155,6 +193,9 @@ public class MenuMainPanel extends javax.swing.JPanel {
         specialAtributeInputPanel = new javax.swing.JPanel();
         specialAtributeInputLabel = new javax.swing.JLabel();
         specialAtributeInputTextfield = new javax.swing.JTextField();
+        gambarPanel = new javax.swing.JPanel();
+        gambarLabel = new javax.swing.JLabel();
+        tambahGambarButton = new javax.swing.JButton();
         makananScrollPane = new javax.swing.JScrollPane();
         tabelMakanan = new javax.swing.JTable();
         minumanScrollPane = new javax.swing.JScrollPane();
@@ -478,7 +519,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 .addGroup(specialAtributeInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(specialAtributeInputTextfield, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
                     .addComponent(specialAtributeInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(549, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         specialAtributeInputPanelLayout.setVerticalGroup(
             specialAtributeInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -490,19 +531,52 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        gambarPanel.setBackground(new java.awt.Color(254, 254, 254));
+
+        gambarLabel.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout gambarPanelLayout = new javax.swing.GroupLayout(gambarPanel);
+        gambarPanel.setLayout(gambarPanelLayout);
+        gambarPanelLayout.setHorizontalGroup(
+            gambarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gambarPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(gambarLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        gambarPanelLayout.setVerticalGroup(
+            gambarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gambarPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(gambarLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        tambahGambarButton.setText("Tambah Gambar");
+        tambahGambarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahGambarButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout kendaraanFormPanel2Layout = new javax.swing.GroupLayout(kendaraanFormPanel2);
         kendaraanFormPanel2.setLayout(kendaraanFormPanel2Layout);
         kendaraanFormPanel2Layout.setHorizontalGroup(
             kendaraanFormPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kendaraanFormPanel2Layout.createSequentialGroup()
+                .addComponent(specialAtributeInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(kendaraanFormPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(kendaraanFormPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(specialAtributeInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kendaraanFormPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(simpanProdukButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(kendaraanFormPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(kendaraanFormPanel2Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(tambahGambarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(gambarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(simpanProdukButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         kendaraanFormPanel2Layout.setVerticalGroup(
@@ -510,10 +584,13 @@ public class MenuMainPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kendaraanFormPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(specialAtributeInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(gambarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(kendaraanFormPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(simpanProdukButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tambahGambarButton))
                 .addContainerGap())
         );
 
@@ -596,14 +673,14 @@ public class MenuMainPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1588, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1156, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -695,11 +772,11 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 case "add":
                 if(makananIsSelected()){
                     makanan = new Makanan(specialAtributeInputTextfield.getText(), namaProdukInputTextField.getText(),
-                        jenisProdukInputButton.getText(), Float.parseFloat(hargaProdukInputTextfield.getText()));
+                        jenisProdukInputButton.getText(), Float.parseFloat(hargaProdukInputTextfield.getText()), gambarBytes);
                     makananControl.insertDataMenu(makanan);
                 }else{
                     minuman = new Minuman(specialAtributeInputTextfield.getText(), namaProdukInputTextField.getText(),
-                        jenisProdukInputButton.getText(), Float.parseFloat(hargaProdukInputTextfield.getText()));
+                        jenisProdukInputButton.getText(), Float.parseFloat(hargaProdukInputTextfield.getText()), gambarBytes);
                     minumanControl.insertDataMenu(minuman);
                 }
                 clearTextData();
@@ -711,11 +788,11 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 case "update":
                 if(makananIsSelected()){
                     makanan = new Makanan(specialAtributeInputTextfield.getText(),idProdukInputTextField.getText(), namaProdukInputTextField.getText(),
-                        jenisProdukInputButton.getText(), Float.parseFloat(hargaProdukInputTextfield.getText()));
+                        jenisProdukInputButton.getText(), Float.parseFloat(hargaProdukInputTextfield.getText()), gambarBytes);
                     makananControl.updateDataProduk(makanan);
                 }else{
                     minuman = new Minuman(specialAtributeInputTextfield.getText(),idProdukInputTextField.getText(), namaProdukInputTextField.getText(),
-                        jenisProdukInputButton.getText(), Float.parseFloat(hargaProdukInputTextfield.getText()));
+                        jenisProdukInputButton.getText(), Float.parseFloat(hargaProdukInputTextfield.getText()), gambarBytes);
                     minumanControl.updateDataProduk(minuman);
                 }
                 clearTextData();
@@ -756,6 +833,8 @@ public class MenuMainPanel extends javax.swing.JPanel {
         specialAtributeInputTextfield.setText(tableModel.getValueAt(clickedRow, 3).toString());
         hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString());
         setSpecialAtributeLabel();
+        setImageIcon((byte[]) tableModel.getValueAt(clickedRow, 5));
+        System.out.println("INI GAMBAR " + tableModel.getValueAt(clickedRow, 5).toString());
         cancelButton.setEnabled(true);
     }//GEN-LAST:event_tabelMakananMouseClicked
 
@@ -767,6 +846,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
         tambahProdukButton.setEnabled(true);
         tabelMakanan.clearSelection();
         tabelMinuman.clearSelection();
+        gambarLabel.setIcon(null);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void tabelMinumanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMinumanMouseClicked
@@ -793,8 +873,38 @@ public class MenuMainPanel extends javax.swing.JPanel {
         specialAtributeInputTextfield.setText(tableModel.getValueAt(clickedRow, 3).toString());
         hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString());
         setSpecialAtributeLabel();
+        setImageIcon((byte[]) tableModel.getValueAt(clickedRow, 5));
         cancelButton.setEnabled(true);
     }//GEN-LAST:event_tabelMinumanMouseClicked
+
+    private void tambahGambarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahGambarButtonActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Gambar", "jpg", "png", "jpeg"));
+        int returnValue = fileChooser.showOpenDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            try {
+                BufferedImage img = ImageIO.read(selectedFile);
+                Image dimg = img.getScaledInstance(gambarLabel.getWidth(), gambarLabel.getHeight(), Image.SCALE_SMOOTH);
+                ImageIcon icon = new ImageIcon(dimg);
+                gambarLabel.setIcon(icon);
+
+                // Tentukan format berdasarkan ekstensi file
+                String extension = getFileExtension(selectedFile);
+                if (!extension.equals("jpg") && !extension.equals("jpeg") && !extension.equals("png")) {
+                    throw new IOException("Unsupported file format: " + extension);
+                }
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIO.write(img, extension, baos);
+                baos.flush();
+                gambarBytes = baos.toByteArray();
+                baos.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_tambahGambarButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -802,6 +912,8 @@ public class MenuMainPanel extends javax.swing.JPanel {
     private javax.swing.JPanel ProdukFormPanel;
     private javax.swing.JButton barukanProdukButton;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JLabel gambarLabel;
+    private javax.swing.JPanel gambarPanel;
     private javax.swing.JButton hapusProdukButton;
     private javax.swing.JLabel hargaProdukInputLabel;
     private javax.swing.JPanel hargaProdukInputPanel;
@@ -830,6 +942,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
     private javax.swing.JTextField specialAtributeInputTextfield;
     private javax.swing.JTable tabelMakanan;
     private javax.swing.JTable tabelMinuman;
+    private javax.swing.JButton tambahGambarButton;
     private javax.swing.JButton tambahProdukButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -28,17 +28,20 @@ public class TabelMakanan extends AbstractTableModel{
     
     @Override
     public Object getValueAt(int rowIndex, int columnIndex){
+         Makanan makanan = (Makanan) list.get(rowIndex);
         switch(columnIndex){
             case 0:
-                return list.get(rowIndex).getId_menu();
+                return makanan.getId_menu();
             case 1:
-                return list.get(rowIndex).getNama_menu();
+                return makanan.getNama_menu();
             case 2:
-                return list.get(rowIndex).getJenis_menu();
+                return makanan.getJenis_menu();
             case 3:
-                return list.get(rowIndex).getSpecial();
+                return makanan.getSpecial();
             case 4:
-                return list.get(rowIndex).getHarga();
+                return makanan.getHarga();
+            case 5:
+                return makanan.getGambar();
             default:
                 return null;
         }

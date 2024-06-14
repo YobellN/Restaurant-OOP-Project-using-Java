@@ -1,13 +1,21 @@
 package dao;
+import com.mysql.jdbc.PreparedStatement;
 import connection.DbConnection;
 import interfaceDAO.IDAO;
 import interfaceDAO.ISearchData;
 import interfaceDAO.IShowForDropdown;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Menu;
 import model.Makanan;
 import model.Minuman;
@@ -17,26 +25,50 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
     protected Connection con;
     
     @Override
-    public void insert(Menu M){
+    public void insert(Menu M) {
         con = dbCon.makeConnection();
 
-        String sql = 
-                "INSERT INTO `menu`(`id_menu`, `nama_menu`, `jenis_menu`, `harga`) "
-                + "VALUES ('"+M.getId_menu()+"','"+M.getNama_menu()+"','"+M.getJenis_menu()+"','"+M.getHarga()+"')";
-
+        String sql = "INSERT INTO menu (id_menu, nama_menu, jenis_menu, harga, gambar) VALUES (?, ?, ?, ?, ?)";
         System.out.println("Adding Menu...");
 
-        try{
-            Statement statement = con.createStatement();
-            int result = statement.executeUpdate(sql);
+        PreparedStatement st = null;
+        FileInputStream fis = null;
+
+        try {
+            st = (PreparedStatement) con.prepareStatement(sql);
+            st.setString(1, M.getId_menu());
+            st.setString(2, M.getNama_menu());
+            st.setString(3, M.getJenis_menu());
+            st.setFloat(4, M.getHarga());
+
+            byte[] imageBytes = M.getGambar();
+            if (imageBytes != null && imageBytes.length > 0) {
+                st.setBytes(5, imageBytes);
+            } else {
+                st.setNull(5, java.sql.Types.BLOB);
+            }
+
+            int result = st.executeUpdate();
             System.out.println("Added " + result + " Menu");
-            statement.close();
-        }catch (Exception e){
+
+        } catch (Exception e) {
             System.out.println("Error adding Menu...");
-            System.out.println(e);
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fis != null) {
+                    fis.close();
+                }
+                if (st != null) {
+                    st.close();
+                }
+                dbCon.closeConnection();
+            } catch (Exception ex) {
+                System.out.println("Error closing resources...");
+                ex.printStackTrace();
+            }
         }
-        dbCon.closeConnection();
-    };
+    }
     
     @Override
     public Menu search(String id_menu){
@@ -63,7 +95,8 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
                             rs.getString("id_menu"), //SQL id_menu
                             rs.getString("nama_menu"), //SQL nama_menu
                             rs.getString("jenis_menu"), //SQL jenis_menu
-                            rs.getFloat("harga")); //SQL harga
+                            rs.getFloat("harga"),//SQL harga
+                            rs.getBytes("gambar"));
                     }
                     else{
                         m = new Makanan(
@@ -71,7 +104,8 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
                             rs.getString("id_menu"), //SQL id_menu
                             rs.getString("nama_menu"), //SQL nama_menu
                             rs.getString("jenis_menu"), //SQL jenis_menu
-                            rs.getFloat("harga")); //SQL harga
+                            rs.getFloat("harga"),
+                            rs.getBytes("gambar")); //SQL harga
                     }
                 }
             rs.close();
@@ -85,9 +119,9 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
     }
     
     @Override
-    public List<Menu> showData (String jenis_menu){
+    public List<Menu> showData(String jenis_menu) {
         con = dbCon.makeConnection();
-        
+
         String sql = "SELECT menu.*, minuman.ukuran, makanan.catatan FROM menu\n" +
                     "LEFT JOIN minuman ON menu.id_menu = minuman.id_menu\n" + //Constraint FK id_menu
                     "LEFT JOIN makanan on menu.id_menu = makanan.id_menu\n" +
@@ -95,43 +129,48 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
                 + jenis_menu
                 + "';";
         System.out.println("Fetching Data...");
-        
-        List<Menu> list = new ArrayList();
-        
-        try{
+
+        List<Menu> list = new ArrayList<>();
+
+        try {
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             Menu m = null;
-            
-            if(rs != null) 
-                while(rs.next()){
-                    if(rs.getString("jenis_menu").equals("Minuman")){
+
+            if (rs != null) {
+                while (rs.next()) {
+                    byte[] gambarBytes = rs.getBytes("gambar"); // Ambil gambar sebagai byte array
+
+                    if (rs.getString("jenis_menu").equals("Minuman")) {
                         m = new Minuman(
                             rs.getString("ukuran"), //SQL ukuran
                             rs.getString("id_menu"), //SQL id_menu
                             rs.getString("nama_menu"), //SQL nama_menu
                             rs.getString("jenis_menu"), //SQL jenis_menu
-                            rs.getFloat("harga")); //SQL harga
-                    }
-                    else{
+                            rs.getFloat("harga"), //SQL harga
+                            gambarBytes); // Simpan byte array gambar
+                    } else {
                         m = new Makanan(
                             rs.getString("catatan"), //SQL catatan
                             rs.getString("id_menu"), //SQL id_menu
                             rs.getString("nama_menu"), //SQL nama_menu
                             rs.getString("jenis_menu"), //SQL jenis_menu
-                            rs.getFloat("harga")); //SQL harga
+                            rs.getFloat("harga"), //SQL harga
+                            gambarBytes); // Simpan byte array gambar
                     }
                     list.add(m);
                 }
+            }
             rs.close();
             statement.close();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Error Fetching data...");
-            System.out.println(e);
+            e.printStackTrace();
         }
+        
         dbCon.closeConnection();
         return list;
-    }
+        }
     
     @Override
     public void update (Menu m, String id_menu){
@@ -140,7 +179,8 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
         String sql = "UPDATE `menu` SET " 
                 + "`nama_menu`='" + m.getNama_menu()+ "',"
                 + "`jenis_menu`='"+ m.getJenis_menu()+ "',"
-                + "`harga`='" + m.getHarga()+ "' "
+                + "`harga`='" + m.getHarga()+ "',"
+                + "`gambar`='" + m.getGambar() +"' "
                 + "WHERE id_menu='" + id_menu + "'";
         System.out.println("Updating Menu...");
         
@@ -267,7 +307,8 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
                             rs.getString("id_menu"), //SQL id_menu
                             rs.getString("nama_menu"), //SQL nama_menu
                             rs.getString("jenis_menu"), //SQL jenis_menu
-                            rs.getFloat("harga")); //SQL harga
+                            rs.getFloat("harga"),//SQL harga
+                            rs.getBytes("gambar"));
                     }
                     else{
                         data = new Makanan(
@@ -275,7 +316,8 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
                             rs.getString("id_menu"), //SQL id_menu
                             rs.getString("nama_menu"), //SQL nama_menu
                             rs.getString("jenis_menu"), //SQL jenis_menu
-                            rs.getFloat("harga")); //SQL harga
+                            rs.getFloat("harga"),
+                            rs.getBytes("gambar")); //SQL harga
                     }
                     list.add(data);
                 }            

@@ -2,14 +2,15 @@ package model;
 
 public class Makanan extends Menu {
     private String catatan;
-
-    public Makanan(String catatan, String id_menu, String nama_menu, String jenis_menu, float harga) {
-        super(id_menu, nama_menu, jenis_menu, harga);
+    private byte[] gambar;
+    
+    public Makanan(String catatan, String id_menu, String nama_menu, String jenis_menu, float harga,  byte[] gambar) {
+        super(id_menu, nama_menu, jenis_menu, harga, gambar);
         this.catatan = catatan;
     } //Konstruktor lengkap
     
-    public Makanan(String catatan, String nama_menu, String jenis_menu, float harga) {
-        super(nama_menu, jenis_menu, harga);
+    public Makanan(String catatan, String nama_menu, String jenis_menu, float harga,  byte[] gambar) {
+        super(nama_menu, jenis_menu, harga, gambar);
         this.catatan = catatan;
     } //Konstruktor tanpa id
 

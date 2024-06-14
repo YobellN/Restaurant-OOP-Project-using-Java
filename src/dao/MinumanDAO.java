@@ -54,7 +54,7 @@ public class MinumanDAO extends MenuDAO implements IMenuDAO{
     }
     
     public void update(Menu m, String id_menu, String ukuran) {
-        Minuman mn = new Minuman(ukuran, m.getId_menu(), m.getNama_menu(), m.getNama_menu(), m.getHarga());
+        Minuman mn = new Minuman(ukuran, m.getId_menu(), m.getNama_menu(), m.getNama_menu(), m.getHarga(), m.getGambar());
         if(cekPerubahanJenis("Minuman",id_menu)){
             deleteOldJenis(id_menu);
             insertNewJenis(mn);
