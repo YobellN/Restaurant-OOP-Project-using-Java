@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import model.Karyawan;
+import model.Reservasi;
 
 /**
  *
@@ -24,22 +24,22 @@ public class ReservasiDAO implements IDAO<Reservasi, String>, IShowForDropdown<R
     protected Connection con;
     
     @Override
-    public void insert(Karyawan C){
+    public void insert(Reservasi C){
         con = dbCon.makeConnection();
         
     String sql = 
-        "INSERT INTO `karyawan`(`id_karyawan`, `nama_karyawan`, `jabatan`, `gaji`) " +
-        "VALUES ('"+ C.getId_karyawan()+"', '"+ C.getNama_karyawan()+"', '"+ C.getJabatan()+"', '"+ C.getGaji()+"')";
+        "INSERT INTO `reservasi`(`id_reservasi`, `tanggal_reservasi`, `jenis_reservasi`, `paket_reservasi`, `total_harga`) " +
+        "VALUES ('" + C.getId_reservasi()+"', '" + C.getTanggal_reservasi() + "', '" + C.getJenis_reservasi()+"', '" + C.getPaket_reservasi() + "', '" + C.getTotal_harga() + "')";
     
-        System.out.println("Adding Karyawan...");
+        System.out.println("Adding Reservasi...");
         
         try{
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
-            System.out.println("Added " + result + " Karyawan");
+            System.out.println("Added " + result + " Reservasi");
             statement.close();
         }catch (Exception e){
-            System.out.println("Error adding Karyawan...");
+            System.out.println("Error adding Reservasi...");
             System.out.println(e);
         }
         dbCon.closeConnection();
@@ -47,12 +47,12 @@ public class ReservasiDAO implements IDAO<Reservasi, String>, IShowForDropdown<R
     
     
     @Override
-    public Karyawan search(String id_karyawan){ 
+    public Reservasi search(String id_reservasi){ 
         con = dbCon.makeConnection();
         
-        String sql = "SELECT * FROM `karyawan` WHERE id_karyawan='"+id_karyawan+"'";
-        System.out.println("Searching Karyawan...");
-        Karyawan c = null;
+        String sql = "SELECT * FROM `reservasi` WHERE id_reservasi='"+id_reservasi+"'";
+        System.out.println("Searching Reservasi...");
+        Reservasi c = null;
         
         try{
             Statement statement = con.createStatement();
@@ -60,11 +60,12 @@ public class ReservasiDAO implements IDAO<Reservasi, String>, IShowForDropdown<R
             
             if(rs != null)
                 while(rs.next())
-                    c = new Karyawan(
-                        rs.getString("id_karyawan"),
-                        rs.getString("nama_karyawan"),
-                        rs.getString("jabatan"),
-                        rs.getFloat("gaji"));
+                    c = new Reservasi(
+                        rs.getString("id_reservasi"),
+                        rs.getString("tanggal_reservasi"),
+                        rs.getString("jenis_reservasi"),
+                        rs.getString("paket_reservasi"),
+                        rs.getFloat("total_harga"));
             
             rs.close();
             statement.close();
@@ -77,12 +78,12 @@ public class ReservasiDAO implements IDAO<Reservasi, String>, IShowForDropdown<R
     }
     
     @Override
-    public List<Karyawan> showData(String data){
+    public List<Reservasi> showData(String data){
         con = dbCon.makeConnection();
         
-        String sql = "SELECT * FROM karyawan";
+        String sql = "SELECT * FROM reservasi";
         System.out.println("Fetching Data...");
-        List<Karyawan> c = new ArrayList();
+        List<Reservasi> c = new ArrayList();
         
         try{
             Statement statement = con.createStatement();
@@ -90,11 +91,12 @@ public class ReservasiDAO implements IDAO<Reservasi, String>, IShowForDropdown<R
             
             if(rs != null)
                 while(rs.next())
-                    c.add(new Karyawan(
-                        rs.getString("id_karyawan"),
-                        rs.getString("nama_karyawan"),
-                        rs.getString("jabatan"),
-                        rs.getFloat("gaji")));
+                    c.add(new Reservasi(
+                        rs.getString("id_reservasi"),
+                        rs.getString("tanggal_reservasi"),
+                        rs.getString("jenis_reservasi"),
+                        rs.getString("paket_reservasi"),
+                        rs.getFloat("total_harga")));
             
             rs.close();
             statement.close();
@@ -107,54 +109,55 @@ public class ReservasiDAO implements IDAO<Reservasi, String>, IShowForDropdown<R
     }
     
     @Override
-    public void update(Karyawan c, String id_karyawan){
+    public void update(Reservasi c, String id_reservasi){
         con = dbCon.makeConnection();
         
-        String sql = "UPDATE `karyawan` SET "
-                + "`id_karyawan`='" + c.getId_karyawan()+ "',"
-                + "`nama_karyawan`='" + c.getNama_karyawan()+ "',"
-                + "`jabatan`='" + c.getJabatan()+ "',"
-                + "`gaji`='" + c.getGaji()+ "' "
-                + "WHERE `id_karyawan`='" + id_karyawan + "'";
-        System.out.println("Updating karyawan");
+        String sql = "UPDATE `reservasi` SET "
+                + "`id_reservasi`='" + c.getId_reservasi()+ "',"
+                + "`tanggal_reservasi`='" + c.getTanggal_reservasi()+ "',"
+                + "`jenis_reservasi`='" + c.getJenis_reservasi()+ "',"
+                + "`paket_reservasi`='" + c.getPaket_reservasi()+ "',"
+                + "`total_harga`='" + c.getTotal_harga()+ "' "
+                + "WHERE `id_reservasi`='" + id_reservasi + "'";
+        System.out.println("Updating Reservasi");
         
         try{
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
-            System.out.println("Edited" + result + " Karyawan " + id_karyawan);
+            System.out.println("Edited" + result + " Reservasi " + id_reservasi);
             statement.close();
         }catch(Exception e){
-            System.out.println("Error Updating Karyawan...");
+            System.out.println("Error Updating Reservasi...");
             System.out.println(e);
         }
         dbCon.closeConnection();
     }
     
     @Override
-    public void delete(String id_karyawan){
+    public void delete(String id_reservasi){
         con = dbCon.makeConnection();
-        String sql = "DELETE FROM `karyawan` WHERE `id_karyawan` = " + id_karyawan + "";
-        System.out.println("Deleting Karyawan...");
+        String sql = "DELETE FROM `reservasi` WHERE `id_reservasi` = " + id_reservasi + "";
+        System.out.println("Deleting Reservasi...");
         
         try{
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
-            System.out.println("Edited" + result + " Karyawan " + id_karyawan);
+            System.out.println("Edited" + result + " Reservasi " + id_reservasi);
             statement.close();
         }catch(Exception e){
-            System.out.println("Error Updating Karyawan...");
+            System.out.println("Error Updating Reservasi...");
             System.out.println(e);
         }
         dbCon.closeConnection();
     }
     
     @Override
-    public List<Karyawan> IShowForDropdown() {
+    public List<Reservasi> IShowForDropdown() {
         con = dbCon.makeConnection();
         
-        String sql = "SELECT * FROM `karyawan`;";
+        String sql = "SELECT * FROM `reservasi`;";
         System.out.println("Fetching Data...");
-        List<Karyawan> data = new ArrayList();
+        List<Reservasi> data = new ArrayList();
         
         try{
             Statement statement = con.createStatement();
@@ -162,11 +165,12 @@ public class ReservasiDAO implements IDAO<Reservasi, String>, IShowForDropdown<R
             
             if(rs != null)
                 while(rs.next())
-                    data.add(new Karyawan(
-                            rs.getString("id_karyawan"),
-                            rs.getString("nama_karyawan"),
-                            rs.getString("jabatan"),
-                            rs.getFloat("gaji")
+                    data.add(new Reservasi(
+                            rs.getString("id_reservasi"),
+                            rs.getString("tanggal_reservasi"),
+                            rs.getString("jenis_reservasi"),
+                            rs.getString("paket_reservasi"),
+                            rs.getFloat("total_harga")
                         )
                     );
             
@@ -183,11 +187,11 @@ public class ReservasiDAO implements IDAO<Reservasi, String>, IShowForDropdown<R
 
     public int generateId(){
         con = dbCon.makeConnection();
-        String sql = "SELECT MAX(CAST(SUBSTRING(id_karyawan, 2) AS SIGNED)) AS highest_number FROM karyawan WHERE id_karyawan LIKE 'K%';";
+        String sql = "SELECT MAX(CAST(SUBSTRING(id_reservasi, 2) AS SIGNED)) AS highest_number FROM reservasi WHERE id_reservasi LIKE 'K%';";
         //mendapatkan nilai tertinggi dari id yang ada di database
         
         System.out.println("Generating Id...");
-        int id=0;
+        int id = 0;
         
         try{
             Statement statement = con.createStatement();

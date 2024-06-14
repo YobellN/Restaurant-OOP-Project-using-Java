@@ -22,8 +22,8 @@ public class Reservasi {
         this.total_harga = total_harga;
     } // konstruktor lengkap
 
-    public Reservasi(String id_pelanggan, String tanggal_reservasi, String jenis_reservasi, String paket_reservasi, float total_harga) {
-        this.id_pelanggan = id_pelanggan;
+    public Reservasi(String id_reservasi, String tanggal_reservasi, String jenis_reservasi, String paket_reservasi, float total_harga) {
+        this.id_reservasi = id_reservasi;
         this.tanggal_reservasi = tanggal_reservasi;
         this.jenis_reservasi = jenis_reservasi;
         this.paket_reservasi = paket_reservasi;
@@ -37,6 +37,7 @@ public class Reservasi {
         this.total_harga = total_harga;
     } // konstruktor tanpa id_reservasi dan id_pelanggan
 
+    
     // getter
     public String getId_reservasi() {
         return id_reservasi;
