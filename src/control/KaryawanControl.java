@@ -3,6 +3,7 @@ package control;
 import dao.KaryawanDAO;
 import java.util.List;
 import model.Karyawan;
+import table.TabelKaryawan;
 
 public class KaryawanControl {
     KaryawanDAO kDao = new KaryawanDAO();
@@ -28,12 +29,11 @@ public class KaryawanControl {
         kDao.delete(id);
     } // menghapus karyawan di database berdasarkan id
     
-    // Dropdown
-    public List<Karyawan> showListKaryawan(){
-        List<Karyawan> data = kDao.IShowForDropdown();
-        
-        System.out.println("Ini jumlah: " + data.size());
-        
-        return data;
+    public TabelKaryawan showTable(){
+        List<Karyawan> data = kDao.showData("Kasir");
+        TabelKaryawan tabelKaryawan = new TabelKaryawan(data);
+
+        return tabelKaryawan;
     }
+    
 }
