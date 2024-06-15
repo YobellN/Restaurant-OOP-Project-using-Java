@@ -78,6 +78,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
         jenisProdukInputButton.setEnabled(value);
         specialAtributeInputTextfield.setEnabled(value);
         jenisProdukInputButton.setEnabled(value);
+        
     }
     
     private void setEditDeleteButton(boolean value){
@@ -119,7 +120,8 @@ public class MenuMainPanel extends javax.swing.JPanel {
         searchProdukInputTextField.setText("");
         specialAtributeInputTextfield.setText("");
         specialAtributeInputLabel.setText("");
-        gambarLabel.setBackground(Color.gray);
+        setImageIcon(null);
+        
     }
     
     // Customer Clear Text    
@@ -828,7 +830,9 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 break;
                 
             }
+            
             showTableBySearch("");
+            
             action = null;
     }//GEN-LAST:event_simpanProdukButtonActionPerformed
 
