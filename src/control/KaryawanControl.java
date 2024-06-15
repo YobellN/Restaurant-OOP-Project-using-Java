@@ -12,16 +12,16 @@ public class KaryawanControl {
         return "K"+kDao.generateId();
     } // Membuat Id dengan awal K dan angka terbesar
 
-    public void insertDataProduk(Karyawan K){
+    public void insertDataKaryawan(Karyawan K){
         K.setId_karyawan(generateId());
         kDao.insert(K);
     } // memasukkan id dari generateID ke objek karyawan lalu insert K ke DAO
     
-    public Karyawan searchDataKaryawan (String id){
-        return kDao.search(id);
-    } // mencari karyawan berdasarkan ID lalu return tipe data karyawan
+    public Karyawan searchDataKaryawan (String data){
+        return kDao.search(data);
+    } // mencari karyawan berdasarkan id, nama, jabatan, username lalu return tipe data karyawan
 
-    public void updateDataProduk(Karyawan K){
+    public void updateDataKaryawan(Karyawan K){
         kDao.update(K, K.getId_karyawan());
     } // update isi?
     
@@ -29,8 +29,8 @@ public class KaryawanControl {
         kDao.delete(id);
     } // menghapus karyawan di database berdasarkan id
     
-    public TabelKaryawan showTable(){
-        List<Karyawan> data = kDao.showData("Kasir");
+    public TabelKaryawan showTable(String target){
+        List<Karyawan> data = kDao.showData(target);
         TabelKaryawan tabelKaryawan = new TabelKaryawan(data);
 
         return tabelKaryawan;

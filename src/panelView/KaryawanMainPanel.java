@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package panelView;
 
 import control.KaryawanControl;
@@ -11,6 +7,7 @@ import exception.InputHarusAngkaException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
 import model.Karyawan;
 
 public class KaryawanMainPanel extends javax.swing.JPanel {
@@ -20,6 +17,7 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
     String actionKaryawan = null;
 
     private Component rootPane;
+    private String selectedId = "";
 
     public KaryawanMainPanel() {
         initComponents();
@@ -77,12 +75,8 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
     }
     
     public void showKaryawan(){
-        tabelKaryawan.setModel(kc.showTable());
+        tabelKaryawan.setModel(kc.showTable(""));
     }
-
-    private boolean kasirIsSelected() {
-        return jabatanInputButton.getText().equals("Kasir");
-    } // nanti pilihannya antara kasir dan manajer. mungkin akan dibuat menjadi bisa buat owner juga. tapi sementara gak usah
 
     private void doSearchKaryawan() { // fungsi untuk search dipakai di : searchKaryawanInputButtonActionPerformed
         if (searchKaryawanInputTextField.getText().isEmpty()) {
@@ -92,18 +86,20 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
         k = kc.searchDataKaryawan(searchKaryawanInputTextField.getText()); // mencari berdasarkan ID
 
         if (k != null) { // jika ketemu datanya
-            setKaryawanEditDeleteButton(true); // maka tombol edit dan delete dibuka
-            namaKaryawanInputTextField.setText(k.getNama_karyawan()); // // mencopy data yang ditemukan di field input
-            gajiKaryawanInputTextfield.setText(Float.toString(k.getGaji()));
-            usernameKaryawanInputTextField.setText(k.getUsername());
-            passwordKaryawanInputTextField.setText(k.getPassword());
-            jabatanInputButton.setText(k.getJabatan());
-            idKaryawanInputTextField.setText(k.getId_karyawan());
+            tabelKaryawan.setModel(kc.showTable(searchKaryawanInputTextField.getText()));
+//            setKaryawanEditDeleteButton(true); // maka tombol edit dan delete dibuka
+//            namaKaryawanInputTextField.setText(k.getNama_karyawan()); // // mencopy data yang ditemukan di field input
+//            gajiKaryawanInputTextfield.setText(Float.toString(k.getGaji()));
+//            usernameKaryawanInputTextField.setText(k.getUsername());
+//            passwordKaryawanInputTextField.setText(k.getPassword());
+//            jabatanInputButton.setText(k.getJabatan());
+//            idKaryawanInputTextField.setText(k.getId_karyawan());
         } else {
             JOptionPane.showMessageDialog(rootPane, "NOT FOUND !!!");
         }
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -143,6 +139,7 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
         idKaryawanInputTextField = new javax.swing.JTextField();
         specialAtributeInputPanel = new javax.swing.JPanel();
         simpanKaryawanButton = new javax.swing.JButton();
+        batalkanKaryawanButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelKaryawan = new javax.swing.JTable();
 
@@ -497,6 +494,21 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
             }
         });
 
+        batalkanKaryawanButton.setBackground(new java.awt.Color(237, 8, 0));
+        batalkanKaryawanButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        batalkanKaryawanButton.setForeground(new java.awt.Color(255, 255, 255));
+        batalkanKaryawanButton.setText("Batalkan");
+        batalkanKaryawanButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                batalkanKaryawanButtonMouseClicked(evt);
+            }
+        });
+        batalkanKaryawanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                batalkanKaryawanButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout searchKendaraanInputPanelLayout = new javax.swing.GroupLayout(searchKendaraanInputPanel);
         searchKendaraanInputPanel.setLayout(searchKendaraanInputPanelLayout);
         searchKendaraanInputPanelLayout.setHorizontalGroup(
@@ -521,6 +533,8 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
                                 .addGap(14, 14, 14))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchKendaraanInputPanelLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(batalkanKaryawanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(simpanKaryawanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
@@ -535,14 +549,16 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
                     .addComponent(searchKaryawanInputButton, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
                 .addGroup(searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(searchKendaraanInputPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(kendaraanFormPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(searchKendaraanInputPanelLayout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addComponent(specialAtributeInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(simpanKaryawanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(searchKendaraanInputPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(kendaraanFormPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGroup(searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(simpanKaryawanButton, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                            .addComponent(batalkanKaryawanButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
         );
 
         tabelKaryawan.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 14)); // NOI18N
@@ -664,7 +680,7 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
             switch (actionKaryawan) {
                 case "add":
                     k = new Karyawan (idKaryawanInputTextField.getText(), namaKaryawanInputTextField.getText(), jabatanInputButton.getText(), Float.parseFloat(gajiKaryawanInputTextfield.getText()), usernameKaryawanInputTextField.getText(), passwordKaryawanInputTextField.getText());
-                    kc.insertDataProduk(k);
+                    kc.insertDataKaryawan(k);
                     clearText();
                     setKaryawanEditDeleteButton(false);
                     setComponentsKaryawan(false);
@@ -672,7 +688,7 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
                     break;
                 case "update":
                     k = new Karyawan (idKaryawanInputTextField.getText(), namaKaryawanInputTextField.getText(), jabatanInputButton.getText(), Float.parseFloat(gajiKaryawanInputTextfield.getText()), usernameKaryawanInputTextField.getText(), passwordKaryawanInputTextField.getText());
-                    kc.updateDataProduk(k);
+                    kc.updateDataKaryawan(k);
                     clearText();
                     setKaryawanEditDeleteButton(false);
                     setComponentsKaryawan(false);
@@ -690,13 +706,49 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_simpanKaryawanButtonActionPerformed
 
     private void tabelKaryawanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelKaryawanMouseClicked
+        actionKaryawan = "baharui";
         
+        tambahKaryawanButton.setEnabled(false);
+        batalkanKaryawanButton.setEnabled(true);
+        simpanKaryawanButton.setEnabled(true);        
+        setKaryawanEditDeleteButton(true);
+        
+        setComponentsKaryawan(false);
+        
+        int clickedRow = tabelKaryawan.getSelectedRow();
+        TableModel tableModel = tabelKaryawan.getModel();
+        
+        selectedId = tableModel.getValueAt(clickedRow, 0).toString();
+
+        idKaryawanInputTextField.setText(tableModel.getValueAt(clickedRow, 0).toString()); 
+        namaKaryawanInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString()); 
+        jabatanInputButton.setText(tableModel.getValueAt(clickedRow, 2).toString());
+        gajiKaryawanInputTextfield.setText(tableModel.getValueAt(clickedRow, 3).toString());
+        usernameKaryawanInputTextField.setText(tableModel.getValueAt(clickedRow, 4).toString());
+        passwordKaryawanInputTextField.setText(tableModel.getValueAt(clickedRow, 5).toString());
+        
+        batalkanKaryawanButton.setEnabled(true);
     }//GEN-LAST:event_tabelKaryawanMouseClicked
+
+    private void batalkanKaryawanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalkanKaryawanButtonActionPerformed
+        clearText();
+        showKaryawan();
+        setKaryawanEditDeleteButton(false);
+        setComponentsKaryawan(false);
+        tambahKaryawanButton.setEnabled(true);
+        tabelKaryawan.clearSelection();
+        
+    }//GEN-LAST:event_batalkanKaryawanButtonActionPerformed
+
+    private void batalkanKaryawanButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_batalkanKaryawanButtonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_batalkanKaryawanButtonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel KendaraanButtonPanel;
     private javax.swing.JButton barukanKaryawanButton;
+    private javax.swing.JButton batalkanKaryawanButton;
     private javax.swing.JLabel gajiKaryawanInputLabel;
     private javax.swing.JTextField gajiKaryawanInputTextfield;
     private javax.swing.JButton hapusKaryawanButton;
