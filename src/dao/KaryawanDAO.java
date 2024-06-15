@@ -39,10 +39,14 @@ public class KaryawanDAO implements IDAO<Karyawan, String>, IShowForDropdown<Kar
     
     
     @Override
-    public Karyawan search(String id_karyawan){ 
+    public Karyawan search(String data){ 
         con = dbCon.makeConnection();
         
-        String sql = "SELECT * FROM `karyawan` WHERE id_karyawan='"+id_karyawan+"'";
+        String sql = "SELECT * FROM `karyawan` WHERE "
+                + "id_karyawan LIKE '%" + data + "%' "
+                + " OR nama_karyawan LIKE '%" + data + "%' "
+                + " OR jabatan LIKE '%" + data + "%' "
+                + " OR username LIKE '%" + data + "%' " + "";
         System.out.println("Searching Karyawan...");
         Karyawan c = null;
         
@@ -75,7 +79,11 @@ public class KaryawanDAO implements IDAO<Karyawan, String>, IShowForDropdown<Kar
     public List<Karyawan> showData(String data){
         con = dbCon.makeConnection();
         
-        String sql = "SELECT * FROM karyawan";
+        String sql = "SELECT * FROM `karyawan` WHERE "
+                + "id_karyawan LIKE '%" + data + "%' "
+                + " OR nama_karyawan LIKE '%" + data + "%' "
+                + " OR jabatan LIKE '%" + data + "%' "
+                + " OR username LIKE '%" + data + "%' " + "";
         System.out.println("Fetching Data...");
         List<Karyawan> c = new ArrayList();
         
