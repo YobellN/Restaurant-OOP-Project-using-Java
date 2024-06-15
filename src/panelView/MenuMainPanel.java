@@ -232,7 +232,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
             .addGroup(searchProdukInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(searchProdukInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(searchProdukInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 1564, Short.MAX_VALUE)
+                    .addComponent(searchProdukInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 1195, Short.MAX_VALUE)
                     .addGroup(searchProdukInputPanelLayout.createSequentialGroup()
                         .addComponent(searchProdukInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -673,7 +673,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1588, Short.MAX_VALUE)
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1219, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
