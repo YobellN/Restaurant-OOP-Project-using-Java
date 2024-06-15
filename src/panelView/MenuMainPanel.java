@@ -55,8 +55,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
     
     public MenuMainPanel() {
         initComponents();
-        showTableMakanan();
-        showTableMinuman();
+        showTableBySearch("");
         setComponentsData(false);
         
         setEditDeleteButton(false);
@@ -124,37 +123,41 @@ public class MenuMainPanel extends javax.swing.JPanel {
         }
     }
     
-    public void showTableMakanan(){
-        tabelMakanan.setModel(makananControl.showTable());
-    }
-    
-    public void showTableMinuman(){
-        tabelMinuman.setModel(minumanControl.showTable());
-    }
+//    public void showTableMakanan(){
+//        tabelMakanan.setModel(makananControl.showTable());
+//    }
+//    
+//    public void showTableMinuman(){
+//        tabelMinuman.setModel(minumanControl.showTable());
+//    }
     
     private boolean makananIsSelected(){
         return jenisProdukInputButton.getText().equals("Makanan");
     }
     
-    private void doSearchMenu(){
-        if(searchProdukInputTextField.getText().isEmpty())
-            return;
-        
-            menu = menuControl.searchDataMenu(searchProdukInputTextField.getText());
-            
-        if(menu != null){
-            setEditDeleteButton(true);
-            idProdukInputTextField.setText(menu.getId_menu());
-            namaProdukInputTextField.setText(menu.getNama_menu());
-            hargaProdukInputTextfield.setText(Float.toString(menu.getHarga()));
-            jenisProdukInputButton.setText(menu.getJenis_menu());
-            setSpecialAtributeLabel();
-            specialAtributeInputTextfield.setText(menu.getSpecial());
-        }else{
-            JOptionPane.showMessageDialog(rootPane, "NOT FOUND !!!");
-        }
-    }
+//    private void doSearchMenu(){
+//        if(searchProdukInputTextField.getText().isEmpty())
+//            return;
+//        
+//            menu = menuControl.searchDataMenu(searchProdukInputTextField.getText());
+//            
+//        if(menu != null){
+//            setEditDeleteButton(true);
+//            idProdukInputTextField.setText(menu.getId_menu());
+//            namaProdukInputTextField.setText(menu.getNama_menu());
+//            hargaProdukInputTextfield.setText(Float.toString(menu.getHarga()));
+//            jenisProdukInputButton.setText(menu.getJenis_menu());
+//            setSpecialAtributeLabel();
+//            specialAtributeInputTextfield.setText(menu.getSpecial());
+//        }else{
+//            JOptionPane.showMessageDialog(rootPane, "NOT FOUND !!!");
+//        }
+//    }
     
+    public void showTableBySearch(String target){
+        tabelMakanan.setModel(makananControl.showTableBySearch(target));
+        tabelMinuman.setModel(minumanControl.showTableBySearch(target));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -688,13 +691,13 @@ public class MenuMainPanel extends javax.swing.JPanel {
     private void searchProdukInputTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchProdukInputTextFieldKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyChar()=='\n'){
-            doSearchMenu();
+            showTableBySearch(searchProdukInputTextField.getText());
         }
     }//GEN-LAST:event_searchProdukInputTextFieldKeyPressed
 
     private void searchProdukInputButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchProdukInputButtonActionPerformed
         // TODO add your handling code here:
-        doSearchMenu();
+        showTableBySearch(searchProdukInputTextField.getText());
     }//GEN-LAST:event_searchProdukInputButtonActionPerformed
 
     private void barukanProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barukanProdukButtonActionPerformed
@@ -714,8 +717,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
         clearTextData();
         setEditDeleteButton(false);
         setComponentsData(false);
-        showTableMakanan();
-        showTableMinuman();
+        showTableBySearch("");
     }//GEN-LAST:event_hapusProdukButtonActionPerformed
 
     private void tambahProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahProdukButtonActionPerformed
@@ -782,8 +784,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 clearTextData();
                 setEditDeleteButton(false);
                 setComponentsData(false);
-                showTableMakanan();
-                showTableMinuman();
+                showTableBySearch("");
                 break;
                 case "update":
                 if(makananIsSelected()){
@@ -798,8 +799,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 clearTextData();
                 setEditDeleteButton(false);
                 setComponentsData(false);
-                showTableMakanan();
-                showTableMinuman();
+                showTableBySearch("");
                 break;
                 default:
                 break;
@@ -847,6 +847,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
         tabelMakanan.clearSelection();
         tabelMinuman.clearSelection();
         gambarLabel.setIcon(null);
+        showTableBySearch("");
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void tabelMinumanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMinumanMouseClicked

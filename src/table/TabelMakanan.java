@@ -46,7 +46,7 @@ public class TabelMakanan extends AbstractTableModel{
                 return null;
         }
     }
-    
+ 
     @Override
     public String getColumnName(int column){
         switch(column){

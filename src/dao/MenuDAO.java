@@ -3,6 +3,7 @@ import com.mysql.jdbc.PreparedStatement;
 import connection.DbConnection;
 import interfaceDAO.IDAO;
 import interfaceDAO.ISearchData;
+import interfaceDAO.ISearchDataMenu;
 import interfaceDAO.IShowForDropdown;
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,7 +21,7 @@ import model.Menu;
 import model.Makanan;
 import model.Minuman;
 
-public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISearchData<Menu, String>{
+public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISearchDataMenu<Menu, String>{
     protected DbConnection dbCon = new DbConnection();
     protected Connection con;
     
@@ -70,51 +71,51 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
     }
     
     @Override
-    public Menu search(String id_menu){
+    public List<Menu> search(String search){
         con = dbCon.makeConnection();
-        
+
         String sql = "SELECT menu.*, minuman.ukuran, makanan.catatan FROM menu\n" + 
-                    "LEFT JOIN minuman ON menu.id_menu = minuman.id_menu\n" + //Constraint FK id_menu
+                    "LEFT JOIN minuman ON menu.id_menu = minuman.id_menu\n" + 
                     "LEFT JOIN makanan on menu.id_menu = makanan.id_menu\n" + 
-                    "WHERE menu.id_menu = '"
-                + id_menu
-                + "'";
+                    "WHERE menu.nama_menu LIKE '%" + search + "%' " +
+                    "OR menu.jenis_menu LIKE '%" + search + "%' ";
         System.out.println("Searching Menu...");
         Menu m = null;
-        
-        try{
+        List<Menu> list = new ArrayList<>();
+        try {
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
-            
-            if(rs != null) 
-                while(rs.next()){
-                    if(rs.getString("jenis_menu").equals("Minuman")){
+
+            if (rs != null) {
+                while (rs.next()) {
+                    if (rs.getString("jenis_menu").equals("Minuman")) {
                         m = new Minuman(
                             rs.getString("ukuran"), //SQL ukuran
                             rs.getString("id_menu"), //SQL id_menu
                             rs.getString("nama_menu"), //SQL nama_menu
                             rs.getString("jenis_menu"), //SQL jenis_menu
-                            rs.getFloat("harga"),//SQL harga
+                            rs.getFloat("harga"), //SQL harga
                             rs.getBytes("gambar"));
-                    }
-                    else{
+                    } else {
                         m = new Makanan(
                             rs.getString("catatan"), //SQL catatan
                             rs.getString("id_menu"), //SQL id_menu
                             rs.getString("nama_menu"), //SQL nama_menu
                             rs.getString("jenis_menu"), //SQL jenis_menu
-                            rs.getFloat("harga"),
-                            rs.getBytes("gambar")); //SQL harga
+                            rs.getFloat("harga"), //SQL harga
+                            rs.getBytes("gambar"));
                     }
+                    list.add(m);
                 }
+            }
             rs.close();
             statement.close();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Error Fetching data...");
             System.out.println(e);
         }
         dbCon.closeConnection();
-        return m;
+        return list;
     }
     
     @Override

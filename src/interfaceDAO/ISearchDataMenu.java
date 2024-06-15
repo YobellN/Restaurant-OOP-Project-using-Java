@@ -6,6 +6,10 @@ package interfaceDAO;
 
 import java.util.List;
 
-public interface ISearchData<T, I> { // OK
-  public T search(I data);
+/**
+ *
+ * @author yobel
+ */
+public interface ISearchDataMenu<T,I> {
+  public List<T> search(I data);
 }

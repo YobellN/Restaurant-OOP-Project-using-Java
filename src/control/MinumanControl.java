@@ -1,5 +1,6 @@
 package control;
 import dao.MinumanDAO;
+import java.util.ArrayList;
 import java.util.List;
 import model.Menu;
 import model.Minuman;
@@ -18,6 +19,18 @@ public class MinumanControl {
         List<Menu> data = mnDao.showData("Minuman");
         TabelMinuman tabelMinuman = new TabelMinuman(data);
 
+        return tabelMinuman;
+    }
+    
+    public TabelMinuman showTableBySearch(String search){
+        List<Menu> data = mnDao.search(search);
+        List<Menu> temp = new ArrayList<>(); // Initialize the temp list
+        for (Menu menu : data) {
+            if (menu.getJenis_menu().equals("Minuman")) {
+                temp.add(menu);
+            }
+        }
+        TabelMinuman tabelMinuman = new TabelMinuman(temp);
         return tabelMinuman;
     }
     
