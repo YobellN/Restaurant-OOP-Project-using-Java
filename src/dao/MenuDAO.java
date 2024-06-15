@@ -40,7 +40,6 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
             st.setString(2, M.getNama_menu());
             st.setString(3, M.getJenis_menu());
             st.setFloat(4, M.getHarga());
-
             byte[] imageBytes = M.getGambar();
             if (imageBytes != null && imageBytes.length > 0) {
                 st.setBytes(5, imageBytes);
