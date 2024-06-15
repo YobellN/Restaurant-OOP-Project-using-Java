@@ -136,9 +136,6 @@ public class MenuMainPanel extends javax.swing.JPanel {
         header.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 int col = header.columnAtPoint(e.getPoint());
-                String name = header.getColumnModel().getColumn(col).getHeaderValue().toString();
-                System.out.println("Column header clicked: " + name);
-
             }
         });
         TableModel tableModel = table.getModel();
