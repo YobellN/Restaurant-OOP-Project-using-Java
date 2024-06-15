@@ -21,7 +21,7 @@ import model.Menu;
 import model.Makanan;
 import model.Minuman;
 
-public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISearchDataMenu<Menu, String>{
+public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>{
     protected DbConnection dbCon = new DbConnection();
     protected Connection con;
     
@@ -71,7 +71,7 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
     }
     
     @Override
-    public List<Menu> search(String search){
+    public List<Menu> showData(String search){
         con = dbCon.makeConnection();
 
         String sql = "SELECT menu.*, minuman.ukuran, makanan.catatan FROM menu\n" + 
@@ -118,59 +118,7 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, ISea
         return list;
     }
     
-    @Override
-    public List<Menu> showData(String jenis_menu) {
-        con = dbCon.makeConnection();
-
-        String sql = "SELECT menu.*, minuman.ukuran, makanan.catatan FROM menu\n" +
-                    "LEFT JOIN minuman ON menu.id_menu = minuman.id_menu\n" + //Constraint FK id_menu
-                    "LEFT JOIN makanan on menu.id_menu = makanan.id_menu\n" +
-                    "WHERE menu.jenis_menu = '"
-                + jenis_menu
-                + "';";
-        System.out.println("Fetching Data...");
-
-        List<Menu> list = new ArrayList<>();
-
-        try {
-            Statement statement = con.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
-            Menu m = null;
-
-            if (rs != null) {
-                while (rs.next()) {
-                    byte[] gambarBytes = rs.getBytes("gambar"); // Ambil gambar sebagai byte array
-
-                    if (rs.getString("jenis_menu").equals("Minuman")) {
-                        m = new Minuman(
-                            rs.getString("ukuran"), //SQL ukuran
-                            rs.getString("id_menu"), //SQL id_menu
-                            rs.getString("nama_menu"), //SQL nama_menu
-                            rs.getString("jenis_menu"), //SQL jenis_menu
-                            rs.getFloat("harga"), //SQL harga
-                            gambarBytes); // Simpan byte array gambar
-                    } else {
-                        m = new Makanan(
-                            rs.getString("catatan"), //SQL catatan
-                            rs.getString("id_menu"), //SQL id_menu
-                            rs.getString("nama_menu"), //SQL nama_menu
-                            rs.getString("jenis_menu"), //SQL jenis_menu
-                            rs.getFloat("harga"), //SQL harga
-                            gambarBytes); // Simpan byte array gambar
-                    }
-                    list.add(m);
-                }
-            }
-            rs.close();
-            statement.close();
-        } catch (Exception e) {
-            System.out.println("Error Fetching data...");
-            e.printStackTrace();
-        }
-        
-        dbCon.closeConnection();
-        return list;
-        }
+    
     
     @Override
     public void update (Menu m, String id_menu){

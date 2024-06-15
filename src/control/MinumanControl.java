@@ -23,7 +23,7 @@ public class MinumanControl {
     }
     
     public TabelMinuman showTableBySearch(String search){
-        List<Menu> data = mnDao.search(search);
+        List<Menu> data = mnDao.showData(search);
         List<Menu> temp = new ArrayList<>(); // Initialize the temp list
         for (Menu menu : data) {
             if (menu.getJenis_menu().equals("Minuman")) {

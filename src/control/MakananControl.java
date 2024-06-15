@@ -23,7 +23,7 @@ public class MakananControl {
     }
     
     public TabelMakanan showTableBySearch(String search){
-        List<Menu> data = mkDao.search(search);
+        List<Menu> data = mkDao.showData(search);
         List<Menu> temp = new ArrayList<>(); // Initialize the temp list
         for (Menu menu : data) {
             if (menu.getJenis_menu().equals("Makanan")) {
