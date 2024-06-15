@@ -1,0 +1,842 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ */
+package panelView;
+
+import control.PembelianKendaraanControl;
+import control.CustomerControl;
+import control.KendaraanControl;
+import exception.InputKosongException;
+
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
+import java.awt.Component;
+
+import model.PembelianKendaraan;
+import model.Customer;
+import model.Kendaraan;
+
+import table.TablePembelianKendaraan;
+
+public class detailPesananMainPanel extends javax.swing.JPanel {
+    
+    private PembelianKendaraanControl pembelianControl;
+    private CustomerControl customerControl;
+    private KendaraanControl kendaraanControl;
+    
+    private PembelianKendaraan pk = null;
+    String action = null;
+    int selectedId = 0;
+    
+    List<Customer> listCustomer;
+    List<Kendaraan> listKendaraan;
+
+    private Component rootPane;
+    
+    // DROPDOWN 
+    // KENDARAAN
+    public void setKendaraanToDropdown(){
+        listKendaraan = kendaraanControl.showListKendaraan();
+        System.out.println(listKendaraan.size());
+        for(int i = 0; i < listKendaraan.size(); i++){
+            namaKendaraanDropdown.addItem(listKendaraan.get(i));
+        }
+    }
+
+    // CUSTOMER
+    public void setCustomerToDropdown(){
+        listCustomer = customerControl.showListCustomer();
+        for(int i = 0; i < listCustomer.size(); i++){
+            namaCustomerDropdown.addItem(listCustomer.get(i));
+        }
+    }
+    // DROPDOWN
+    
+    // RADIO BUTTON
+    public void setRadioButtonValue(){
+        bcaRadio.setActionCommand("BCA");
+        briRadio.setActionCommand("BRI");
+        mayRadio.setActionCommand("May Bank");
+        bpdRadio.setActionCommand("BPD DIY");
+        tunaiRadio.setActionCommand("Tunai");
+    }
+    // RADIO BUTTON
+    
+    // TABLE SHOW    
+    public void showTableBySearch(String target){
+        tablePembelian.setModel(pembelianControl.showTable(target));
+    }    
+    // TABLE SHOW    
+
+    // EXCEPTION
+    public void inputKosongPembelianException() throws InputKosongException{
+        if(namaCustomerDropdown.getSelectedIndex() == -1 || namaKendaraanDropdown.getSelectedIndex() == -1
+                || jumlahPembelianInput.getText().isEmpty()
+                || (!kursiCheckbox.isSelected() && !sistemNavigasiCheckbox.isSelected())
+                || metodePembayaranGroup.getSelection().getActionCommand() == null){
+                        throw new InputKosongException();
+        }        
+    }
+    // EXCEPTION
+
+    // RESET METHOD TO DEFAULT
+    public void clearText(){
+        // RESET DROPDOWN
+        namaCustomerDropdown.setSelectedIndex(-1);
+        namaKendaraanDropdown.setSelectedIndex(-1);
+        
+        // RESET CHECKBOX
+        kursiCheckbox.setSelected(false);
+        sistemNavigasiCheckbox.setSelected(false);
+        
+        // RESET RADIOBUTTON
+        metodePembayaranGroup.clearSelection();
+        
+        // RESET TEXT
+        searchPesananInputTextField.setText("");
+        jumlahPembelianInput.setText("");
+    }
+    
+    // SET METHOD BUTTON EDIT & DELETE
+    public void setEditDeleteBtn(boolean value){
+        barukanTransaksiButton.setEnabled(value);
+        hapusTransaksiButton.setEnabled(value);
+    }
+    
+    // METHOD FOR SET COMPONENT, ENABLE / DISABLE
+    public void setComponent(boolean value){
+        namaCustomerDropdown.setEnabled(value);
+        namaKendaraanDropdown.setEnabled(value);
+        jumlahPembelianInput.setEnabled(value);
+        
+        kursiCheckbox.setEnabled(value);
+        sistemNavigasiCheckbox.setEnabled(value);
+        
+        simpanTransaksiButton.setEnabled(value);
+        batalTransaksiButton.setEnabled(value);
+    }
+
+    // METHOD FOR SET RADIO BUTTON
+    public void setRadioComponent(boolean value){
+        bcaRadio.setEnabled(value);
+        briRadio.setEnabled(value);
+        mayRadio.setEnabled(value);
+        bpdRadio.setEnabled(value);
+        tunaiRadio.setEnabled(value);
+    }
+    
+    public detailPesananMainPanel() {
+        initComponents();
+        setOpaque(false);     
+        
+        pembelianControl = new PembelianKendaraanControl();
+        customerControl = new CustomerControl();
+        kendaraanControl = new KendaraanControl();
+        
+        setCustomerToDropdown();
+        setKendaraanToDropdown();
+        setRadioButtonValue();
+        
+        showTableBySearch("");
+        
+        // RESET
+        clearText();
+        setComponent(false);
+        setRadioComponent(false);
+        setEditDeleteBtn(false);
+    }
+
+    
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        metodePembayaranGroup = new javax.swing.ButtonGroup();
+        mainPanel = new javax.swing.JPanel();
+        searchPesananInputPanel = new javax.swing.JPanel();
+        searchPesananInputLabel = new javax.swing.JLabel();
+        searchPesananInputTextField = new javax.swing.JTextField();
+        searchTPesananInputButton = new javax.swing.JButton();
+        simpanTransaksiButton = new javax.swing.JButton();
+        batalTransaksiButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablePembelian = new javax.swing.JTable();
+        transaksiFormPanel = new javax.swing.JPanel();
+        transaksiButtonPanel = new javax.swing.JPanel();
+        barukanTransaksiButton = new javax.swing.JButton();
+        hapusTransaksiButton = new javax.swing.JButton();
+        tambahTransaksiButton = new javax.swing.JButton();
+        namaCustomerPanel = new javax.swing.JPanel();
+        namaCustomerLabel = new javax.swing.JLabel();
+        namaCustomerDropdown = new javax.swing.JComboBox<>();
+        namaKendaraanPanel = new javax.swing.JPanel();
+        namaKendaraanLabel = new javax.swing.JLabel();
+        namaKendaraanDropdown = new javax.swing.JComboBox<>();
+        jPanel1 = new javax.swing.JPanel();
+        jumlahPembelian = new javax.swing.JLabel();
+        jumlahPembelianInput = new javax.swing.JTextField();
+        checkboxPanel = new javax.swing.JPanel();
+        atributLabel = new javax.swing.JLabel();
+        kursiCheckbox = new javax.swing.JCheckBox();
+        sistemNavigasiCheckbox = new javax.swing.JCheckBox();
+        metodePembayaranPanel = new javax.swing.JPanel();
+        metodePembayaranLabel = new javax.swing.JLabel();
+        bcaRadio = new javax.swing.JRadioButton();
+        briRadio = new javax.swing.JRadioButton();
+        mayRadio = new javax.swing.JRadioButton();
+        bpdRadio = new javax.swing.JRadioButton();
+        tunaiRadio = new javax.swing.JRadioButton();
+
+        mainPanel.setBackground(new java.awt.Color(255, 221, 186));
+
+        searchPesananInputPanel.setBackground(new java.awt.Color(255, 221, 186));
+
+        searchPesananInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        searchPesananInputLabel.setForeground(new java.awt.Color(137, 92, 3));
+        searchPesananInputLabel.setText("Pencarian Pesanan");
+
+        searchPesananInputTextField.setBackground(new java.awt.Color(255, 255, 255));
+        searchPesananInputTextField.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        searchPesananInputTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                searchPesananInputTextFieldKeyPressed(evt);
+            }
+        });
+
+        searchTPesananInputButton.setBackground(new java.awt.Color(137, 92, 3));
+        searchTPesananInputButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        searchTPesananInputButton.setForeground(new java.awt.Color(255, 255, 255));
+        searchTPesananInputButton.setText("Cari");
+        searchTPesananInputButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTPesananInputButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout searchPesananInputPanelLayout = new javax.swing.GroupLayout(searchPesananInputPanel);
+        searchPesananInputPanel.setLayout(searchPesananInputPanelLayout);
+        searchPesananInputPanelLayout.setHorizontalGroup(
+            searchPesananInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchPesananInputPanelLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(searchPesananInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(searchPesananInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(searchPesananInputPanelLayout.createSequentialGroup()
+                        .addComponent(searchPesananInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchTPesananInputButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 531, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        searchPesananInputPanelLayout.setVerticalGroup(
+            searchPesananInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchPesananInputPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(searchPesananInputLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(searchPesananInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(searchPesananInputTextField)
+                    .addComponent(searchTPesananInputButton, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        simpanTransaksiButton.setBackground(new java.awt.Color(51, 178, 73));
+        simpanTransaksiButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        simpanTransaksiButton.setForeground(new java.awt.Color(255, 255, 255));
+        simpanTransaksiButton.setText("Simpan");
+        simpanTransaksiButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simpanTransaksiButtonActionPerformed(evt);
+            }
+        });
+
+        batalTransaksiButton.setBackground(new java.awt.Color(237, 78, 5));
+        batalTransaksiButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        batalTransaksiButton.setForeground(new java.awt.Color(255, 255, 255));
+        batalTransaksiButton.setText("Batalkan");
+        batalTransaksiButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                batalTransaksiButtonActionPerformed(evt);
+            }
+        });
+
+        tablePembelian.setBackground(new java.awt.Color(255, 255, 255));
+        tablePembelian.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 12)); // NOI18N
+        tablePembelian.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tablePembelian.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablePembelianMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablePembelian);
+
+        transaksiFormPanel.setBackground(new java.awt.Color(255, 221, 186));
+
+        transaksiButtonPanel.setBackground(new java.awt.Color(255, 221, 186));
+
+        barukanTransaksiButton.setBackground(new java.awt.Color(255, 175, 47));
+        barukanTransaksiButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        barukanTransaksiButton.setForeground(new java.awt.Color(255, 255, 255));
+        barukanTransaksiButton.setText("Barukan");
+        barukanTransaksiButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                barukanTransaksiButtonActionPerformed(evt);
+            }
+        });
+
+        hapusTransaksiButton.setBackground(new java.awt.Color(237, 78, 5));
+        hapusTransaksiButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        hapusTransaksiButton.setForeground(new java.awt.Color(255, 255, 255));
+        hapusTransaksiButton.setText("Hapus");
+        hapusTransaksiButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hapusTransaksiButtonActionPerformed(evt);
+            }
+        });
+
+        tambahTransaksiButton.setBackground(new java.awt.Color(51, 178, 73));
+        tambahTransaksiButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        tambahTransaksiButton.setForeground(new java.awt.Color(255, 255, 255));
+        tambahTransaksiButton.setText("Tambah");
+        tambahTransaksiButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahTransaksiButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout transaksiButtonPanelLayout = new javax.swing.GroupLayout(transaksiButtonPanel);
+        transaksiButtonPanel.setLayout(transaksiButtonPanelLayout);
+        transaksiButtonPanelLayout.setHorizontalGroup(
+            transaksiButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(transaksiButtonPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tambahTransaksiButton)
+                .addGap(18, 18, 18)
+                .addComponent(barukanTransaksiButton)
+                .addGap(18, 18, 18)
+                .addComponent(hapusTransaksiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+        transaksiButtonPanelLayout.setVerticalGroup(
+            transaksiButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(transaksiButtonPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(transaksiButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(barukanTransaksiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tambahTransaksiButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(hapusTransaksiButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        namaCustomerPanel.setBackground(new java.awt.Color(255, 221, 186));
+
+        namaCustomerLabel.setBackground(new java.awt.Color(137, 92, 3));
+        namaCustomerLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        namaCustomerLabel.setForeground(new java.awt.Color(137, 92, 3));
+        namaCustomerLabel.setText("Nama Customer");
+
+        namaCustomerDropdown.setBackground(new java.awt.Color(255, 255, 255));
+        namaCustomerDropdown.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+
+        javax.swing.GroupLayout namaCustomerPanelLayout = new javax.swing.GroupLayout(namaCustomerPanel);
+        namaCustomerPanel.setLayout(namaCustomerPanelLayout);
+        namaCustomerPanelLayout.setHorizontalGroup(
+            namaCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(namaCustomerPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(namaCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(namaCustomerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(namaCustomerDropdown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        namaCustomerPanelLayout.setVerticalGroup(
+            namaCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(namaCustomerPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(namaCustomerLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(namaCustomerDropdown, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        namaKendaraanPanel.setBackground(new java.awt.Color(255, 221, 186));
+
+        namaKendaraanLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        namaKendaraanLabel.setForeground(new java.awt.Color(137, 92, 3));
+        namaKendaraanLabel.setText("Nama Kendaraan");
+
+        namaKendaraanDropdown.setBackground(new java.awt.Color(255, 255, 255));
+        namaKendaraanDropdown.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+
+        javax.swing.GroupLayout namaKendaraanPanelLayout = new javax.swing.GroupLayout(namaKendaraanPanel);
+        namaKendaraanPanel.setLayout(namaKendaraanPanelLayout);
+        namaKendaraanPanelLayout.setHorizontalGroup(
+            namaKendaraanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(namaKendaraanPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(namaKendaraanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(namaKendaraanLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(namaKendaraanDropdown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        namaKendaraanPanelLayout.setVerticalGroup(
+            namaKendaraanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(namaKendaraanPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(namaKendaraanLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(namaKendaraanDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel1.setBackground(new java.awt.Color(255, 221, 186));
+
+        jumlahPembelian.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        jumlahPembelian.setForeground(new java.awt.Color(137, 92, 3));
+        jumlahPembelian.setText("Jumlah Pembelian");
+
+        jumlahPembelianInput.setBackground(new java.awt.Color(255, 255, 255));
+        jumlahPembelianInput.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jumlahPembelian, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                    .addComponent(jumlahPembelianInput))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jumlahPembelian)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jumlahPembelianInput, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        checkboxPanel.setBackground(new java.awt.Color(255, 221, 186));
+
+        atributLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        atributLabel.setForeground(new java.awt.Color(137, 92, 3));
+        atributLabel.setText("Atribut Tambahan Kendaraan");
+
+        kursiCheckbox.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        kursiCheckbox.setForeground(new java.awt.Color(137, 92, 3));
+        kursiCheckbox.setText("Kursi Kulit");
+
+        sistemNavigasiCheckbox.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        sistemNavigasiCheckbox.setForeground(new java.awt.Color(137, 92, 3));
+        sistemNavigasiCheckbox.setText("Sistem Navigasi");
+
+        javax.swing.GroupLayout checkboxPanelLayout = new javax.swing.GroupLayout(checkboxPanel);
+        checkboxPanel.setLayout(checkboxPanelLayout);
+        checkboxPanelLayout.setHorizontalGroup(
+            checkboxPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(checkboxPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(checkboxPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(atributLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(checkboxPanelLayout.createSequentialGroup()
+                        .addGroup(checkboxPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(kursiCheckbox)
+                            .addComponent(sistemNavigasiCheckbox))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        checkboxPanelLayout.setVerticalGroup(
+            checkboxPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(checkboxPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(atributLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(kursiCheckbox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sistemNavigasiCheckbox)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        metodePembayaranPanel.setBackground(new java.awt.Color(255, 221, 186));
+
+        metodePembayaranLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        metodePembayaranLabel.setForeground(new java.awt.Color(137, 92, 3));
+        metodePembayaranLabel.setText("Metode Pembayaran");
+
+        metodePembayaranGroup.add(bcaRadio);
+        bcaRadio.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        bcaRadio.setForeground(new java.awt.Color(137, 92, 3));
+        bcaRadio.setText("BCA");
+
+        metodePembayaranGroup.add(briRadio);
+        briRadio.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        briRadio.setForeground(new java.awt.Color(137, 92, 3));
+        briRadio.setText("BRI");
+
+        metodePembayaranGroup.add(mayRadio);
+        mayRadio.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        mayRadio.setForeground(new java.awt.Color(137, 92, 3));
+        mayRadio.setText("May Bank");
+
+        metodePembayaranGroup.add(bpdRadio);
+        bpdRadio.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        bpdRadio.setForeground(new java.awt.Color(137, 92, 3));
+        bpdRadio.setText("BPD DIY");
+
+        metodePembayaranGroup.add(tunaiRadio);
+        tunaiRadio.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        tunaiRadio.setForeground(new java.awt.Color(137, 92, 3));
+        tunaiRadio.setText("Tunai");
+
+        javax.swing.GroupLayout metodePembayaranPanelLayout = new javax.swing.GroupLayout(metodePembayaranPanel);
+        metodePembayaranPanel.setLayout(metodePembayaranPanelLayout);
+        metodePembayaranPanelLayout.setHorizontalGroup(
+            metodePembayaranPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(metodePembayaranPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(metodePembayaranPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(metodePembayaranLabel)
+                    .addComponent(bcaRadio)
+                    .addComponent(briRadio)
+                    .addComponent(mayRadio)
+                    .addComponent(bpdRadio)
+                    .addComponent(tunaiRadio))
+                .addContainerGap(442, Short.MAX_VALUE))
+        );
+        metodePembayaranPanelLayout.setVerticalGroup(
+            metodePembayaranPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(metodePembayaranPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(metodePembayaranLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bcaRadio)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(briRadio)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mayRadio)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bpdRadio)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tunaiRadio)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout transaksiFormPanelLayout = new javax.swing.GroupLayout(transaksiFormPanel);
+        transaksiFormPanel.setLayout(transaksiFormPanelLayout);
+        transaksiFormPanelLayout.setHorizontalGroup(
+            transaksiFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(transaksiFormPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(transaksiFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(transaksiButtonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(namaCustomerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(namaKendaraanPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(checkboxPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(metodePembayaranPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        transaksiFormPanelLayout.setVerticalGroup(
+            transaksiFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(transaksiFormPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(transaksiButtonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(transaksiFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(metodePembayaranPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(transaksiFormPanelLayout.createSequentialGroup()
+                        .addComponent(namaCustomerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(namaKendaraanPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(checkboxPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
+        mainPanel.setLayout(mainPanelLayout);
+        mainPanelLayout.setHorizontalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(searchPesananInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(simpanTransaksiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(batalTransaksiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(transaksiFormPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        mainPanelLayout.setVerticalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(searchPesananInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(transaksiFormPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(simpanTransaksiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(batalTransaksiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void searchPesananInputTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchPesananInputTextFieldKeyPressed
+
+    }//GEN-LAST:event_searchPesananInputTextFieldKeyPressed
+
+    private void searchTPesananInputButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTPesananInputButtonActionPerformed
+        showTableBySearch(searchPesananInputTextField.getText());
+        
+        clearText();
+        setComponent(false);
+        setEditDeleteBtn(false);
+        setRadioComponent(false);
+        metodePembayaranGroup.clearSelection();
+        tambahTransaksiButton.setEnabled(true);  
+    }//GEN-LAST:event_searchTPesananInputButtonActionPerformed
+
+    private void barukanTransaksiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barukanTransaksiButtonActionPerformed
+        action = "baharui";
+        setComponent(true);
+        namaCustomerDropdown.setEnabled(false);
+        setEditDeleteBtn(true);
+        setRadioComponent(false);  
+    }//GEN-LAST:event_barukanTransaksiButtonActionPerformed
+
+    private void hapusTransaksiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusTransaksiButtonActionPerformed
+        action = "hapus";
+        
+        if(JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan " + action + "?") != JOptionPane.YES_OPTION)
+        return;
+
+        pembelianControl.deletePembelianKendaraan(selectedId);
+        
+        clearText();
+        setComponent(false);
+        setEditDeleteBtn(false);
+        setRadioComponent(false);
+        metodePembayaranGroup.clearSelection();
+        tambahTransaksiButton.setEnabled(true);
+        showTableBySearch("");
+    }//GEN-LAST:event_hapusTransaksiButtonActionPerformed
+
+    private void tambahTransaksiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahTransaksiButtonActionPerformed
+        action = "tambah";
+        setComponent(true);
+        setRadioComponent(true); 
+    }//GEN-LAST:event_tambahTransaksiButtonActionPerformed
+
+    private void simpanTransaksiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanTransaksiButtonActionPerformed
+        try{
+            // EXCEPTION
+            inputKosongPembelianException();
+            
+            // SET ATRIBUT DAN METODE PEMBAYARAN
+            String atribut = "";
+            String metodePembayaran = "";
+            
+            // MENCARI INDEX YANG DITUNJUK OLEH DROPDOWN
+            // CUSTOMER
+            int selectedIndexCustomer = namaCustomerDropdown.getSelectedIndex();            
+            Customer selectedCustomer = listCustomer.get(selectedIndexCustomer);
+            
+            // KENDARAAN
+            int selectedIndexKendaraan = namaKendaraanDropdown.getSelectedIndex();
+            Kendaraan selectedKendaraan = listKendaraan.get(selectedIndexKendaraan);
+            double totalHarga = Integer.parseInt(jumlahPembelianInput.getText()) * selectedKendaraan.getHarga();
+            if(kursiCheckbox.isSelected() && sistemNavigasiCheckbox.isSelected()){
+                atribut = "Paket Lengkap";
+            }else if(kursiCheckbox.isSelected()){
+                atribut = "Tambahan kursi kulit";
+            }else{
+                atribut = "Tambahan Sistem navigasi";
+            }
+            metodePembayaran = metodePembayaranGroup.getSelection().getActionCommand();
+            if(JOptionPane.showConfirmDialog(rootPane,"Total pembayran yang perlu Anda bayarkan adalah : Rp. " +totalHarga) != JOptionPane.CLOSED_OPTION){
+                 if(action.equals("tambah")){                
+                PembelianKendaraan pk = new PembelianKendaraan(selectedCustomer.getId_customer(), Integer.parseInt(jumlahPembelianInput.getText()), 
+                        selectedKendaraan.getId_kendaraan(), atribut, metodePembayaran, selectedCustomer, selectedKendaraan);
+                pembelianControl.insertDataPembelianKendaraan(pk);
+            } else {
+                PembelianKendaraan pk = new PembelianKendaraan(selectedCustomer.getId_customer(), Integer.parseInt(jumlahPembelianInput.getText()), 
+                        selectedKendaraan.getId_kendaraan(), atribut, metodePembayaran, selectedCustomer, selectedKendaraan);
+                pembelianControl.updatePembelianKendaraan(pk, selectedId);
+                selectedId = -1;
+                }
+            }
+           
+        }catch(InputKosongException e){
+            JOptionPane.showMessageDialog(this, e.message());
+        }
+        
+        clearText();
+        setComponent(false);
+        setEditDeleteBtn(false);
+        setRadioComponent(false);
+        metodePembayaranGroup.clearSelection();
+        tambahTransaksiButton.setEnabled(true);
+        showTableBySearch("");
+    }//GEN-LAST:event_simpanTransaksiButtonActionPerformed
+
+    private void batalTransaksiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalTransaksiButtonActionPerformed
+        clearText();
+        setEditDeleteBtn(false);
+        setComponent(false);
+        setEditDeleteBtn(false);
+        setRadioComponent(false);
+        
+        tambahTransaksiButton.setEnabled(true);
+    }//GEN-LAST:event_batalTransaksiButtonActionPerformed
+
+    private void tablePembelianMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablePembelianMouseClicked
+        int indexCustomer = -1, indexKendaraan = -1;
+        action = "baharui";
+        
+        tambahTransaksiButton.setEnabled(false);
+        batalTransaksiButton.setEnabled(true);
+        simpanTransaksiButton.setEnabled(true);        
+        setEditDeleteBtn(true);
+        
+        setComponent(false);
+        setRadioComponent(false);        
+        metodePembayaranGroup.clearSelection();
+        
+        int clickedRow = tablePembelian.getSelectedRow();
+        TableModel tableModel = tablePembelian.getModel();
+        
+        selectedId = Integer.parseInt(tableModel.getValueAt(clickedRow, 0).toString());
+        jumlahPembelianInput.setText(tableModel.getValueAt(clickedRow, 3).toString());
+        
+        String metodePembayaran = tableModel.getValueAt(clickedRow, 5).toString();
+        String atribut = tableModel.getValueAt(clickedRow, 4).toString();
+        
+        switch(metodePembayaran){
+            case "BCA" :
+                bcaRadio.setSelected(true);
+                break;
+            case "BRI" :
+                briRadio.setSelected(true);
+                break;
+            case "May Bank":
+                mayRadio.setSelected(true);
+                break;
+            case "BPD DIY":
+                bpdRadio.setSelected(true);
+                break;
+            case "Tunai":
+                tunaiRadio.setSelected(true);
+                break;
+        }
+        
+        kursiCheckbox.setSelected(false);
+        sistemNavigasiCheckbox.setSelected(false);
+        
+        switch(atribut){
+            case "Paket Lengkap" :
+                kursiCheckbox.setSelected(true);
+                sistemNavigasiCheckbox.setSelected(true);
+                break;
+            case "Tambahan Sistem navigasi" :
+                sistemNavigasiCheckbox.setSelected(true);
+                break;
+            case "Tambahan kursi kulit" :
+                kursiCheckbox.setSelected(true);
+                break;
+        }
+        
+        for(Customer customer : listCustomer){
+            if(customer.getId_customer() == Integer.parseInt(tableModel.getValueAt(clickedRow, 6).toString())){
+                indexCustomer = listCustomer.indexOf(customer);
+            }
+        }
+        
+        for(Kendaraan kendaraan : listKendaraan){
+            if(kendaraan.getId_kendaraan().equals(tableModel.getValueAt(clickedRow, 7).toString())){
+                indexKendaraan = listKendaraan.indexOf(kendaraan);
+            }
+        }        
+        
+        namaCustomerDropdown.setSelectedIndex(indexCustomer);
+        namaKendaraanDropdown.setSelectedIndex(indexKendaraan);
+    }//GEN-LAST:event_tablePembelianMouseClicked
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel atributLabel;
+    private javax.swing.JButton barukanTransaksiButton;
+    private javax.swing.JButton batalTransaksiButton;
+    private javax.swing.JRadioButton bcaRadio;
+    private javax.swing.JRadioButton bpdRadio;
+    private javax.swing.JRadioButton briRadio;
+    private javax.swing.JPanel checkboxPanel;
+    private javax.swing.JButton hapusTransaksiButton;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jumlahPembelian;
+    private javax.swing.JTextField jumlahPembelianInput;
+    private javax.swing.JCheckBox kursiCheckbox;
+    private javax.swing.JPanel mainPanel;
+    private javax.swing.JRadioButton mayRadio;
+    private javax.swing.ButtonGroup metodePembayaranGroup;
+    private javax.swing.JLabel metodePembayaranLabel;
+    private javax.swing.JPanel metodePembayaranPanel;
+    private javax.swing.JComboBox<Customer> namaCustomerDropdown;
+    private javax.swing.JLabel namaCustomerLabel;
+    private javax.swing.JPanel namaCustomerPanel;
+    private javax.swing.JComboBox<Kendaraan> namaKendaraanDropdown;
+    private javax.swing.JLabel namaKendaraanLabel;
+    private javax.swing.JPanel namaKendaraanPanel;
+    private javax.swing.JLabel searchPesananInputLabel;
+    private javax.swing.JPanel searchPesananInputPanel;
+    private javax.swing.JTextField searchPesananInputTextField;
+    private javax.swing.JButton searchTPesananInputButton;
+    private javax.swing.JButton simpanTransaksiButton;
+    private javax.swing.JCheckBox sistemNavigasiCheckbox;
+    private javax.swing.JTable tablePembelian;
+    private javax.swing.JButton tambahTransaksiButton;
+    private javax.swing.JPanel transaksiButtonPanel;
+    private javax.swing.JPanel transaksiFormPanel;
+    private javax.swing.JRadioButton tunaiRadio;
+    // End of variables declaration//GEN-END:variables
+}
