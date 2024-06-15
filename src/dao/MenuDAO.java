@@ -280,29 +280,7 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>{
         return list;
     }
     
-    public void updateJenis (Menu m, String id_menu){
-        con = dbCon.makeConnection();
-        
-        String sql = "UPDATE `"
-                + m.getJenis_menu()
-                + "` SET `deskripsi`='"
-                + m.getSpecial()
-                + "' WHERE `makanan`.id_menu = '"
-                + id_menu
-                + "'";
-        System.out.println("Updating Jenis Menu...");
-        
-        try{
-            Statement statement = con.createStatement();
-            int result = statement.executeUpdate(sql);
-            System.out.println("Edited" + result + " Menu " + id_menu);
-            statement.close();
-        }catch(Exception e){
-            System.out.println("Error Updating Menu...");
-            System.out.println(e);
-        }
-        dbCon.closeConnection();
-    }
+    
     
 }
 

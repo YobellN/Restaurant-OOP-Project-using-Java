@@ -35,6 +35,32 @@ public class MinumanDAO extends MenuDAO implements IMenuDAO{
         dbCon.closeConnection();  
     }
     
+    public void updateJenis (Minuman mn, String id_menu){
+        con = dbCon.makeConnection();
+        
+        String sql = "UPDATE `"
+                + mn.getJenis_menu()
+                + "` SET `ukuran`='"
+                + mn.getUkuran()
+                + "' WHERE `minuman`.id_menu = '"
+                + id_menu
+                + "'";
+        System.out.println("Updating Jenis Menu...");
+        
+        try{
+            Statement statement = con.createStatement();
+            int result = statement.executeUpdate(sql);
+            System.out.println("Edited" + result + " Menu " + id_menu);
+            statement.close();
+        }catch(Exception e){
+            System.out.println("Error Updating Menu...");
+            System.out.println(e);
+        }
+        dbCon.closeConnection();
+    }
+    
+   
+    
     @Override
     public void deleteOldJenis(String id_menu) {
         con = dbCon.makeConnection();
@@ -59,7 +85,7 @@ public class MinumanDAO extends MenuDAO implements IMenuDAO{
             deleteOldJenis(id_menu);
             insertNewJenis(mn);
         }else{
-            updateJenis(m, id_menu);
+            updateJenis((Minuman) m, id_menu);
         }
         super.update(m, id_menu);
     }

@@ -64,4 +64,6 @@ public class TabelMakanan extends AbstractTableModel{
                 return null;
         }
     }
+    
+    
 }

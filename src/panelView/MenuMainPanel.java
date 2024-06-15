@@ -11,20 +11,28 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.Comparator;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import model.Menu;
 import model.Minuman;
 import model.Makanan;
+import table.TabelMakanan;
 
 public class MenuMainPanel extends javax.swing.JPanel {
     private MenuControl menuControl = new MenuControl();
@@ -57,7 +65,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
         initComponents();
         showTableBySearch("");
         setComponentsData(false);
-        
+        showTableBySearch("");
         setEditDeleteButton(false);
         
         clearTextData();
@@ -123,13 +131,29 @@ public class MenuMainPanel extends javax.swing.JPanel {
         }
     }
     
-//    public void showTableMakanan(){
-//        tabelMakanan.setModel(makananControl.showTable());
-//    }
-//    
-//    public void showTableMinuman(){
-//        tabelMinuman.setModel(minumanControl.showTable());
-//    }
+    private static void addHeaderClickListener(JTable table) {
+        JTableHeader header = table.getTableHeader();
+        header.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                int col = header.columnAtPoint(e.getPoint());
+                String name = header.getColumnModel().getColumn(col).getHeaderValue().toString();
+                System.out.println("Column header clicked: " + name);
+
+            }
+        });
+        TableModel tableModel = table.getModel();
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>((TableModel) tableModel);
+        
+        sorter.setComparator(4, Comparator.comparingDouble(value -> {
+            if (value instanceof Number) {
+                return ((Number) value).doubleValue();
+            }
+            return Double.parseDouble(value.toString());
+        }));
+        table.setRowSorter(sorter);
+        
+        
+    }
     
     private boolean makananIsSelected(){
         return jenisProdukInputButton.getText().equals("Makanan");
@@ -157,6 +181,8 @@ public class MenuMainPanel extends javax.swing.JPanel {
     public void showTableBySearch(String target){
         tabelMakanan.setModel(makananControl.showTableBySearch(target));
         tabelMinuman.setModel(minumanControl.showTableBySearch(target));
+        addHeaderClickListener(tabelMakanan);
+        addHeaderClickListener(tabelMinuman);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -803,7 +829,9 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 break;
                 default:
                 break;
+                
             }
+            showTableBySearch("");
             action = null;
     }//GEN-LAST:event_simpanProdukButtonActionPerformed
 
@@ -813,7 +841,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
 
     private void tabelMakananMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMakananMouseClicked
         tabelMinuman.clearSelection();
-        action = "baharui";
+        action = "update";
         
         tambahProdukButton.setEnabled(false);
         cancelButton.setEnabled(true);
@@ -823,10 +851,15 @@ public class MenuMainPanel extends javax.swing.JPanel {
         setComponentsData(false);
         
         int clickedRow = tabelMakanan.getSelectedRow();
-        TableModel tableModel = tabelMakanan.getModel();
         
-        selectedId = tableModel.getValueAt(clickedRow, 0).toString();
+        if (tabelMakanan.getRowSorter() != null) {
+            clickedRow = tabelMakanan.convertRowIndexToModel(clickedRow);
+        }
+        
+        TableModel tableModel = tabelMakanan.getModel();
 
+        selectedId = tableModel.getValueAt(clickedRow, 0).toString();
+        
         idProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 0).toString());
         namaProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
         jenisProdukInputButton.setText(tableModel.getValueAt(clickedRow, 2).toString());
@@ -834,7 +867,6 @@ public class MenuMainPanel extends javax.swing.JPanel {
         hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString());
         setSpecialAtributeLabel();
         setImageIcon((byte[]) tableModel.getValueAt(clickedRow, 5));
-        System.out.println("INI GAMBAR " + tableModel.getValueAt(clickedRow, 5).toString());
         cancelButton.setEnabled(true);
     }//GEN-LAST:event_tabelMakananMouseClicked
 
@@ -866,6 +898,10 @@ public class MenuMainPanel extends javax.swing.JPanel {
         int clickedRow = tabelMinuman.getSelectedRow();
         TableModel tableModel = tabelMinuman.getModel();
         
+        if (tabelMinuman.getRowSorter() != null) {
+            clickedRow = tabelMinuman.convertRowIndexToModel(clickedRow);
+        }
+         
         selectedId = tableModel.getValueAt(clickedRow, 0).toString();
         
         idProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 0).toString());
