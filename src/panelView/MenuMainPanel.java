@@ -9,6 +9,7 @@ import control.MinumanControl;
 import control.MakananControl;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -19,9 +20,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Comparator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -42,6 +46,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
     private Minuman minuman = null;
     private Makanan makanan = null;
     String action = null;
+    String actionTambahGambar = null;
     private Component rootPane;
     private String selectedId = "";
     private File selectedFile;
@@ -63,7 +68,6 @@ public class MenuMainPanel extends javax.swing.JPanel {
     
     public MenuMainPanel() {
         initComponents();
-        showTableBySearch("");
         setComponentsData(false);
         showTableBySearch("");
         setEditDeleteButton(false);
@@ -154,13 +158,31 @@ public class MenuMainPanel extends javax.swing.JPanel {
         
     }
     
+    private static byte[] ubahGambar(JLabel labelGambar) throws IOException {
+        ImageIcon icon = (ImageIcon) labelGambar.getIcon();
+        Image img = icon.getImage();
+
+        BufferedImage bufferedImage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = bufferedImage.createGraphics();
+        g2.drawImage(img, 0, 0, null);
+        g2.dispose();
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(bufferedImage, "jpg", baos); 
+        baos.flush();
+        byte[] gambarBytes = baos.toByteArray();
+        baos.close();
+
+        return gambarBytes;
+    }
+ 
     private boolean makananIsSelected(){
         return jenisProdukInputButton.getText().equals("Makanan");
     }
     
 
     
-    public void showTableBySearch(String target){
+    private void showTableBySearch(String target){
         tabelMakanan.setModel(makananControl.showTableBySearch(target));
         tabelMinuman.setModel(minumanControl.showTableBySearch(target));
         addHeaderClickListener(tabelMakanan);
@@ -727,6 +749,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
         clearTextData();
         setEditDeleteButton(false);
         setComponentsData(false);
+        tambahProdukButton.setEnabled(true);
         showTableBySearch("");
     }//GEN-LAST:event_hapusProdukButtonActionPerformed
 
@@ -796,14 +819,22 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 setComponentsData(false);
                 showTableBySearch("");
                 break;
-                case "update":
+                case "update":        
                 if(makananIsSelected()){
-                    makanan = new Makanan(specialAtributeInputTextfield.getText(),idProdukInputTextField.getText(), namaProdukInputTextField.getText(),
-                        jenisProdukInputButton.getText(), Float.parseFloat(hargaProdukInputTextfield.getText()), gambarBytes);
-                    makananControl.updateDataProduk(makanan);
+                    try {
+                        makanan = new Makanan(specialAtributeInputTextfield.getText(),idProdukInputTextField.getText(), namaProdukInputTextField.getText(),
+                                jenisProdukInputButton.getText(), Float.parseFloat(hargaProdukInputTextfield.getText()), ubahGambar(gambarLabel));
+                    } catch (IOException ex) {
+                        Logger.getLogger(MenuMainPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                        makananControl.updateDataProduk(makanan);
                 }else{
-                    minuman = new Minuman(specialAtributeInputTextfield.getText(),idProdukInputTextField.getText(), namaProdukInputTextField.getText(),
-                        jenisProdukInputButton.getText(), Float.parseFloat(hargaProdukInputTextfield.getText()), gambarBytes);
+                    try {
+                        minuman = new Minuman(specialAtributeInputTextfield.getText(),idProdukInputTextField.getText(), namaProdukInputTextField.getText(),
+                                jenisProdukInputButton.getText(), Float.parseFloat(hargaProdukInputTextfield.getText()), ubahGambar(gambarLabel));
+                    } catch (IOException ex) {
+                        Logger.getLogger(MenuMainPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     minumanControl.updateDataProduk(minuman);
                 }
                 clearTextData();
@@ -815,9 +846,9 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 break;
                 
             }
-            
             showTableBySearch("");
-            
+            tambahProdukButton.setEnabled(true);
+            actionTambahGambar = null;
             action = null;
     }//GEN-LAST:event_simpanProdukButtonActionPerformed
 
@@ -903,8 +934,6 @@ public class MenuMainPanel extends javax.swing.JPanel {
     private void tambahGambarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahGambarButtonActionPerformed
         if(action == null)
         return;
-        
-        
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new FileNameExtensionFilter("Gambar", "jpg", "png", "jpeg"));
         int returnValue = fileChooser.showOpenDialog(null);
@@ -931,6 +960,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 ex.printStackTrace();
             }
         }
+        
     }//GEN-LAST:event_tambahGambarButtonActionPerformed
 
 

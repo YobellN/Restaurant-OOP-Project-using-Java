@@ -18,13 +18,13 @@ public class MinumanControl {
     public TabelMinuman showTable() {
         List<Menu> data = mnDao.showData("Minuman");
         TabelMinuman tabelMinuman = new TabelMinuman(data);
-
+        
         return tabelMinuman;
     }
     
     public TabelMinuman showTableBySearch(String search){
         List<Menu> data = mnDao.showData(search);
-        List<Menu> temp = new ArrayList<>(); // Initialize the temp list
+        List<Menu> temp = new ArrayList<>();
         for (Menu menu : data) {
             if (menu.getJenis_menu().equals("Minuman")) {
                 temp.add(menu);

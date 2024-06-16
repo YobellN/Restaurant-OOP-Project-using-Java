@@ -20,7 +20,7 @@ public class MakananDAO extends MenuDAO implements IMenuDAO{
                 "INSERT INTO `makanan`(`id_menu`, `catatan`) VALUES ('"
                 + mk.getId_menu()
                 + "','"
-                + mk.getCatatan()
+                + mk.getSpecial()
                 + "')";
 
         System.out.println("Adding Menu...");

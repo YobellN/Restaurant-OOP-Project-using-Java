@@ -121,27 +121,46 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>{
     
     
     @Override
-    public void update (Menu m, String id_menu){
+    public void update(Menu m, String id_menu) {
         con = dbCon.makeConnection();
-        
-        String sql = "UPDATE `menu` SET " 
-                + "`nama_menu`='" + m.getNama_menu()+ "',"
-                + "`jenis_menu`='"+ m.getJenis_menu()+ "',"
-                + "`harga`='" + m.getHarga()+ "',"
-                + "`gambar`='" + m.getGambar() +"' "
-                + "WHERE id_menu='" + id_menu + "'";
+
+        String sql = "UPDATE menu SET nama_menu = ?, jenis_menu = ?, harga = ?, gambar = ? WHERE id_menu = ?";
         System.out.println("Updating Menu...");
-        
-        try{
-            Statement statement = con.createStatement();
-            int result = statement.executeUpdate(sql);
-            System.out.println("Edited" + result + " Menu " + id_menu);
-            statement.close();
-        }catch(Exception e){
-            System.out.println("Error Updating Menu...");
-            System.out.println(e);
+
+        PreparedStatement st = null;
+
+        try {
+            st = (PreparedStatement) con.prepareStatement(sql);
+            st.setString(1, m.getNama_menu());
+            st.setString(2, m.getJenis_menu());
+            st.setFloat(3, m.getHarga());
+
+            byte[] imageBytes = m.getGambar();
+            if (imageBytes != null && imageBytes.length > 0) {
+                st.setBytes(4, imageBytes);
+            } else {
+                st.setNull(4, java.sql.Types.BLOB);
+            }
+
+            st.setString(5, id_menu);
+
+            int result = st.executeUpdate();
+            System.out.println("Updated " + result + " Menu with id_menu " + id_menu);
+
+        } catch (Exception e) {
+            System.out.println("Error updating Menu...");
+            e.printStackTrace();
+        } finally {
+            try {
+                if (st != null) {
+                    st.close();
+                }
+                dbCon.closeConnection();
+            } catch (Exception ex) {
+                System.out.println("Error closing resources...");
+                ex.printStackTrace();
+            }
         }
-        dbCon.closeConnection();
     }
     
     @Override
