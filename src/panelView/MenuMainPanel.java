@@ -212,13 +212,16 @@ public class MenuMainPanel extends javax.swing.JPanel {
         minumanScrollPane = new javax.swing.JScrollPane();
         tabelMinuman = new javax.swing.JTable();
 
-        mainPanel.setBackground(new java.awt.Color(255, 255, 255));
+        mainPanel.setBackground(new java.awt.Color(255, 221, 186));
 
-        searchProdukInputPanel.setBackground(new java.awt.Color(255, 255, 255));
+        searchProdukInputPanel.setBackground(new java.awt.Color(255, 221, 186));
 
+        searchProdukInputLabel.setBackground(new java.awt.Color(255, 221, 186));
         searchProdukInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        searchProdukInputLabel.setForeground(new java.awt.Color(137, 92, 3));
         searchProdukInputLabel.setText("Pencarian Produk");
 
+        searchProdukInputTextField.setBackground(new java.awt.Color(255, 255, 255));
         searchProdukInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         searchProdukInputTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -226,7 +229,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
             }
         });
 
-        searchProdukInputButton.setBackground(new java.awt.Color(27, 26, 85));
+        searchProdukInputButton.setBackground(new java.awt.Color(137, 92, 3));
         searchProdukInputButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         searchProdukInputButton.setForeground(new java.awt.Color(255, 255, 255));
         searchProdukInputButton.setText("Cari");
@@ -243,7 +246,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
             .addGroup(searchProdukInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(searchProdukInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(searchProdukInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 1195, Short.MAX_VALUE)
+                    .addComponent(searchProdukInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(searchProdukInputPanelLayout.createSequentialGroup()
                         .addComponent(searchProdukInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -262,11 +265,11 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
-        ProdukFormPanel.setBackground(new java.awt.Color(255, 255, 255));
+        ProdukFormPanel.setBackground(new java.awt.Color(255, 221, 186));
 
-        ProdukButtonPanel.setBackground(new java.awt.Color(255, 255, 255));
+        ProdukButtonPanel.setBackground(new java.awt.Color(255, 221, 186));
 
-        barukanProdukButton.setBackground(new java.awt.Color(255, 189, 3));
+        barukanProdukButton.setBackground(new java.awt.Color(255, 175, 47));
         barukanProdukButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         barukanProdukButton.setForeground(new java.awt.Color(255, 255, 255));
         barukanProdukButton.setText("Barukan");
@@ -276,7 +279,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
             }
         });
 
-        hapusProdukButton.setBackground(new java.awt.Color(237, 8, 0));
+        hapusProdukButton.setBackground(new java.awt.Color(237, 78, 5));
         hapusProdukButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         hapusProdukButton.setForeground(new java.awt.Color(255, 255, 255));
         hapusProdukButton.setText("Hapus");
@@ -286,7 +289,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
             }
         });
 
-        tambahProdukButton.setBackground(new java.awt.Color(51, 178, 73));
+        tambahProdukButton.setBackground(new java.awt.Color(51, 151, 56));
         tambahProdukButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         tambahProdukButton.setForeground(new java.awt.Color(255, 255, 255));
         tambahProdukButton.setText("Tambah");
@@ -320,11 +323,13 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        idProdukInputPanel.setBackground(new java.awt.Color(255, 255, 255));
+        idProdukInputPanel.setBackground(new java.awt.Color(255, 221, 186));
 
         idProdukInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        idProdukInputLabel.setForeground(new java.awt.Color(137, 92, 3));
         idProdukInputLabel.setText("ID Produk");
 
+        idProdukInputTextField.setBackground(new java.awt.Color(255, 255, 255));
         idProdukInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         idProdukInputTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -339,8 +344,8 @@ public class MenuMainPanel extends javax.swing.JPanel {
             .addGroup(idProdukInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(idProdukInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(idProdukInputTextField)
-                    .addComponent(idProdukInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
+                    .addComponent(idProdukInputTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                    .addComponent(idProdukInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         idProdukInputPanelLayout.setVerticalGroup(
@@ -353,11 +358,13 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        namaProdukInputPanel.setBackground(new java.awt.Color(255, 255, 255));
+        namaProdukInputPanel.setBackground(new java.awt.Color(255, 221, 186));
 
         namaProdukInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        namaProdukInputLabel.setForeground(new java.awt.Color(137, 92, 3));
         namaProdukInputLabel.setText("Nama Produk");
 
+        namaProdukInputTextField.setBackground(new java.awt.Color(255, 255, 255));
         namaProdukInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout namaProdukInputPanelLayout = new javax.swing.GroupLayout(namaProdukInputPanel);
@@ -381,11 +388,13 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        hargaProdukInputPanel.setBackground(new java.awt.Color(255, 255, 255));
+        hargaProdukInputPanel.setBackground(new java.awt.Color(255, 221, 186));
 
         hargaProdukInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        hargaProdukInputLabel.setForeground(new java.awt.Color(137, 92, 3));
         hargaProdukInputLabel.setText("Harga");
 
+        hargaProdukInputTextfield.setBackground(new java.awt.Color(255, 255, 255));
         hargaProdukInputTextfield.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         hargaProdukInputTextfield.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -400,8 +409,8 @@ public class MenuMainPanel extends javax.swing.JPanel {
             .addGroup(hargaProdukInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(hargaProdukInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(hargaProdukInputTextfield)
-                    .addComponent(hargaProdukInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
+                    .addComponent(hargaProdukInputTextfield, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                    .addComponent(hargaProdukInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         hargaProdukInputPanelLayout.setVerticalGroup(
@@ -414,12 +423,15 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jenisProdukInputPanel.setBackground(new java.awt.Color(255, 255, 255));
+        jenisProdukInputPanel.setBackground(new java.awt.Color(255, 221, 186));
 
         jenisProdukInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        jenisProdukInputLabel.setForeground(new java.awt.Color(137, 92, 3));
         jenisProdukInputLabel.setText("Jenis Produk");
 
+        jenisProdukInputButton.setBackground(new java.awt.Color(70, 39, 7));
         jenisProdukInputButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        jenisProdukInputButton.setForeground(new java.awt.Color(255, 255, 255));
         jenisProdukInputButton.setText("Minuman");
         jenisProdukInputButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -486,9 +498,9 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        kendaraanFormPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        kendaraanFormPanel2.setBackground(new java.awt.Color(255, 221, 186));
 
-        simpanProdukButton.setBackground(new java.awt.Color(51, 178, 73));
+        simpanProdukButton.setBackground(new java.awt.Color(51, 151, 56));
         simpanProdukButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         simpanProdukButton.setForeground(new java.awt.Color(255, 255, 255));
         simpanProdukButton.setText("Simpan");
@@ -499,7 +511,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
             }
         });
 
-        cancelButton.setBackground(new java.awt.Color(237, 8, 0));
+        cancelButton.setBackground(new java.awt.Color(237, 78, 5));
         cancelButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         cancelButton.setForeground(new java.awt.Color(255, 255, 255));
         cancelButton.setText("Batalkan");
@@ -509,11 +521,13 @@ public class MenuMainPanel extends javax.swing.JPanel {
             }
         });
 
-        specialAtributeInputPanel.setBackground(new java.awt.Color(255, 255, 255));
+        specialAtributeInputPanel.setBackground(new java.awt.Color(255, 221, 186));
 
         specialAtributeInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        specialAtributeInputLabel.setForeground(new java.awt.Color(137, 92, 3));
         specialAtributeInputLabel.setText("Catatan");
 
+        specialAtributeInputTextfield.setBackground(new java.awt.Color(255, 255, 255));
         specialAtributeInputTextfield.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         specialAtributeInputTextfield.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -581,12 +595,10 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(kendaraanFormPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(kendaraanFormPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(kendaraanFormPanel2Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(tambahGambarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(gambarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(kendaraanFormPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(gambarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tambahGambarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addComponent(simpanProdukButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -599,7 +611,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 .addComponent(specialAtributeInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(gambarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(kendaraanFormPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(simpanProdukButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -677,22 +689,20 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(makananScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 796, Short.MAX_VALUE)
                     .addComponent(minumanScrollPane))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );

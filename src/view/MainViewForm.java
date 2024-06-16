@@ -58,17 +58,17 @@ public class MainViewForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        sidePanel.setBackground(new java.awt.Color(20, 60, 60));
+        sidePanel.setBackground(new java.awt.Color(229, 171, 89));
 
-        logoPanel.setBackground(new java.awt.Color(20, 60, 60));
+        logoPanel.setBackground(new java.awt.Color(229, 171, 89));
 
         logoIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/titipCo.png"))); // NOI18N
+        logoIcon.setIcon(new javax.swing.ImageIcon("D:\\ATMA\\sem 4\\PBO A\\TubessPBO\\TubesPBO\\src\\icon\\restoo-01.png")); // NOI18N
 
         logoLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 22)); // NOI18N
-        logoLabel.setForeground(new java.awt.Color(255, 255, 255));
+        logoLabel.setForeground(new java.awt.Color(137, 92, 3));
         logoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logoLabel.setText("Titip.co");
+        logoLabel.setText("RESTO");
 
         javax.swing.GroupLayout logoPanelLayout = new javax.swing.GroupLayout(logoPanel);
         logoPanel.setLayout(logoPanelLayout);
@@ -91,7 +91,7 @@ public class MainViewForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        singlePanel.setBackground(new java.awt.Color(20, 60, 60));
+        singlePanel.setBackground(new java.awt.Color(229, 171, 89));
         singlePanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 singlePanelMouseClicked(evt);
@@ -100,10 +100,10 @@ public class MainViewForm extends javax.swing.JFrame {
 
         customerLabel.setBackground(new java.awt.Color(20, 60, 60));
         customerLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        customerLabel.setForeground(new java.awt.Color(255, 255, 255));
+        customerLabel.setForeground(new java.awt.Color(137, 92, 3));
         customerLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        customerLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/customerIcon.png"))); // NOI18N
-        customerLabel.setText("Penitip");
+        customerLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-order-25.png"))); // NOI18N
+        customerLabel.setText("  Menu");
 
         javax.swing.GroupLayout singlePanelLayout = new javax.swing.GroupLayout(singlePanel);
         singlePanel.setLayout(singlePanelLayout);
@@ -122,7 +122,7 @@ public class MainViewForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        multiplePanel.setBackground(new java.awt.Color(20, 60, 60));
+        multiplePanel.setBackground(new java.awt.Color(229, 171, 89));
         multiplePanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 multiplePanelMouseClicked(evt);
@@ -131,10 +131,10 @@ public class MainViewForm extends javax.swing.JFrame {
 
         kendaraanLabel.setBackground(new java.awt.Color(20, 60, 60));
         kendaraanLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        kendaraanLabel.setForeground(new java.awt.Color(255, 255, 255));
+        kendaraanLabel.setForeground(new java.awt.Color(137, 92, 3));
         kendaraanLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        kendaraanLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/productIcon.png"))); // NOI18N
-        kendaraanLabel.setText("Product");
+        kendaraanLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-customer-30.png"))); // NOI18N
+        kendaraanLabel.setText("Karyawan");
 
         javax.swing.GroupLayout multiplePanelLayout = new javax.swing.GroupLayout(multiplePanel);
         multiplePanel.setLayout(multiplePanelLayout);
@@ -153,11 +153,11 @@ public class MainViewForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        transaksiPanel.setBackground(new java.awt.Color(20, 60, 60));
+        transaksiPanel.setBackground(new java.awt.Color(229, 171, 89));
 
         transaksiLabel.setBackground(new java.awt.Color(20, 60, 60));
         transaksiLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        transaksiLabel.setForeground(new java.awt.Color(255, 255, 255));
+        transaksiLabel.setForeground(new java.awt.Color(137, 92, 3));
         transaksiLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         transaksiLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/penitipanIcon.png"))); // NOI18N
         transaksiLabel.setText("Penitipan");
@@ -184,11 +184,11 @@ public class MainViewForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        transaksiPanelDate.setBackground(new java.awt.Color(20, 60, 60));
+        transaksiPanelDate.setBackground(new java.awt.Color(229, 171, 89));
 
-        transaksiLabelDate.setBackground(new java.awt.Color(20, 60, 60));
+        transaksiLabelDate.setBackground(new java.awt.Color(229, 171, 89));
         transaksiLabelDate.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        transaksiLabelDate.setForeground(new java.awt.Color(255, 255, 255));
+        transaksiLabelDate.setForeground(new java.awt.Color(137, 92, 3));
         transaksiLabelDate.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         transaksiLabelDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/penitipanIcon.png"))); // NOI18N
         transaksiLabelDate.setText("Penitipan");
@@ -223,12 +223,15 @@ public class MainViewForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(singlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(sidePanelLayout.createSequentialGroup()
-                        .addComponent(logoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(multiplePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(transaksiPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(transaksiPanelDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(sidePanelLayout.createSequentialGroup()
+                        .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(sidePanelLayout.createSequentialGroup()
+                                .addComponent(logoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(transaksiPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(transaksiPanelDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         sidePanelLayout.setVerticalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,7 +242,7 @@ public class MainViewForm extends javax.swing.JFrame {
                 .addComponent(singlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(multiplePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(transaksiPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(transaksiPanelDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -257,15 +260,16 @@ public class MainViewForm extends javax.swing.JFrame {
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addComponent(sidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(sidePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 793, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 799, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -287,7 +291,7 @@ public class MainViewForm extends javax.swing.JFrame {
             return;
         
         recolorDefaultSwitchPanel();
-        singlePanel.setBackground(new Color(241, 53, 21, 200));
+        singlePanel.setBackground(new Color(255,204,51));
         setForm(new MenuMainPanel());
         selectedIndex = 1;
     }//GEN-LAST:event_singlePanelMouseClicked
@@ -297,7 +301,7 @@ public class MainViewForm extends javax.swing.JFrame {
             return;
         
         recolorDefaultSwitchPanel();
-        multiplePanel.setBackground(new Color(241, 53, 21, 200));
+        multiplePanel.setBackground(new Color(255,204,51));
         setForm(new KaryawanMainPanel());
         selectedIndex = 2;
     }//GEN-LAST:event_multiplePanelMouseClicked
@@ -307,7 +311,7 @@ public class MainViewForm extends javax.swing.JFrame {
 //            return;
 //        
 //        recolorDefaultSwitchPanel();
-//        transaksiPanel.setBackground(new Color(241, 53, 21, 200));
+//        transaksiPanel.setBackground(new Color(255,204,51));
 //        setForm(new PenitipanMainPanel());
 //        selectedIndex = 3;
     }//GEN-LAST:event_transaksiLabelMouseClicked
@@ -317,7 +321,7 @@ public class MainViewForm extends javax.swing.JFrame {
 //            return;
 //        
 //        recolorDefaultSwitchPanel();
-//        transaksiPanelDate.setBackground(new Color(241, 53, 21, 200));
+//        transaksiPanelDate.setBackground(new Color(255,204,51));
 //        setForm(new PenitipanMainPanelDate());
 //        selectedIndex = 4;
     }//GEN-LAST:event_transaksiLabelDateMouseClicked

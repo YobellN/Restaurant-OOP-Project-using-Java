@@ -24,8 +24,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
               <Component id="mainPanel" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -33,8 +32,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
               <Component id="mainPanel" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -45,7 +43,7 @@
     <Container class="javax.swing.JPanel" name="mainPanel">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+          <Color blue="ba" green="dd" red="ff" type="rgb"/>
         </Property>
       </Properties>
 
@@ -92,7 +90,7 @@
                       <Component id="makananScrollPane" pref="796" max="32767" attributes="0"/>
                       <Component id="minumanScrollPane" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="11" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -101,7 +99,7 @@
         <Container class="javax.swing.JPanel" name="searchProdukInputPanel">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+              <Color blue="ba" green="dd" red="ff" type="rgb"/>
             </Property>
           </Properties>
 
@@ -111,7 +109,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="searchProdukInputLabel" alignment="0" pref="1195" max="32767" attributes="0"/>
+                          <Component id="searchProdukInputLabel" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="searchProdukInputTextField" min="-2" pref="584" max="-2" attributes="0"/>
                               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
@@ -140,14 +138,23 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="searchProdukInputLabel">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ba" green="dd" red="ff" type="rgb"/>
+                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Berlin Sans FB Demi" size="12" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="3" green="5c" red="89" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pencarian Produk"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="searchProdukInputTextField">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Berlin Sans FB" size="12" style="0"/>
                 </Property>
@@ -159,7 +166,7 @@
             <Component class="javax.swing.JButton" name="searchProdukInputButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="55" green="1a" red="1b" type="rgb"/>
+                  <Color blue="3" green="5c" red="89" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Berlin Sans FB Demi" size="12" style="0"/>
@@ -178,7 +185,7 @@
         <Container class="javax.swing.JPanel" name="ProdukFormPanel">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+              <Color blue="ba" green="dd" red="ff" type="rgb"/>
             </Property>
           </Properties>
 
@@ -232,7 +239,7 @@
             <Container class="javax.swing.JPanel" name="ProdukButtonPanel">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="ba" green="dd" red="ff" type="rgb"/>
                 </Property>
               </Properties>
 
@@ -268,7 +275,7 @@
                 <Component class="javax.swing.JButton" name="barukanProdukButton">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="3" green="bd" red="ff" type="rgb"/>
+                      <Color blue="2f" green="af" red="ff" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Berlin Sans FB Demi" size="12" style="0"/>
@@ -285,7 +292,7 @@
                 <Component class="javax.swing.JButton" name="hapusProdukButton">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="8" red="ed" type="rgb"/>
+                      <Color blue="5" green="4e" red="ed" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Berlin Sans FB Demi" size="12" style="0"/>
@@ -302,7 +309,7 @@
                 <Component class="javax.swing.JButton" name="tambahProdukButton">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="49" green="b2" red="33" type="rgb"/>
+                      <Color blue="38" green="97" red="33" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Berlin Sans FB Demi" size="12" style="0"/>
@@ -321,7 +328,7 @@
             <Container class="javax.swing.JPanel" name="idProdukInputPanel">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="ba" green="dd" red="ff" type="rgb"/>
                 </Property>
               </Properties>
 
@@ -331,8 +338,8 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="idProdukInputTextField" alignment="0" max="32767" attributes="0"/>
-                              <Component id="idProdukInputLabel" alignment="0" pref="237" max="32767" attributes="0"/>
+                              <Component id="idProdukInputTextField" alignment="0" pref="237" max="32767" attributes="0"/>
+                              <Component id="idProdukInputLabel" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -356,11 +363,17 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Berlin Sans FB Demi" size="12" style="0"/>
                     </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="3" green="5c" red="89" type="rgb"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="ID Produk"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="idProdukInputTextField">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Berlin Sans FB" size="12" style="0"/>
                     </Property>
@@ -374,7 +387,7 @@
             <Container class="javax.swing.JPanel" name="namaProdukInputPanel">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="ba" green="dd" red="ff" type="rgb"/>
                 </Property>
               </Properties>
 
@@ -409,11 +422,17 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Berlin Sans FB Demi" size="12" style="0"/>
                     </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="3" green="5c" red="89" type="rgb"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Nama Produk"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="namaProdukInputTextField">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Berlin Sans FB" size="12" style="0"/>
                     </Property>
@@ -424,7 +443,7 @@
             <Container class="javax.swing.JPanel" name="hargaProdukInputPanel">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="ba" green="dd" red="ff" type="rgb"/>
                 </Property>
               </Properties>
 
@@ -434,8 +453,8 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="hargaProdukInputTextfield" alignment="0" max="32767" attributes="0"/>
-                              <Component id="hargaProdukInputLabel" alignment="0" pref="237" max="32767" attributes="0"/>
+                              <Component id="hargaProdukInputTextfield" alignment="0" pref="237" max="32767" attributes="0"/>
+                              <Component id="hargaProdukInputLabel" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -459,11 +478,17 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Berlin Sans FB Demi" size="12" style="0"/>
                     </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="3" green="5c" red="89" type="rgb"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Harga"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="hargaProdukInputTextfield">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Berlin Sans FB" size="12" style="0"/>
                     </Property>
@@ -477,7 +502,7 @@
             <Container class="javax.swing.JPanel" name="jenisProdukInputPanel">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="ba" green="dd" red="ff" type="rgb"/>
                 </Property>
               </Properties>
 
@@ -515,13 +540,22 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Berlin Sans FB Demi" size="12" style="0"/>
                     </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="3" green="5c" red="89" type="rgb"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Jenis Produk"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="jenisProdukInputButton">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="7" green="27" red="46" type="rgb"/>
+                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Berlin Sans FB Demi" size="12" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Minuman"/>
                   </Properties>
@@ -536,7 +570,7 @@
         <Container class="javax.swing.JPanel" name="kendaraanFormPanel2">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+              <Color blue="ba" green="dd" red="ff" type="rgb"/>
             </Property>
           </Properties>
 
@@ -549,14 +583,11 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                              <Component id="tambahGambarButton" max="32767" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="gambarPanel" min="-2" max="-2" attributes="0"/>
+                          <Component id="tambahGambarButton" min="-2" pref="135" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="50" max="32767" attributes="0"/>
                       <Component id="simpanProdukButton" min="-2" pref="119" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="cancelButton" min="-2" pref="113" max="-2" attributes="0"/>
@@ -571,7 +602,7 @@
                       <Component id="specialAtributeInputPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="gambarPanel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="7" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="simpanProdukButton" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                           <Component id="cancelButton" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
@@ -586,7 +617,7 @@
             <Component class="javax.swing.JButton" name="simpanProdukButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="49" green="b2" red="33" type="rgb"/>
+                  <Color blue="38" green="97" red="33" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Berlin Sans FB Demi" size="12" style="0"/>
@@ -606,7 +637,7 @@
             <Component class="javax.swing.JButton" name="cancelButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="8" red="ed" type="rgb"/>
+                  <Color blue="5" green="4e" red="ed" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Berlin Sans FB Demi" size="12" style="0"/>
@@ -623,7 +654,7 @@
             <Container class="javax.swing.JPanel" name="specialAtributeInputPanel">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="ba" green="dd" red="ff" type="rgb"/>
                 </Property>
               </Properties>
 
@@ -658,11 +689,17 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Berlin Sans FB Demi" size="12" style="0"/>
                     </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="3" green="5c" red="89" type="rgb"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Catatan"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="specialAtributeInputTextfield">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Berlin Sans FB" size="12" style="0"/>
                     </Property>
