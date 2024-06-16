@@ -304,7 +304,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/icon/penitipanIcon.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penitipan"/>
+                    <Property name="text" type="java.lang.String" value="Pelanggan"/>
                   </Properties>
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="transaksiLabelMouseClicked"/>
@@ -355,7 +355,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/icon/penitipanIcon.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penitipan"/>
+                    <Property name="text" type="java.lang.String" value="Display Menu"/>
                   </Properties>
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="transaksiLabelDateMouseClicked"/>

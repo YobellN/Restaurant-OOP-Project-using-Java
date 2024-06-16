@@ -63,7 +63,6 @@ public class MainViewForm extends javax.swing.JFrame {
         logoPanel.setBackground(new java.awt.Color(229, 171, 89));
 
         logoIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logoIcon.setIcon(new javax.swing.ImageIcon("D:\\ATMA\\sem 4\\PBO A\\TubessPBO\\TubesPBO\\src\\icon\\restoo-01.png")); // NOI18N
 
         logoLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 22)); // NOI18N
         logoLabel.setForeground(new java.awt.Color(137, 92, 3));
@@ -160,7 +159,7 @@ public class MainViewForm extends javax.swing.JFrame {
         transaksiLabel.setForeground(new java.awt.Color(137, 92, 3));
         transaksiLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         transaksiLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/penitipanIcon.png"))); // NOI18N
-        transaksiLabel.setText("Penitipan");
+        transaksiLabel.setText("Pelanggan");
         transaksiLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 transaksiLabelMouseClicked(evt);
@@ -191,7 +190,7 @@ public class MainViewForm extends javax.swing.JFrame {
         transaksiLabelDate.setForeground(new java.awt.Color(137, 92, 3));
         transaksiLabelDate.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         transaksiLabelDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/penitipanIcon.png"))); // NOI18N
-        transaksiLabelDate.setText("Penitipan");
+        transaksiLabelDate.setText("Display Menu");
         transaksiLabelDate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 transaksiLabelDateMouseClicked(evt);
@@ -312,7 +311,8 @@ public class MainViewForm extends javax.swing.JFrame {
         
         recolorDefaultSwitchPanel();
         transaksiPanel.setBackground(new Color(255,204,51));
-        setForm(new DisplayMenuMainPanel());
+        
+        setForm(new PelangganMainPanel());
         selectedIndex = 3;
     }//GEN-LAST:event_transaksiLabelMouseClicked
 
@@ -322,7 +322,8 @@ public class MainViewForm extends javax.swing.JFrame {
         
         recolorDefaultSwitchPanel();
         transaksiPanelDate.setBackground(new Color(255,204,51));
-        setForm(new PelangganMainPanel());
+        
+        setForm(new DisplayMenuMainPanel());
         selectedIndex = 4;
     }//GEN-LAST:event_transaksiLabelDateMouseClicked
 
