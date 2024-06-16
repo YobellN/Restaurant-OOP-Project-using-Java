@@ -169,14 +169,17 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelKaryawan = new javax.swing.JTable();
 
-        mainPanel.setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(255, 218, 182));
 
-        searchKendaraanInputPanel.setBackground(new java.awt.Color(255, 255, 255));
+        mainPanel.setBackground(new java.awt.Color(255, 218, 182));
+
+        searchKendaraanInputPanel.setBackground(new java.awt.Color(255, 218, 182));
 
         searchKaryawanInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        searchKaryawanInputLabel.setForeground(new java.awt.Color(51, 51, 51));
+        searchKaryawanInputLabel.setForeground(new java.awt.Color(137, 92, 3));
         searchKaryawanInputLabel.setText("Pencarian Karyawan");
 
+        searchKaryawanInputTextField.setBackground(new java.awt.Color(255, 255, 255));
         searchKaryawanInputTextField.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         searchKaryawanInputTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -184,7 +187,7 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
             }
         });
 
-        searchKaryawanInputButton.setBackground(new java.awt.Color(27, 26, 85));
+        searchKaryawanInputButton.setBackground(new java.awt.Color(137, 92, 3));
         searchKaryawanInputButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         searchKaryawanInputButton.setForeground(new java.awt.Color(255, 255, 255));
         searchKaryawanInputButton.setText("Cari");
@@ -194,11 +197,11 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
             }
         });
 
-        kendaraanFormPanel.setBackground(new java.awt.Color(255, 255, 255));
+        kendaraanFormPanel.setBackground(new java.awt.Color(255, 218, 182));
 
-        KendaraanButtonPanel.setBackground(new java.awt.Color(255, 255, 255));
+        KendaraanButtonPanel.setBackground(new java.awt.Color(255, 218, 182));
 
-        barukanKaryawanButton.setBackground(new java.awt.Color(255, 189, 3));
+        barukanKaryawanButton.setBackground(new java.awt.Color(255, 175, 47));
         barukanKaryawanButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         barukanKaryawanButton.setForeground(new java.awt.Color(255, 255, 255));
         barukanKaryawanButton.setText("Barukan");
@@ -208,7 +211,7 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
             }
         });
 
-        hapusKaryawanButton.setBackground(new java.awt.Color(237, 8, 0));
+        hapusKaryawanButton.setBackground(new java.awt.Color(237, 78, 5));
         hapusKaryawanButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         hapusKaryawanButton.setForeground(new java.awt.Color(255, 255, 255));
         hapusKaryawanButton.setText("Hapus");
@@ -218,7 +221,7 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
             }
         });
 
-        tambahKaryawanButton.setBackground(new java.awt.Color(51, 178, 73));
+        tambahKaryawanButton.setBackground(new java.awt.Color(51, 151, 56));
         tambahKaryawanButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         tambahKaryawanButton.setForeground(new java.awt.Color(255, 255, 255));
         tambahKaryawanButton.setText("Tambah");
@@ -252,13 +255,14 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        idKendaraanInputPanel.setBackground(new java.awt.Color(255, 255, 255));
+        idKendaraanInputPanel.setBackground(new java.awt.Color(255, 218, 182));
 
         namaKaryawanInputLabel.setBackground(new java.awt.Color(0, 0, 0));
         namaKaryawanInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        namaKaryawanInputLabel.setForeground(new java.awt.Color(51, 51, 51));
+        namaKaryawanInputLabel.setForeground(new java.awt.Color(137, 92, 3));
         namaKaryawanInputLabel.setText("Nama");
 
+        namaKaryawanInputTextField.setBackground(new java.awt.Color(255, 255, 255));
         namaKaryawanInputTextField.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout idKendaraanInputPanelLayout = new javax.swing.GroupLayout(idKendaraanInputPanel);
@@ -284,13 +288,14 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        usernameInputPanel.setBackground(new java.awt.Color(255, 255, 255));
+        usernameInputPanel.setBackground(new java.awt.Color(255, 218, 182));
 
         usernameKaryawanInputLabel.setBackground(new java.awt.Color(0, 0, 0));
         usernameKaryawanInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        usernameKaryawanInputLabel.setForeground(new java.awt.Color(51, 51, 51));
+        usernameKaryawanInputLabel.setForeground(new java.awt.Color(137, 92, 3));
         usernameKaryawanInputLabel.setText("Username");
 
+        usernameKaryawanInputTextField.setBackground(new java.awt.Color(255, 255, 255));
         usernameKaryawanInputTextField.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout usernameInputPanelLayout = new javax.swing.GroupLayout(usernameInputPanel);
@@ -315,12 +320,13 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
-        hargaKendaraanInputPanel.setBackground(new java.awt.Color(255, 255, 255));
+        hargaKendaraanInputPanel.setBackground(new java.awt.Color(255, 218, 182));
 
         gajiKaryawanInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        gajiKaryawanInputLabel.setForeground(new java.awt.Color(0, 0, 0));
+        gajiKaryawanInputLabel.setForeground(new java.awt.Color(137, 92, 3));
         gajiKaryawanInputLabel.setText("Gaji");
 
+        gajiKaryawanInputTextfield.setBackground(new java.awt.Color(255, 255, 255));
         gajiKaryawanInputTextfield.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         gajiKaryawanInputTextfield.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -328,15 +334,15 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
             }
         });
 
-        jenisKendaraanInputPanel.setBackground(new java.awt.Color(255, 255, 255));
+        jenisKendaraanInputPanel.setBackground(new java.awt.Color(255, 218, 182));
 
         jenisJabatanInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        jenisJabatanInputLabel.setForeground(new java.awt.Color(0, 0, 0));
+        jenisJabatanInputLabel.setForeground(new java.awt.Color(137, 92, 3));
         jenisJabatanInputLabel.setText("Jabatan");
 
-        jabatanInputButton.setBackground(new java.awt.Color(153, 204, 255));
+        jabatanInputButton.setBackground(new java.awt.Color(70, 39, 7));
         jabatanInputButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        jabatanInputButton.setForeground(new java.awt.Color(0, 0, 0));
+        jabatanInputButton.setForeground(new java.awt.Color(255, 255, 255));
         jabatanInputButton.setText("Kasir");
         jabatanInputButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -393,13 +399,14 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
                     .addComponent(jenisKendaraanInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        passwordKaryawanInputPanel.setBackground(new java.awt.Color(255, 255, 255));
+        passwordKaryawanInputPanel.setBackground(new java.awt.Color(255, 218, 182));
 
+        passwordKaryawanInputTextField.setBackground(new java.awt.Color(255, 255, 255));
         passwordKaryawanInputTextField.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
 
         passwordKaryawanInputLabel.setBackground(new java.awt.Color(0, 0, 0));
         passwordKaryawanInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        passwordKaryawanInputLabel.setForeground(new java.awt.Color(51, 51, 51));
+        passwordKaryawanInputLabel.setForeground(new java.awt.Color(137, 92, 3));
         passwordKaryawanInputLabel.setText("Password");
 
         javax.swing.GroupLayout passwordKaryawanInputPanelLayout = new javax.swing.GroupLayout(passwordKaryawanInputPanel);
@@ -408,12 +415,11 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
             passwordKaryawanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(passwordKaryawanInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(passwordKaryawanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(passwordKaryawanInputPanelLayout.createSequentialGroup()
-                        .addComponent(passwordKaryawanInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(passwordKaryawanInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
+                .addComponent(passwordKaryawanInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(passwordKaryawanInputPanelLayout.createSequentialGroup()
+                .addComponent(passwordKaryawanInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         passwordKaryawanInputPanelLayout.setVerticalGroup(
             passwordKaryawanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -424,13 +430,14 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
                 .addGap(14, 14, 14))
         );
 
-        usernameInputPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        usernameInputPanel4.setBackground(new java.awt.Color(255, 218, 182));
 
         idKaryawanInputLabel.setBackground(new java.awt.Color(0, 0, 0));
         idKaryawanInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        idKaryawanInputLabel.setForeground(new java.awt.Color(51, 51, 51));
+        idKaryawanInputLabel.setForeground(new java.awt.Color(137, 92, 3));
         idKaryawanInputLabel.setText("ID Karyawan");
 
+        idKaryawanInputTextField.setBackground(new java.awt.Color(255, 255, 255));
         idKaryawanInputTextField.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout usernameInputPanel4Layout = new javax.swing.GroupLayout(usernameInputPanel4);
@@ -494,10 +501,10 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(usernameInputPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(passwordKaryawanInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        specialAtributeInputPanel.setBackground(new java.awt.Color(255, 255, 255));
+        specialAtributeInputPanel.setBackground(new java.awt.Color(255, 218, 182));
 
         javax.swing.GroupLayout specialAtributeInputPanelLayout = new javax.swing.GroupLayout(specialAtributeInputPanel);
         specialAtributeInputPanel.setLayout(specialAtributeInputPanelLayout);
@@ -510,7 +517,7 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
             .addGap(0, 62, Short.MAX_VALUE)
         );
 
-        simpanKaryawanButton.setBackground(new java.awt.Color(51, 178, 73));
+        simpanKaryawanButton.setBackground(new java.awt.Color(51, 151, 56));
         simpanKaryawanButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         simpanKaryawanButton.setForeground(new java.awt.Color(255, 255, 255));
         simpanKaryawanButton.setText("Simpan");
@@ -520,7 +527,7 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
             }
         });
 
-        batalkanKaryawanButton.setBackground(new java.awt.Color(237, 8, 0));
+        batalkanKaryawanButton.setBackground(new java.awt.Color(237, 78, 5));
         batalkanKaryawanButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         batalkanKaryawanButton.setForeground(new java.awt.Color(255, 255, 255));
         batalkanKaryawanButton.setText("Batalkan");
@@ -535,6 +542,7 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
             }
         });
 
+        tabelKaryawan.setBackground(new java.awt.Color(255, 255, 255));
         tabelKaryawan.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 14)); // NOI18N
         tabelKaryawan.setForeground(new java.awt.Color(0, 0, 0));
         tabelKaryawan.setModel(new javax.swing.table.DefaultTableModel(
@@ -599,7 +607,7 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
                     .addGroup(searchKendaraanInputPanelLayout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addComponent(specialAtributeInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
                         .addGroup(searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(batalkanKaryawanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(simpanKaryawanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
