@@ -4,10 +4,16 @@ import control.KaryawanControl;
 import java.awt.Component;
 import exception.InputKosongException;
 import exception.InputHarusAngkaException;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import model.Karyawan;
 
 public class KaryawanMainPanel extends javax.swing.JPanel {
@@ -48,7 +54,7 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
         } catch (NumberFormatException e) {
             return false;
         }
-}
+    }
 
 
     public void setComponentsKaryawan(boolean value) { // ngeset tempat input
@@ -76,6 +82,7 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
     
     public void showKaryawan(){
         tabelKaryawan.setModel(kc.showTable(""));
+        addHeaderClickListener(tabelKaryawan);
     }
 
     private void doSearchKaryawan() { // fungsi untuk search dipakai di : searchKaryawanInputButtonActionPerformed
@@ -99,7 +106,26 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
         }
     }
 
-    
+    private static void addHeaderClickListener(JTable table) {
+        JTableHeader header = table.getTableHeader();
+        header.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                int col = header.columnAtPoint(e.getPoint());
+            }
+        });
+        TableModel tableModel = table.getModel();
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>((TableModel) tableModel);
+        
+        sorter.setComparator(4, Comparator.comparingDouble(value -> {
+            if (value instanceof Number) {
+                return ((Number) value).doubleValue();
+            }
+            return Double.parseDouble(value.toString());
+        }));
+        table.setRowSorter(sorter);
+        
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -721,7 +747,9 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
         
         int clickedRow = tabelKaryawan.getSelectedRow();
         TableModel tableModel = tabelKaryawan.getModel();
-        
+        if (tabelKaryawan.getRowSorter() != null) {
+            clickedRow = tabelKaryawan.convertRowIndexToModel(clickedRow);
+        }
         selectedId = tableModel.getValueAt(clickedRow, 0).toString();
 
         idKaryawanInputTextField.setText(tableModel.getValueAt(clickedRow, 0).toString()); 
