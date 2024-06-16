@@ -627,12 +627,16 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_barukanKaryawanButtonActionPerformed
 
     private void hapusKaryawanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusKaryawanButtonActionPerformed
+        if (jabatanInputButton.getText().equalsIgnoreCase("owner")) {
+            JOptionPane.showMessageDialog(rootPane, "OWNER TIDAK DAPAT DIHAPUS!!!");
+            return;
+        }
         int opsi = JOptionPane.showConfirmDialog(rootPane, "Yakin Ingin Hapus ?", "Hapus Data", JOptionPane.YES_NO_OPTION);
         if (opsi == JOptionPane.NO_OPTION || opsi == JOptionPane.CLOSED_OPTION) {
             return;
         }
 
-        kc.deleteDataKaryawan(k.getId_karyawan()); // delete berdasarkan id
+        kc.deleteDataKaryawan(idKaryawanInputTextField.getText()); // delete berdasarkan id
         clearText(); // bersihin field input
         setKaryawanEditDeleteButton(false); 
         setComponentsKaryawan(false); // tutup field input
