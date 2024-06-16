@@ -18,7 +18,7 @@ public class MinumanDAO extends MenuDAO implements IMenuDAO{
                 "INSERT INTO `minuman`(`id_menu`, `ukuran`) VALUES ('"
                 + mn.getId_menu()
                 + "','"
-                + mn.getUkuran()
+                + mn.getSpecial()
                 + "')";
 
         System.out.println("Adding Menu...");
@@ -80,7 +80,7 @@ public class MinumanDAO extends MenuDAO implements IMenuDAO{
     }
     
     public void update(Menu m, String id_menu, String ukuran) {
-        Minuman mn = new Minuman(ukuran, m.getId_menu(), m.getNama_menu(), m.getNama_menu(), m.getHarga(), m.getGambar());
+        Minuman mn = new Minuman(ukuran, m.getId_menu(), m.getNama_menu(), m.getJenis_menu(), m.getHarga(), m.getGambar());
         if(cekPerubahanJenis("Minuman",id_menu)){
             deleteOldJenis(id_menu);
             insertNewJenis(mn);
