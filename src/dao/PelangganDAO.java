@@ -6,6 +6,7 @@ package dao;
 
 import connection.DbConnection;
 import interfaceDAO.IDAO;
+import interfaceDAO.IGenerateID;
 import interfaceDAO.ISearchData;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ import java.util.List;
 import model.Pelanggan;
 import interfaceDAO.IShowForDropdown;
 
-public class PelangganDAO implements IDAO<Pelanggan, String>, IShowForDropdown<Pelanggan>, ISearchData<Pelanggan, String>{
+public class PelangganDAO implements IDAO<Pelanggan, String>, IShowForDropdown<Pelanggan>, ISearchData<Pelanggan, String>, IGenerateID{
     private DbConnection dbCon = new DbConnection();
     private Connection con;
     
@@ -173,5 +174,35 @@ public class PelangganDAO implements IDAO<Pelanggan, String>, IShowForDropdown<P
         }
         dbCon.closeConnection();
         return c;
+    }
+    
+    @Override
+    public int generateId(){
+        con = dbCon.makeConnection();
+        String sql = "SELECT MAX(CAST(SUBSTRING(id_pelanggan, 2) AS SIGNED)) AS highest_number FROM pelanggan WHERE id_pelanggan LIKE 'P-%';";
+        //mendapatkan nilai tertinggi dari id yang ada di database
+        
+        System.out.println("Generating Id...");
+        int id=0;
+        
+        try{
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            
+            if(rs != null && rs.next()){
+                if(!rs.wasNull())
+                    id = rs.getInt("highest_number")+1;
+            }
+                    
+            //memasukan id terakhir ke dalam variabel id
+                
+            rs.close();
+            statement.close();
+        }catch(Exception e){
+            System.out.println("Error Fetching data...");
+            System.out.println(e);
+        }
+        dbCon.closeConnection();
+        return id;
     }
 }

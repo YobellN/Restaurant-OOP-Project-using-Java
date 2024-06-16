@@ -307,23 +307,23 @@ public class MainViewForm extends javax.swing.JFrame {
     }//GEN-LAST:event_multiplePanelMouseClicked
 
     private void transaksiLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transaksiLabelMouseClicked
-//        if(selectedIndex == 3)
-//            return;
-//        
-//        recolorDefaultSwitchPanel();
-//        transaksiPanel.setBackground(new Color(255,204,51));
-//        setForm(new PenitipanMainPanel());
-//        selectedIndex = 3;
+        if(selectedIndex == 3)
+            return;
+        
+        recolorDefaultSwitchPanel();
+        transaksiPanel.setBackground(new Color(255,204,51));
+        setForm(new DisplayMenuMainPanel());
+        selectedIndex = 3;
     }//GEN-LAST:event_transaksiLabelMouseClicked
 
     private void transaksiLabelDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transaksiLabelDateMouseClicked
-//        if(selectedIndex == 4)
-//            return;
-//        
-//        recolorDefaultSwitchPanel();
-//        transaksiPanelDate.setBackground(new Color(255,204,51));
-//        setForm(new PenitipanMainPanelDate());
-//        selectedIndex = 4;
+        if(selectedIndex == 4)
+            return;
+        
+        recolorDefaultSwitchPanel();
+        transaksiPanelDate.setBackground(new Color(255,204,51));
+        setForm(new PelangganMainPanel());
+        selectedIndex = 4;
     }//GEN-LAST:event_transaksiLabelDateMouseClicked
 
     /**

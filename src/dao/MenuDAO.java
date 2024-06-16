@@ -2,6 +2,7 @@ package dao;
 import com.mysql.jdbc.PreparedStatement;
 import connection.DbConnection;
 import interfaceDAO.IDAO;
+import interfaceDAO.IGenerateID;
 import interfaceDAO.ISearchData;
 import interfaceDAO.ISearchDataMenu;
 import interfaceDAO.IShowForDropdown;
@@ -21,7 +22,7 @@ import model.Menu;
 import model.Makanan;
 import model.Minuman;
 
-public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>{
+public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, IGenerateID{
     protected DbConnection dbCon = new DbConnection();
     protected Connection con;
     
@@ -182,7 +183,7 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>{
     }
     
     
-    
+    @Override
     public int generateId(){
         con = dbCon.makeConnection();
         String sql = "SELECT MAX(CAST(SUBSTRING(id_menu, 2) AS SIGNED)) AS highest_number FROM menu WHERE id_menu LIKE 'M%';";
@@ -253,7 +254,7 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>{
         
         String sql = "SELECT M.*, MK.catatan, MN.ukuran FROM menu M "
                 + "LEFT JOIN makanan MK ON M.id_menu = MK.id_menu "
-                + "LEFT JOIN minuman MN ON M.id_menu = MK.id_menu;";
+                + "LEFT JOIN minuman MN ON M.id_menu = MN.id_menu;";
         
         System.out.println("Fetching Data...");
         

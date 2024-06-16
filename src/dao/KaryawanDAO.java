@@ -2,6 +2,7 @@ package dao;
 
 import connection.DbConnection;
 import interfaceDAO.IDAO;
+import interfaceDAO.IGenerateID;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -11,7 +12,7 @@ import model.Karyawan;
 import interfaceDAO.IShowForDropdown;
 import interfaceDAO.ISearchData;
 
-public class KaryawanDAO implements IDAO<Karyawan, String>, IShowForDropdown<Karyawan>, ISearchData<Karyawan, String>{ // OK , i guess
+public class KaryawanDAO implements IDAO<Karyawan, String>, IShowForDropdown<Karyawan>, ISearchData<Karyawan, String>, IGenerateID{ // OK , i guess
     protected DbConnection dbCon = new DbConnection();
     protected Connection con;
     
@@ -190,7 +191,8 @@ public class KaryawanDAO implements IDAO<Karyawan, String>, IShowForDropdown<Kar
         dbCon.closeConnection();
         return data;
     }
-
+    
+    @Override
     public int generateId(){
         con = dbCon.makeConnection();
         String sql = "SELECT MAX(CAST(SUBSTRING(id_karyawan, 2) AS SIGNED)) AS highest_number FROM karyawan WHERE id_karyawan LIKE 'K%';";
