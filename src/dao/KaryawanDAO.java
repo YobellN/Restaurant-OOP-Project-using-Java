@@ -142,12 +142,12 @@ public class KaryawanDAO implements IDAO<Karyawan, String>, IShowForDropdown<Kar
     public void delete(String id_karyawan){
         con = dbCon.makeConnection();
         String sql = "DELETE FROM `karyawan` WHERE `id_karyawan` = '" + id_karyawan + "'";
-        System.out.println("Deleting Karyawan...");
+        System.out.println("Deleting Karyawan...???");
         
         try{
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
-            System.out.println("Edited" + result + " Karyawan " + id_karyawan);
+            System.out.println("Edited " + result + " Karyawan " + id_karyawan);
             statement.close();
         }catch(Exception e){
             System.out.println("Error Deleting Karyawan...");
