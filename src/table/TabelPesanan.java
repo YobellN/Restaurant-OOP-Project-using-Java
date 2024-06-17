@@ -35,7 +35,7 @@ public class TabelPesanan extends AbstractTableModel{
             case 0:
                 return list.get(rowIndex).getId_menu();
             case 1:
-                return list.get(rowIndex).getMenu().getNama_menu();
+                return list.get(rowIndex).getNamaMenu();
             case 2:
                 return list.get(rowIndex).getJumlah();
             case 3:

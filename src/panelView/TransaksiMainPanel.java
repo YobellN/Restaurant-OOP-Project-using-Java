@@ -27,6 +27,7 @@ import model.Makanan;
 import control.TransaksiControl;
 import java.util.ArrayList;
 import model.Transaksi;
+import table.TabelPesanan;
 
 public class TransaksiMainPanel extends javax.swing.JPanel {
 
@@ -134,8 +135,8 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         addHeaderClickListener(tabelMinuman);
     }
     
-    private void showTabelPesananBySearch(String target){
-        tabelPesanan.setModel(pesananControl.showTable(target));
+    private void showTabelPesananBySearch(){
+        tabelPesanan.setModel(new TabelPesanan(pesananList));
         addHeaderClickListener(tabelPesanan);
     }
 
@@ -965,33 +966,33 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         switch (action) {
             case "add":
                 pesanan = new Pesanan(idPesananInputTextField.getText(), 
-                        idProdukInputTextField.getText(), 
+                        idProdukInputTextField.getText(), namaProdukInputTextField.getText(),
                         Integer.parseInt(jumlahProdukInputTextfield.getText()), 
                         (Float.parseFloat(hargaProdukInputTextfield.getText()) * Integer.parseInt(jumlahProdukInputTextfield.getText()))
                 );
-                pesananControl.insertDataPesanan(pesanan);
+                pesananList.add(pesanan);
                 clearTextData();
                 setEditDeleteButton(false);
                 setComponentsData(false);
-                showTableMenuBySearch("");
+                showTabelPesananBySearch();
                 break;
-            case "update":
-                pesanan = new Pesanan( // tidak perlu update id pesanan
-                        idProdukInputTextField.getText(), 
-                        Integer.parseInt(jumlahProdukInputTextfield.getText()), 
-                        (Float.parseFloat(hargaProdukInputTextfield.getText()) * Integer.parseInt(jumlahProdukInputTextfield.getText()))
-                );
-                pesananControl.updateDataPesanan(pesanan);
-                clearTextData();
-                setEditDeleteButton(false);
-                setComponentsData(false);
-                showTableMenuBySearch("");
-                break;
+////            case "update":
+////                pesanan = new Pesanan( // tidak perlu update id pesanan
+////                        idProdukInputTextField.getText(), 
+////                        Integer.parseInt(jumlahProdukInputTextfield.getText()), 
+////                        (Float.parseFloat(hargaProdukInputTextfield.getText()) * Integer.parseInt(jumlahProdukInputTextfield.getText()))
+////                );
+////                pesananControl.updateDataPesanan(pesanan);
+//                clearTextData();
+//                setEditDeleteButton(false);
+//                setComponentsData(false);
+//                showTableMenuBySearch("");
+//                break;
             default:
                 break;
 
         }
-        showTabelPesananBySearch("");
+        
         showTableMenuBySearch("");
         tambahProdukButton.setEnabled(true);
         action = null;

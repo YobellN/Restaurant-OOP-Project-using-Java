@@ -5,6 +5,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
+import table.TabelPesanan;
 
 
 public class Pesanan {
@@ -29,6 +31,15 @@ public class Pesanan {
         this.jumlah = jumlah;
         this.sub_total = sub_total;
     }
+    
+    public Pesanan(String id_pesanan, String id_menu, String nama_menu, int jumlah, float sub_total) {
+        this.id_pesanan = id_pesanan;
+        this.id_menu = id_menu;
+        this.jumlah = jumlah;
+        this.sub_total = sub_total;
+        this.namaMenu = nama_menu;
+    }
+    
     public Pesanan(String id_menu, int jumlah, float sub_total) {
         this.id_menu = id_menu;
         this.jumlah = jumlah;
@@ -56,6 +67,9 @@ public class Pesanan {
     public Menu getMenu(){
         return menu;
     }
+    public String getNamaMenu(){
+        return namaMenu;
+    }
     // setter
     public void setId_pesanan(String id_pesanan) {
         this.id_pesanan = id_pesanan;
@@ -78,5 +92,8 @@ public class Pesanan {
         return "Pesanan{" + "id_pesanan=" + id_pesanan + ", id_menu=" + id_menu + ", jumlah=" + jumlah + ", sub_total=" + sub_total + '}';
     } // toString menampilkan seluruh variabel
     
-    
+    public TabelPesanan showTable(List<Pesanan> p) {
+        TabelPesanan tabelPesanan = new TabelPesanan(p);
+        return tabelPesanan;
+    }
 }
