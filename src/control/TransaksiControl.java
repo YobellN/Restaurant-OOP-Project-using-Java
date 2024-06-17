@@ -6,6 +6,7 @@ package control;
 
 import dao.TransaksiDAO;
 import java.util.List;
+import model.Pelanggan;
 import model.Transaksi;
 import table.TabelTransaksi;
 
@@ -20,11 +21,19 @@ public class TransaksiControl {
         return "T"+kDao.generateId();
     }
 
-    public void insertDataTransaksi(Transaksi K){
+    public void insertDataTransaksi(Transaksi K, Pelanggan P){
         K.setId_pesanan(generateId());
+        insertDataPelangganTransaksi(P);
         kDao.insert(K);
     } // memasukkan id dari generateID ke objek karyawan lalu insert K ke DAO
     
+    public void insertDataPelangganTransaksi(Pelanggan P){
+        kDao.insertPelangganTransaksi(P);
+    }
+    
+    public void insertTotalHarga(Transaksi K){
+        kDao.updateHarga(K);
+    }
     public Transaksi searchDataTransaksi (String data){
         return kDao.search(data);
     } // mencari karyawan berdasarkan id, nama, jabatan, username lalu return tipe data karyawan

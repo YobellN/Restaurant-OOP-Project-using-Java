@@ -15,12 +15,11 @@ public class Transaksi {
     private String tanggal_pesanan; // SQL : tanggal_pesanan;
     private float total_harga;      // SQL : total_harga;
 
-    public Transaksi(String id_pesanan, String id_karyawan, String id_pelanggan, String tanggal_pesanan, float total_harga) {
+    public Transaksi(String id_pesanan, String id_karyawan, String id_pelanggan, String tanggal_pesanan) {
         this.id_pesanan = id_pesanan;
         this.id_karyawan = id_karyawan;
         this.id_pelanggan = id_pelanggan;
         this.tanggal_pesanan = tanggal_pesanan;
-        this.total_harga = total_harga;
     } // konstruktor lengkap
 
     public Transaksi(String id_karyawan, String id_pelanggan, String tanggal_pesanan, float total_harga) {

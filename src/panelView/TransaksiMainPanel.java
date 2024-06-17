@@ -7,6 +7,7 @@ package panelView;
 import control.MenuControl;
 import control.MinumanControl;
 import control.MakananControl;
+import control.PelangganControl;
 import control.PesananControl;
 import java.awt.Component;
 import java.awt.event.KeyEvent;
@@ -26,6 +27,9 @@ import model.Makanan;
 
 import control.TransaksiControl;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import model.Pelanggan;
 import model.Transaksi;
 import table.TabelPesanan;
 
@@ -45,10 +49,16 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     
     private PesananControl pesananControl = new PesananControl();
     private Pesanan pesanan = null;
-
+    
+    private PelangganControl pelangganControl = new PelangganControl();
+    private Pelanggan pelanggan = null;
+    
+    private Karyawan karyawan = null;
+    
     String action = null;
     private Component rootPane;
     private String selectedId = "";
+    double totalHarga = 0;
 
     /**
      * Creates new form KendaraanView
@@ -76,7 +86,9 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         idKaryawanInputTextField.setEnabled(false);
         idPesananInputTextField.setEnabled(false);
         totalProdukInputTextfield.setEnabled(false);
-
+        
+        this.karyawan = k;
+        
         setComponentsData(false);
         showTableMenuBySearch("");
         setEditDeleteButton(false);
@@ -92,7 +104,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     }
 
     private void setEditDeleteButton(boolean value) {
-        barukanProdukButton.setEnabled(value);
         hapusProdukButton.setEnabled(value);
     }
 
@@ -109,7 +120,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     }
     // Customer Clear Text    
 
-    private static void addHeaderClickListener(JTable table) {
+    private static void addHeaderMenu(JTable table) {
         JTableHeader header = table.getTableHeader();
         header.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -127,17 +138,36 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         }));
         table.setRowSorter(sorter);
     }
+    
+    private static void addHeaderPesanan(JTable table) {
+        JTableHeader header = table.getTableHeader();
+        header.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                int col = header.columnAtPoint(e.getPoint());
+            }
+        });
+        TableModel tableModel = table.getModel();
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>((TableModel) tableModel);
 
+        sorter.setComparator(3, Comparator.comparingDouble(value -> {
+            if (value instanceof Number) {
+                return ((Number) value).doubleValue();
+            }
+            return Double.parseDouble(value.toString());
+        }));
+        table.setRowSorter(sorter);
+    }
+    
     private void showTableMenuBySearch(String target) {
         tabelMakanan.setModel(makananControl.showTableBySearch(target));
         tabelMinuman.setModel(minumanControl.showTableBySearch(target));
-        addHeaderClickListener(tabelMakanan);
-        addHeaderClickListener(tabelMinuman);
+        addHeaderMenu(tabelMakanan);
+        addHeaderMenu(tabelMinuman);
     }
     
     private void showTabelPesananBySearch(){
         tabelPesanan.setModel(new TabelPesanan(pesananList));
-        addHeaderClickListener(tabelPesanan);
+        addHeaderPesanan(tabelPesanan);
     }
 
     /**
@@ -210,7 +240,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         searchProdukInputLabel.setForeground(new java.awt.Color(137, 92, 3));
         searchProdukInputLabel.setText("Pencarian Produk");
 
-        searchProdukInputTextField.setBackground(new java.awt.Color(255, 255, 255));
         searchProdukInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         searchProdukInputTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -234,7 +263,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         idKaryawanLabel.setForeground(new java.awt.Color(137, 92, 3));
         idKaryawanLabel.setText("ID Karyawan");
 
-        idKaryawanInputTextField.setBackground(new java.awt.Color(255, 255, 255));
         idKaryawanInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         idKaryawanInputTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -269,7 +297,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         idPelangganLabel.setForeground(new java.awt.Color(137, 92, 3));
         idPelangganLabel.setText("Nama Pelanggan");
 
-        namaPelangganInputTextField.setBackground(new java.awt.Color(255, 255, 255));
         namaPelangganInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         namaPelangganInputTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -304,7 +331,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         idKaryawanLabel1.setForeground(new java.awt.Color(137, 92, 3));
         idKaryawanLabel1.setText("ID Pesanan");
 
-        idPesananInputTextField.setBackground(new java.awt.Color(255, 255, 255));
         idPesananInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         idPesananInputTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -436,7 +462,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         idProdukInputLabel.setForeground(new java.awt.Color(137, 92, 3));
         idProdukInputLabel.setText("ID Produk");
 
-        idProdukInputTextField.setBackground(new java.awt.Color(255, 255, 255));
         idProdukInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         idProdukInputTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -467,7 +492,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
 
         namaProdukInputPanel.setBackground(new java.awt.Color(255, 221, 186));
 
-        hargaProdukInputTextfield.setBackground(new java.awt.Color(255, 255, 255));
         hargaProdukInputTextfield.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         hargaProdukInputTextfield.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -503,7 +527,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
 
         hargaProdukInputPanel.setBackground(new java.awt.Color(255, 221, 186));
 
-        namaProdukInputTextField.setBackground(new java.awt.Color(255, 255, 255));
         namaProdukInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
 
         namaProdukInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
@@ -534,7 +557,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
 
         jenisProdukInputPanel.setBackground(new java.awt.Color(255, 221, 186));
 
-        specialAtributeInputTextfield.setBackground(new java.awt.Color(255, 255, 255));
         specialAtributeInputTextfield.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         specialAtributeInputTextfield.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -575,7 +597,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         totalProdukInputLabel.setForeground(new java.awt.Color(137, 92, 3));
         totalProdukInputLabel.setText("Jumlah");
 
-        jumlahProdukInputTextfield.setBackground(new java.awt.Color(255, 255, 255));
         jumlahProdukInputTextfield.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         jumlahProdukInputTextfield.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -805,7 +826,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
             .addGap(0, 62, Short.MAX_VALUE)
         );
 
-        totalProdukInputTextfield.setBackground(new java.awt.Color(255, 255, 255));
         totalProdukInputTextfield.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         totalProdukInputTextfield.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -907,13 +927,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         showTableMenuBySearch(searchProdukInputTextField.getText());
     }//GEN-LAST:event_searchProdukInputButtonActionPerformed
 
-    private void barukanProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barukanProdukButtonActionPerformed
-        // TODO add your handling code here:
-        action = "update";
-        setComponentsData(true);
-        tabelPesanan.setEnabled(false); // kalo lagi di edit jangan dipencet, bisa nimpa data nanti
-    }//GEN-LAST:event_barukanProdukButtonActionPerformed
-
     private void hapusProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusProdukButtonActionPerformed
         // TODO add your handling code here:
         int opsi = JOptionPane.showConfirmDialog(rootPane, "Yakin Ingin Hapus ?", "Hapus Data", JOptionPane.YES_NO_OPTION);
@@ -971,6 +984,11 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                         (Float.parseFloat(hargaProdukInputTextfield.getText()) * Integer.parseInt(jumlahProdukInputTextfield.getText()))
                 );
                 pesananList.add(pesanan);
+                totalHarga=0;
+                for(Pesanan p : pesananList){
+                    totalHarga += p.getSub_total();
+                }
+                totalProdukInputTextfield.setText(String.valueOf(totalHarga));
                 clearTextData();
                 setEditDeleteButton(false);
                 setComponentsData(false);
@@ -1045,15 +1063,15 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
 
     private void tabelMinumanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMinumanMouseClicked
         tabelMakanan.clearSelection();
-
-        action = "update";
+        action = "add";
+        
 
         tambahProdukButton.setEnabled(false);
         cancelButton.setEnabled(true);
         simpanProdukButton.setEnabled(true);
         setEditDeleteButton(true);
 
-        setComponentsData(false);
+        setComponentsData(true);
 
         int clickedRow = tabelMinuman.getSelectedRow();
         TableModel tableModel = tabelMinuman.getModel();
@@ -1081,7 +1099,28 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_tabelPesananMouseClicked
 
     private void simpanTransaksiProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanTransaksiProdukButtonActionPerformed
-        // TODO add your handling code here:
+       if (action == null) {
+            return;
+        }
+       
+        int dialog = JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan " + action + "?");
+        if (dialog == JOptionPane.CLOSED_OPTION || dialog == JOptionPane.NO_OPTION || dialog == JOptionPane.CANCEL_OPTION) {
+            return;
+        }
+        pelanggan = new Pelanggan(pelangganControl.generateId(), namaPelangganInputTextField.getText(), "-", "-");
+        transaksi = new Transaksi(idPesananInputTextField.getText(),karyawan.getId_karyawan(), pelangganControl.generateId(), "2023-10-10");
+        System.out.println("INI ID DI BAGIAN ADD " +pelanggan.getId_pelanggan());
+        tc.insertDataTransaksi(transaksi, pelanggan);
+        pesananControl.insertDataPesanan(pesananList);
+        tc.insertTotalHarga(transaksi);
+        clearTextData();
+        setEditDeleteButton(false);
+        setComponentsData(false);
+        pesananList.removeAll(pesananList);
+        totalHarga = 0;
+        showTableMenuBySearch("");
+        tambahProdukButton.setEnabled(true);
+        action = null;
     }//GEN-LAST:event_simpanTransaksiProdukButtonActionPerformed
 
     private void cancelTransaksiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelTransaksiButtonActionPerformed
@@ -1104,6 +1143,13 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_idPesananInputTextFieldActionPerformed
 
+    private void barukanProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barukanProdukButtonActionPerformed
+        // TODO add your handling code here:
+        action = "update";
+        setComponentsData(true);
+        tabelPesanan.setEnabled(false); // kalo lagi di edit jangan dipencet, bisa nimpa data nanti
+    }//GEN-LAST:event_barukanProdukButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ProdukButtonPanel;
@@ -1121,17 +1167,11 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     private javax.swing.JLabel idPelangganLabel;
     private javax.swing.JTextField idPesananInputTextField;
     private javax.swing.JLabel idProdukInputLabel;
-    private javax.swing.JLabel idProdukInputLabel1;
-    private javax.swing.JLabel idProdukInputLabel3;
     private javax.swing.JPanel idProdukInputPanel;
-    private javax.swing.JPanel idProdukInputPanel1;
     private javax.swing.JPanel idProdukInputPanel2;
-    private javax.swing.JPanel idProdukInputPanel3;
     private javax.swing.JPanel idProdukInputPanel4;
     private javax.swing.JPanel idProdukInputPanel5;
     private javax.swing.JTextField idProdukInputTextField;
-    private javax.swing.JTextField idProdukInputTextField1;
-    private javax.swing.JTextField idProdukInputTextField3;
     private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPanel jenisProdukInputPanel;

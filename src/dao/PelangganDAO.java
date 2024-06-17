@@ -179,7 +179,7 @@ public class PelangganDAO implements IDAO<Pelanggan, String>, IShowForDropdown<P
     @Override
     public int generateId(){
         con = dbCon.makeConnection();
-        String sql = "SELECT MAX(CAST(SUBSTRING(id_pelanggan, 2) AS SIGNED)) AS highest_number FROM pelanggan WHERE id_pelanggan LIKE 'P-%';";
+        String sql = "SELECT MAX(CAST(SUBSTRING(id_pelanggan, 3) AS SIGNED)) AS highest_number FROM pelanggan WHERE id_pelanggan LIKE 'P-%';";
         //mendapatkan nilai tertinggi dari id yang ada di database
         
         System.out.println("Generating Id...");

@@ -14,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import model.Pelanggan;
+import model.Pesanan;
 import model.Transaksi;
 
 /**
@@ -54,108 +56,178 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IShowForDropdown<T
         return id;
     }
     
-    @Override
-    public void insert(Transaksi C){
+    public double hitungTotalHarga(String id_pesanan) {
+        Connection con = dbCon.makeConnection();
+
+        String sql = "SELECT SUM(sub_total) AS sub " +
+                     "FROM pesanan " +
+                     "WHERE id_pesanan = '" + id_pesanan + "'";
+
+        System.out.println("Hitung Total Harga...");
+        double total = 0;
+
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            if (rs.next()) {
+                total = rs.getDouble("sub");
+            }
+
+            rs.close();
+            statement.close();
+        } catch (Exception e) {
+            System.out.println("Error Fetching data...");
+            e.printStackTrace();
+        } finally {
+            dbCon.closeConnection();
+        }
+
+        return total;
+    }
+
+    public void updateHarga(Transaksi C){
         con = dbCon.makeConnection();
-        
-    String sql = 
-        "INSERT INTO `transaksi`(`id_pesanan`, `id_karyawan`, `id_pelanggan`, `tanggal_pesanan`, `total_harga`) "
-            + "VALUES "
-            + "('"+ C.getId_pesanan()+"',"
-            + "'"+ C.getId_karyawan()+"',"
-            + "'"+ C.getId_pelanggan()+"'," 
-            + "'"+ C.getTanggal_pesanan()+"',"
-            + "'"+ 0 +"'" // set 0 biar default aja
-            + ")"; 
-    
-        System.out.println("Adding Transaksi...");
-        
+        String sql = "UPDATE transaksi " +
+             "SET total_harga = '" + hitungTotalHarga(C.getId_pesanan()) + "' " +
+             "WHERE id_pesanan = '" + C.getId_pesanan() + "'";
+
+        System.out.println("Adding Insert Harga...");
+
         try{
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
             System.out.println("Added " + result + " Transaksi");
             statement.close();
         }catch (Exception e){
-            System.out.println("Error adding Transaksi...");
+            System.out.println("Error adding Harga Transaksi...");
             System.out.println(e);
         }
         dbCon.closeConnection();
+    }
+    
+    public void insertPelangganTransaksi(Pelanggan P){
+        con = dbCon.makeConnection();
+        
+        String sql = 
+            "INSERT INTO `pelanggan`(`id_pelanggan`, `nama_pelanggan`) "
+                + "VALUES "
+                + "('"+ P.getId_pelanggan()+"','"
+                + P.getNama_pelanggan() + "')"; 
+
+            System.out.println("Adding Insert Harga...");
+
+            try{
+                Statement statement = con.createStatement();
+                int result = statement.executeUpdate(sql);
+                System.out.println("Added " + result + " Transaksi");
+                statement.close();
+            }catch (Exception e){
+                System.out.println("Error adding Pelanggan Transaksi...");
+                System.out.println(e);
+            }
+            dbCon.closeConnection();
+    }
+    
+    @Override
+    public void insert(Transaksi C){
+        con = dbCon.makeConnection();
+        
+        String sql = "INSERT INTO transaksi (id_pesanan, id_karyawan, id_pelanggan, tanggal_pesanan) VALUES ('" 
+                + C.getId_pesanan() + "', '" 
+                + C.getId_karyawan() + "', '" 
+                + C.getId_pelanggan() + "', '" 
+                + C.getTanggal_pesanan() + "')";
+            System.out.println("Adding Transaksi...");
+
+            try{
+                Statement statement = con.createStatement();
+                int result = statement.executeUpdate(sql);
+                System.out.println("Added " + result + " Transaksi");
+                statement.close();
+            }catch (Exception e){
+                System.out.println("Error adding Transaksi...");
+                System.out.println(e);
+            }
+            dbCon.closeConnection();
     }
     
     
     @Override
     public Transaksi search(String data){ 
-        con = dbCon.makeConnection();
-        
-        String sql = "SELECT * FROM `transaksi` WHERE "
-                + "id_pesanan LIKE '%" + data + "%' "
-                + " OR id_karyawan LIKE '%" + data + "%' "
-                + " OR id_pelanggan LIKE '%" + data + "%' "
-                + " OR total_harga LIKE '%" + data + "%' "
-                + " OR tanggal_pesanan LIKE '%" + data + "%' " + "";
-        System.out.println("Searching Transaksi...");
-        Transaksi c = null;
-        
-        try{
-            Statement statement = con.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
-            
-            if(rs != null)
-                while(rs.next())
-                    c = new Transaksi( 
-                        rs.getString("id_pesanan"),
-                        rs.getString("id_karyawan"),
-                        rs.getString("id_pelanggan"),
-                        rs.getString("tanggal_pesanan"),
-                        rs.getFloat("total_harga")
-                    );
-            
-            rs.close();
-            statement.close();
-        }catch(Exception e){
-            System.out.println("Error Fetching data...");
-            System.out.println(e);
-        }
-        dbCon.closeConnection();
-        return c;
+//        con = dbCon.makeConnection();
+//        
+//        String sql = "SELECT * FROM `transaksi` WHERE "
+//                + "id_pesanan LIKE '%" + data + "%' "
+//                + " OR id_karyawan LIKE '%" + data + "%' "
+//                + " OR id_pelanggan LIKE '%" + data + "%' "
+//                + " OR total_harga LIKE '%" + data + "%' "
+//                + " OR tanggal_pesanan LIKE '%" + data + "%' " + "";
+//        System.out.println("Searching Transaksi...");
+//        Transaksi c = null;
+//        
+//        try{
+//            Statement statement = con.createStatement();
+//            ResultSet rs = statement.executeQuery(sql);
+//            
+//            if(rs != null)
+//                while(rs.next())
+//                    c = new Transaksi( 
+//                        rs.getString("id_pesanan"),
+//                        rs.getString("id_karyawan"),
+//                        rs.getString("id_pelanggan"),
+//                        rs.getString("tanggal_pesanan"),
+//                        rs.getFloat("total_harga")
+//                    );
+//            
+//            rs.close();
+//            statement.close();
+//        }catch(Exception e){
+//            System.out.println("Error Fetching data...");
+//            System.out.println(e);
+//        }
+//        dbCon.closeConnection();
+//        return c;
+        return null;
     }
     
     @Override
     public List<Transaksi> showData(String data){
-        con = dbCon.makeConnection();
-        
-        String sql = "SELECT * FROM `transaksi` WHERE "
-                + "id_pesanan LIKE '%" + data + "%' "
-                + " OR id_karyawan LIKE '%" + data + "%' "
-                + " OR id_pelanggan LIKE '%" + data + "%' "
-                + " OR total_harga LIKE '%" + data + "%' "
-                + " OR tanggal_transaksi LIKE '%" + data + "%' " + "";
-        System.out.println("Fetching Data...");
-        List<Transaksi> c = new ArrayList();
-        
-        try{
-            Statement statement = con.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
-            
-            if(rs != null)
-                while(rs.next())
-                    c.add(new Transaksi(
-                        rs.getString("id_pesanan"),
-                        rs.getString("id_karyawan"),
-                        rs.getString("id_pelanggan"),
-                        rs.getString("tanggal_pesanan"),
-                        rs.getFloat("total_harga")
-                    )
-                );
-            
-            rs.close();
-            statement.close();
-        }catch(Exception e){
-            System.out.println("Error Fetching data...");
-            System.out.println(e);
-        }
-        dbCon.closeConnection();
-        return c;
+//        con = dbCon.makeConnection();
+//        
+//        String sql = "SELECT * FROM `transaksi` WHERE "
+//                + "id_pesanan LIKE '%" + data + "%' "
+//                + " OR id_karyawan LIKE '%" + data + "%' "
+//                + " OR id_pelanggan LIKE '%" + data + "%' "
+//                + " OR total_harga LIKE '%" + data + "%' "
+//                + " OR tanggal_transaksi LIKE '%" + data + "%' " + "";
+//        System.out.println("Fetching Data...");
+//        List<Transaksi> c = new ArrayList();
+//        
+//        try{
+//            Statement statement = con.createStatement();
+//            ResultSet rs = statement.executeQuery(sql);
+//            
+//            if(rs != null)
+//                while(rs.next())
+//                    c.add(new Transaksi(
+//                        rs.getString("id_pesanan"),
+//                        rs.getString("id_karyawan"),
+//                        rs.getString("id_pelanggan"),
+//                        rs.getString("tanggal_pesanan"),
+//                        rs.getFloat("total_harga")
+//                    )
+//                );
+//            
+//            rs.close();
+//            statement.close();
+//        }catch(Exception e){
+//            System.out.println("Error Fetching data...");
+//            System.out.println(e);
+//        }
+//        dbCon.closeConnection();
+//        return c;
+        return null;
     }
     
     @Override
@@ -201,36 +273,37 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IShowForDropdown<T
     }
     @Override
     public List<Transaksi> IShowForDropdown() { // tidak override karena butuh kondisi where
-        con = dbCon.makeConnection();
-        
-        String sql = "SELECT * FROM `transaksi` "; // hanya show sesuai id_pesanan saat ini
-        System.out.println("Fetching Data...");
-        List<Transaksi> data = new ArrayList();
-        
-        try{
-            Statement statement = con.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
-            
-            if(rs != null)
-                while(rs.next())
-                    data.add(new Transaksi(
-                        rs.getString("id_pesanan"),
-                        rs.getString("id_karyawan"),
-                        rs.getString("id_pelanggan"),
-                        rs.getString("tanggal_pesanan"),
-                        rs.getFloat("total_harga")
-                        )
-                    );
-            
-            rs.close();
-            statement.close();
-        }catch(Exception e){
-            System.out.println("Error Fetching data...");
-            System.out.println(e);
-        }
-        
-        dbCon.closeConnection();
-        return data;
+//        con = dbCon.makeConnection();
+//        
+//        String sql = "SELECT * FROM `transaksi` "; // hanya show sesuai id_pesanan saat ini
+//        System.out.println("Fetching Data...");
+//        List<Transaksi> data = new ArrayList();
+//        
+//        try{
+//            Statement statement = con.createStatement();
+//            ResultSet rs = statement.executeQuery(sql);
+//            
+//            if(rs != null)
+//                while(rs.next())
+//                    data.add(new Transaksi(
+//                        rs.getString("id_pesanan"),
+//                        rs.getString("id_karyawan"),
+//                        rs.getString("id_pelanggan"),
+//                        rs.getString("tanggal_pesanan"),
+//                        rs.getFloat("total_harga")
+//                        )
+//                    );
+//            
+//            rs.close();
+//            statement.close();
+//        }catch(Exception e){
+//            System.out.println("Error Fetching data...");
+//            System.out.println(e);
+//        }
+//        
+//        dbCon.closeConnection();
+//        return data;
+        return null;
     }
     
 }
