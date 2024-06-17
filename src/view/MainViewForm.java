@@ -24,6 +24,7 @@ public class MainViewForm extends javax.swing.JFrame {
         multiplePanel.setBackground(new Color(0, 0, 0, 0));
         transaksiPanel.setBackground(new Color(0, 0, 0, 0));
         transaksiPanelDate.setBackground(new Color(0, 0, 0, 0));
+        pesananPanelDate.setBackground(new Color(0, 0, 0, 0));
     }
     
     public MainViewForm() {
@@ -53,6 +54,8 @@ public class MainViewForm extends javax.swing.JFrame {
         transaksiLabel = new javax.swing.JLabel();
         transaksiPanelDate = new javax.swing.JPanel();
         transaksiLabelDate = new javax.swing.JLabel();
+        pesananPanelDate = new javax.swing.JPanel();
+        pesananLabelDate = new javax.swing.JLabel();
         contentPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -214,6 +217,37 @@ public class MainViewForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        pesananPanelDate.setBackground(new java.awt.Color(229, 171, 89));
+
+        pesananLabelDate.setBackground(new java.awt.Color(229, 171, 89));
+        pesananLabelDate.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        pesananLabelDate.setForeground(new java.awt.Color(137, 92, 3));
+        pesananLabelDate.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        pesananLabelDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/penitipanIcon.png"))); // NOI18N
+        pesananLabelDate.setText("Display Menu");
+        pesananLabelDate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pesananLabelDateMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pesananPanelDateLayout = new javax.swing.GroupLayout(pesananPanelDate);
+        pesananPanelDate.setLayout(pesananPanelDateLayout);
+        pesananPanelDateLayout.setHorizontalGroup(
+            pesananPanelDateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pesananPanelDateLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pesananLabelDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pesananPanelDateLayout.setVerticalGroup(
+            pesananPanelDateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pesananPanelDateLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pesananLabelDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout sidePanelLayout = new javax.swing.GroupLayout(sidePanel);
         sidePanel.setLayout(sidePanelLayout);
         sidePanelLayout.setHorizontalGroup(
@@ -229,7 +263,8 @@ public class MainViewForm extends javax.swing.JFrame {
                                 .addComponent(logoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(transaksiPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(transaksiPanelDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(transaksiPanelDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pesananPanelDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         sidePanelLayout.setVerticalGroup(
@@ -245,6 +280,8 @@ public class MainViewForm extends javax.swing.JFrame {
                 .addComponent(transaksiPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(transaksiPanelDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pesananPanelDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -327,6 +364,17 @@ public class MainViewForm extends javax.swing.JFrame {
         selectedIndex = 4;
     }//GEN-LAST:event_transaksiLabelDateMouseClicked
 
+    private void pesananLabelDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pesananLabelDateMouseClicked
+        if(selectedIndex == 5)
+            return;
+        
+        recolorDefaultSwitchPanel();
+        pesananPanelDate.setBackground(new Color(255,204,51));
+        
+        setForm(new TransaksiMainPanel());
+        selectedIndex = 5;
+    }//GEN-LAST:event_pesananLabelDateMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -372,6 +420,8 @@ public class MainViewForm extends javax.swing.JFrame {
     private javax.swing.JPanel logoPanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel multiplePanel;
+    private javax.swing.JLabel pesananLabelDate;
+    private javax.swing.JPanel pesananPanelDate;
     private javax.swing.JPanel sidePanel;
     private javax.swing.JPanel singlePanel;
     private javax.swing.JLabel transaksiLabel;
