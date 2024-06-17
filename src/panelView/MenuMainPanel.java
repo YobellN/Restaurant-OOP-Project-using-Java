@@ -7,7 +7,6 @@ package panelView;
 import control.MenuControl;
 import control.MinumanControl;
 import control.MakananControl;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -29,14 +28,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import model.Menu;
 import model.Minuman;
 import model.Makanan;
-import table.TabelMakanan;
 
 public class MenuMainPanel extends javax.swing.JPanel {
     private MenuControl menuControl = new MenuControl();

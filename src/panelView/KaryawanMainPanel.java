@@ -94,13 +94,6 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
 
         if (k != null) { // jika ketemu datanya
             tabelKaryawan.setModel(kc.showTable(searchKaryawanInputTextField.getText()));
-//            setKaryawanEditDeleteButton(true); // maka tombol edit dan delete dibuka
-//            namaKaryawanInputTextField.setText(k.getNama_karyawan()); // // mencopy data yang ditemukan di field input
-//            gajiKaryawanInputTextfield.setText(Float.toString(k.getGaji()));
-//            usernameKaryawanInputTextField.setText(k.getUsername());
-//            passwordKaryawanInputTextField.setText(k.getPassword());
-//            jabatanInputButton.setText(k.getJabatan());
-//            idKaryawanInputTextField.setText(k.getId_karyawan());
         } else {
             JOptionPane.showMessageDialog(rootPane, "NOT FOUND !!!");
         }

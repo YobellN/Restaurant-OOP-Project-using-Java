@@ -8,47 +8,38 @@ import control.MenuControl;
 import control.MinumanControl;
 import control.MakananControl;
 import control.PesananControl;
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
 import java.util.Comparator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import model.Karyawan;
 import model.Menu;
 import model.Pesanan;
 import model.Minuman;
 import model.Makanan;
-import table.TabelMakanan;
+
+import control.TransaksiControl;
+import model.Transaksi;
 
 public class TransaksiMainPanel extends javax.swing.JPanel {
 
     private MenuControl menuControl = new MenuControl();
     private MakananControl makananControl = new MakananControl();
     private MinumanControl minumanControl = new MinumanControl();
+    
     private Menu menu = null;
     private Minuman minuman = null;
     private Makanan makanan = null;
-
+    
+    private Transaksi transaksi = null;
+    private TransaksiControl tc = new TransaksiControl();
+    
     private PesananControl pesananControl = new PesananControl();
     private Pesanan pesanan = null;
 
@@ -69,15 +60,16 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         }
     }
 
-    public TransaksiMainPanel() {
+    public TransaksiMainPanel(Karyawan k) {
         initComponents();
-
+        idPesananInputTextField.setText(tc.generateId());
+        idKaryawanInputTextField.setText(k.getNama_karyawan());
         // Yang tidak perlu di ubah
         idProdukInputTextField.setEnabled(false);
         namaProdukInputTextField.setEnabled(false);
         hargaProdukInputTextfield.setEnabled(false);
         specialAtributeInputTextfield.setEnabled(false); // catatan
-        idPelangganInputTextField.setEnabled(false);
+        namaPelangganInputTextField.setEnabled(false);
         idKaryawanInputTextField.setEnabled(false);
         idPesananInputTextField.setEnabled(false);
         totalProdukInputTextfield.setEnabled(false);
@@ -87,10 +79,13 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         setEditDeleteButton(false);
 
         clearTextData();
+        
     }
     
     private void setComponentsData(boolean value) {
         jumlahProdukInputTextfield.setEnabled(value);
+        namaPelangganInputTextField.setEnabled(value);
+        jDateChooser.setEnabled(value);
     }
 
     private void setEditDeleteButton(boolean value) {
@@ -136,6 +131,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         addHeaderClickListener(tabelMakanan);
         addHeaderClickListener(tabelMinuman);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -157,7 +153,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         idKaryawanInputTextField = new javax.swing.JTextField();
         idProdukInputPanel4 = new javax.swing.JPanel();
         idPelangganLabel = new javax.swing.JLabel();
-        idPelangganInputTextField = new javax.swing.JTextField();
+        namaPelangganInputTextField = new javax.swing.JTextField();
         idProdukInputPanel5 = new javax.swing.JPanel();
         idKaryawanLabel1 = new javax.swing.JLabel();
         idPesananInputTextField = new javax.swing.JTextField();
@@ -194,8 +190,9 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         simpanTransaksiProdukButton = new javax.swing.JButton();
         cancelTransaksiButton = new javax.swing.JButton();
         specialAtributeInputPanel1 = new javax.swing.JPanel();
-        totalProdukInputLabel1 = new javax.swing.JLabel();
         totalProdukInputTextfield = new javax.swing.JTextField();
+        totalProdukInputLabel1 = new javax.swing.JLabel();
+        jDateChooser = new com.toedter.calendar.JDateChooser();
 
         mainPanel.setBackground(new java.awt.Color(255, 221, 186));
 
@@ -263,13 +260,13 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
 
         idPelangganLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         idPelangganLabel.setForeground(new java.awt.Color(137, 92, 3));
-        idPelangganLabel.setText("ID Pelanggan");
+        idPelangganLabel.setText("Nama Pelanggan");
 
-        idPelangganInputTextField.setBackground(new java.awt.Color(255, 255, 255));
-        idPelangganInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
-        idPelangganInputTextField.addActionListener(new java.awt.event.ActionListener() {
+        namaPelangganInputTextField.setBackground(new java.awt.Color(255, 255, 255));
+        namaPelangganInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
+        namaPelangganInputTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idPelangganInputTextFieldActionPerformed(evt);
+                namaPelangganInputTextFieldActionPerformed(evt);
             }
         });
 
@@ -281,7 +278,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(idProdukInputPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(idPelangganLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(idPelangganInputTextField))
+                    .addComponent(namaPelangganInputTextField))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
         idProdukInputPanel4Layout.setVerticalGroup(
@@ -290,7 +287,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(idPelangganLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(idPelangganInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(namaPelangganInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -688,7 +685,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                 .addGroup(ProdukFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(kendaraanFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(specialAtributeInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         tabelMakanan.setModel(new javax.swing.table.DefaultTableModel(
@@ -773,27 +770,33 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         kendaraanFormPanel3Layout.setHorizontalGroup(
             kendaraanFormPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kendaraanFormPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(simpanTransaksiProdukButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cancelTransaksiButton)
-                .addContainerGap())
+                .addContainerGap(7, Short.MAX_VALUE))
         );
         kendaraanFormPanel3Layout.setVerticalGroup(
             kendaraanFormPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kendaraanFormPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 12, Short.MAX_VALUE)
                 .addGroup(kendaraanFormPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(simpanTransaksiProdukButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cancelTransaksiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(cancelTransaksiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         specialAtributeInputPanel1.setBackground(new java.awt.Color(255, 221, 186));
 
-        totalProdukInputLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        totalProdukInputLabel1.setForeground(new java.awt.Color(137, 92, 3));
-        totalProdukInputLabel1.setText("Total");
+        javax.swing.GroupLayout specialAtributeInputPanel1Layout = new javax.swing.GroupLayout(specialAtributeInputPanel1);
+        specialAtributeInputPanel1.setLayout(specialAtributeInputPanel1Layout);
+        specialAtributeInputPanel1Layout.setHorizontalGroup(
+            specialAtributeInputPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 249, Short.MAX_VALUE)
+        );
+        specialAtributeInputPanel1Layout.setVerticalGroup(
+            specialAtributeInputPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 62, Short.MAX_VALUE)
+        );
 
         totalProdukInputTextfield.setBackground(new java.awt.Color(255, 255, 255));
         totalProdukInputTextfield.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
@@ -803,24 +806,9 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout specialAtributeInputPanel1Layout = new javax.swing.GroupLayout(specialAtributeInputPanel1);
-        specialAtributeInputPanel1.setLayout(specialAtributeInputPanel1Layout);
-        specialAtributeInputPanel1Layout.setHorizontalGroup(
-            specialAtributeInputPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(specialAtributeInputPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(totalProdukInputLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(116, Short.MAX_VALUE))
-            .addComponent(totalProdukInputTextfield, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
-        );
-        specialAtributeInputPanel1Layout.setVerticalGroup(
-            specialAtributeInputPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(specialAtributeInputPanel1Layout.createSequentialGroup()
-                .addComponent(totalProdukInputLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(totalProdukInputTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
-        );
+        totalProdukInputLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        totalProdukInputLabel1.setForeground(new java.awt.Color(137, 92, 3));
+        totalProdukInputLabel1.setText("Total");
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -833,19 +821,24 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                         .addComponent(ProdukFormPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(kendaraanFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(minumanScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE))
+                            .addComponent(minumanScrollPane1)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                                .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(totalProdukInputLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(totalProdukInputTextfield))))
                         .addContainerGap())
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(makananScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(minumanScrollPane)
                             .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addComponent(specialAtributeInputPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(minumanScrollPane)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                                .addComponent(kendaraanFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())))))
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addComponent(searchProdukInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -862,12 +855,22 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                         .addComponent(minumanScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(kendaraanFormPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(specialAtributeInputPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                            .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addComponent(totalProdukInputLabel1)
+                                .addGap(9, 9, 9)
+                                .addComponent(totalProdukInputTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(specialAtributeInputPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(kendaraanFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(makananScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
-                    .addComponent(minumanScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(minumanScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+                    .addComponent(makananScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1085,9 +1088,9 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_idKaryawanInputTextFieldActionPerformed
 
-    private void idPelangganInputTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idPelangganInputTextFieldActionPerformed
+    private void namaPelangganInputTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaPelangganInputTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_idPelangganInputTextFieldActionPerformed
+    }//GEN-LAST:event_namaPelangganInputTextFieldActionPerformed
 
     private void idPesananInputTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idPesananInputTextFieldActionPerformed
         // TODO add your handling code here:
@@ -1107,7 +1110,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     private javax.swing.JTextField idKaryawanInputTextField;
     private javax.swing.JLabel idKaryawanLabel;
     private javax.swing.JLabel idKaryawanLabel1;
-    private javax.swing.JTextField idPelangganInputTextField;
     private javax.swing.JLabel idPelangganLabel;
     private javax.swing.JTextField idPesananInputTextField;
     private javax.swing.JLabel idProdukInputLabel;
@@ -1122,6 +1124,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     private javax.swing.JTextField idProdukInputTextField;
     private javax.swing.JTextField idProdukInputTextField1;
     private javax.swing.JTextField idProdukInputTextField3;
+    private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPanel jenisProdukInputPanel;
     private javax.swing.JTextField jumlahProdukInputTextfield;
@@ -1131,6 +1134,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane makananScrollPane;
     private javax.swing.JScrollPane minumanScrollPane;
     private javax.swing.JScrollPane minumanScrollPane1;
+    private javax.swing.JTextField namaPelangganInputTextField;
     private javax.swing.JLabel namaProdukInputLabel;
     private javax.swing.JPanel namaProdukInputPanel;
     private javax.swing.JTextField namaProdukInputTextField;

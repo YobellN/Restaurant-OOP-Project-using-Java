@@ -27,7 +27,7 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IShowForDropdown<T
     @Override
     public int generateId(){
         con = dbCon.makeConnection();
-        String sql = "SELECT MAX(CAST(SUBSTRING(id_pesanan, 2) AS SIGNED)) AS highest_number FROM menu WHERE id_pesanan LIKE 'T%';";
+        String sql = "SELECT MAX(CAST(SUBSTRING(id_pesanan, 2) AS SIGNED)) AS highest_number FROM transaksi WHERE id_pesanan LIKE 'T%';";
         //mendapatkan nilai tertinggi dari id yang ada di database
         
         System.out.println("Generating Id...");
