@@ -116,8 +116,7 @@ public class PelangganMainPanel extends javax.swing.JPanel {
         TableModel tableModel = table.getModel();
         TableRowSorter<TableModel> sorter = new TableRowSorter<>((TableModel) tableModel);
         table.setRowSorter(sorter);
-        
-        
+
     }
     /**
      * This method is called from within the constructor to initialize the form.
