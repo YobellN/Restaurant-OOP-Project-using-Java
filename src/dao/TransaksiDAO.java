@@ -106,28 +106,6 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IShowForDropdown<T
         dbCon.closeConnection();
     }
     
-    public void insertPelangganTransaksi(Pelanggan P){
-        con = dbCon.makeConnection();
-        
-        String sql = 
-            "INSERT INTO `pelanggan`(`id_pelanggan`, `nama_pelanggan`) "
-                + "VALUES "
-                + "('"+ P.getId_pelanggan()+"','"
-                + P.getNama_pelanggan() + "')"; 
-
-            System.out.println("Adding Insert Harga...");
-
-            try{
-                Statement statement = con.createStatement();
-                int result = statement.executeUpdate(sql);
-                System.out.println("Added " + result + " Transaksi");
-                statement.close();
-            }catch (Exception e){
-                System.out.println("Error adding Pelanggan Transaksi...");
-                System.out.println(e);
-            }
-            dbCon.closeConnection();
-    }
     
     @Override
     public void insert(Transaksi C){

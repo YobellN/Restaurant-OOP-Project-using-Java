@@ -26,9 +26,6 @@ public class TransaksiControl {
         kDao.insert(K);
     } // memasukkan id dari generateID ke objek karyawan lalu insert K ke DAO
     
-    public void insertDataPelangganTransaksi(Pelanggan P){
-        kDao.insertPelangganTransaksi(P);
-    }
     
     public void insertTotalHarga(Transaksi K){
         kDao.updateHarga(K);
