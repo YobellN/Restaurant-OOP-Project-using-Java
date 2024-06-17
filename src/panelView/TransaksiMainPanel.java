@@ -1109,8 +1109,8 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         }
         pelanggan = new Pelanggan(pelangganControl.generateId(), namaPelangganInputTextField.getText(), "-", "-");
         transaksi = new Transaksi(idPesananInputTextField.getText(),karyawan.getId_karyawan(), pelangganControl.generateId(), "2023-10-10");
-        System.out.println("INI ID DI BAGIAN ADD " +pelanggan.getId_pelanggan());
-        tc.insertDataTransaksi(transaksi, pelanggan);
+        pelangganControl.insertDataPelanggan(pelanggan);
+        tc.insertDataTransaksi(transaksi);
         pesananControl.insertDataPesanan(pesananList);
         tc.insertTotalHarga(transaksi);
         clearTextData();

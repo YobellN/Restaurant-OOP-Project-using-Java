@@ -21,9 +21,8 @@ public class TransaksiControl {
         return "T"+kDao.generateId();
     }
 
-    public void insertDataTransaksi(Transaksi K, Pelanggan P){
+    public void insertDataTransaksi(Transaksi K){
         K.setId_pesanan(generateId());
-        insertDataPelangganTransaksi(P);
         kDao.insert(K);
     } // memasukkan id dari generateID ke objek karyawan lalu insert K ke DAO
     
