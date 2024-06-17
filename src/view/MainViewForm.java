@@ -4,13 +4,19 @@
  */
 package view;
 
+import control.KaryawanControl;
 import panelView.*;
 import java.awt.Color;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
+import model.Karyawan;
 
 public class MainViewForm extends javax.swing.JFrame {
     private int selectedIndex = -1;
-
+    private Karyawan k = null;
+    private KaryawanControl kc = new KaryawanControl();
+    private boolean login = false;
+    
     private void setForm(JComponent com){
         contentPanel.removeAll();
         contentPanel.add(com);
@@ -24,6 +30,7 @@ public class MainViewForm extends javax.swing.JFrame {
         multiplePanel.setBackground(new Color(0, 0, 0, 0));
         transaksiPanel.setBackground(new Color(0, 0, 0, 0));
         transaksiPanelDate.setBackground(new Color(0, 0, 0, 0));
+        pesananPanelDate.setBackground(new Color(0, 0, 0, 0));
     }
     
     public MainViewForm() {
@@ -53,7 +60,16 @@ public class MainViewForm extends javax.swing.JFrame {
         transaksiLabel = new javax.swing.JLabel();
         transaksiPanelDate = new javax.swing.JPanel();
         transaksiLabelDate = new javax.swing.JLabel();
+        pesananPanelDate = new javax.swing.JPanel();
+        pesananLabelDate = new javax.swing.JLabel();
         contentPanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        usernameTextField = new javax.swing.JTextField();
+        passwordTextField = new javax.swing.JTextField();
+        loginButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        idKaryawanTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -214,6 +230,37 @@ public class MainViewForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        pesananPanelDate.setBackground(new java.awt.Color(229, 171, 89));
+
+        pesananLabelDate.setBackground(new java.awt.Color(229, 171, 89));
+        pesananLabelDate.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        pesananLabelDate.setForeground(new java.awt.Color(137, 92, 3));
+        pesananLabelDate.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        pesananLabelDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/penitipanIcon.png"))); // NOI18N
+        pesananLabelDate.setText("Display Menu");
+        pesananLabelDate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pesananLabelDateMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pesananPanelDateLayout = new javax.swing.GroupLayout(pesananPanelDate);
+        pesananPanelDate.setLayout(pesananPanelDateLayout);
+        pesananPanelDateLayout.setHorizontalGroup(
+            pesananPanelDateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pesananPanelDateLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pesananLabelDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pesananPanelDateLayout.setVerticalGroup(
+            pesananPanelDateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pesananPanelDateLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pesananLabelDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout sidePanelLayout = new javax.swing.GroupLayout(sidePanel);
         sidePanel.setLayout(sidePanelLayout);
         sidePanelLayout.setHorizontalGroup(
@@ -229,7 +276,8 @@ public class MainViewForm extends javax.swing.JFrame {
                                 .addComponent(logoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(transaksiPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(transaksiPanelDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(transaksiPanelDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pesananPanelDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         sidePanelLayout.setVerticalGroup(
@@ -245,13 +293,94 @@ public class MainViewForm extends javax.swing.JFrame {
                 .addComponent(transaksiPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(transaksiPanelDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pesananPanelDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        contentPanel.setBackground(new java.awt.Color(255, 255, 255));
+        contentPanel.setBackground(new java.awt.Color(153, 255, 153));
         contentPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         contentPanel.setOpaque(false);
         contentPanel.setLayout(new java.awt.BorderLayout());
+
+        jPanel1.setBackground(new java.awt.Color(51, 255, 204));
+
+        loginButton.setText("Login");
+        loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                loginButtonMouseClicked(evt);
+            }
+        });
+
+        jLabel1.setText("LOGIN");
+
+        idKaryawanTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idKaryawanTextFieldActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(idKaryawanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(423, 423, 423))))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(215, 215, 215)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(205, 205, 205)
+                        .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(70, 70, 70)
+                .addComponent(idKaryawanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(loginButton)
+                .addContainerGap(11, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(304, 304, 304)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(433, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(247, 247, 247)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(291, Short.MAX_VALUE))
+        );
+
+        contentPanel.add(jPanel1, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -286,13 +415,21 @@ public class MainViewForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void singlePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_singlePanelMouseClicked
-        if(selectedIndex == 1)
+        if(login){
+            if(selectedIndex == 1) // jadikan kunci login
             return;
+            recolorDefaultSwitchPanel();
+            singlePanel.setBackground(new Color(255,204,51));
+            setForm(new MenuMainPanel());
+            selectedIndex = 1;
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "ANDA BELUM LOGIN!!!");
+            return;
+        }
         
-        recolorDefaultSwitchPanel();
-        singlePanel.setBackground(new Color(255,204,51));
-        setForm(new MenuMainPanel());
-        selectedIndex = 1;
+        
+        
+        
     }//GEN-LAST:event_singlePanelMouseClicked
 
     private void multiplePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_multiplePanelMouseClicked
@@ -326,6 +463,33 @@ public class MainViewForm extends javax.swing.JFrame {
         setForm(new DisplayMenuMainPanel());
         selectedIndex = 4;
     }//GEN-LAST:event_transaksiLabelDateMouseClicked
+
+    private void pesananLabelDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pesananLabelDateMouseClicked
+        if(selectedIndex == 5)
+            return;
+        
+        recolorDefaultSwitchPanel();
+        pesananPanelDate.setBackground(new Color(255,204,51));
+        
+        setForm(new TransaksiMainPanel(k));
+        selectedIndex = 5;
+    }//GEN-LAST:event_pesananLabelDateMouseClicked
+
+    private void loginButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseClicked
+        if(kc.loginKaryawan(usernameTextField.getText(), passwordTextField.getText(), idKaryawanTextField.getText())){
+            k = kc.searchDataKaryawan(idKaryawanTextField.getText());
+            login = true;
+            JOptionPane.showMessageDialog(rootPane, "ANDA TELAH LOGIN");
+            singlePanelMouseClicked(evt);
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "USERNAME/PASSWORD ANDA SALAH!!!");
+            return;
+        }
+    }//GEN-LAST:event_loginButtonMouseClicked
+
+    private void idKaryawanTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idKaryawanTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idKaryawanTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -366,17 +530,26 @@ public class MainViewForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentPanel;
     private javax.swing.JLabel customerLabel;
+    private javax.swing.JTextField idKaryawanTextField;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel kendaraanLabel;
+    private javax.swing.JButton loginButton;
     private javax.swing.JLabel logoIcon;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JPanel logoPanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel multiplePanel;
+    private javax.swing.JTextField passwordTextField;
+    private javax.swing.JLabel pesananLabelDate;
+    private javax.swing.JPanel pesananPanelDate;
     private javax.swing.JPanel sidePanel;
     private javax.swing.JPanel singlePanel;
     private javax.swing.JLabel transaksiLabel;
     private javax.swing.JLabel transaksiLabelDate;
     private javax.swing.JPanel transaksiPanel;
     private javax.swing.JPanel transaksiPanelDate;
+    private javax.swing.JTextField usernameTextField;
     // End of variables declaration//GEN-END:variables
 }

@@ -36,4 +36,8 @@ public class KaryawanControl {
         return tabelKaryawan;
     }
     
+    public boolean loginKaryawan(String user, String pass, String id){
+        return kDao.cekLogin(user, pass, id);
+    }
+    
 }
