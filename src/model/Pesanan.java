@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 
 public class Pesanan {
     private String id_pesanan; // SQL : id_pesanan
@@ -11,27 +13,28 @@ public class Pesanan {
     private int jumlah; // SQL : jumlah
     private float sub_total; // SQL : sub_total;
     private String namaMenu; // buat konstruktor di show aja, nanti buat kontruktor khusus yang ada nama menu
+    private Menu menu;
+    
+    public Pesanan(String id_pesanan, String id_menu, int jumlah, float sub_total, Menu menu) {
+        this.id_pesanan = id_pesanan;
+        this.id_menu = id_menu;
+        this.jumlah = jumlah;
+        this.sub_total = sub_total;
+        this.menu = menu;
+    } // konstruktor lengkap
     
     public Pesanan(String id_pesanan, String id_menu, int jumlah, float sub_total) {
         this.id_pesanan = id_pesanan;
         this.id_menu = id_menu;
         this.jumlah = jumlah;
         this.sub_total = sub_total;
-    } // konstruktor lengkap
-
+    }
     public Pesanan(String id_menu, int jumlah, float sub_total) {
         this.id_menu = id_menu;
         this.jumlah = jumlah;
         this.sub_total = sub_total;
     } // konstruktor tanpa id_pesanan
 
-    public Pesanan(String id_pesanan, String id_menu, int jumlah, float sub_total, String namaMenu) {
-        this.id_pesanan = id_pesanan;
-        this.id_menu = id_menu;
-        this.jumlah = jumlah;
-        this.sub_total = sub_total;
-        this.namaMenu = namaMenu;
-    }
 
     // getter
     public String getId_pesanan() {
@@ -49,7 +52,10 @@ public class Pesanan {
     public float getSub_total() {
         return sub_total;
     }
-
+    
+    public Menu getMenu(){
+        return menu;
+    }
     // setter
     public void setId_pesanan(String id_pesanan) {
         this.id_pesanan = id_pesanan;

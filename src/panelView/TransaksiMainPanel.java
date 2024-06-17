@@ -25,6 +25,7 @@ import model.Minuman;
 import model.Makanan;
 
 import control.TransaksiControl;
+import java.util.ArrayList;
 import model.Transaksi;
 
 public class TransaksiMainPanel extends javax.swing.JPanel {
@@ -37,6 +38,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     private Minuman minuman = null;
     private Makanan makanan = null;
     
+    private ArrayList<Pesanan> pesananList = new ArrayList();
     private Transaksi transaksi = null;
     private TransaksiControl tc = new TransaksiControl();
     
@@ -75,7 +77,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         totalProdukInputTextfield.setEnabled(false);
 
         setComponentsData(false);
-        showTableBySearch("");
+        showTableMenuBySearch("");
         setEditDeleteButton(false);
 
         clearTextData();
@@ -125,13 +127,17 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         table.setRowSorter(sorter);
     }
 
-    private void showTableBySearch(String target) {
+    private void showTableMenuBySearch(String target) {
         tabelMakanan.setModel(makananControl.showTableBySearch(target));
         tabelMinuman.setModel(minumanControl.showTableBySearch(target));
         addHeaderClickListener(tabelMakanan);
         addHeaderClickListener(tabelMinuman);
     }
     
+    private void showTabelPesananBySearch(String target){
+        tabelPesanan.setModel(pesananControl.showTable(target));
+        addHeaderClickListener(tabelPesanan);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -891,13 +897,13 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     private void searchProdukInputTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchProdukInputTextFieldKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyChar() == '\n') {
-            showTableBySearch(searchProdukInputTextField.getText());
+            showTableMenuBySearch(searchProdukInputTextField.getText());
         }
     }//GEN-LAST:event_searchProdukInputTextFieldKeyPressed
 
     private void searchProdukInputButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchProdukInputButtonActionPerformed
         // TODO add your handling code here:
-        showTableBySearch(searchProdukInputTextField.getText());
+        showTableMenuBySearch(searchProdukInputTextField.getText());
     }//GEN-LAST:event_searchProdukInputButtonActionPerformed
 
     private void barukanProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barukanProdukButtonActionPerformed
@@ -919,7 +925,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         setEditDeleteButton(false);
         setComponentsData(false);
         tambahProdukButton.setEnabled(true);
-        showTableBySearch("");
+        showTableMenuBySearch("");
     }//GEN-LAST:event_hapusProdukButtonActionPerformed
 
     private void tambahProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahProdukButtonActionPerformed
@@ -967,7 +973,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                 clearTextData();
                 setEditDeleteButton(false);
                 setComponentsData(false);
-                showTableBySearch("");
+                showTableMenuBySearch("");
                 break;
             case "update":
                 pesanan = new Pesanan( // tidak perlu update id pesanan
@@ -979,13 +985,14 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                 clearTextData();
                 setEditDeleteButton(false);
                 setComponentsData(false);
-                showTableBySearch("");
+                showTableMenuBySearch("");
                 break;
             default:
                 break;
 
         }
-        showTableBySearch("");
+        showTabelPesananBySearch("");
+        showTableMenuBySearch("");
         tambahProdukButton.setEnabled(true);
         action = null;
     }//GEN-LAST:event_simpanProdukButtonActionPerformed
@@ -1032,7 +1039,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         tambahProdukButton.setEnabled(true);
         tabelMakanan.clearSelection();
         tabelMinuman.clearSelection();
-        showTableBySearch("");
+        showTableMenuBySearch("");
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void tabelMinumanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMinumanMouseClicked

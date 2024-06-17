@@ -26,20 +26,22 @@ public class TabelPesanan extends AbstractTableModel{
     
     @Override
     public int getColumnCount(){
-        return 4;
+        return 5;
     }
     
     @Override
     public Object getValueAt(int rowIndex, int columnIndex){
         switch(columnIndex){
             case 0:
-                return list.get(rowIndex).getId_pesanan();
-            case 1:
                 return list.get(rowIndex).getId_menu();
+            case 1:
+                return list.get(rowIndex).getMenu().getNama_menu();
             case 2:
                 return list.get(rowIndex).getJumlah();
             case 3:
                 return list.get(rowIndex).getSub_total();
+            case 4:
+                return list.get(rowIndex).getId_pesanan();
             default:
                 return null;
         }
@@ -49,9 +51,9 @@ public class TabelPesanan extends AbstractTableModel{
     public String getColumnName(int column){
         switch(column){
             case 0:
-                return "ID Pesanan";
-            case 1:
                 return "ID Menu";
+            case 1:
+                return "Nama Menu";
             case 2:
                 return "Jumlah";
             case 3:

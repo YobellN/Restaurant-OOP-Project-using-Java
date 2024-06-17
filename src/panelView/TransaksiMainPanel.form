@@ -201,9 +201,6 @@
             </Component>
             <Component class="javax.swing.JTextField" name="searchProdukInputTextField">
               <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Berlin Sans FB" size="12" style="0"/>
                 </Property>
@@ -275,9 +272,6 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="idKaryawanInputTextField">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Berlin Sans FB" size="12" style="0"/>
                     </Property>
@@ -334,9 +328,6 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="namaPelangganInputTextField">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Berlin Sans FB" size="12" style="0"/>
                     </Property>
@@ -393,9 +384,6 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="idPesananInputTextField">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Berlin Sans FB" size="12" style="0"/>
                     </Property>
@@ -612,9 +600,6 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="idProdukInputTextField">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Berlin Sans FB" size="12" style="0"/>
                     </Property>
@@ -662,9 +647,6 @@
               <SubComponents>
                 <Component class="javax.swing.JTextField" name="hargaProdukInputTextfield">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Berlin Sans FB" size="12" style="0"/>
                     </Property>
@@ -723,9 +705,6 @@
               <SubComponents>
                 <Component class="javax.swing.JTextField" name="namaProdukInputTextField">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Berlin Sans FB" size="12" style="0"/>
                     </Property>
@@ -782,9 +761,6 @@
               <SubComponents>
                 <Component class="javax.swing.JTextField" name="specialAtributeInputTextfield">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Berlin Sans FB" size="12" style="0"/>
                     </Property>
@@ -852,9 +828,6 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="jumlahProdukInputTextfield">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Berlin Sans FB" size="12" style="0"/>
                     </Property>
@@ -1104,9 +1077,6 @@
         </Container>
         <Component class="javax.swing.JTextField" name="totalProdukInputTextfield">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Berlin Sans FB" size="12" style="0"/>
             </Property>
