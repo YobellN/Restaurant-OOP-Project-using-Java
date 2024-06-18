@@ -414,6 +414,12 @@ public class MainViewForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void JikaKasir(){
+        if(!login){
+            multiplePanel.setVisible(false);
+        }
+    }
+    
     private void singlePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_singlePanelMouseClicked
         if(login){
             if(selectedIndex == 1) // jadikan kunci login
@@ -426,10 +432,6 @@ public class MainViewForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "ANDA BELUM LOGIN!!!");
             return;
         }
-        
-        
-        
-        
     }//GEN-LAST:event_singlePanelMouseClicked
 
     private void multiplePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_multiplePanelMouseClicked
