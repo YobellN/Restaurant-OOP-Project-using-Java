@@ -244,7 +244,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="idKaryawanInputTextField" min="-2" pref="193" max="-2" attributes="0"/>
+                              <Component id="namaKaryawanInputTextField" min="-2" pref="193" max="-2" attributes="0"/>
                               <Component id="idKaryawanLabel" min="-2" pref="179" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
@@ -257,7 +257,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="idKaryawanLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="idKaryawanInputTextField" min="-2" pref="29" max="-2" attributes="0"/>
+                          <Component id="namaKaryawanInputTextField" min="-2" pref="29" max="-2" attributes="0"/>
                           <EmptySpace pref="18" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -272,18 +272,15 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="3" green="5c" red="89" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="ID Karyawan"/>
+                    <Property name="text" type="java.lang.String" value="Nama Karyawan"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="idKaryawanInputTextField">
+                <Component class="javax.swing.JTextField" name="namaKaryawanInputTextField">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Berlin Sans FB" size="12" style="0"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="idKaryawanInputTextFieldActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -337,9 +334,6 @@
                       <Font name="Berlin Sans FB" size="12" style="0"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="namaPelangganInputTextFieldActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -393,9 +387,6 @@
                       <Font name="Berlin Sans FB" size="12" style="0"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="idPesananInputTextFieldActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -1030,9 +1021,6 @@
               <Font name="Berlin Sans FB" size="12" style="0"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="totalProdukInputTextfieldKeyTyped"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="totalProdukInputLabel1">
           <Properties>
