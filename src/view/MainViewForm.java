@@ -31,6 +31,7 @@ public class MainViewForm extends javax.swing.JFrame {
         transaksiPanel.setBackground(new Color(0, 0, 0, 0));
         transaksiPanelDate.setBackground(new Color(0, 0, 0, 0));
         pesananPanelDate.setBackground(new Color(0, 0, 0, 0));
+        laporanPanelDate.setBackground(new Color(0, 0, 0, 0));
     }
     
     public MainViewForm() {
@@ -62,6 +63,8 @@ public class MainViewForm extends javax.swing.JFrame {
         transaksiLabelDate = new javax.swing.JLabel();
         pesananPanelDate = new javax.swing.JPanel();
         pesananLabelDate = new javax.swing.JLabel();
+        laporanPanelDate = new javax.swing.JPanel();
+        pesananLabelDate1 = new javax.swing.JLabel();
         contentPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -261,6 +264,42 @@ public class MainViewForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        laporanPanelDate.setBackground(new java.awt.Color(229, 171, 89));
+        laporanPanelDate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                laporanPanelDateMouseClicked(evt);
+            }
+        });
+
+        pesananLabelDate1.setBackground(new java.awt.Color(229, 171, 89));
+        pesananLabelDate1.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        pesananLabelDate1.setForeground(new java.awt.Color(137, 92, 3));
+        pesananLabelDate1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        pesananLabelDate1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/penitipanIcon.png"))); // NOI18N
+        pesananLabelDate1.setText("Display Menu");
+        pesananLabelDate1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pesananLabelDate1MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout laporanPanelDateLayout = new javax.swing.GroupLayout(laporanPanelDate);
+        laporanPanelDate.setLayout(laporanPanelDateLayout);
+        laporanPanelDateLayout.setHorizontalGroup(
+            laporanPanelDateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(laporanPanelDateLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pesananLabelDate1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        laporanPanelDateLayout.setVerticalGroup(
+            laporanPanelDateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(laporanPanelDateLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pesananLabelDate1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout sidePanelLayout = new javax.swing.GroupLayout(sidePanel);
         sidePanel.setLayout(sidePanelLayout);
         sidePanelLayout.setHorizontalGroup(
@@ -277,7 +316,8 @@ public class MainViewForm extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(transaksiPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(transaksiPanelDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pesananPanelDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(pesananPanelDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(laporanPanelDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         sidePanelLayout.setVerticalGroup(
@@ -295,6 +335,8 @@ public class MainViewForm extends javax.swing.JFrame {
                 .addComponent(transaksiPanelDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pesananPanelDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(laporanPanelDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -493,6 +535,21 @@ public class MainViewForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_idKaryawanTextFieldActionPerformed
 
+    private void pesananLabelDate1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pesananLabelDate1MouseClicked
+        if(selectedIndex == 7)
+            return;
+        
+        recolorDefaultSwitchPanel();
+        laporanPanelDate.setBackground(new Color(255,204,51));
+        
+        setForm(new laporanMainPanel());
+        selectedIndex = 7;
+    }//GEN-LAST:event_pesananLabelDate1MouseClicked
+
+    private void laporanPanelDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laporanPanelDateMouseClicked
+       
+    }//GEN-LAST:event_laporanPanelDateMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -537,6 +594,7 @@ public class MainViewForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel kendaraanLabel;
+    private javax.swing.JPanel laporanPanelDate;
     private javax.swing.JButton loginButton;
     private javax.swing.JLabel logoIcon;
     private javax.swing.JLabel logoLabel;
@@ -545,6 +603,7 @@ public class MainViewForm extends javax.swing.JFrame {
     private javax.swing.JPanel multiplePanel;
     private javax.swing.JTextField passwordTextField;
     private javax.swing.JLabel pesananLabelDate;
+    private javax.swing.JLabel pesananLabelDate1;
     private javax.swing.JPanel pesananPanelDate;
     private javax.swing.JPanel sidePanel;
     private javax.swing.JPanel singlePanel;
