@@ -170,6 +170,11 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
         searchKaryawanInputLabel.setText("Pencarian Karyawan");
 
         searchKaryawanInputTextField.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        searchKaryawanInputTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                searchKaryawanInputTextFieldKeyTyped(evt);
+            }
+        });
 
         searchKaryawanInputButton.setBackground(new java.awt.Color(137, 92, 3));
         searchKaryawanInputButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
@@ -731,6 +736,12 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
         tambahKaryawanButton.setEnabled(true);
         tabelKaryawan.clearSelection();
     }//GEN-LAST:event_batalkanKaryawanButtonActionPerformed
+
+    private void searchKaryawanInputTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKaryawanInputTextFieldKeyTyped
+        if (evt.getKeyChar() == '\n') {
+            doSearchKaryawan();
+        }
+    }//GEN-LAST:event_searchKaryawanInputTextFieldKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
