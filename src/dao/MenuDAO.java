@@ -80,7 +80,8 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, IGen
         String sql = "SELECT menu.*, minuman.ukuran, makanan.catatan FROM menu\n"
                 + "LEFT JOIN minuman ON menu.id_menu = minuman.id_menu\n"
                 + "LEFT JOIN makanan on menu.id_menu = makanan.id_menu\n"
-                + "WHERE menu.nama_menu LIKE '%" + search + "%' "
+                + "WHERE menu.id_menu LIKE '%" + search + "%' "
+                + "OR menu.nama_menu LIKE '%" + search + "%' "
                 + "OR menu.jenis_menu LIKE '%" + search + "%' ";
         System.out.println("Searching Menu...");
         Menu m = null;

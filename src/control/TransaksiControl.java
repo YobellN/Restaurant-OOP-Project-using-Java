@@ -30,9 +30,6 @@ public class TransaksiControl {
     public void insertTotalHarga(Transaksi K){
         kDao.updateHarga(K);
     }
-    public Transaksi searchDataTransaksi (String data){
-        return kDao.search(data);
-    } // mencari karyawan berdasarkan id, nama, jabatan, username lalu return tipe data karyawan
 
     public void updateDataTransaksi(Transaksi K){
         kDao.update(K, K.getId_pesanan());
@@ -47,5 +44,9 @@ public class TransaksiControl {
         TabelTransaksi tabelTransaksi = new TabelTransaksi(data);
 
         return tabelTransaksi;
+    }
+    
+    public void createReceipt(String id_pesanan){
+        kDao.createReceipt(id_pesanan);
     }
 }

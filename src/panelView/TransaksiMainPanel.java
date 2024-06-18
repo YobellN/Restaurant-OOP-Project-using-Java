@@ -1116,11 +1116,11 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         // untuk bersihkan input field 
         clearTextData();
         namaPelangganInputTextField.setText(""); 
-        jDateChooser.setDateFormatString("");
+        jDateChooser.setDate(null);
         
         setEditDeleteButton(false);
         setComponentsData(false);
-        
+        tc.createReceipt(idPesananInputTextField.getText());
         pesananList.removeAll(pesananList); // membersihkan list
         showTabelPesananBySearch();
         showTableMenuBySearch("");
