@@ -32,7 +32,10 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="mainPanel" min="-2" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="mainPanel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -52,34 +55,36 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="ProdukFormPanel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="minumanScrollPane1" max="32767" attributes="0"/>
-                              <Group type="102" alignment="1" attributes="0">
+                              <Group type="102" attributes="0">
                                   <Component id="jDateChooser" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
+                                  <Component id="totalProdukInputLabel1" min="-2" pref="127" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="minumanScrollPane1" min="-2" pref="614" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="makananScrollPane" min="-2" pref="565" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                  <Component id="specialAtributeInputPanel1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="totalProdukInputLabel1" min="-2" pref="127" max="-2" attributes="0"/>
-                                      <Component id="totalProdukInputTextfield" max="32767" attributes="0"/>
+                                      <Component id="totalProdukInputTextfield" min="-2" pref="279" max="-2" attributes="0"/>
+                                      <Component id="kendaraanFormPanel3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="makananScrollPane" min="-2" pref="581" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="minumanScrollPane" max="32767" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Component id="specialAtributeInputPanel1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="91" max="32767" attributes="0"/>
-                                  <Component id="kendaraanFormPanel3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="minumanScrollPane" min="-2" pref="605" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                   </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <Component id="searchProdukInputPanel" max="32767" attributes="0"/>
@@ -99,8 +104,8 @@
                           <Component id="minumanScrollPane1" min="-2" pref="184" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jDateChooser" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
+                              <Component id="jDateChooser" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
                                   <Component id="totalProdukInputLabel1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                                   <Component id="totalProdukInputTextfield" min="-2" pref="29" max="-2" attributes="0"/>
@@ -120,10 +125,10 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="minumanScrollPane" pref="399" max="32767" attributes="0"/>
-                      <Component id="makananScrollPane" pref="0" max="32767" attributes="0"/>
+                      <Component id="makananScrollPane" pref="355" max="32767" attributes="0"/>
+                      <Component id="minumanScrollPane" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -294,9 +299,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="idPelangganLabel" pref="200" max="32767" attributes="0"/>
-                              <Component id="namaPelangganInputTextField" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="idPelangganLabel" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="namaPelangganInputTextField" min="-2" pref="187" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="12" max="32767" attributes="0"/>
                       </Group>
@@ -609,9 +614,6 @@
                       <Font name="Berlin Sans FB" size="12" style="0"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="idProdukInputTextFieldActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -656,9 +658,6 @@
                       <Font name="Berlin Sans FB" size="12" style="0"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="hargaProdukInputTextfieldKeyTyped"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="hargaProdukInputLabel">
                   <Properties>
@@ -770,9 +769,6 @@
                       <Font name="Berlin Sans FB" size="12" style="0"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="specialAtributeInputTextfieldKeyTyped"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="specialAtributeInputLabel">
                   <Properties>

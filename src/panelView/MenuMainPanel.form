@@ -87,10 +87,10 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="makananScrollPane" pref="796" max="32767" attributes="0"/>
                       <Component id="minumanScrollPane" max="32767" attributes="0"/>
+                      <Component id="makananScrollPane" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="11" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -230,7 +230,7 @@
                           <Component id="namaProdukInputPanel" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jenisProdukInputPanel" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="16" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -602,7 +602,7 @@
                       <Component id="specialAtributeInputPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="gambarPanel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="7" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="simpanProdukButton" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                           <Component id="cancelButton" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
