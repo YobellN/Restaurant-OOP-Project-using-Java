@@ -228,7 +228,7 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IGenerateID{
             String reportSrcFile = "C:\\Users\\yobel"
                     + "\\OneDrive - Universitas Atma Jaya Yogyakarta\\"
                     + "Documents\\tugas\\PBO\\TubesPBO\\"
-                    + "TubesPBO_Restoran\\src\\report\\reportTransaksi.jrxml";
+                    + "TubesPBO_Restoran\\src\\report\\transaksiReport.jrxml";
             JasperReport jasperReport = JasperCompileManager.compileReport(reportSrcFile);
 
             Map<String, Object> parameters = new HashMap<>();

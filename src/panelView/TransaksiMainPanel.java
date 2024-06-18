@@ -60,13 +60,13 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     public TransaksiMainPanel(Karyawan k) {
         initComponents();
         idPesananInputTextField.setText(tc.generateId());
-        idKaryawanInputTextField.setText(k.getNama_karyawan());
+        namaKaryawanInputTextField.setText(k.getNama_karyawan());
         // Yang tidak perlu di ubah
         idProdukInputTextField.setEnabled(false);
         namaProdukInputTextField.setEnabled(false);
         hargaProdukInputTextfield.setEnabled(false);
         specialAtributeInputTextfield.setEnabled(false); // catatan
-        idKaryawanInputTextField.setEnabled(false);
+        namaKaryawanInputTextField.setEnabled(false);
         idPesananInputTextField.setEnabled(false);
         totalProdukInputTextfield.setEnabled(false);
 
@@ -189,7 +189,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         searchProdukInputButton = new javax.swing.JButton();
         idProdukInputPanel2 = new javax.swing.JPanel();
         idKaryawanLabel = new javax.swing.JLabel();
-        idKaryawanInputTextField = new javax.swing.JTextField();
+        namaKaryawanInputTextField = new javax.swing.JTextField();
         idProdukInputPanel4 = new javax.swing.JPanel();
         idPelangganLabel = new javax.swing.JLabel();
         namaPelangganInputTextField = new javax.swing.JTextField();
@@ -261,14 +261,9 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
 
         idKaryawanLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         idKaryawanLabel.setForeground(new java.awt.Color(137, 92, 3));
-        idKaryawanLabel.setText("ID Karyawan");
+        idKaryawanLabel.setText("Nama Karyawan");
 
-        idKaryawanInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
-        idKaryawanInputTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idKaryawanInputTextFieldActionPerformed(evt);
-            }
-        });
+        namaKaryawanInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout idProdukInputPanel2Layout = new javax.swing.GroupLayout(idProdukInputPanel2);
         idProdukInputPanel2.setLayout(idProdukInputPanel2Layout);
@@ -277,7 +272,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
             .addGroup(idProdukInputPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(idProdukInputPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(idKaryawanInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(namaKaryawanInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(idKaryawanLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -287,7 +282,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(idKaryawanLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(idKaryawanInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(namaKaryawanInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -298,11 +293,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         idPelangganLabel.setText("Nama Pelanggan");
 
         namaPelangganInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
-        namaPelangganInputTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                namaPelangganInputTextFieldActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout idProdukInputPanel4Layout = new javax.swing.GroupLayout(idProdukInputPanel4);
         idProdukInputPanel4.setLayout(idProdukInputPanel4Layout);
@@ -332,11 +322,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         idKaryawanLabel1.setText("ID Pesanan");
 
         idPesananInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
-        idPesananInputTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idPesananInputTextFieldActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout idProdukInputPanel5Layout = new javax.swing.GroupLayout(idProdukInputPanel5);
         idProdukInputPanel5.setLayout(idProdukInputPanel5Layout);
@@ -783,11 +768,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         );
 
         totalProdukInputTextfield.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
-        totalProdukInputTextfield.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                totalProdukInputTextfieldKeyTyped(evt);
-            }
-        });
 
         totalProdukInputLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         totalProdukInputLabel1.setForeground(new java.awt.Color(137, 92, 3));
@@ -906,7 +886,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         // MENGUBAH AKSES FIELD
         setEditDeleteButton(false);
         setComponentsData(false);
-
+        simpanTransaksiProdukButton.setEnabled(true);
     }//GEN-LAST:event_hapusProdukButtonActionPerformed
 
     private void simpanProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanProdukButtonActionPerformed
@@ -959,8 +939,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         tabelMakanan.setEnabled(true); 
         tabelMinuman.setEnabled(true);
         tabelPesanan.setEnabled(true);
-        
-        simpanProdukButton.setEnabled(true);
+        simpanTransaksiProdukButton.setEnabled(true);
         action = null; // MERESET AKSI MENJADI NULL
     }//GEN-LAST:event_simpanProdukButtonActionPerformed
 
@@ -1001,6 +980,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         tabelPesanan.clearSelection();  // MEMBERSIHKAN SELECTION TABEL PESANAN
         showTableMenuBySearch(""); // SHOW ULANG MENU
         showTabelPesanan(); // SHOW ULANG PESANAN
+        simpanTransaksiProdukButton.setEnabled(true); // MEMBUKA AKSES SIMPAN TRANSAKSI
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void tabelMinumanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMinumanMouseClicked
@@ -1031,7 +1011,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_tabelMinumanMouseClicked
 
     private void jumlahProdukInputTextfieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jumlahProdukInputTextfieldKeyTyped
-        // TODO add your handling code here:
+        // exception UNTUK MENGECEK HANYA ANGKA YANG BISA DI INPUT
         char key = evt.getKeyChar();
         if (!Character.isDigit(key) && key != KeyEvent.VK_BACK_SPACE || key == '.') {
             evt.consume();
@@ -1041,33 +1021,35 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jumlahProdukInputTextfieldKeyTyped
 
     private void tabelPesananMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelPesananMouseClicked
-        // TODO add your handling code here:
-        action = "update";
+        tabelMakanan.clearSelection(); // DIPAKAI MENGHAPUS PILIHAN DI TABEL LAIN
+        tabelMinuman.clearSelection(); // DIPAKAI MENGHAPUS PILIHAN DI TABEL LAIN
 
-        setEditDeleteButton(true);
+        action = "update"; // UNTUK UPDATE PESANAN
 
-        cancelButton.setEnabled(true);
-        simpanProdukButton.setEnabled(true);
+        // MENGESET AKSES SAAT KLIK TABEL PESANAN
+        setComponentsData(true); // BOLEH EDIT JUMLAH
+        setEditDeleteButton(false); // TIDAK BISA EDIT / DELETE
+        cancelButton.setEnabled(true); // BOLEH CANCEL
+        simpanProdukButton.setEnabled(true); // BOLEH SIMPAN PRODUK
+        simpanTransaksiProdukButton.setEnabled(false); // TIDAK BISA SIMPAN TRANSAKSI
 
-        setComponentsData(false);
-
+        // DIPAKAI UNTUK MEMILIH SECTION TABEL
         int clickedRow = tabelPesanan.getSelectedRow();
-        TableModel tableModel = tabelPesanan.getModel();
-
         if (tabelPesanan.getRowSorter() != null) {
             clickedRow = tabelPesanan.convertRowIndexToModel(clickedRow);
         }
-
+        // DIPAKAI UNTUK MENGAMBIL DATA TABEL
+        TableModel tableModel = tabelPesanan.getModel();
+        // DIPAKAI UNTUK SET DATA DARI TABEL
         idProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 0).toString());
         namaProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
         specialAtributeInputLabel.setText("    ");
         jumlahProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 2).toString());
-        cancelButton.setEnabled(true);
-
         hargaProdukInputTextfield.setText("" + menuControl.searchHargaMenu(idProdukInputTextField.getText()));
     }//GEN-LAST:event_tabelPesananMouseClicked
 
     private void simpanTransaksiProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanTransaksiProdukButtonActionPerformed
+        // Exception
         if (pesananList.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "DATA TIDAK BOLEH KOSONG!!!");
             return;
@@ -1078,13 +1060,13 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(rootPane, "Tanggal tidak boleh kosong!!!");
             return;
         }
-
+        // Aksi
         int dialog = JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan " + "Simpan Transaksi" + "?");
         if (dialog == JOptionPane.CLOSED_OPTION || dialog == JOptionPane.NO_OPTION || dialog == JOptionPane.CANCEL_OPTION) {
             return;
         }
 
-        // untuk kalender
+        // DIPAKAI UNTUK CONVERT FORMAT CALENDER
         String toDate = jDateChooser.getDate().toString();
         SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
         Date date = null;
@@ -1096,7 +1078,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = outputFormat.format(date);
 
-        // untuk input
+        // DIPAKAI UNTUK MEMBUAT OBJEK
         pelanggan = new Pelanggan(pelangganControl.generateId(), namaPelangganInputTextField.getText(), "-", "-");
         transaksi = new Transaksi(idPesananInputTextField.getText(), karyawan.getId_karyawan(),
                 pelangganControl.generateId(), formattedDate, 0);
@@ -1104,51 +1086,38 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         // untuk insert sql
         pelangganControl.insertDataPelanggan(pelanggan);
         tc.insertDataTransaksi(transaksi);
-        tc.insertTotalHarga(transaksi);
         pesananControl.insertDataPesanan(pesananList);
-
-        // untuk bersihkan input field 
+        tc.insertTotalHarga(transaksi);
+        // UNTUK MEMBERSIHKAN FIELD
         clearTextData();
-        namaPelangganInputTextField.setText(""); 
-        jDateChooser.setDate(null);
+        namaPelangganInputTextField.setText("");
+        jDateChooser = null;
+        pesananList.removeAll(pesananList); 
         
+        // UNTUK SET AKSES FIELD
         setEditDeleteButton(false);
         setComponentsData(false);
         tc.createReceipt(idPesananInputTextField.getText());
         pesananList.removeAll(pesananList); // membersihkan list
         showTabelPesanan();
         showTableMenuBySearch("");
+        
+        // UNTUK MERESET AKSI
         action = null;
 
-        // melakukan increment ID jika masih stay 
+        // UNTUK MEREGENERATE ID PESANAN
         idPesananInputTextField.setText(tc.generateId());
     }//GEN-LAST:event_simpanTransaksiProdukButtonActionPerformed
 
-    private void totalProdukInputTextfieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_totalProdukInputTextfieldKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_totalProdukInputTextfieldKeyTyped
-
-    private void idKaryawanInputTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idKaryawanInputTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_idKaryawanInputTextFieldActionPerformed
-
-    private void namaPelangganInputTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaPelangganInputTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_namaPelangganInputTextFieldActionPerformed
-
-    private void idPesananInputTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idPesananInputTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_idPesananInputTextFieldActionPerformed
-
     private void barukanProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barukanProdukButtonActionPerformed
-        // TODO add your handling code here:
+        // DIPAKAI UNTUK MENGEDIT PESANAN
         action = "update";
         setComponentsData(true);
         tabelPesanan.setEnabled(false); // kalo lagi di edit jangan dipencet, bisa nimpa data nanti
         tabelMakanan.setEnabled(false); // kalo lagi di edit jangan dipencet, bisa nimpa data nanti
         tabelMinuman.setEnabled(false); // kalo lagi di edit jangan dipencet, bisa nimpa data nanti
+        simpanTransaksiProdukButton.setEnabled(true);
     }//GEN-LAST:event_barukanProdukButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ProdukButtonPanel;
@@ -1159,7 +1128,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     private javax.swing.JLabel hargaProdukInputLabel;
     private javax.swing.JPanel hargaProdukInputPanel;
     private javax.swing.JTextField hargaProdukInputTextfield;
-    private javax.swing.JTextField idKaryawanInputTextField;
     private javax.swing.JLabel idKaryawanLabel;
     private javax.swing.JLabel idKaryawanLabel1;
     private javax.swing.JLabel idPelangganLabel;
@@ -1180,6 +1148,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane makananScrollPane;
     private javax.swing.JScrollPane minumanScrollPane;
     private javax.swing.JScrollPane minumanScrollPane1;
+    private javax.swing.JTextField namaKaryawanInputTextField;
     private javax.swing.JTextField namaPelangganInputTextField;
     private javax.swing.JLabel namaProdukInputLabel;
     private javax.swing.JPanel namaProdukInputPanel;
