@@ -3,8 +3,6 @@ package control;
 import dao.MenuDAO;
 import java.util.List;
 import model.Menu;
-import table.TabelMakanan;
-import table.TabelMinuman;
 
 public class MenuControl {
     MenuDAO mDao = new MenuDAO();
@@ -13,6 +11,9 @@ public class MenuControl {
         return "M"+mDao.generateId();
     }
 
+    public float searchHargaMenu (String id_menu){ // mencari harga berdasarkan id menu
+        return mDao.searchHarga(id_menu);
+    }
     
     public void deleteDataMenu(String id_menu){
         mDao.delete(id_menu);
