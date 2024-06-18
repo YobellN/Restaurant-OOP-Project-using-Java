@@ -10,18 +10,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Insets;
 import java.util.ArrayList;
-import java.util.HashSet;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import model.Menu;
@@ -47,7 +42,7 @@ public class DisplayMenuMainPanel extends JPanel {
     private void initMenuDisplay() {
       for (Menu menu : menuList) {
             JPanel menuPanel = new JPanel(new BorderLayout());
-            menuPanel.setPreferredSize(new Dimension(200, 200)); // Set ukuran preferensi untuk panel
+            menuPanel.setPreferredSize(new Dimension(226, 200)); // Set ukuran preferensi untuk panel
             menuPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
             menuPanel.setBackground(new Color(240, 240, 240));
             
