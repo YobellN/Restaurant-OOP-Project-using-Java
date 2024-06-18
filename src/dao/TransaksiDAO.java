@@ -111,11 +111,12 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IShowForDropdown<T
     public void insert(Transaksi C){
         con = dbCon.makeConnection();
         
-        String sql = "INSERT INTO transaksi (id_pesanan, id_karyawan, id_pelanggan, tanggal_pesanan) VALUES ('" 
+        String sql = "INSERT INTO transaksi (id_pesanan, id_karyawan, id_pelanggan, tanggal_pesanan, total_harga) VALUES ('" 
                 + C.getId_pesanan() + "', '" 
                 + C.getId_karyawan() + "', '" 
                 + C.getId_pelanggan() + "', '" 
-                + C.getTanggal_pesanan() + "')";
+                + C.getTanggal_pesanan() + "', '"
+                + C.getTotal_harga() + "')";
             System.out.println("Adding Transaksi...");
 
             try{

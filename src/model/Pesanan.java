@@ -87,6 +87,14 @@ public class Pesanan {
         this.sub_total = sub_total;
     }
 
+    public void setNamaMenu(String namaMenu) {
+        this.namaMenu = namaMenu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+    
     @Override
     public String toString() {
         return "Pesanan{" + "id_pesanan=" + id_pesanan + ", id_menu=" + id_menu + ", jumlah=" + jumlah + ", sub_total=" + sub_total + '}';

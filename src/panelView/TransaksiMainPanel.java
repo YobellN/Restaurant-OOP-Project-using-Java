@@ -26,6 +26,8 @@ import model.Minuman;
 import model.Makanan;
 
 import control.TransaksiControl;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -38,23 +40,23 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     private MenuControl menuControl = new MenuControl();
     private MakananControl makananControl = new MakananControl();
     private MinumanControl minumanControl = new MinumanControl();
-    
+
     private Menu menu = null;
     private Minuman minuman = null;
     private Makanan makanan = null;
-    
+
     private ArrayList<Pesanan> pesananList = new ArrayList();
     private Transaksi transaksi = null;
     private TransaksiControl tc = new TransaksiControl();
-    
+
     private PesananControl pesananControl = new PesananControl();
     private Pesanan pesanan = null;
-    
+
     private PelangganControl pelangganControl = new PelangganControl();
     private Pelanggan pelanggan = null;
-    
+
     private Karyawan karyawan = null;
-    
+
     String action = null;
     private Component rootPane;
     private String selectedId = "";
@@ -63,7 +65,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     /**
      * Creates new form KendaraanView
      */
-
     public boolean isInteger(String str) {
         try {
             Integer.parseInt(str);
@@ -82,28 +83,30 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         namaProdukInputTextField.setEnabled(false);
         hargaProdukInputTextfield.setEnabled(false);
         specialAtributeInputTextfield.setEnabled(false); // catatan
-        namaPelangganInputTextField.setEnabled(false);
         idKaryawanInputTextField.setEnabled(false);
         idPesananInputTextField.setEnabled(false);
         totalProdukInputTextfield.setEnabled(false);
         
-        this.karyawan = k;
-        
+        // gapapa di ubah
+        jDateChooser.setEnabled(true);
+        namaPelangganInputTextField.setEnabled(true);
+
+        this.karyawan = k; // dapat dari login
+
         setComponentsData(false);
         showTableMenuBySearch("");
         setEditDeleteButton(false);
 
         clearTextData();
-        
+
     }
-    
+
     private void setComponentsData(boolean value) {
         jumlahProdukInputTextfield.setEnabled(value);
-        namaPelangganInputTextField.setEnabled(value);
-        jDateChooser.setEnabled(value);
     }
 
     private void setEditDeleteButton(boolean value) {
+        barukanProdukButton.setEnabled(value);
         hapusProdukButton.setEnabled(value);
     }
 
@@ -138,7 +141,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         }));
         table.setRowSorter(sorter);
     }
-    
+
     private static void addHeaderPesanan(JTable table) {
         JTableHeader header = table.getTableHeader();
         header.addMouseListener(new MouseAdapter() {
@@ -157,17 +160,25 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         }));
         table.setRowSorter(sorter);
     }
-    
+
     private void showTableMenuBySearch(String target) {
         tabelMakanan.setModel(makananControl.showTableBySearch(target));
         tabelMinuman.setModel(minumanControl.showTableBySearch(target));
         addHeaderMenu(tabelMakanan);
         addHeaderMenu(tabelMinuman);
     }
-    
-    private void showTabelPesananBySearch(){
+
+    private void showTabelPesananBySearch() {
         tabelPesanan.setModel(new TabelPesanan(pesananList));
         addHeaderPesanan(tabelPesanan);
+    }
+    
+    private void setTotalTransaksi (){
+        totalHarga = 0;
+        for (Pesanan p : pesananList) {
+            totalHarga += p.getSub_total();
+        }
+        totalProdukInputTextfield.setText(String.valueOf(totalHarga));
     }
 
     /**
@@ -198,7 +209,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         ProdukButtonPanel = new javax.swing.JPanel();
         barukanProdukButton = new javax.swing.JButton();
         hapusProdukButton = new javax.swing.JButton();
-        tambahProdukButton = new javax.swing.JButton();
+        simpanProdukButton = new javax.swing.JButton();
         idProdukInputPanel = new javax.swing.JPanel();
         idProdukInputLabel = new javax.swing.JLabel();
         idProdukInputTextField = new javax.swing.JTextField();
@@ -215,8 +226,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         totalProdukInputLabel = new javax.swing.JLabel();
         jumlahProdukInputTextfield = new javax.swing.JTextField();
         kendaraanFormPanel2 = new javax.swing.JPanel();
-        simpanProdukButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
         makananScrollPane = new javax.swing.JScrollPane();
         tabelMakanan = new javax.swing.JTable();
         minumanScrollPane = new javax.swing.JScrollPane();
@@ -225,7 +234,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         tabelPesanan = new javax.swing.JTable();
         kendaraanFormPanel3 = new javax.swing.JPanel();
         simpanTransaksiProdukButton = new javax.swing.JButton();
-        cancelTransaksiButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
         specialAtributeInputPanel1 = new javax.swing.JPanel();
         totalProdukInputTextfield = new javax.swing.JTextField();
         totalProdukInputLabel1 = new javax.swing.JLabel();
@@ -422,13 +431,14 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
             }
         });
 
-        tambahProdukButton.setBackground(new java.awt.Color(51, 151, 56));
-        tambahProdukButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        tambahProdukButton.setForeground(new java.awt.Color(255, 255, 255));
-        tambahProdukButton.setText("Tambah");
-        tambahProdukButton.addActionListener(new java.awt.event.ActionListener() {
+        simpanProdukButton.setBackground(new java.awt.Color(51, 151, 56));
+        simpanProdukButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        simpanProdukButton.setForeground(new java.awt.Color(255, 255, 255));
+        simpanProdukButton.setText("Simpan");
+        simpanProdukButton.setPreferredSize(new java.awt.Dimension(81, 21));
+        simpanProdukButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tambahProdukButtonActionPerformed(evt);
+                simpanProdukButtonActionPerformed(evt);
             }
         });
 
@@ -438,8 +448,8 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
             ProdukButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ProdukButtonPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tambahProdukButton)
-                .addGap(18, 18, 18)
+                .addComponent(simpanProdukButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addComponent(barukanProdukButton)
                 .addGap(18, 18, 18)
                 .addComponent(hapusProdukButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -450,8 +460,9 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
             .addGroup(ProdukButtonPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(ProdukButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(barukanProdukButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tambahProdukButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(ProdukButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(barukanProdukButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(simpanProdukButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(hapusProdukButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -627,46 +638,15 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
 
         kendaraanFormPanel2.setBackground(new java.awt.Color(255, 221, 186));
 
-        simpanProdukButton.setBackground(new java.awt.Color(51, 151, 56));
-        simpanProdukButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        simpanProdukButton.setForeground(new java.awt.Color(255, 255, 255));
-        simpanProdukButton.setText("Simpan");
-        simpanProdukButton.setPreferredSize(new java.awt.Dimension(81, 21));
-        simpanProdukButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                simpanProdukButtonActionPerformed(evt);
-            }
-        });
-
-        cancelButton.setBackground(new java.awt.Color(237, 78, 5));
-        cancelButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        cancelButton.setForeground(new java.awt.Color(255, 255, 255));
-        cancelButton.setText("Batalkan");
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout kendaraanFormPanel2Layout = new javax.swing.GroupLayout(kendaraanFormPanel2);
         kendaraanFormPanel2.setLayout(kendaraanFormPanel2Layout);
         kendaraanFormPanel2Layout.setHorizontalGroup(
             kendaraanFormPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(kendaraanFormPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(simpanProdukButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGap(0, 262, Short.MAX_VALUE)
         );
         kendaraanFormPanel2Layout.setVerticalGroup(
             kendaraanFormPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kendaraanFormPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(kendaraanFormPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(simpanProdukButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+            .addGap(0, 43, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout ProdukFormPanelLayout = new javax.swing.GroupLayout(ProdukFormPanel);
@@ -783,13 +763,13 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
             }
         });
 
-        cancelTransaksiButton.setBackground(new java.awt.Color(237, 78, 5));
-        cancelTransaksiButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        cancelTransaksiButton.setForeground(new java.awt.Color(255, 255, 255));
-        cancelTransaksiButton.setText("Batalkan Transaksi");
-        cancelTransaksiButton.addActionListener(new java.awt.event.ActionListener() {
+        cancelButton.setBackground(new java.awt.Color(237, 78, 5));
+        cancelButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        cancelButton.setForeground(new java.awt.Color(255, 255, 255));
+        cancelButton.setText("Batalkan");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelTransaksiButtonActionPerformed(evt);
+                cancelButtonActionPerformed(evt);
             }
         });
 
@@ -800,9 +780,9 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
             .addGroup(kendaraanFormPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(simpanTransaksiProdukButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cancelTransaksiButton)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         kendaraanFormPanel3Layout.setVerticalGroup(
             kendaraanFormPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -810,7 +790,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                 .addGap(0, 12, Short.MAX_VALUE)
                 .addGroup(kendaraanFormPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(simpanTransaksiProdukButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cancelTransaksiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         specialAtributeInputPanel1.setBackground(new java.awt.Color(255, 221, 186));
@@ -933,23 +913,19 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         if (opsi == JOptionPane.NO_OPTION || opsi == JOptionPane.CLOSED_OPTION) {
             return;
         }
-
-        pesananControl.deleteDataPesanan(idPesananInputTextField.getText(), idProdukInputTextField.getText()); // akan hapus berdasarkan idPesanan saat ini dan idMenu
+        for (Pesanan p : pesananList) {
+            if (p.getId_menu().equals(idProdukInputTextField.getText())) {
+                pesananList.remove(p);
+                break;
+            }
+        } 
+        setTotalTransaksi();
         clearTextData();
         setEditDeleteButton(false);
         setComponentsData(false);
-        tambahProdukButton.setEnabled(true);
         showTableMenuBySearch("");
+        showTabelPesananBySearch(); // UNTUK SHOW TABEL KANAN ATAS
     }//GEN-LAST:event_hapusProdukButtonActionPerformed
-
-    private void tambahProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahProdukButtonActionPerformed
-        // TODO add your handling code here:
-        action = "add";
-        clearTextData();
-        setEditDeleteButton(false);
-        setComponentsData(true);
-        tabelPesanan.setEnabled(false); // jika lagi nambah, maka keranjang false
-    }//GEN-LAST:event_tambahProdukButtonActionPerformed
 
     private void idProdukInputTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idProdukInputTextFieldActionPerformed
         // TODO add your handling code here:
@@ -970,7 +946,10 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         if (action == null) {
             return;
         }
-
+        if (jumlahProdukInputTextfield.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Jumlah tidak boleh kosong!!! !!", "Input Failure", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         int dialog = JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan " + action + "?");
         if (dialog == JOptionPane.CLOSED_OPTION || dialog == JOptionPane.NO_OPTION || dialog == JOptionPane.CANCEL_OPTION) {
             return;
@@ -978,41 +957,44 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
 
         switch (action) {
             case "add":
-                pesanan = new Pesanan(idPesananInputTextField.getText(), 
+                pesanan = new Pesanan(idPesananInputTextField.getText(),
                         idProdukInputTextField.getText(), namaProdukInputTextField.getText(),
-                        Integer.parseInt(jumlahProdukInputTextfield.getText()), 
+                        Integer.parseInt(jumlahProdukInputTextfield.getText()),
                         (Float.parseFloat(hargaProdukInputTextfield.getText()) * Integer.parseInt(jumlahProdukInputTextfield.getText()))
                 );
                 pesananList.add(pesanan);
-                totalHarga=0;
-                for(Pesanan p : pesananList){
-                    totalHarga += p.getSub_total();
-                }
-                totalProdukInputTextfield.setText(String.valueOf(totalHarga));
+                setTotalTransaksi();
                 clearTextData();
                 setEditDeleteButton(false);
                 setComponentsData(false);
                 showTabelPesananBySearch();
                 break;
-////            case "update":
-////                pesanan = new Pesanan( // tidak perlu update id pesanan
-////                        idProdukInputTextField.getText(), 
-////                        Integer.parseInt(jumlahProdukInputTextfield.getText()), 
-////                        (Float.parseFloat(hargaProdukInputTextfield.getText()) * Integer.parseInt(jumlahProdukInputTextfield.getText()))
-////                );
-////                pesananControl.updateDataPesanan(pesanan);
-//                clearTextData();
-//                setEditDeleteButton(false);
-//                setComponentsData(false);
-//                showTableMenuBySearch("");
-//                break;
+            case "update":
+                for (Pesanan p : pesananList) {
+                    if (p.getId_menu().equals(idProdukInputTextField.getText())) {
+                        // Update atribut dari pesanan
+                        p.setId_menu(idProdukInputTextField.getText());
+                        p.setNamaMenu(namaProdukInputTextField.getText());
+                        p.setJumlah(Integer.parseInt(jumlahProdukInputTextfield.getText()));
+                        p.setSub_total(menuControl.searchHargaMenu(idProdukInputTextField.getText()) * Integer.parseInt(jumlahProdukInputTextfield.getText()));
+                        break;
+                    }
+                }
+                setTotalTransaksi();
+                clearTextData();
+                setEditDeleteButton(false);
+                setComponentsData(false);
+                showTableMenuBySearch("");
+                break;
             default:
                 break;
 
         }
+        tabelMakanan.setEnabled(true); // entah kenapa harus true baru tidak nge bug
+        tabelMinuman.setEnabled(true);
+        tabelPesanan.setEnabled(true);
         
         showTableMenuBySearch("");
-        tambahProdukButton.setEnabled(true);
         action = null;
     }//GEN-LAST:event_simpanProdukButtonActionPerformed
 
@@ -1024,7 +1006,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         tabelMinuman.clearSelection();
         action = "add"; // add karena bisa nambah langsung
 
-        tambahProdukButton.setEnabled(true); // ketika di hit maka akan menambah pesanan
         cancelButton.setEnabled(true);
         simpanProdukButton.setEnabled(true);
         setEditDeleteButton(false);
@@ -1047,7 +1028,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         specialAtributeInputTextfield.setText(tableModel.getValueAt(clickedRow, 3).toString());
         hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString());
         cancelButton.setEnabled(true);
-        
+
     }//GEN-LAST:event_tabelMakananMouseClicked
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -1055,7 +1036,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         setEditDeleteButton(false);
         setComponentsData(false);
         setEditDeleteButton(false);
-        tambahProdukButton.setEnabled(true);
         tabelMakanan.clearSelection();
         tabelMinuman.clearSelection();
         showTableMenuBySearch("");
@@ -1064,9 +1044,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     private void tabelMinumanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMinumanMouseClicked
         tabelMakanan.clearSelection();
         action = "add";
-        
 
-        tambahProdukButton.setEnabled(false);
         cancelButton.setEnabled(true);
         simpanProdukButton.setEnabled(true);
         setEditDeleteButton(true);
@@ -1092,40 +1070,96 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
 
     private void jumlahProdukInputTextfieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jumlahProdukInputTextfieldKeyTyped
         // TODO add your handling code here:
+        char key = evt.getKeyChar();
+        if (!Character.isDigit(key) && key != KeyEvent.VK_BACK_SPACE || key == '.') {
+            evt.consume();
+            JOptionPane.showMessageDialog(
+                    null, "Hanya bisa masukan angka !!", "Input Failure", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jumlahProdukInputTextfieldKeyTyped
 
     private void tabelPesananMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelPesananMouseClicked
         // TODO add your handling code here:
+        action = "update";
+
+        setEditDeleteButton(true);
+
+        cancelButton.setEnabled(true);
+        simpanProdukButton.setEnabled(true);
+        
+        setComponentsData(false);
+        
+        int clickedRow = tabelPesanan.getSelectedRow();
+        TableModel tableModel = tabelPesanan.getModel();
+
+        if (tabelPesanan.getRowSorter() != null) {
+            clickedRow = tabelPesanan.convertRowIndexToModel(clickedRow);
+        }
+
+        selectedId = tableModel.getValueAt(clickedRow, 0).toString();
+        idProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 0).toString());
+        namaProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
+        specialAtributeInputLabel.setText("    ");
+        jumlahProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 2).toString());
+        cancelButton.setEnabled(true);
+        
+        hargaProdukInputTextfield.setText(""+menuControl.searchHargaMenu(idProdukInputTextField.getText()));
     }//GEN-LAST:event_tabelPesananMouseClicked
 
     private void simpanTransaksiProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanTransaksiProdukButtonActionPerformed
-       if (action == null) {
+        if (pesananList.isEmpty()) { 
+            JOptionPane.showMessageDialog(rootPane, "DATA TIDAK BOLEH KOSONG!!!");
+            return;
+        }else if(namaPelangganInputTextField.getText().isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Nama Pelanggan tidak boleh kosong!!!");
+            return;
+        }else if(jDateChooser.getDate() == null){
+            JOptionPane.showMessageDialog(rootPane, "Tanggal tidak boleh kosong!!!");
             return;
         }
-       
-        int dialog = JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan " + action + "?");
+        
+        int dialog = JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan " + "Simpan Transaksi" + "?");
         if (dialog == JOptionPane.CLOSED_OPTION || dialog == JOptionPane.NO_OPTION || dialog == JOptionPane.CANCEL_OPTION) {
             return;
         }
+        
+        // untuk kalender
+        String toDate = jDateChooser.getDate().toString();
+        SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");            
+        Date date = null;
+        try {
+            date = inputFormat.parse(toDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = outputFormat.format(date);
+        
+        // untuk input
         pelanggan = new Pelanggan(pelangganControl.generateId(), namaPelangganInputTextField.getText(), "-", "-");
-        transaksi = new Transaksi(idPesananInputTextField.getText(),karyawan.getId_karyawan(), pelangganControl.generateId(), "2023-10-10");
+        transaksi = new Transaksi(idPesananInputTextField.getText(), karyawan.getId_karyawan(), 
+                pelangganControl.generateId(), formattedDate, Float.parseFloat(totalProdukInputTextfield.getText()));
+        // untuk insert sql
         pelangganControl.insertDataPelanggan(pelanggan);
         tc.insertDataTransaksi(transaksi);
         pesananControl.insertDataPesanan(pesananList);
-        tc.insertTotalHarga(transaksi);
+        
+        // untuk bersihkan input field 
         clearTextData();
+        namaPelangganInputTextField.setText(""); 
+        jDateChooser.setDateFormatString("");
+        
         setEditDeleteButton(false);
         setComponentsData(false);
-        pesananList.removeAll(pesananList);
-        totalHarga = 0;
+        
+        pesananList.removeAll(pesananList); // membersihkan list
+        showTabelPesananBySearch();
         showTableMenuBySearch("");
-        tambahProdukButton.setEnabled(true);
         action = null;
+        
+        // melakukan increment ID jika masih stay 
+        idPesananInputTextField.setText(tc.generateId());
     }//GEN-LAST:event_simpanTransaksiProdukButtonActionPerformed
-
-    private void cancelTransaksiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelTransaksiButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cancelTransaksiButtonActionPerformed
 
     private void totalProdukInputTextfieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_totalProdukInputTextfieldKeyTyped
         // TODO add your handling code here:
@@ -1148,6 +1182,8 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         action = "update";
         setComponentsData(true);
         tabelPesanan.setEnabled(false); // kalo lagi di edit jangan dipencet, bisa nimpa data nanti
+        tabelMakanan.setEnabled(false); // kalo lagi di edit jangan dipencet, bisa nimpa data nanti
+        tabelMinuman.setEnabled(false); // kalo lagi di edit jangan dipencet, bisa nimpa data nanti
     }//GEN-LAST:event_barukanProdukButtonActionPerformed
 
 
@@ -1156,7 +1192,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     private javax.swing.JPanel ProdukFormPanel;
     private javax.swing.JButton barukanProdukButton;
     private javax.swing.JButton cancelButton;
-    private javax.swing.JButton cancelTransaksiButton;
     private javax.swing.JButton hapusProdukButton;
     private javax.swing.JLabel hargaProdukInputLabel;
     private javax.swing.JPanel hargaProdukInputPanel;
@@ -1199,7 +1234,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     private javax.swing.JTable tabelMakanan;
     private javax.swing.JTable tabelMinuman;
     private javax.swing.JTable tabelPesanan;
-    private javax.swing.JButton tambahProdukButton;
     private javax.swing.JLabel totalProdukInputLabel;
     private javax.swing.JLabel totalProdukInputLabel1;
     private javax.swing.JTextField totalProdukInputTextfield;
