@@ -960,6 +960,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         tabelMinuman.setEnabled(true);
         tabelPesanan.setEnabled(true);
         
+        simpanProdukButton.setEnabled(true);
         action = null; // MERESET AKSI MENJADI NULL
     }//GEN-LAST:event_simpanProdukButtonActionPerformed
 
@@ -1098,10 +1099,12 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         // untuk input
         pelanggan = new Pelanggan(pelangganControl.generateId(), namaPelangganInputTextField.getText(), "-", "-");
         transaksi = new Transaksi(idPesananInputTextField.getText(), karyawan.getId_karyawan(),
-                pelangganControl.generateId(), formattedDate, Float.parseFloat(totalProdukInputTextfield.getText()));
+                pelangganControl.generateId(), formattedDate, 0);
+        
         // untuk insert sql
         pelangganControl.insertDataPelanggan(pelanggan);
         tc.insertDataTransaksi(transaksi);
+        tc.insertTotalHarga(transaksi);
         pesananControl.insertDataPesanan(pesananList);
 
         // untuk bersihkan input field 
