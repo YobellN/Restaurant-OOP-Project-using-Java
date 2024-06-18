@@ -7,8 +7,6 @@ import exception.InputHarusAngkaException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Comparator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
@@ -18,16 +16,14 @@ import model.Karyawan;
 
 public class KaryawanMainPanel extends javax.swing.JPanel {
 
-    private KaryawanControl kc = new KaryawanControl();
+    private final KaryawanControl kc = new KaryawanControl();
     private Karyawan k = null;
     String actionKaryawan = null;
 
     private Component rootPane;
-    private String selectedId = "";
 
     public KaryawanMainPanel() {
         initComponents();
-        setOpaque(false);
         showKaryawan();
         setComponentsKaryawan(false);
         idKaryawanInputTextField.setEnabled(false); // langsung false saja karena rencananya id gak bisa di ubah
@@ -46,7 +42,7 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
             throw new InputHarusAngkaException();
         }
     }
-    
+
     private boolean isFloat(String input) {
         try {
             Float.parseFloat(input);
@@ -56,8 +52,7 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
         }
     }
 
-
-    public void setComponentsKaryawan(boolean value) { // ngeset tempat input
+    private void setComponentsKaryawan(boolean value) { // ngeset tempat input
         namaKaryawanInputTextField.setEnabled(value);
         gajiKaryawanInputTextfield.setEnabled(value);
         usernameKaryawanInputTextField.setEnabled(value);
@@ -65,12 +60,12 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
         jabatanInputButton.setEnabled(value);
     }
 
-    public void setKaryawanEditDeleteButton(boolean value) { // membuka/tutup tombol barukan dan hapus jika mau/tidak mau ngedit data
+    private void setKaryawanEditDeleteButton(boolean value) { // membuka/tutup tombol barukan dan hapus jika mau/tidak mau ngedit data
         barukanKaryawanButton.setEnabled(value);
         hapusKaryawanButton.setEnabled(value);
     }
 
-    public void clearText() {
+    private void clearText() {
         namaKaryawanInputTextField.setText("");
         gajiKaryawanInputTextfield.setText("");
         jabatanInputButton.setText("    ");
@@ -79,8 +74,27 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
         passwordKaryawanInputTextField.setText("");
         idKaryawanInputTextField.setText("");
     }
-    
-    public void showKaryawan(){
+
+    private static void addHeaderClickListener(JTable table) {
+        JTableHeader header = table.getTableHeader();
+        header.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                int col = header.columnAtPoint(e.getPoint());
+            }
+        });
+        TableModel tableModel = table.getModel();
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>((TableModel) tableModel);
+
+        sorter.setComparator(4, Comparator.comparingDouble(value -> {
+            if (value instanceof Number) {
+                return ((Number) value).doubleValue();
+            }
+            return Double.parseDouble(value.toString());
+        }));
+        table.setRowSorter(sorter);
+    }
+
+    private void showKaryawan() {
         tabelKaryawan.setModel(kc.showTable(""));
         addHeaderClickListener(tabelKaryawan);
     }
@@ -93,32 +107,12 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
         k = kc.searchDataKaryawan(searchKaryawanInputTextField.getText()); // mencari berdasarkan ID
 
         if (k != null) { // jika ketemu datanya
-            tabelKaryawan.setModel(kc.showTable(searchKaryawanInputTextField.getText()));
+            tabelKaryawan.setModel(kc.showTable(searchKaryawanInputTextField.getText())); // maka akan show berdasarkan pencarian
         } else {
             JOptionPane.showMessageDialog(rootPane, "NOT FOUND !!!");
         }
     }
 
-    private static void addHeaderClickListener(JTable table) {
-        JTableHeader header = table.getTableHeader();
-        header.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                int col = header.columnAtPoint(e.getPoint());
-            }
-        });
-        TableModel tableModel = table.getModel();
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>((TableModel) tableModel);
-        
-        sorter.setComparator(4, Comparator.comparingDouble(value -> {
-            if (value instanceof Number) {
-                return ((Number) value).doubleValue();
-            }
-            return Double.parseDouble(value.toString());
-        }));
-        table.setRowSorter(sorter);
-        
-        
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -176,11 +170,6 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
         searchKaryawanInputLabel.setText("Pencarian Karyawan");
 
         searchKaryawanInputTextField.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        searchKaryawanInputTextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                searchKaryawanInputTextFieldKeyPressed(evt);
-            }
-        });
 
         searchKaryawanInputButton.setBackground(new java.awt.Color(137, 92, 3));
         searchKaryawanInputButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
@@ -320,11 +309,6 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
         gajiKaryawanInputLabel.setText("Gaji");
 
         gajiKaryawanInputTextfield.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        gajiKaryawanInputTextfield.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                gajiKaryawanInputTextfieldKeyTyped(evt);
-            }
-        });
 
         jenisKendaraanInputPanel.setBackground(new java.awt.Color(255, 218, 182));
 
@@ -521,11 +505,6 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
         batalkanKaryawanButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         batalkanKaryawanButton.setForeground(new java.awt.Color(255, 255, 255));
         batalkanKaryawanButton.setText("Batalkan");
-        batalkanKaryawanButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                batalkanKaryawanButtonMouseClicked(evt);
-            }
-        });
         batalkanKaryawanButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 batalkanKaryawanButtonActionPerformed(evt);
@@ -635,21 +614,17 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void searchKaryawanInputTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKaryawanInputTextFieldKeyPressed
-
-    }//GEN-LAST:event_searchKaryawanInputTextFieldKeyPressed
-
     private void searchKaryawanInputButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchKaryawanInputButtonActionPerformed
-        doSearchKaryawan();
+        doSearchKaryawan(); // Mencari Karyawan
     }//GEN-LAST:event_searchKaryawanInputButtonActionPerformed
 
     private void barukanKaryawanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barukanKaryawanButtonActionPerformed
-        actionKaryawan = "update"; 
+        actionKaryawan = "update";
         setComponentsKaryawan(true); // membuka akses field input
     }//GEN-LAST:event_barukanKaryawanButtonActionPerformed
 
     private void hapusKaryawanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusKaryawanButtonActionPerformed
-        if (jabatanInputButton.getText().equalsIgnoreCase("owner")) {
+        if (jabatanInputButton.getText().equalsIgnoreCase("owner")) { // exception
             JOptionPane.showMessageDialog(rootPane, "OWNER TIDAK DAPAT DIHAPUS!!!");
             return;
         }
@@ -660,7 +635,7 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
 
         kc.deleteDataKaryawan(idKaryawanInputTextField.getText()); // delete berdasarkan id
         clearText(); // bersihin field input
-        setKaryawanEditDeleteButton(false); 
+        setKaryawanEditDeleteButton(false);
         setComponentsKaryawan(false); // tutup field input
         showKaryawan(); // melakukan show ulang
     }//GEN-LAST:event_hapusKaryawanButtonActionPerformed
@@ -671,14 +646,9 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
         setKaryawanEditDeleteButton(false); // membatasi tombol edit dan hapus
         setComponentsKaryawan(true); // membuka field input
 
-        idKaryawanInputTextField.setEnabled(false); // mastikan saja biar tidak dibuka 
         idKaryawanInputTextField.setText(kc.generateId()); // membuat ID baru berdasarkan nilai id tertinggi
         jabatanInputButton.setText("Kasir");
     }//GEN-LAST:event_tambahKaryawanButtonActionPerformed
-
-    private void gajiKaryawanInputTextfieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_gajiKaryawanInputTextfieldKeyTyped
-
-    }//GEN-LAST:event_gajiKaryawanInputTextfieldKeyTyped
 
     private void jabatanInputButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jabatanInputButtonActionPerformed
         switch (jabatanInputButton.getText()) { // akan membalikkan nilai jika di pencet
@@ -705,20 +675,12 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
 
             switch (actionKaryawan) {
                 case "add":
-                    k = new Karyawan (idKaryawanInputTextField.getText(), namaKaryawanInputTextField.getText(), jabatanInputButton.getText(), Float.parseFloat(gajiKaryawanInputTextfield.getText()), usernameKaryawanInputTextField.getText(), passwordKaryawanInputTextField.getText());
+                    k = new Karyawan(idKaryawanInputTextField.getText(), namaKaryawanInputTextField.getText(), jabatanInputButton.getText(), Float.parseFloat(gajiKaryawanInputTextfield.getText()), usernameKaryawanInputTextField.getText(), passwordKaryawanInputTextField.getText());
                     kc.insertDataKaryawan(k);
-                    clearText();
-                    setKaryawanEditDeleteButton(false);
-                    setComponentsKaryawan(false);
-                    showKaryawan();
                     break;
                 case "update":
-                    k = new Karyawan (idKaryawanInputTextField.getText(), namaKaryawanInputTextField.getText(), jabatanInputButton.getText(), Float.parseFloat(gajiKaryawanInputTextfield.getText()), usernameKaryawanInputTextField.getText(), passwordKaryawanInputTextField.getText());
+                    k = new Karyawan(idKaryawanInputTextField.getText(), namaKaryawanInputTextField.getText(), jabatanInputButton.getText(), Float.parseFloat(gajiKaryawanInputTextfield.getText()), usernameKaryawanInputTextField.getText(), passwordKaryawanInputTextField.getText());
                     kc.updateDataKaryawan(k);
-                    clearText();
-                    setKaryawanEditDeleteButton(false);
-                    setComponentsKaryawan(false);
-                    showKaryawan();
                     break;
                 default:
                     break;
@@ -729,33 +691,36 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
         } catch (InputHarusAngkaException e2) {
             JOptionPane.showMessageDialog(rootPane, e2.message());
         }
+        // Bagian bersihin field
+        clearText();
+        setKaryawanEditDeleteButton(false);
+        setComponentsKaryawan(false);
+        showKaryawan();
     }//GEN-LAST:event_simpanKaryawanButtonActionPerformed
 
     private void tabelKaryawanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelKaryawanMouseClicked
         actionKaryawan = "baharui";
-        
+
+        // setter Akses Field 
         tambahKaryawanButton.setEnabled(false);
         batalkanKaryawanButton.setEnabled(true);
-        simpanKaryawanButton.setEnabled(true);        
+        simpanKaryawanButton.setEnabled(true);
         setKaryawanEditDeleteButton(true);
-        
         setComponentsKaryawan(false);
-        
+
+        // Getter Data dari tabel
         int clickedRow = tabelKaryawan.getSelectedRow();
         TableModel tableModel = tabelKaryawan.getModel();
         if (tabelKaryawan.getRowSorter() != null) {
             clickedRow = tabelKaryawan.convertRowIndexToModel(clickedRow);
         }
-        selectedId = tableModel.getValueAt(clickedRow, 0).toString();
-
-        idKaryawanInputTextField.setText(tableModel.getValueAt(clickedRow, 0).toString()); 
-        namaKaryawanInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString()); 
+        // Setter Data dari tabel
+        idKaryawanInputTextField.setText(tableModel.getValueAt(clickedRow, 0).toString());
+        namaKaryawanInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
         jabatanInputButton.setText(tableModel.getValueAt(clickedRow, 2).toString());
         gajiKaryawanInputTextfield.setText(tableModel.getValueAt(clickedRow, 3).toString());
         usernameKaryawanInputTextField.setText(tableModel.getValueAt(clickedRow, 4).toString());
         passwordKaryawanInputTextField.setText(tableModel.getValueAt(clickedRow, 5).toString());
-        
-        batalkanKaryawanButton.setEnabled(true);
     }//GEN-LAST:event_tabelKaryawanMouseClicked
 
     private void batalkanKaryawanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalkanKaryawanButtonActionPerformed
@@ -765,12 +730,7 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
         setComponentsKaryawan(false);
         tambahKaryawanButton.setEnabled(true);
         tabelKaryawan.clearSelection();
-        
     }//GEN-LAST:event_batalkanKaryawanButtonActionPerformed
-
-    private void batalkanKaryawanButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_batalkanKaryawanButtonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_batalkanKaryawanButtonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

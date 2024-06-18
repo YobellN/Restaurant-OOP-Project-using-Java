@@ -9,21 +9,27 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Karyawan;
-import interfaceDAO.IShowForDropdown;
 import interfaceDAO.ISearchData;
 
-public class KaryawanDAO implements IDAO<Karyawan, String>, IShowForDropdown<Karyawan>, ISearchData<Karyawan, String>, IGenerateID { // OK , i guess
+public class KaryawanDAO implements IDAO<Karyawan, String>, ISearchData<Karyawan, String>, IGenerateID { 
 
     protected DbConnection dbCon = new DbConnection();
     protected Connection con;
 
     @Override
-    public void insert(Karyawan C) {
+    public void insert(Karyawan C) { // DIPAKAI OLEH CONTROL INSERT
         con = dbCon.makeConnection();
 
         String sql
                 = "INSERT INTO `karyawan`(`id_karyawan`, `nama_karyawan`, `jabatan`, `gaji`, `username`, `password`) "
-                + "VALUES ('" + C.getId_karyawan() + "', '" + C.getNama_karyawan() + "', '" + C.getJabatan() + "', '" + C.getGaji() + "', '" + C.getUsername() + "', '" + C.getPassword() + "')";
+                + "VALUES ('"
+                + C.getId_karyawan() + "', '"
+                + C.getNama_karyawan() + "', '"
+                + C.getJabatan() + "', '"
+                + C.getGaji() + "', '"
+                + C.getUsername() + "', '"
+                + C.getPassword()
+                + "')";
 
         System.out.println("Adding Karyawan...");
 
@@ -40,11 +46,11 @@ public class KaryawanDAO implements IDAO<Karyawan, String>, IShowForDropdown<Kar
     }
 
     @Override
-    public Karyawan search(String data) {
+    public Karyawan search(String data) { // DIPAKAI OLEH CONTROL SEARCH
         con = dbCon.makeConnection();
 
-        String sql = "SELECT * FROM `karyawan` WHERE "
-                + "id_karyawan LIKE '" + data + "'";
+        String sql = "SELECT * FROM `karyawan` WHERE id_karyawan LIKE '" + data + "'";
+
         System.out.println("Searching Karyawan...");
         Karyawan c = null;
 
@@ -76,7 +82,7 @@ public class KaryawanDAO implements IDAO<Karyawan, String>, IShowForDropdown<Kar
     }
 
     @Override
-    public List<Karyawan> showData(String data) {
+    public List<Karyawan> showData(String data) { // DIPAKAI CONTROL SHOWDATA
         con = dbCon.makeConnection();
 
         String sql = "SELECT * FROM `karyawan` WHERE "
@@ -115,7 +121,7 @@ public class KaryawanDAO implements IDAO<Karyawan, String>, IShowForDropdown<Kar
     }
 
     @Override
-    public void update(Karyawan c, String id_karyawan) {
+    public void update(Karyawan c, String id_karyawan) { // DIPAKAI UNTUK CONTROL UPDATE
         con = dbCon.makeConnection();
 
         String sql = "UPDATE `karyawan` SET "
@@ -141,7 +147,7 @@ public class KaryawanDAO implements IDAO<Karyawan, String>, IShowForDropdown<Kar
     }
 
     @Override
-    public void delete(String id_karyawan) {
+    public void delete(String id_karyawan) { // DIPAKAI UNTUK CONTROL DELETE
         con = dbCon.makeConnection();
         String sql = "DELETE FROM `karyawan` WHERE `id_karyawan` = '" + id_karyawan + "'";
         System.out.println("Deleting Karyawan...???");
@@ -159,44 +165,7 @@ public class KaryawanDAO implements IDAO<Karyawan, String>, IShowForDropdown<Kar
     }
 
     @Override
-    public List<Karyawan> IShowForDropdown() {
-        con = dbCon.makeConnection();
-
-        String sql = "SELECT * FROM `karyawan`;";
-        System.out.println("Fetching Data...");
-        List<Karyawan> data = new ArrayList();
-
-        try {
-            Statement statement = con.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
-
-            if (rs != null) {
-                while (rs.next()) {
-                    data.add(new Karyawan(
-                            rs.getString("id_karyawan"),
-                            rs.getString("nama_karyawan"),
-                            rs.getString("jabatan"),
-                            rs.getFloat("gaji"),
-                            rs.getString("username"),
-                            rs.getString("password")
-                    )
-                    );
-                }
-            }
-
-            rs.close();
-            statement.close();
-        } catch (Exception e) {
-            System.out.println("Error Fetching data...");
-            System.out.println(e);
-        }
-
-        dbCon.closeConnection();
-        return data;
-    }
-
-    @Override
-    public int generateId() {
+    public int generateId() { // DIPAKAI UNTUK CONTROL generateID
         con = dbCon.makeConnection();
         String sql = "SELECT MAX(CAST(SUBSTRING(id_karyawan, 2) AS SIGNED)) AS highest_number FROM karyawan WHERE id_karyawan LIKE 'K%';";
         //mendapatkan nilai tertinggi dari id yang ada di database
@@ -225,7 +194,7 @@ public class KaryawanDAO implements IDAO<Karyawan, String>, IShowForDropdown<Kar
         return id;
     }
 
-    public boolean cekLogin(String username, String password, String id) {
+    public boolean cekLogin(String username, String password, String id) { // DIPAKAI UNTUK LOGIN 
         con = dbCon.makeConnection();
 
         String sql = "SELECT * FROM `karyawan` WHERE "

@@ -8,14 +8,6 @@ public class Karyawan { // OK
     private String username;
     private String password;
 
-    public Karyawan(String nama_karyawan, String jabatan, float gaji, String username, String password) {
-        this.nama_karyawan = nama_karyawan;
-        this.jabatan = jabatan;
-        this.gaji = gaji;
-        this.username = username;
-        this.password = password;
-    } // konstruktor tanpa id_karyawan
-
     public Karyawan(String id_karyawan, String nama_karyawan, String jabatan, float gaji, String username, String password) {
         this.id_karyawan = id_karyawan;
         this.nama_karyawan = nama_karyawan;

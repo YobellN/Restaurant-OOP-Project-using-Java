@@ -162,9 +162,6 @@
                   <Font name="Berlin Sans FB Demi" size="12" style="0"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="searchKaryawanInputTextFieldKeyPressed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="searchKaryawanInputButton">
               <Properties>
@@ -509,9 +506,6 @@
                           <Font name="Berlin Sans FB Demi" size="12" style="0"/>
                         </Property>
                       </Properties>
-                      <Events>
-                        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="gajiKaryawanInputTextfieldKeyTyped"/>
-                      </Events>
                     </Component>
                     <Container class="javax.swing.JPanel" name="jenisKendaraanInputPanel">
                       <Properties>
@@ -748,7 +742,6 @@
                 <Property name="text" type="java.lang.String" value="Batalkan"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="batalkanKaryawanButtonMouseClicked"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="batalkanKaryawanButtonActionPerformed"/>
               </Events>
             </Component>
