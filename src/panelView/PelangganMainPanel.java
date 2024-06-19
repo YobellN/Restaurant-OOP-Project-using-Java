@@ -150,7 +150,7 @@ public class PelangganMainPanel extends javax.swing.JPanel {
 
         searchKaryawanInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         searchKaryawanInputLabel.setForeground(new java.awt.Color(137, 92, 3));
-        searchKaryawanInputLabel.setText("Pencarian Karyawan");
+        searchKaryawanInputLabel.setText("Pencarian Pelanggan");
 
         searchKaryawanInputTextField.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         searchKaryawanInputTextField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -579,10 +579,11 @@ public class PelangganMainPanel extends javax.swing.JPanel {
             inputKosongPelangganException();
             InputHarusAngkaPelangganException();
 
-            if (JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan " + actionPelanggan + "?") == JOptionPane.CLOSED_OPTION) {
+            int opsi = JOptionPane.showConfirmDialog(rootPane, "Yakin Ingin "+ actionPelanggan +" ?", actionPelanggan, JOptionPane.YES_NO_OPTION);
+            if (opsi == JOptionPane.NO_OPTION || opsi == JOptionPane.CLOSED_OPTION) {
                 return;
             }
-
+            
             switch (actionPelanggan) {
                 case "add":
                     p = new Pelanggan (idPelangganInputTextField.getText(), namaPelangganInputTextfield.getText(), alamatInputTextField.getText(),nomorTeleponInputTextField.getText());
@@ -626,10 +627,8 @@ public class PelangganMainPanel extends javax.swing.JPanel {
 
         idPelangganInputTextField.setText(tableModel.getValueAt(clickedRow, 0).toString()); 
         namaPelangganInputTextfield.setText(tableModel.getValueAt(clickedRow, 1).toString());
-        alamatInputTextField.setText(tableModel.getValueAt(clickedRow, 2).toString());
-        nomorTeleponInputTextField.setText(tableModel.getValueAt(clickedRow, 3).toString());
-        
-        batalkanKaryawanButton.setEnabled(true);
+        nomorTeleponInputTextField.setText(tableModel.getValueAt(clickedRow, 2).toString());
+        alamatInputTextField.setText(tableModel.getValueAt(clickedRow, 3).toString());
     }//GEN-LAST:event_tabelPelangganMouseClicked
 
     private void batalkanKaryawanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalkanKaryawanButtonActionPerformed

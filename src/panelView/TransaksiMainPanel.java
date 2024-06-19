@@ -73,7 +73,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         namaKaryawanInputTextField.setEnabled(false);
         idPesananInputTextField.setEnabled(false);
         totalProdukInputTextfield.setEnabled(false);
-
+        jenisProdukInputButton.setEnabled(false);
         // gapapa di ubah
         jDateChooser.setEnabled(true);
         namaPelangganInputTextField.setEnabled(true);
@@ -159,6 +159,8 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         tabelMinuman.setModel(minumanControl.showTableBySearch(target));
         addHeaderMenu(tabelMakanan);
         addHeaderMenu(tabelMinuman);
+        tabelMakanan.setEnabled(true); 
+        tabelMinuman.setEnabled(true);
     }
 
     // DIPAKAI UNTUK MENG SHOW TABEL PESANAN 
@@ -927,6 +929,10 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         // MENGUBAH AKSES FIELD
         setEditDeleteButton(false);
         setComponentsData(false);
+        // Mengeset seluruh tabel agar bisa di akses
+        tabelMakanan.setEnabled(true); 
+        tabelMinuman.setEnabled(true);
+        tabelPesanan.setEnabled(true);
         simpanTransaksiProdukButton.setEnabled(true);
     }//GEN-LAST:event_hapusProdukButtonActionPerformed
 
@@ -935,13 +941,20 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         if (action == null) {
             return;
         }
-        int dialog = JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan " + action + "?");
-        if (dialog == JOptionPane.CLOSED_OPTION || dialog == JOptionPane.NO_OPTION || dialog == JOptionPane.CANCEL_OPTION) {
-            return;
+        for (Pesanan p : pesananList) { // MENCARI DATA YANG AKAN DIHAPUS BERDASARKAN ID
+            if (p.getId_menu().equals(idProdukInputTextField.getText())) {
+                JOptionPane.showMessageDialog( null, "MENU TIDAK BOLEH SAMA!!", "Input Failure", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }
-        
         try {
             inputKosongPesananException(); // EXCEPTION
+            
+            int dialog = JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan " + action + "?");
+            if (dialog == JOptionPane.CLOSED_OPTION || dialog == JOptionPane.NO_OPTION || dialog == JOptionPane.CANCEL_OPTION) {
+                return;
+            }
+            
             switch (action) {
                 case "add":
                     pesanan = new Pesanan(idPesananInputTextField.getText(),
@@ -957,13 +970,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                             p.setId_menu(idProdukInputTextField.getText());
                             p.setNamaMenu(namaProdukInputTextField.getText());
                             p.setJumlah(Integer.parseInt(jumlahProdukInputTextfield.getText()));
-                            if(minumanControl.searchHarga(idProdukInputTextField.getText()) != 0){
-                                p.setSub_total(minumanControl.searchHarga(idProdukInputTextField.getText()) * Integer.parseInt(jumlahProdukInputTextfield.getText()));
-                            }else{
-                                p.setSub_total(makananControl.searchHarga(idProdukInputTextField.getText()) * Integer.parseInt(jumlahProdukInputTextfield.getText()));
-                            }
-                            
-                            
+                            p.setSub_total(makananControl.searchHarga(idProdukInputTextField.getText()) * Integer.parseInt(jumlahProdukInputTextfield.getText()));
                             break;
                         }
                     }
@@ -992,8 +999,9 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
 
     private void tabelMakananMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMakananMouseClicked
         tabelMinuman.clearSelection(); // DIPAKAI MENGHAPUS PILIHAN DI TABEL LAIN
-        action = "add"; // AKSI ADD SUPAYA LANGSUNG MENAMBAH KERANJANG KALAU MAU
-
+        if(tabelMakanan.isEnabled()){
+            action = "add"; // AKSI ADD SUPAYA LANGSUNG MENAMBAH KERANJANG KALAU MAU
+        }
         // MENGESET AKSES SAAT KLIK TABEL MAKANAN
         setComponentsData(true); // BOLEH EDIT JUMLAH
         setEditDeleteButton(false); // TIDAK BISA EDIT / DELETE
@@ -1026,6 +1034,9 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         tabelMakanan.clearSelection(); // MEMBERSIHKAN SELECTION TABEL MAKANAN
         tabelMinuman.clearSelection();  // MEMBERSIHKAN SELECTION TABEL MINUMAN
         tabelPesanan.clearSelection();  // MEMBERSIHKAN SELECTION TABEL PESANAN
+        tabelMakanan.setEnabled(true); 
+        tabelMinuman.setEnabled(true);
+        tabelPesanan.setEnabled(true);
         showTableMenuBySearch(""); // SHOW ULANG MENU
         showTabelPesanan(); // SHOW ULANG PESANAN
         simpanTransaksiProdukButton.setEnabled(true); // MEMBUKA AKSES SIMPAN TRANSAKSI
@@ -1033,8 +1044,9 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
 
     private void tabelMinumanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMinumanMouseClicked
         tabelMakanan.clearSelection(); // DIPAKAI MENGHAPUS PILIHAN DI TABEL LAIN
-        action = "add"; // AKSI ADD SUPAYA LANGSUNG MENAMBAH KERANJANG KALAU MAU
-
+        if(tabelMinuman.isEnabled()){
+            action = "add"; // AKSI ADD SUPAYA LANGSUNG MENAMBAH KERANJANG KALAU MAU
+        }
         // MENGESET AKSES SAAT KLIK TABEL MAKANAN
         setComponentsData(true); // BOLEH EDIT JUMLAH
         setEditDeleteButton(false); // TIDAK BISA EDIT / DELETE
@@ -1070,14 +1082,16 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jumlahProdukInputTextfieldKeyTyped
 
     private void tabelPesananMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelPesananMouseClicked
+        tabelMakanan.setEnabled(false); // GAK BOLEH DI AKSES SAAT UPDATE KERANJANG
+        tabelMinuman.setEnabled(false); // GAK BOLEH DI AKSES SAAT UPDATE KERANJANG
         tabelMakanan.clearSelection(); // DIPAKAI MENGHAPUS PILIHAN DI TABEL LAIN
         tabelMinuman.clearSelection(); // DIPAKAI MENGHAPUS PILIHAN DI TABEL LAIN
-
+        
         action = "update"; // UNTUK UPDATE PESANAN
 
         // MENGESET AKSES SAAT KLIK TABEL PESANAN
         setComponentsData(true); // BOLEH EDIT JUMLAH
-        setEditDeleteButton(false); // TIDAK BISA EDIT / DELETE
+        setEditDeleteButton(true); // BISA EDIT / DELETE
         cancelButton.setEnabled(true); // BOLEH CANCEL
         simpanProdukButton.setEnabled(true); // BOLEH SIMPAN PRODUK
         simpanTransaksiProdukButton.setEnabled(false); // TIDAK BISA SIMPAN TRANSAKSI
@@ -1094,11 +1108,8 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         namaProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
         specialAtributeInputLabel.setText("    ");
         jumlahProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 2).toString());
-        if(jenisProdukInputButton.equals("Minuman")){
-            hargaProdukInputTextfield.setText(String.valueOf(minumanControl.searchHarga(idProdukInputTextField.getText())));
-        }else{
-            hargaProdukInputTextfield.setText(String.valueOf(makananControl.searchHarga(idProdukInputTextField.getText())));
-        }  
+        hargaProdukInputTextfield.setText(String.valueOf(makananControl.searchHarga(idProdukInputTextField.getText())));
+          
     }//GEN-LAST:event_tabelPesananMouseClicked
 
     private void simpanTransaksiProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanTransaksiProdukButtonActionPerformed
@@ -1113,6 +1124,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(rootPane, "Tanggal tidak boleh kosong!!!");
             return;
         }
+        
         // Aksi
         int dialog = JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan " + "Simpan Transaksi" + "?");
         if (dialog == JOptionPane.CLOSED_OPTION || dialog == JOptionPane.NO_OPTION || dialog == JOptionPane.CANCEL_OPTION) {
@@ -1151,10 +1163,13 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         // UNTUK SET AKSES FIELD
         setEditDeleteButton(false);
         setComponentsData(false);
-//        tc.createReceipt(idPesananInputTextField.getText());
+        tc.createReceipt(idPesananInputTextField.getText()); // untuk menunjukkan recipt
         pesananList.removeAll(pesananList); // membersihkan list
         showTabelPesanan();
         showTableMenuBySearch("");
+        tabelMakanan.setEnabled(true); 
+        tabelMinuman.setEnabled(true);
+        tabelPesanan.setEnabled(true);
         
         // UNTUK MERESET AKSI
         action = null;
@@ -1170,7 +1185,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         tabelPesanan.setEnabled(false); // kalo lagi di edit jangan dipencet, bisa nimpa data nanti
         tabelMakanan.setEnabled(false); // kalo lagi di edit jangan dipencet, bisa nimpa data nanti
         tabelMinuman.setEnabled(false); // kalo lagi di edit jangan dipencet, bisa nimpa data nanti
-        simpanTransaksiProdukButton.setEnabled(true);
+        simpanTransaksiProdukButton.setEnabled(false);
     }//GEN-LAST:event_barukanProdukButtonActionPerformed
 
     private void jenisProdukInputButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jenisProdukInputButtonActionPerformed

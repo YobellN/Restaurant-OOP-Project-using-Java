@@ -419,17 +419,12 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IGenerateID{
     
     public void createReceipt(String id_pesanan) {
         con = dbCon.makeConnection();
-        try {
-            String reportSrcFile = "C:\\Users\\yobel"
-                    + "\\OneDrive - Universitas Atma Jaya Yogyakarta\\"
-                    + "Documents\\tugas\\PBO\\TubesPBO\\"
-                    + "TubesPBO_Restoran\\src\\report\\transaksiReport.jrxml";
+        try { // UBAH PATHNYA SESUAI JARXML MASING - MASING
+            String reportSrcFile = "D:\\Semester 4\\PBOGuided\\TUBES\\TubesPBO\\src\\report\\transaksiReport.jrxml";
             JasperReport jasperReport = JasperCompileManager.compileReport(reportSrcFile);
 
             Map<String, Object> parameters = new HashMap<>();
             parameters.put("id_pesanan", id_pesanan);
-
-            
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, con);
 
