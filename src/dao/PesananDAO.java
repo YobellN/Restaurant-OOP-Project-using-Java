@@ -53,61 +53,62 @@ public class PesananDAO implements IDAOTransaksi<Pesanan, String>{
     }
 
     @Override
-    public List<Pesanan> showData(String data){
+    public List<Pesanan> showData(String data) {
         con = dbCon.makeConnection();
-        
+
         String sql = "SELECT * FROM "
                 + "pesanan P LEFT JOIN menu M ON P.id_menu = M.id_menu "
                 + "LEFT JOIN makanan MK ON M.id_menu = MK.id_menu "
                 + "LEFT JOIN minuman MN ON M.id_menu = MN.id_menu "
-                + "WHERE (P.id_pesanan LIKE '%" + data + "%' "
-                + "OR M.id_menu LIKE '%" + data + "%' "
-                + "OR M.nama_menu LIKE '%" + data + "%' "
-                + "OR MK.catatan LIKE '%" + data + "%' "
-                + "OR MN.ukuran LIKE '%" + data + "%');";
+                + "WHERE P.id_pesanan LIKE '%" + data + "%'";
+
         System.out.println("Fetching Data...");
-        List<Pesanan> list = new ArrayList();
+        List<Pesanan> list = new ArrayList<>();
         Menu m = null;
-        try{
+
+        try {
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
-            if(rs != null){
-                while(rs.next()){
-                    if(rs.getString("jenis_menu").equals("Minuman")){
-                        m = new Minuman(
-                            rs.getString("ukuran"), //SQL ukuran
-                            rs.getString("id_menu"), //SQL id_menu
-                            rs.getString("nama_menu"), //SQL nama_menu
-                            rs.getString("jenis_menu"), //SQL jenis_menu
-                            rs.getFloat("harga"), //SQL harga
-                            rs.getBytes("gambar"));
-                    }else{
-                        m = new Makanan(
-                            rs.getString("catatan"), //SQL catatan
-                            rs.getString("id_menu"), //SQL id_menu
-                            rs.getString("nama_menu"), //SQL nama_menu
-                            rs.getString("jenis_menu"), //SQL jenis_menu
-                            rs.getFloat("harga"), //SQL harga
-                            rs.getBytes("gambar"));
-                    }
-                    Pesanan p = new Pesanan(
-                            rs.getString("id_pesanan"),
-                            rs.getString("id_menu"),
-                            rs.getInt("jumlah"),
-                            rs.getFloat("sub_total"),
-                            m
-                    );     
-                    list.add(p);
-                }    
-            }                    
+
+            while (rs.next()) {
+                if ("Minuman".equals(rs.getString("jenis_menu"))) {
+                    m = new Minuman(
+                            rs.getString("ukuran"), // SQL ukuran
+                            rs.getString("id_menu"), // SQL id_menu
+                            rs.getString("nama_menu"), // SQL nama_menu
+                            rs.getString("jenis_menu"), // SQL jenis_menu
+                            rs.getFloat("harga"), // SQL harga
+                            rs.getBytes("gambar")); // SQL gambar
+                } else {
+                    m = new Makanan(
+                            rs.getString("catatan"), // SQL catatan
+                            rs.getString("id_menu"), // SQL id_menu
+                            rs.getString("nama_menu"), // SQL nama_menu
+                            rs.getString("jenis_menu"), // SQL jenis_menu
+                            rs.getFloat("harga"), // SQL harga
+                            rs.getBytes("gambar")); // SQL gambar
+                }
+
+                Pesanan p = new Pesanan(
+                        rs.getString("id_pesanan"),
+                        rs.getString("id_menu"),
+                        rs.getInt("jumlah"),
+                        rs.getFloat("sub_total"),
+                        m
+                );
+
+                list.add(p);
+            }
+
             rs.close();
             statement.close();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Error Fetching data...");
             System.out.println(e);
         }
+
         dbCon.closeConnection();
-        
+
         return list;
     }
     

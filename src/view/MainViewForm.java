@@ -74,6 +74,12 @@ public class MainViewForm extends javax.swing.JFrame {
         reservasiPanel.setBackground(new Color(0, 0, 0, 0));
     }
     
+    private void clearTextLogin(){
+        idKaryawanTextField.setText("");
+        usernameTextField.setText("");
+        passwordTextField.setText("");
+    }
+    
     private void initsidePanel(boolean value){
         setOwnerPanel(value);
         setManagerPanel(value);
@@ -129,6 +135,8 @@ public class MainViewForm extends javax.swing.JFrame {
         userIDLabel = new javax.swing.JLabel();
         usernameLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -555,28 +563,66 @@ public class MainViewForm extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
+        jTextField1.setEditable(false);
+        jTextField1.setBackground(new java.awt.Color(255, 218, 182));
+        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(137, 92, 3));
+        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField1.setText("Restoran yang Resto banget");
+        jTextField1.setBorder(null);
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jTextField2.setEditable(false);
+        jTextField2.setBackground(new java.awt.Color(255, 218, 182));
+        jTextField2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jTextField2.setForeground(new java.awt.Color(137, 92, 3));
+        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField2.setText("SELAMAT DATANG !");
+        jTextField2.setBorder(null);
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelLoginLayout = new javax.swing.GroupLayout(panelLogin);
         panelLogin.setLayout(panelLoginLayout);
         panelLoginLayout.setHorizontalGroup(
             panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLoginLayout.createSequentialGroup()
-                .addGap(304, 304, 304)
-                .addComponent(panelInputLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(417, Short.MAX_VALUE))
+                .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelLoginLayout.createSequentialGroup()
+                        .addGap(333, 333, 333)
+                        .addComponent(panelInputLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelLoginLayout.createSequentialGroup()
+                        .addGap(293, 293, 293)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelLoginLayout.createSequentialGroup()
+                        .addGap(351, 351, 351)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(335, Short.MAX_VALUE))
         );
         panelLoginLayout.setVerticalGroup(
             panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLoginLayout.createSequentialGroup()
-                .addGap(229, 229, 229)
+                .addGap(182, 182, 182)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(panelInputLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(319, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(236, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout loginMenuPanelLayout = new javax.swing.GroupLayout(loginMenuPanel);
         loginMenuPanel.setLayout(loginMenuPanelLayout);
         loginMenuPanelLayout.setHorizontalGroup(
             loginMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1356, Short.MAX_VALUE)
+            .addGap(0, 1190, Short.MAX_VALUE)
             .addGroup(loginMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(loginMenuPanelLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -585,7 +631,7 @@ public class MainViewForm extends javax.swing.JFrame {
         );
         loginMenuPanelLayout.setVerticalGroup(
             loginMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 795, Short.MAX_VALUE)
+            .addGap(0, 792, Short.MAX_VALUE)
             .addGroup(loginMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(loginMenuPanelLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -630,7 +676,7 @@ public class MainViewForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 799, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE)
         );
 
         pack();
@@ -742,7 +788,10 @@ public class MainViewForm extends javax.swing.JFrame {
     }                                           
 
     private void logoutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabelMouseClicked
-       
+        login = false;
+        setLoginPanel(true, false);
+        initsidePanel(false);
+        clearTextLogin();
     }//GEN-LAST:event_logoutLabelMouseClicked
 
     private void reservasiPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reservasiPanelMouseClicked
@@ -760,7 +809,16 @@ public class MainViewForm extends javax.swing.JFrame {
         login = false;
         setLoginPanel(true, false);
         initsidePanel(false);
+        clearTextLogin();
     }//GEN-LAST:event_logoutPanelMouseClicked
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -832,6 +890,8 @@ public class MainViewForm extends javax.swing.JFrame {
     private javax.swing.JPanel contentPanel;
     private javax.swing.JLabel iconLogin;
     private javax.swing.JTextField idKaryawanTextField;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel karyawanPanel;
     private javax.swing.JPanel laporanPanel;
     private javax.swing.JButton loginButton;

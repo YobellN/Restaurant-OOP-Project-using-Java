@@ -32,9 +32,8 @@ public class PesananControl implements IPesananControl{
     
     public TabelPesanan showTable(String target){
         List<Pesanan> data = pDao.showData(target);
-        TabelPesanan tabelPesanan = new TabelPesanan(data);
-
-        return tabelPesanan;
+        return new TabelPesanan(data);
     }
+    
 
 }

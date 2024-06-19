@@ -56,6 +56,10 @@ public class TransaksiControl implements ITransaksiControl {
     public void insertTotalHarga(Transaksi transaksi) {
         kDao.updateHarga(transaksi);
     }
-
+    
+    public TabelTransaksi showTableByTanggal(String tanggalMulai, String tanggalSelesai){
+        List<Transaksi> data = kDao.showDatabyTanggal(tanggalMulai, tanggalSelesai);
+        return new TabelTransaksi(data);
+    }
     
 }

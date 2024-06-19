@@ -179,9 +179,6 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
 
         mainPanel.setBackground(new java.awt.Color(255, 218, 182));
 
-        tabelReservasi.setBackground(new java.awt.Color(255, 255, 255));
-        tabelReservasi.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 14)); // NOI18N
-        tabelReservasi.setForeground(new java.awt.Color(0, 0, 0));
         tabelReservasi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -231,7 +228,6 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
         searchReservasiInputLabel.setForeground(new java.awt.Color(137, 92, 3));
         searchReservasiInputLabel.setText("Pencarian Reservasi");
 
-        searchReservasiInputTextField.setBackground(new java.awt.Color(255, 255, 255));
         searchReservasiInputTextField.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         searchReservasiInputTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -313,9 +309,6 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
         namaPelangganInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         namaPelangganInputLabel.setForeground(new java.awt.Color(137, 92, 3));
         namaPelangganInputLabel.setText("Nama Pelanggan");
-
-        namaPelangganDropDown.setBackground(new java.awt.Color(255, 255, 255));
-        namaPelangganDropDown.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout namaPelangganInputPanelLayout = new javax.swing.GroupLayout(namaPelangganInputPanel);
         namaPelangganInputPanel.setLayout(namaPelangganInputPanelLayout);
@@ -470,9 +463,7 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
         totalHargaLabel.setForeground(new java.awt.Color(137, 92, 3));
         totalHargaLabel.setText("Total Harga");
 
-        totalHargaInputTextField.setBackground(new java.awt.Color(255, 255, 255));
         totalHargaInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
-        totalHargaInputTextField.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout totalHargaPanelLayout = new javax.swing.GroupLayout(totalHargaPanel);
         totalHargaPanel.setLayout(totalHargaPanelLayout);
