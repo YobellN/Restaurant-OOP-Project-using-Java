@@ -8,10 +8,6 @@ import model.Menu;
 public abstract class MenuControl<T extends Menu> implements ICRUDControl<T, String> {
     protected MenuDAO mDao = new MenuDAO();
     
-    public MenuControl(MenuDAO mDao) {
-        this.mDao = mDao;
-    }
-    
     @Override
     public void insert(T menu) {
         menu.setId_menu(generateId());

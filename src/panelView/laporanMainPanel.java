@@ -64,6 +64,7 @@ public class laporanMainPanel extends javax.swing.JPanel {
 
     private void showTransaksi() {
         tabelKaryawan.setModel(tc.showTableBySearch(""));
+        
         addHeaderClickListener(tabelKaryawan);
     }
 
@@ -71,9 +72,6 @@ public class laporanMainPanel extends javax.swing.JPanel {
         if (searchKaryawanInputTextField.getText().isEmpty()) {
             return;
         }
-
-       
-
         if (k != null) { // jika ketemu datanya
             tabelKaryawan.setModel(tc.showTableBySearch(searchKaryawanInputTextField.getText())); // maka akan show berdasarkan pencarian
         } else {
@@ -96,24 +94,29 @@ public class laporanMainPanel extends javax.swing.JPanel {
         searchKaryawanInputLabel = new javax.swing.JLabel();
         searchKaryawanInputTextField = new javax.swing.JTextField();
         searchKaryawanInputButton = new javax.swing.JButton();
-        simpanKaryawanButton = new javax.swing.JButton();
         batalkanKaryawanButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelKaryawan = new javax.swing.JTable();
         minumanScrollPane1 = new javax.swing.JScrollPane();
         tabelPesanan = new javax.swing.JTable();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        searchKaryawanInputLabel1 = new javax.swing.JLabel();
+        searchKaryawanInputLabel2 = new javax.swing.JLabel();
+        searchKaryawanInputButton1 = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
 
         setBackground(new java.awt.Color(255, 218, 182));
 
         mainPanel.setBackground(new java.awt.Color(255, 218, 182));
+        mainPanel.setPreferredSize(new java.awt.Dimension(1208, 794));
 
         searchKendaraanInputPanel.setBackground(new java.awt.Color(255, 218, 182));
 
         searchKaryawanInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         searchKaryawanInputLabel.setForeground(new java.awt.Color(137, 92, 3));
-        searchKaryawanInputLabel.setText("Pencarian Karyawan");
+        searchKaryawanInputLabel.setText("Pencarian Pesanan");
 
         searchKaryawanInputTextField.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         searchKaryawanInputTextField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -129,16 +132,6 @@ public class laporanMainPanel extends javax.swing.JPanel {
         searchKaryawanInputButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchKaryawanInputButtonActionPerformed(evt);
-            }
-        });
-
-        simpanKaryawanButton.setBackground(new java.awt.Color(51, 151, 56));
-        simpanKaryawanButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        simpanKaryawanButton.setForeground(new java.awt.Color(255, 255, 255));
-        simpanKaryawanButton.setText("Simpan");
-        simpanKaryawanButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                simpanKaryawanButtonActionPerformed(evt);
             }
         });
 
@@ -183,30 +176,53 @@ public class laporanMainPanel extends javax.swing.JPanel {
         ));
         minumanScrollPane1.setViewportView(tabelPesanan);
 
+        searchKaryawanInputLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        searchKaryawanInputLabel1.setForeground(new java.awt.Color(137, 92, 3));
+        searchKaryawanInputLabel1.setText("Pencarian Pesanan Berdasarkan Tanggal");
+
+        searchKaryawanInputLabel2.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        searchKaryawanInputLabel2.setForeground(new java.awt.Color(137, 92, 3));
+        searchKaryawanInputLabel2.setText("Sampai");
+
+        searchKaryawanInputButton1.setBackground(new java.awt.Color(137, 92, 3));
+        searchKaryawanInputButton1.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        searchKaryawanInputButton1.setForeground(new java.awt.Color(255, 255, 255));
+        searchKaryawanInputButton1.setText("Cari");
+        searchKaryawanInputButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchKaryawanInputButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout searchKendaraanInputPanelLayout = new javax.swing.GroupLayout(searchKendaraanInputPanel);
         searchKendaraanInputPanel.setLayout(searchKendaraanInputPanelLayout);
         searchKendaraanInputPanelLayout.setHorizontalGroup(
             searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
             .addGroup(searchKendaraanInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(searchKaryawanInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchKendaraanInputPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(batalkanKaryawanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchKendaraanInputPanelLayout.createSequentialGroup()
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchKaryawanInputLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchKaryawanInputButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 239, Short.MAX_VALUE)
+                        .addComponent(minumanScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(searchKendaraanInputPanelLayout.createSequentialGroup()
                         .addComponent(searchKaryawanInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(searchKaryawanInputButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 582, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchKendaraanInputPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(batalkanKaryawanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(simpanKaryawanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(searchKaryawanInputLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchKendaraanInputPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(minumanScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(216, 216, 216))
         );
         searchKendaraanInputPanelLayout.setVerticalGroup(
             searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,17 +230,23 @@ public class laporanMainPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(searchKaryawanInputLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchKaryawanInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchKaryawanInputButton, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
-                .addGap(74, 74, 74)
-                .addComponent(minumanScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
-                .addGroup(searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(simpanKaryawanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(batalkanKaryawanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(searchKaryawanInputTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(searchKaryawanInputButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(53, 53, 53)
+                .addComponent(searchKaryawanInputLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(minumanScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(searchKaryawanInputButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(searchKaryawanInputLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jDateChooser2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(58, 58, 58)
+                .addComponent(batalkanKaryawanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -240,29 +262,26 @@ public class laporanMainPanel extends javax.swing.JPanel {
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(searchKendaraanInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(searchKendaraanInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1214, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 799, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchKaryawanInputButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchKaryawanInputButtonActionPerformed
         doSearchKaryawan(); // Mencari Karyawan
     }//GEN-LAST:event_searchKaryawanInputButtonActionPerformed
-
-    private void simpanKaryawanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanKaryawanButtonActionPerformed
-      
-    }//GEN-LAST:event_simpanKaryawanButtonActionPerformed
 
     private void tabelKaryawanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelKaryawanMouseClicked
 //        actionKaryawan = "baharui";
@@ -304,18 +323,26 @@ public class laporanMainPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_searchKaryawanInputTextFieldKeyTyped
 
+    private void searchKaryawanInputButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchKaryawanInputButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchKaryawanInputButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton batalkanKaryawanButton;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JScrollPane minumanScrollPane1;
     private javax.swing.JButton searchKaryawanInputButton;
+    private javax.swing.JButton searchKaryawanInputButton1;
     private javax.swing.JLabel searchKaryawanInputLabel;
+    private javax.swing.JLabel searchKaryawanInputLabel1;
+    private javax.swing.JLabel searchKaryawanInputLabel2;
     private javax.swing.JTextField searchKaryawanInputTextField;
     private javax.swing.JPanel searchKendaraanInputPanel;
-    private javax.swing.JButton simpanKaryawanButton;
     private javax.swing.JTable tabelKaryawan;
     private javax.swing.JTable tabelPesanan;
     // End of variables declaration//GEN-END:variables
