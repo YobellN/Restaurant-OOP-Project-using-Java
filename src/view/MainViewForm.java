@@ -74,6 +74,12 @@ public class MainViewForm extends javax.swing.JFrame {
         reservasiPanel.setBackground(new Color(0, 0, 0, 0));
     }
     
+    private void clearTextLogin(){
+        idKaryawanTextField.setText("");
+        usernameTextField.setText("");
+        passwordTextField.setText("");
+    }
+    
     private void initsidePanel(boolean value){
         setOwnerPanel(value);
         setManagerPanel(value);
@@ -742,7 +748,10 @@ public class MainViewForm extends javax.swing.JFrame {
     }                                           
 
     private void logoutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabelMouseClicked
-       
+        login = false;
+        setLoginPanel(true, false);
+        initsidePanel(false);
+        clearTextLogin();
     }//GEN-LAST:event_logoutLabelMouseClicked
 
     private void reservasiPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reservasiPanelMouseClicked
@@ -760,6 +769,7 @@ public class MainViewForm extends javax.swing.JFrame {
         login = false;
         setLoginPanel(true, false);
         initsidePanel(false);
+        clearTextLogin();
     }//GEN-LAST:event_logoutPanelMouseClicked
 
     /**

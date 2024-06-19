@@ -64,7 +64,8 @@ public class DisplayMenuMainPanel extends JPanel {
 
         
         JLabel makananLabel = new JLabel("Makanan", JLabel.CENTER);
-        makananLabel.setFont(new Font("Serif", Font.BOLD, 24)); // Atur font di sini
+        makananLabel.setFont(new Font("Segoe UI", Font.BOLD, 30)); // Atur font di sini
+        makananLabel.setForeground(new Color(137,92,3));
         c.gridx = 0;
         c.gridy = 0;
         c.weightx = 0.5;
@@ -86,7 +87,8 @@ public class DisplayMenuMainPanel extends JPanel {
 
         
         JLabel minumanLabel = new JLabel("Minuman", JLabel.CENTER);
-        minumanLabel.setFont(new Font("Serif", Font.BOLD, 24)); // Atur font di sini
+        minumanLabel.setFont(new Font("Segoe UI", Font.BOLD, 30)); // Atur font di sini
+        minumanLabel.setForeground(new Color(137,92,3));
         c.gridx = 2;
         c.gridy = 0;
         c.gridheight = 1;
