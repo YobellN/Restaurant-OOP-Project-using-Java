@@ -52,4 +52,9 @@ public class PelangganControl implements IPelangganControl {
     public Pelanggan searchDataPelanggan(String id) {
         return pDao.search(id);
     }
+    
+    public List<Pelanggan> showListPelanggan(){
+        List<Pelanggan> dataPelanggan = pDao.showDataList();
+        return dataPelanggan;
+    }
 }

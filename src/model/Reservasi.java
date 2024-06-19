@@ -12,29 +12,33 @@ public class Reservasi {
     private String jenis_reservasi; // SQL : jenis_reservasi
     private String paket_reservasi; // SQL : paket_reservasi
     private float total_harga; // SQL : total_harga
+    private Pelanggan pelanggan;
 
-    public Reservasi(String id_reservasi, String id_pelanggan, String tanggal_reservasi, String jenis_reservasi, String paket_reservasi, float total_harga) {
+    public Reservasi(String id_reservasi, String id_pelanggan, String tanggal_reservasi, String jenis_reservasi, String paket_reservasi, float total_harga, Pelanggan pelanggan) {
         this.id_reservasi = id_reservasi;
         this.id_pelanggan = id_pelanggan;
         this.tanggal_reservasi = tanggal_reservasi;
         this.jenis_reservasi = jenis_reservasi;
         this.paket_reservasi = paket_reservasi;
         this.total_harga = total_harga;
+        this.pelanggan = pelanggan;
     } // konstruktor lengkap
 
-    public Reservasi(String id_reservasi, String tanggal_reservasi, String jenis_reservasi, String paket_reservasi, float total_harga) {
-        this.id_reservasi = id_reservasi;
+    public Reservasi(String id_pelanggan, String tanggal_reservasi, String jenis_reservasi, String paket_reservasi, float total_harga, Pelanggan pelanggan) {
+        this.id_pelanggan = id_pelanggan;
         this.tanggal_reservasi = tanggal_reservasi;
         this.jenis_reservasi = jenis_reservasi;
         this.paket_reservasi = paket_reservasi;
         this.total_harga = total_harga;
+        this.pelanggan = pelanggan;
     } // konstruktor tanpa id_reservasi
 
-    public Reservasi(String tanggal_reservasi, String jenis_reservasi, String paket_reservasi, float total_harga) {
+    public Reservasi(String tanggal_reservasi, String jenis_reservasi, String paket_reservasi, float total_harga, Pelanggan pelanggan) {
         this.tanggal_reservasi = tanggal_reservasi;
         this.jenis_reservasi = jenis_reservasi;
         this.paket_reservasi = paket_reservasi;
         this.total_harga = total_harga;
+        this.pelanggan = pelanggan;
     } // konstruktor tanpa id_reservasi dan id_pelanggan
 
     
@@ -63,6 +67,10 @@ public class Reservasi {
         return total_harga;
     }
 
+    public Pelanggan getPelanggan() {
+        return pelanggan;
+    }
+
     // setter
     public void setId_reservasi(String id_reservasi) {
         this.id_reservasi = id_reservasi;
@@ -86,6 +94,10 @@ public class Reservasi {
 
     public void setTotal_harga(float total_harga) {
         this.total_harga = total_harga;
+    }
+
+    public void setPelanggan(Pelanggan pelanggan) {
+        this.pelanggan = pelanggan;
     }
 
     @Override

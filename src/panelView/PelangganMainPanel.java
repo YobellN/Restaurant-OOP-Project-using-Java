@@ -57,7 +57,6 @@ public class PelangganMainPanel extends javax.swing.JPanel {
 
 
     public void setComponentsPelanggan(boolean value) { // ngeset tempat input
-        idPelangganInputTextField.setEnabled(value);
         namaPelangganInputTextfield.setEnabled(value);
         nomorTeleponInputTextField.setEnabled(value);
         alamatInputTextField.setEnabled(value);
