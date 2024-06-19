@@ -327,6 +327,7 @@ public class laporanMainPanel extends javax.swing.JPanel {
 
     private void batalkanKaryawanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalkanKaryawanButtonActionPerformed
         tabelKaryawan.clearSelection();
+        tabelPesanan.clearSelection();
         searchKaryawanInputTextField.setText("");
     }//GEN-LAST:event_batalkanKaryawanButtonActionPerformed
 
