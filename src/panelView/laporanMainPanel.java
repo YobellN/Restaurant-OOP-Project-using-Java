@@ -1,10 +1,11 @@
 package panelView;
 
 import control.KaryawanControl;
+import control.PesananControl;
+import control.TransaksiControl;
 import dao.KaryawanDAO;
+import dao.TransaksiDAO;
 import java.awt.Component;
-import exception.InputKosongException;
-import exception.InputHarusAngkaException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Comparator;
@@ -17,7 +18,8 @@ import model.Karyawan;
 
 public class laporanMainPanel extends javax.swing.JPanel {
 
-    private final KaryawanControl kc;
+    private final PesananControl pc=null;
+    private final TransaksiControl tc;
     private Karyawan k = null;
     String actionKaryawan = null;
 
@@ -25,8 +27,8 @@ public class laporanMainPanel extends javax.swing.JPanel {
 
     public laporanMainPanel() {
         initComponents();
-        kc = new KaryawanControl(new KaryawanDAO());
-        showKaryawan();
+        tc = new TransaksiControl(new TransaksiDAO());
+        showTransaksi();
     }
 
 
@@ -39,8 +41,6 @@ public class laporanMainPanel extends javax.swing.JPanel {
             return false;
         }
     }
-
-
 
 
     private static void addHeaderClickListener(JTable table) {
@@ -62,8 +62,8 @@ public class laporanMainPanel extends javax.swing.JPanel {
         table.setRowSorter(sorter);
     }
 
-    private void showKaryawan() {
-        tabelKaryawan.setModel(kc.showTableBySearch(""));
+    private void showTransaksi() {
+        tabelKaryawan.setModel(tc.showTableBySearch(""));
         addHeaderClickListener(tabelKaryawan);
     }
 
@@ -75,7 +75,7 @@ public class laporanMainPanel extends javax.swing.JPanel {
        
 
         if (k != null) { // jika ketemu datanya
-            tabelKaryawan.setModel(kc.showTableBySearch(searchKaryawanInputTextField.getText())); // maka akan show berdasarkan pencarian
+            tabelKaryawan.setModel(tc.showTableBySearch(searchKaryawanInputTextField.getText())); // maka akan show berdasarkan pencarian
         } else {
             JOptionPane.showMessageDialog(rootPane, "NOT FOUND !!!");
         }

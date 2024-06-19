@@ -35,13 +35,13 @@ public class TabelTransaksi extends AbstractTableModel{
             case 0:
                 return list.get(rowIndex).getId_pesanan();
             case 1:
-                return list.get(rowIndex).getId_karyawan();
+                return list.get(rowIndex).getKaryawan().getNama_karyawan();
             case 2:
-                return list.get(rowIndex).getId_pelanggan();
+                return list.get(rowIndex).getPelanggan().getNama_pelanggan();
             case 3:
                 return list.get(rowIndex).getTanggal_pesanan();
             case 4:
-                return list.get(rowIndex).getTotal_harga();
+                return "Rp " + list.get(rowIndex).getTotal_harga();
             default:
                 return null;
         }
@@ -53,9 +53,9 @@ public class TabelTransaksi extends AbstractTableModel{
             case 0:
                 return "ID Transaksi";
             case 1:
-                return "ID Karyawan";
+                return "Nama Kasir";
             case 2:
-                return "ID Pelanggan";
+                return "Nama Pelanggan";
             case 3:
                 return "Tanggal Transaksi";
             case 4:

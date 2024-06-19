@@ -41,7 +41,7 @@ public class TabelReservasi extends AbstractTableModel{
             case 7:
                 return list.get(rowIndex).getTanggal_reservasi();
             case 8:
-                return list.get(rowIndex).getTotal_harga();
+                return "Rp " + list.get(rowIndex).getTotal_harga();
             case 9:
                 return list.get(rowIndex).getPelanggan();
             default:

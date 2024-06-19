@@ -8,7 +8,6 @@ import model.Menu;
 import table.TabelMakanan;
 
 public class MakananControl extends MenuControl<Makanan> implements IMakananControl {
-
     public MakananControl(MakananDAO mkDao) {
         super(mkDao);
     }

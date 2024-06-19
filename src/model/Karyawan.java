@@ -16,7 +16,14 @@ public class Karyawan { // OK
         this.username = username;
         this.password = password;
     } // konstruktor lengkap
-
+    
+    public Karyawan(String id_karyawan, String nama_karyawan, String jabatan, float gaji) {
+        this.id_karyawan = id_karyawan;
+        this.nama_karyawan = nama_karyawan;
+        this.jabatan = jabatan;
+        this.gaji = gaji;
+    } // konstruktor tanpa user/pass
+    
     // getter
     public String getId_karyawan() {
         return id_karyawan;

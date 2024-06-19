@@ -285,7 +285,7 @@
                               </Group>
                               <Component id="totalHargaPanel" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="20" max="32767" attributes="0"/>
+                          <EmptySpace pref="23" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -455,10 +455,10 @@
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="tanggalReservasiLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tanggalReservasiInput" alignment="0" min="-2" pref="272" max="-2" attributes="0"/>
+                                  <Component id="tanggalReservasiLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tanggalReservasiInput" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="37" max="32767" attributes="0"/>
+                              <EmptySpace pref="109" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -467,9 +467,8 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="tanggalReservasiLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="tanggalReservasiInput" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
+                              <Component id="tanggalReservasiInput" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -487,12 +486,6 @@
                       </Properties>
                     </Component>
                     <Component class="com.toedter.calendar.JDateChooser" name="tanggalReservasiInput">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>

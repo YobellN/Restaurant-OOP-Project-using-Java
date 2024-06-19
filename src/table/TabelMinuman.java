@@ -39,7 +39,7 @@ public class TabelMinuman extends AbstractTableModel{
             case 3:
                 return minuman.getSpecial();
             case 4:
-                return minuman.getHarga();
+                return "Rp " + minuman.getHarga();
             case 5:
                 return minuman.getGambar();
             default:

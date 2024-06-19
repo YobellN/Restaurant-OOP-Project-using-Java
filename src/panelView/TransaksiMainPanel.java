@@ -803,12 +803,12 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                             .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(mainPanelLayout.createSequentialGroup()
-                                        .addGap(34, 34, 34)
+                                        .addGap(32, 32, 32)
                                         .addComponent(specialAtributeInputPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(mainPanelLayout.createSequentialGroup()
-                                        .addGap(24, 24, 24)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(52, 52, 52)
+                                .addGap(54, 54, 54)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(totalProdukInputTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(kendaraanFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -835,18 +835,16 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(totalProdukInputLabel1)
                                 .addGap(9, 9, 9)
-                                .addComponent(totalProdukInputTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(totalProdukInputTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                             .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addGap(26, 26, 26)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(specialAtributeInputPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(kendaraanFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(kendaraanFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(specialAtributeInputPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(9, 9, 9)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(makananScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
@@ -982,7 +980,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         namaProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
         specialAtributeInputLabel.setText("Catatan");
         specialAtributeInputTextfield.setText(tableModel.getValueAt(clickedRow, 3).toString());
-        hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString());
+        hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString().replace("Rp ", ""));
     }//GEN-LAST:event_tabelMakananMouseClicked
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -1022,7 +1020,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         namaProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
         specialAtributeInputLabel.setText("Ukuran");
         specialAtributeInputTextfield.setText(tableModel.getValueAt(clickedRow, 3).toString());
-        hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString());
+        hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString().replace("Rp ", ""));
         cancelButton.setEnabled(true);
     }//GEN-LAST:event_tabelMinumanMouseClicked
 
@@ -1061,7 +1059,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         namaProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
         specialAtributeInputLabel.setText("    ");
         jumlahProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 2).toString());
-        hargaProdukInputTextfield.setText("" + menuControl.searchHarga(idProdukInputTextField.getText()));
+        hargaProdukInputTextfield.setText(String.valueOf(menuControl.searchHarga(idProdukInputTextField.getText())));
     }//GEN-LAST:event_tabelPesananMouseClicked
 
     private void simpanTransaksiProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanTransaksiProdukButtonActionPerformed

@@ -14,6 +14,8 @@ public class Transaksi {
     private String id_pelanggan;    // SQL : id_pelanggan;
     private String tanggal_pesanan; // SQL : tanggal_pesanan;
     private float total_harga;      // SQL : total_harga;
+    private Pelanggan pelanggan;
+    private Karyawan karyawan;
 
     public Transaksi(String id_pesanan, String id_karyawan, String id_pelanggan, String tanggal_pesanan, float total_harga) {
         this.id_pesanan = id_pesanan;
@@ -36,10 +38,16 @@ public class Transaksi {
         this.total_harga = total_harga;
     } // konstruktor tanpa id_pesanan dan id_karyawan
 
-    public Transaksi(String tanggal_pesanan, float total_harga) {
+    public Transaksi(String id_pesanan, String id_karyawan, String id_pelanggan, String tanggal_pesanan, float total_harga, 
+            Karyawan k, Pelanggan p) {
+        this.id_pesanan = id_pesanan;
+        this.id_karyawan = id_karyawan;
+        this.id_pelanggan = id_pelanggan;
         this.tanggal_pesanan = tanggal_pesanan;
         this.total_harga = total_harga;
-    } // konstruktor tanpa id sama sekali
+        this.karyawan = k;
+        this.pelanggan = p;     
+    } // konstruktor untuk show Table
 
     // getter
     public String getId_pesanan() {
@@ -60,6 +68,14 @@ public class Transaksi {
 
     public float getTotal_harga() {
         return total_harga;
+    }
+    
+    public Karyawan getKaryawan(){
+        return karyawan;
+    }
+    
+    public Pelanggan getPelanggan(){
+        return pelanggan;
     }
 
     // setter

@@ -346,10 +346,6 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
         tanggalReservasiLabel.setForeground(new java.awt.Color(137, 92, 3));
         tanggalReservasiLabel.setText("Tanggal Titipan");
 
-        tanggalReservasiInput.setBackground(new java.awt.Color(255, 255, 255));
-        tanggalReservasiInput.setForeground(new java.awt.Color(0, 0, 0));
-        tanggalReservasiInput.setDateFormatString("yyyy-MM-dd");
-
         javax.swing.GroupLayout tanggalReservasiPanelLayout = new javax.swing.GroupLayout(tanggalReservasiPanel);
         tanggalReservasiPanel.setLayout(tanggalReservasiPanelLayout);
         tanggalReservasiPanelLayout.setHorizontalGroup(
@@ -358,17 +354,16 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(tanggalReservasiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tanggalReservasiLabel)
-                    .addComponent(tanggalReservasiInput, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
+                    .addComponent(tanggalReservasiInput, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
         tanggalReservasiPanelLayout.setVerticalGroup(
             tanggalReservasiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tanggalReservasiPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tanggalReservasiLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tanggalReservasiInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tanggalReservasiInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         checkboxPanel.setBackground(new java.awt.Color(255, 218, 182));
@@ -538,7 +533,7 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
                         .addComponent(radioPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(checkboxPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(totalHargaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout searchReservasiInputPanelLayout = new javax.swing.GroupLayout(searchReservasiInputPanel);
@@ -569,7 +564,7 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
                     .addComponent(searchReservasiInputTextField)
                     .addComponent(searchReservasiInputButton, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(reservasiFormPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(reservasiFormPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(617, 617, 617))
         );
 
@@ -782,7 +777,7 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
         SimpleDateFormat outputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
         
         tanggalReservasiInput.setDate(dateWithTime);
-        totalHargaInputTextField.setText(tableModel.getValueAt(clickedRow, 8).toString());
+        totalHargaInputTextField.setText(tableModel.getValueAt(clickedRow, 8).toString().replace("Rp ", ""));
         
         String checkbox = tableModel.getValueAt(clickedRow, 6).toString();                
         String radio = tableModel.getValueAt(clickedRow, 5).toString();

@@ -901,7 +901,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
         namaProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
         jenisProdukInputButton.setText(tableModel.getValueAt(clickedRow, 2).toString());
         specialAtributeInputTextfield.setText(tableModel.getValueAt(clickedRow, 3).toString());
-        hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString());
+        hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString().replace("Rp ", ""));
         setSpecialAtributeLabel();
         setImageIcon((byte[]) tableModel.getValueAt(clickedRow, 5));
         cancelButton.setEnabled(true);
@@ -945,7 +945,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
         namaProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
         jenisProdukInputButton.setText(tableModel.getValueAt(clickedRow, 2).toString());
         specialAtributeInputTextfield.setText(tableModel.getValueAt(clickedRow, 3).toString());
-        hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString());
+        hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString().replace("Rp ", ""));
         setSpecialAtributeLabel();
         setImageIcon((byte[]) tableModel.getValueAt(clickedRow, 5));
         cancelButton.setEnabled(true);

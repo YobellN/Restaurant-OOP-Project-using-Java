@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import model.Karyawan;
+import model.Pelanggan;
 import model.Transaksi;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -138,36 +140,58 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IGenerateID{
 
     
     @Override
-    public List<Transaksi> showData(String data){
+    public List<Transaksi> showData(String data) {
         con = dbCon.makeConnection();
-        
-        String sql = "SELECT * FROM `transaksi` WHERE "
-                + "id_pesanan LIKE '%" + data + "%' "
-                + " OR id_karyawan LIKE '%" + data + "%' "
-                + " OR id_pelanggan LIKE '%" + data + "%' "
-                + " OR total_harga LIKE '%" + data + "%' "
-                + " OR tanggal_transaksi LIKE '%" + data + "%' " + "";
+
+        String sql = "SELECT t.id_pesanan, t.id_karyawan, t.id_pelanggan, t.tanggal_pesanan, t.total_harga, " 
+                 + "k.nama_karyawan, k.jabatan, k.gaji, " 
+                 + "p.nama_pelanggan, p.alamat, p.nomor_telepon " 
+                 + "FROM transaksi t " 
+                 + "JOIN karyawan k ON t.id_karyawan = k.id_karyawan " 
+                 + "JOIN pelanggan p ON t.id_pelanggan = p.id_pelanggan " 
+                 + "WHERE t.id_pesanan LIKE '%" + data + "%' " 
+                 + "OR t.id_karyawan LIKE '%" + data + "%' " 
+                 + "OR t.id_pelanggan LIKE '%" + data + "%' " 
+                 + "OR k.nama_karyawan LIKE '%" + data + "%' " 
+                 + "OR p.nama_pelanggan LIKE '%" + data + "%'"
+                 + "ORDER BY t.id_pesanan";
         System.out.println("Fetching Data...");
-        List<Transaksi> c = new ArrayList();
-        
-        try{
+        List<Transaksi> c = new ArrayList<>();
+
+        try {
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
-            
-            if(rs != null)
-                while(rs.next())
+
+            if (rs != null) {
+                while (rs.next()) {
+                    Karyawan k = new Karyawan(
+                            rs.getString("id_karyawan"),
+                            rs.getString("nama_karyawan"),
+                            rs.getString("jabatan"),
+                            rs.getFloat("gaji")
+                    );
+                    Pelanggan p = new Pelanggan(
+                            rs.getString("id_pelanggan"),
+                            rs.getString("nama_pelanggan"),
+                            rs.getString("alamat"),
+                            rs.getString("nomor_telepon")
+                    );
+                    
                     c.add(new Transaksi(
-                        rs.getString("id_pesanan"),
-                        rs.getString("id_karyawan"),
-                        rs.getString("id_pelanggan"),
-                        rs.getString("tanggal_pesanan"),
-                        rs.getFloat("total_harga")
-                    )
-                );
-            
+                            rs.getString("id_pesanan"),
+                            rs.getString("id_karyawan"),
+                            rs.getString("id_pelanggan"),
+                            rs.getString("tanggal_pesanan"),
+                            rs.getFloat("total_harga"),
+                            k,
+                            p
+                    ));
+                }
+            }
+
             rs.close();
             statement.close();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Error Fetching data...");
             System.out.println(e);
         }
