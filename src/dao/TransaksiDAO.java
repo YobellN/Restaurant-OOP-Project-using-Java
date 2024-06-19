@@ -238,6 +238,4 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IGenerateID{
             e.printStackTrace();
         } 
     }
-    
-    
 }
