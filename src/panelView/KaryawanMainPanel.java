@@ -102,9 +102,6 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
     }
 
     private void doSearchKaryawan() { // fungsi untuk search dipakai di : searchKaryawanInputButtonActionPerformed
-        if (searchKaryawanInputTextField.getText().isEmpty()) {
-            return;
-        }
         tabelKaryawan.setModel(kc.showTableBySearch(searchKaryawanInputTextField.getText())); // maka akan show berdasarkan pencarian
         addHeaderClickListener(tabelKaryawan);
     }
@@ -665,13 +662,16 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
         if (actionKaryawan == null) {
             return;
         }
-        if (JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan " + actionKaryawan + "?") == JOptionPane.CLOSED_OPTION) {
-            return;
-        }
+        
         try {
             InputHarusAngkaKaryawanException();
             inputKosongKaryawanException();
 
+            int dialog = JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan " + actionKaryawan + "?");
+            if (dialog == JOptionPane.CLOSED_OPTION || dialog == JOptionPane.NO_OPTION || dialog == JOptionPane.CANCEL_OPTION) {
+                return;
+            }
+            
             switch (actionKaryawan) {
                 case "add":
                     k = new Karyawan(idKaryawanInputTextField.getText(), namaKaryawanInputTextField.getText(), jabatanInputButton.getText(), Float.parseFloat(gajiKaryawanInputTextfield.getText()), usernameKaryawanInputTextField.getText(), passwordKaryawanInputTextField.getText());

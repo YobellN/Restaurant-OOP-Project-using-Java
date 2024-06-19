@@ -43,7 +43,6 @@ import exception.InputHarusAngkaException;
 
 public class MenuMainPanel extends javax.swing.JPanel {
 
-    private MenuControl menuControl;
     private MinumanControl minumanControl;
     private MakananControl makananControl;
     private Menu menu = null;
@@ -757,7 +756,11 @@ public class MenuMainPanel extends javax.swing.JPanel {
         if (opsi == JOptionPane.NO_OPTION || opsi == JOptionPane.CLOSED_OPTION) {
             return;
         }
-        System.out.println("KONTOL");
+        if(makananIsSelected()){
+            makananControl.delete(idProdukInputTextField.getText());
+        }else{
+            minumanControl.delete(idProdukInputTextField.getText());
+        }
         clearTextData();
         setEditDeleteButton(false);
         setComponentsData(false);
@@ -811,14 +814,15 @@ public class MenuMainPanel extends javax.swing.JPanel {
         if (action == null) {
             return;
         }
-
-        int dialog = JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan " + action + "?");
-        if (dialog == JOptionPane.CLOSED_OPTION || dialog == JOptionPane.NO_OPTION || dialog == JOptionPane.CANCEL_OPTION) {
-            return;
-        }
         try {
             inputKosongMenuException();
             InputHarusAngkaSpecialException();
+            
+            int dialog = JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan " + action + "?");
+            if (dialog == JOptionPane.CLOSED_OPTION || dialog == JOptionPane.NO_OPTION || dialog == JOptionPane.CANCEL_OPTION) {
+                return;
+            }
+            
             switch (action) {
                 case "add":
                     if (makananIsSelected()) {

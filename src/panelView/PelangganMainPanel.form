@@ -156,7 +156,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="3" green="5c" red="89" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Pencarian Karyawan"/>
+                <Property name="text" type="java.lang.String" value="Pencarian Pelanggan"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="searchKaryawanInputTextField">

@@ -49,7 +49,9 @@ public class KaryawanDAO implements IDAO<Karyawan, String>, ISearchData<Karyawan
     public Karyawan search(String data) { // DIPAKAI OLEH CONTROL SEARCH
         con = dbCon.makeConnection();
 
-        String sql = "SELECT * FROM `karyawan` WHERE id_karyawan LIKE '" + data + "'";
+        String sql = "SELECT * FROM `karyawan` WHERE id_karyawan LIKE '%" + data + "%' "
+                + "OR nama_karyawan LIKE '%" + data + "%' "
+                + "OR jabatan LIKE '%" + data + "%'";
 
         System.out.println("Searching Karyawan...");
         Karyawan c = null;
