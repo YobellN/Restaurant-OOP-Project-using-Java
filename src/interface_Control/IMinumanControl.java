@@ -2,14 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package interfaceDAO;
+package interface_Control;
 
-import java.util.List;
+import model.Minuman;
+import table.TabelMinuman;
 
 /**
  *
  * @author yobel
  */
-public interface ISearchDataMenu<T,I> {
-  public List<T> search(I data);
+public interface IMinumanControl extends ICRUDControl<Minuman, String> {
+    TabelMinuman showTableBySearch(String search);
 }

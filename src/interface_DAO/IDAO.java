@@ -1,4 +1,4 @@
-package interfaceDAO;
+package interface_DAO;
 import java.util.List;
 
 public interface IDAO<T, I> { // OK

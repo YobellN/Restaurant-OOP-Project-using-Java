@@ -5,6 +5,7 @@
 package control;
 
 import dao.PesananDAO;
+import interface_Control.IPesananControl;
 import java.util.List;
 import model.Pesanan;
 import table.TabelPesanan;
@@ -13,15 +14,14 @@ import table.TabelPesanan;
  *
  * @author Tok Se Ka 220711904
  */
-public class PesananControl {
+public class PesananControl implements IPesananControl{
     PesananDAO pDao = new PesananDAO();
 
     public void insertDataPesanan(List<Pesanan> pesananList) {
-        for (Pesanan pesanan : pesananList) {
+       for (Pesanan pesanan : pesananList) {
            pDao.insert(pesanan);
        }
     } 
-
     public void updateDataPesanan(Pesanan P){
         pDao.update(P, P.getId_pesanan(), P.getId_menu());
     } // update isi?
@@ -36,4 +36,5 @@ public class PesananControl {
 
         return tabelPesanan;
     }
+
 }

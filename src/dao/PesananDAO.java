@@ -5,8 +5,8 @@
 package dao;
 
 import connection.DbConnection;
-import interfaceDAO.IDAOTransaksi;
-import interfaceDAO.ISearchData;
+import interface_DAO.IDAOTransaksi;
+import interface_DAO.ISearchData;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -116,12 +116,11 @@ public class PesananDAO implements IDAOTransaksi<Pesanan, String>{
         con = dbCon.makeConnection();
         
         String sql = "UPDATE `pesanan` SET "
-                + "`id_pesanan`='"+ c.getId_pesanan()+"',"
                 + "`id_menu`='"+ c.getId_menu()+"',"
                 + "`jumlah`='"+ c.getJumlah()+"',"
                 + "`sub_total`='"+ c.getSub_total()+"' "
                 + "WHERE `id_pesanan`='" + id_pesanan + "'"
-                + "AND `id_menu`='" + id_menu + "'";
+                + "AND `id_menu` = '" + id_menu + "'";
         System.out.println("Updating pesanan");
         
         try{
@@ -140,14 +139,14 @@ public class PesananDAO implements IDAOTransaksi<Pesanan, String>{
     public void delete(String id_pesanan, String id_menu){
         con = dbCon.makeConnection();
         String sql = "DELETE FROM `pesanan` "
-                + "WHERE `id_pesanan`='" + id_pesanan + "'"
-                + "AND `id_menu`='" + id_menu + "'";
+                + "WHERE `id_pesanan`='" + id_pesanan + ""
+                + "AND `id_menu` = '" + id_menu + "'";
         System.out.println("Deleting Pesanan...???");
         
         try{
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
-            System.out.println("Edited " + result + " Pesanan " + id_pesanan + " Menu " + id_menu);
+            System.out.println("Edited " + result + " Pesanan " + id_pesanan + " Menu ");
             statement.close();
         }catch(Exception e){
             System.out.println("Error Deleting Pesanan...");

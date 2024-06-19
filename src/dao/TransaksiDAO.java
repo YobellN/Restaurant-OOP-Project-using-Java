@@ -4,12 +4,9 @@
  */
 package dao;
 
-import java.sql.DriverManager;
 import connection.DbConnection;
-import interfaceDAO.IDAO;
-import interfaceDAO.IGenerateID;
-import interfaceDAO.IShowForDropdown;
-import interfaceDAO.ISearchData;
+import interface_DAO.IDAO;
+import interface_Control.IGenerateID;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -17,8 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import model.Pelanggan;
-import model.Pesanan;
 import model.Transaksi;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;

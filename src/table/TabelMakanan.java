@@ -10,9 +10,9 @@ import model.Makanan;
 import model.Menu;
 
 public class TabelMakanan extends AbstractTableModel{
-    private List<Menu> list;
+    private List<Makanan> list;
 
-    public TabelMakanan(List<Menu> list) {
+    public TabelMakanan(List<Makanan> list) {
         this.list = list;
     }
     

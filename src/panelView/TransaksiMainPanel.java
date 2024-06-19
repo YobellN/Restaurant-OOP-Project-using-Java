@@ -23,6 +23,10 @@ import model.Karyawan;
 import model.Pesanan;
 
 import control.TransaksiControl;
+import dao.MakananDAO;
+import dao.MinumanDAO;
+import dao.PelangganDAO;
+import dao.TransaksiDAO;
 import exception.InputKosongException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -42,12 +46,13 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
 
     // CONTROL
     // FINAL KARENA TIDAK PERLU DI UBAH DI DALAM PANEL TRANSAKSI
-    private final MenuControl menuControl = new MenuControl(); // DIPAKAI UNTUK MENCARI HARGA
-    private final MakananControl makananControl = new MakananControl(); // DIPAKAI UNTUK SHOW TABEL
-    private final MinumanControl minumanControl = new MinumanControl(); // DIPAKAI UNTUK SHOW TABEL
-    private final TransaksiControl tc = new TransaksiControl(); // DIPAKAI UNTUK generateID dan INSERT SQL
+    // DIPAKAI UNTUK MENCARI HARGA
+    private final MenuControl menuControl = null;
+    private final MakananControl makananControl;
+    private final MinumanControl minumanControl;
+    private final TransaksiControl tc; // DIPAKAI UNTUK generateID dan INSERT SQL
     private final PesananControl pesananControl = new PesananControl(); // DIPAKAI UNTUK INSERT SQL PESANAN
-    private final PelangganControl pelangganControl = new PelangganControl(); // DIPAKAI UNTUK GenerateID dan INSERT SQL PELANGGAN
+    private final PelangganControl pelangganControl; // DIPAKAI UNTUK GenerateID dan INSERT SQL PELANGGAN
 
     // TAMBAHAN
     private ArrayList<Pesanan> pesananList = new ArrayList(); // DIPAKAI UNTUK MENJADI KERANJANG
@@ -59,6 +64,10 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
      */
     public TransaksiMainPanel(Karyawan k) {
         initComponents();
+        tc = new TransaksiControl(new TransaksiDAO());
+        makananControl = new MakananControl(new MakananDAO());
+        minumanControl = new MinumanControl(new MinumanDAO());
+        pelangganControl = new PelangganControl((new PelangganDAO()));
         idPesananInputTextField.setText(tc.generateId());
         namaKaryawanInputTextField.setText(k.getNama_karyawan());
         // Yang tidak perlu di ubah
@@ -916,7 +925,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                             p.setId_menu(idProdukInputTextField.getText());
                             p.setNamaMenu(namaProdukInputTextField.getText());
                             p.setJumlah(Integer.parseInt(jumlahProdukInputTextfield.getText()));
-                            p.setSub_total(menuControl.searchHargaMenu(idProdukInputTextField.getText()) * Integer.parseInt(jumlahProdukInputTextfield.getText()));
+                            p.setSub_total(menuControl.searchHarga(idProdukInputTextField.getText()) * Integer.parseInt(jumlahProdukInputTextfield.getText()));
                             break;
                         }
                     }
@@ -1045,7 +1054,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         namaProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
         specialAtributeInputLabel.setText("    ");
         jumlahProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 2).toString());
-        hargaProdukInputTextfield.setText("" + menuControl.searchHargaMenu(idProdukInputTextField.getText()));
+        hargaProdukInputTextfield.setText("" + menuControl.searchHarga(idProdukInputTextField.getText()));
     }//GEN-LAST:event_tabelPesananMouseClicked
 
     private void simpanTransaksiProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanTransaksiProdukButtonActionPerformed
@@ -1084,8 +1093,8 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                 pelangganControl.generateId(), formattedDate, 0);
         
         // untuk insert sql
-        pelangganControl.insertDataPelanggan(pelanggan);
-        tc.insertDataTransaksi(transaksi);
+        pelangganControl.insert(pelanggan);
+        tc.insert(transaksi);
         pesananControl.insertDataPesanan(pesananList);
         tc.insertTotalHarga(transaksi);
         // UNTUK MEMBERSIHKAN FIELD

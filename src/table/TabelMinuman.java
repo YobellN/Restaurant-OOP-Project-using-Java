@@ -10,9 +10,9 @@ import model.Minuman;
 import model.Menu;
 
 public class TabelMinuman extends AbstractTableModel{
-    private List<Menu> list;
+    private List<Minuman> list;
 
-    public TabelMinuman(List<Menu> list) {
+    public TabelMinuman(List<Minuman> list) {
         this.list = list;
     }
     

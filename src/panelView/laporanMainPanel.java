@@ -1,6 +1,7 @@
 package panelView;
 
 import control.KaryawanControl;
+import dao.KaryawanDAO;
 import java.awt.Component;
 import exception.InputKosongException;
 import exception.InputHarusAngkaException;
@@ -16,7 +17,7 @@ import model.Karyawan;
 
 public class laporanMainPanel extends javax.swing.JPanel {
 
-    private final KaryawanControl kc = new KaryawanControl();
+    private final KaryawanControl kc;
     private Karyawan k = null;
     String actionKaryawan = null;
 
@@ -24,6 +25,7 @@ public class laporanMainPanel extends javax.swing.JPanel {
 
     public laporanMainPanel() {
         initComponents();
+        kc = new KaryawanControl(new KaryawanDAO());
         showKaryawan();
     }
 
@@ -61,7 +63,7 @@ public class laporanMainPanel extends javax.swing.JPanel {
     }
 
     private void showKaryawan() {
-        tabelKaryawan.setModel(kc.showTable(""));
+        tabelKaryawan.setModel(kc.showTableBySearch(""));
         addHeaderClickListener(tabelKaryawan);
     }
 
@@ -70,10 +72,10 @@ public class laporanMainPanel extends javax.swing.JPanel {
             return;
         }
 
-        k = kc.searchDataKaryawan(searchKaryawanInputTextField.getText()); // mencari berdasarkan ID
+       
 
         if (k != null) { // jika ketemu datanya
-            tabelKaryawan.setModel(kc.showTable(searchKaryawanInputTextField.getText())); // maka akan show berdasarkan pencarian
+            tabelKaryawan.setModel(kc.showTableBySearch(searchKaryawanInputTextField.getText())); // maka akan show berdasarkan pencarian
         } else {
             JOptionPane.showMessageDialog(rootPane, "NOT FOUND !!!");
         }
@@ -150,7 +152,6 @@ public class laporanMainPanel extends javax.swing.JPanel {
             }
         });
 
-        tabelKaryawan.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 14)); // NOI18N
         tabelKaryawan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

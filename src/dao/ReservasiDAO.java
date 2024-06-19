@@ -5,21 +5,21 @@
 package dao;
 
 import connection.DbConnection;
-import interfaceDAO.IDAO;
-import interfaceDAO.ISearchData;
-import interfaceDAO.IShowForDropdown;
+import interface_DAO.IDAO;
+import interface_DAO.ISearchData;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Reservasi;
+import interface_DAO.IShowDataList;
 
 /**
  *
  * @author Lenovo
  */
-public class ReservasiDAO implements IDAO<Reservasi, String>, IShowForDropdown<Reservasi>, ISearchData<Reservasi, String>{
+public class ReservasiDAO implements IDAO<Reservasi, String>, IShowDataList<Reservasi>, ISearchData<Reservasi, String>{
     protected DbConnection dbCon = new DbConnection();
     protected Connection con;
     
@@ -152,7 +152,7 @@ public class ReservasiDAO implements IDAO<Reservasi, String>, IShowForDropdown<R
     }
     
     @Override
-    public List<Reservasi> IShowForDropdown() {
+    public List<Reservasi> showDataList() {
         con = dbCon.makeConnection();
         
         String sql = "SELECT * FROM `reservasi`;";

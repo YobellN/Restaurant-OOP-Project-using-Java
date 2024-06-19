@@ -2,10 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package interfaceDAO;
+package interface_Control;
 
-import java.util.List;
-
-public interface ISearchData<T, I> { // OK
-  public T search(I data);
+/**
+ *
+ * @author yobel
+ */
+public interface IGenerateID {
+    public int generateId();
 }
