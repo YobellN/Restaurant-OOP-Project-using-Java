@@ -85,8 +85,8 @@ public class MenuMainPanel extends javax.swing.JPanel {
 
     public MenuMainPanel() {
         initComponents();
-        makananControl = new MakananControl();
-        minumanControl = new MinumanControl();
+        makananControl = new MakananControl(new MakananDAO());
+        minumanControl = new MinumanControl(new MinumanDAO());
         setComponentsData(false);
         showTableBySearch("");
         setEditDeleteButton(false);

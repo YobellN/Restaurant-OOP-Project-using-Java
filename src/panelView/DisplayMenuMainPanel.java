@@ -42,11 +42,11 @@ public class DisplayMenuMainPanel extends JPanel {
      * Creates new form DisplayMenuMainPanel
      */
     public DisplayMenuMainPanel() {
-        makananControl = new MakananControl();
-        minumanControl = new MinumanControl();
+        makananControl = new MakananControl(new MakananDAO());
+        minumanControl = new MinumanControl(new MinumanDAO());
         makananList = new ArrayList<>(makananControl.showListMenu());
         minumanList = new ArrayList<>(minumanControl.showListMenu());
-
+        
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         this.setBackground(new Color(255, 218, 182));

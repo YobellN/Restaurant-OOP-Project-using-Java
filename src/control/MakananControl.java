@@ -8,7 +8,12 @@ import model.Menu;
 import table.TabelMakanan;
 
 public class MakananControl extends MenuControl<Makanan> implements IMakananControl {
-    private final MakananDAO mDdao = new MakananDAO();
+    private MakananDAO mkDao;
+    
+    public MakananControl(MakananDAO mDao) {
+        super(mDao);
+        this.mkDao = mDao; // Inisialisasi mkDao
+    }
     
     @Override
     protected boolean cekJenis(Menu menu) {
@@ -18,17 +23,17 @@ public class MakananControl extends MenuControl<Makanan> implements IMakananCont
     @Override
     public void insert(Makanan mk) {
         mk.setId_menu(generateId());
-        ((MakananDAO) mDao).insert(mk);  // Cast to MakananDAO
+        mkDao.insert(mk);  // Tidak perlu casting, karena mkDao sudah bertipe MakananDAO
     }
 
     @Override
     public void update(Makanan mk) {
-        ((MakananDAO) mDao).update(mk, mk.getId_menu(), mk.getCatatan());  // Cast to MakananDAO
+        mkDao.update(mk, mk.getId_menu(), mk.getCatatan());  // Tidak perlu casting, karena mkDao sudah bertipe MakananDAO
     }
 
     @Override
     public TabelMakanan showTableBySearch(String search) {
-        List<Menu> data = mDao.showData(search);
+        List<Menu> data = mkDao.showData(search);
         List<Makanan> temp = new ArrayList<>();
         for (Menu menu : data) {
             if (menu.getJenis_menu().equals("Makanan") && cekJenis(menu)) {
@@ -41,7 +46,7 @@ public class MakananControl extends MenuControl<Makanan> implements IMakananCont
 
     @Override
     public List<Makanan> showListMenu() {
-        List<Menu> data = mDao.showDataList();
+        List<Menu> data = mkDao.showDataList();
         List<Makanan> temp = new ArrayList<>();
         for (Menu menu : data) {
             if (cekJenis(menu)) {

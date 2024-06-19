@@ -65,8 +65,8 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     public TransaksiMainPanel(Karyawan k) {
         initComponents();
         tc = new TransaksiControl(new TransaksiDAO());
-        makananControl = new MakananControl();
-        minumanControl = new MinumanControl();
+        makananControl = new MakananControl(new MakananDAO());
+        minumanControl = new MinumanControl(new MinumanDAO());
         pelangganControl = new PelangganControl((new PelangganDAO()));
         idPesananInputTextField.setText(tc.generateId());
         namaKaryawanInputTextField.setText(k.getNama_karyawan());

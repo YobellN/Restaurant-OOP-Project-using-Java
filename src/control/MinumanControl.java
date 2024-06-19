@@ -8,9 +8,13 @@ import model.Minuman;
 import table.TabelMinuman;
 
 public class MinumanControl extends MenuControl<Minuman> implements IMinumanControl {
-
-    private final MinumanDAO mDAO = new MinumanDAO();
-
+    private MinumanDAO mDAO;
+    
+    public MinumanControl(MinumanDAO mDao) {
+        super(mDao);
+        this.mDao = mDao; // Inisialisasi mDao
+    }
+    
     @Override
     protected boolean cekJenis(Menu menu) {
         return menu instanceof Minuman;

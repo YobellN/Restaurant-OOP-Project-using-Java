@@ -6,7 +6,11 @@ import java.util.List;
 import model.Menu;
 
 public abstract class MenuControl<T extends Menu> implements ICRUDControl<T, String> {
-    protected MenuDAO mDao = new MenuDAO();
+    protected MenuDAO mDao;
+    
+    public MenuControl(MenuDAO MDao) {
+        this.mDao = MDao;
+    }
     
     @Override
     public void insert(T menu) {
