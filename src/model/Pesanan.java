@@ -15,6 +15,7 @@ public class Pesanan {
     private int jumlah; // SQL : jumlah
     private float sub_total; // SQL : sub_total;
     private String namaMenu; // buat konstruktor di show aja, nanti buat kontruktor khusus yang ada nama menu
+    private String jenisMenu;
     private Menu menu;
     
     public Pesanan(String id_pesanan, String id_menu, int jumlah, float sub_total, Menu menu) {
@@ -32,12 +33,13 @@ public class Pesanan {
         this.sub_total = sub_total;
     }
     
-    public Pesanan(String id_pesanan, String id_menu, String nama_menu, int jumlah, float sub_total) {
+    public Pesanan(String id_pesanan, String id_menu, String nama_menu, String jenis_menu, int jumlah, float sub_total) {
         this.id_pesanan = id_pesanan;
         this.id_menu = id_menu;
         this.jumlah = jumlah;
         this.sub_total = sub_total;
         this.namaMenu = nama_menu;
+        this.jenisMenu = jenis_menu;
     }
     
     public Pesanan(String id_menu, int jumlah, float sub_total) {

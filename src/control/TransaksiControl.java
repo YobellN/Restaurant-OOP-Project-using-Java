@@ -16,11 +16,11 @@ import table.TabelTransaksi;
  */
 public class TransaksiControl implements ITransaksiControl {
     private TransaksiDAO kDao;
-
-    public TransaksiControl(TransaksiDAO kDao) {
-        this.kDao = kDao;
+    
+    public TransaksiControl(TransaksiDAO tDao) {
+        this.kDao = tDao;
     }
-
+    
     @Override
     public String generateId() {
         return "T" + kDao.generateId();

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package panelView;
 
 import control.MenuControl;
@@ -47,10 +43,9 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     // CONTROL
     // FINAL KARENA TIDAK PERLU DI UBAH DI DALAM PANEL TRANSAKSI
     // DIPAKAI UNTUK MENCARI HARGA
-    private final MenuControl menuControl = null;
     private final MakananControl makananControl;
     private final MinumanControl minumanControl;
-    private final TransaksiControl tc; // DIPAKAI UNTUK generateID dan INSERT SQL
+    private TransaksiControl tc; // DIPAKAI UNTUK generateID dan INSERT SQL
     private final PesananControl pesananControl = new PesananControl(); // DIPAKAI UNTUK INSERT SQL PESANAN
     private final PelangganControl pelangganControl; // DIPAKAI UNTUK GenerateID dan INSERT SQL PELANGGAN
 
@@ -111,7 +106,14 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         specialAtributeInputLabel.setText("");
         jumlahProdukInputTextfield.setText("");
     }
-
+    
+    private void setSpecialAtributeLabel() {
+        if (jenisProdukInputButton.getText().equals("Makanan")) {
+            specialAtributeInputLabel.setText("Catatan");
+        } else {
+            specialAtributeInputLabel.setText("Ukuran");
+        }
+    }
     // DIPAKAI UNTUK SORTIR TABEL
     private static void addHeaderMenu(JTable table) {
         JTableHeader header = table.getTableHeader();
@@ -225,7 +227,9 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         specialAtributeInputPanel = new javax.swing.JPanel();
         totalProdukInputLabel = new javax.swing.JLabel();
         jumlahProdukInputTextfield = new javax.swing.JTextField();
-        kendaraanFormPanel2 = new javax.swing.JPanel();
+        jenisProdukInputPanel1 = new javax.swing.JPanel();
+        jenisProdukInputLabel = new javax.swing.JLabel();
+        jenisProdukInputButton = new javax.swing.JButton();
         makananScrollPane = new javax.swing.JScrollPane();
         tabelMakanan = new javax.swing.JTable();
         minumanScrollPane = new javax.swing.JScrollPane();
@@ -606,17 +610,43 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        kendaraanFormPanel2.setBackground(new java.awt.Color(255, 221, 186));
+        jenisProdukInputPanel1.setBackground(new java.awt.Color(255, 221, 186));
 
-        javax.swing.GroupLayout kendaraanFormPanel2Layout = new javax.swing.GroupLayout(kendaraanFormPanel2);
-        kendaraanFormPanel2.setLayout(kendaraanFormPanel2Layout);
-        kendaraanFormPanel2Layout.setHorizontalGroup(
-            kendaraanFormPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 262, Short.MAX_VALUE)
+        jenisProdukInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        jenisProdukInputLabel.setForeground(new java.awt.Color(137, 92, 3));
+        jenisProdukInputLabel.setText("Jenis Produk");
+
+        jenisProdukInputButton.setBackground(new java.awt.Color(70, 39, 7));
+        jenisProdukInputButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        jenisProdukInputButton.setForeground(new java.awt.Color(255, 255, 255));
+        jenisProdukInputButton.setText("Minuman");
+        jenisProdukInputButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jenisProdukInputButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jenisProdukInputPanel1Layout = new javax.swing.GroupLayout(jenisProdukInputPanel1);
+        jenisProdukInputPanel1.setLayout(jenisProdukInputPanel1Layout);
+        jenisProdukInputPanel1Layout.setHorizontalGroup(
+            jenisProdukInputPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jenisProdukInputPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jenisProdukInputPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jenisProdukInputPanel1Layout.createSequentialGroup()
+                        .addComponent(jenisProdukInputButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jenisProdukInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
-        kendaraanFormPanel2Layout.setVerticalGroup(
-            kendaraanFormPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 43, Short.MAX_VALUE)
+        jenisProdukInputPanel1Layout.setVerticalGroup(
+            jenisProdukInputPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jenisProdukInputPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jenisProdukInputLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jenisProdukInputButton, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout ProdukFormPanelLayout = new javax.swing.GroupLayout(ProdukFormPanel);
@@ -639,11 +669,9 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                                 .addComponent(specialAtributeInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(ProdukFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ProdukFormPanelLayout.createSequentialGroup()
-                                .addComponent(kendaraanFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 6, Short.MAX_VALUE))
                             .addComponent(jenisProdukInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(hargaProdukInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(hargaProdukInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jenisProdukInputPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         ProdukFormPanelLayout.setVerticalGroup(
@@ -661,8 +689,8 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                     .addComponent(jenisProdukInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(ProdukFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(kendaraanFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(specialAtributeInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(specialAtributeInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jenisProdukInputPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -839,8 +867,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                             .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(kendaraanFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(specialAtributeInputPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -918,7 +945,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
             switch (action) {
                 case "add":
                     pesanan = new Pesanan(idPesananInputTextField.getText(),
-                            idProdukInputTextField.getText(), namaProdukInputTextField.getText(),
+                            idProdukInputTextField.getText(), namaProdukInputTextField.getText(), jenisProdukInputButton.getText(),
                             Integer.parseInt(jumlahProdukInputTextfield.getText()),
                             (Float.parseFloat(hargaProdukInputTextfield.getText()) * Integer.parseInt(jumlahProdukInputTextfield.getText()))
                     );
@@ -930,7 +957,13 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                             p.setId_menu(idProdukInputTextField.getText());
                             p.setNamaMenu(namaProdukInputTextField.getText());
                             p.setJumlah(Integer.parseInt(jumlahProdukInputTextfield.getText()));
-                            p.setSub_total(menuControl.searchHarga(idProdukInputTextField.getText()) * Integer.parseInt(jumlahProdukInputTextfield.getText()));
+                            if(minumanControl.searchHarga(idProdukInputTextField.getText()) != 0){
+                                p.setSub_total(minumanControl.searchHarga(idProdukInputTextField.getText()) * Integer.parseInt(jumlahProdukInputTextfield.getText()));
+                            }else{
+                                p.setSub_total(makananControl.searchHarga(idProdukInputTextField.getText()) * Integer.parseInt(jumlahProdukInputTextfield.getText()));
+                            }
+                            
+                            
                             break;
                         }
                     }
@@ -979,6 +1012,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         idProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 0).toString());
         namaProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
         specialAtributeInputLabel.setText("Catatan");
+        jenisProdukInputButton.setText("Makanan");
         specialAtributeInputTextfield.setText(tableModel.getValueAt(clickedRow, 3).toString());
         hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString().replace("Rp ", ""));
     }//GEN-LAST:event_tabelMakananMouseClicked
@@ -1021,6 +1055,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         specialAtributeInputLabel.setText("Ukuran");
         specialAtributeInputTextfield.setText(tableModel.getValueAt(clickedRow, 3).toString());
         hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString().replace("Rp ", ""));
+        jenisProdukInputButton.setText("Minuman");
         cancelButton.setEnabled(true);
     }//GEN-LAST:event_tabelMinumanMouseClicked
 
@@ -1059,7 +1094,11 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         namaProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
         specialAtributeInputLabel.setText("    ");
         jumlahProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 2).toString());
-        hargaProdukInputTextfield.setText(String.valueOf(menuControl.searchHarga(idProdukInputTextField.getText())));
+        if(jenisProdukInputButton.equals("Minuman")){
+            hargaProdukInputTextfield.setText(String.valueOf(minumanControl.searchHarga(idProdukInputTextField.getText())));
+        }else{
+            hargaProdukInputTextfield.setText(String.valueOf(makananControl.searchHarga(idProdukInputTextField.getText())));
+        }  
     }//GEN-LAST:event_tabelPesananMouseClicked
 
     private void simpanTransaksiProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanTransaksiProdukButtonActionPerformed
@@ -1134,6 +1173,19 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         simpanTransaksiProdukButton.setEnabled(true);
     }//GEN-LAST:event_barukanProdukButtonActionPerformed
 
+    private void jenisProdukInputButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jenisProdukInputButtonActionPerformed
+        // TODO add your handling code here:
+        switch (jenisProdukInputButton.getText()) {
+            case "Makanan":
+            jenisProdukInputButton.setText("Minuman");
+            break;
+            case "Minuman":
+            jenisProdukInputButton.setText("Makanan");
+            break;
+        }
+        setSpecialAtributeLabel();
+    }//GEN-LAST:event_jenisProdukInputButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ProdukButtonPanel;
     private javax.swing.JPanel ProdukFormPanel;
@@ -1155,9 +1207,11 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     private javax.swing.JTextField idProdukInputTextField;
     private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JButton jenisProdukInputButton;
+    private javax.swing.JLabel jenisProdukInputLabel;
     private javax.swing.JPanel jenisProdukInputPanel;
+    private javax.swing.JPanel jenisProdukInputPanel1;
     private javax.swing.JTextField jumlahProdukInputTextfield;
-    private javax.swing.JPanel kendaraanFormPanel2;
     private javax.swing.JPanel kendaraanFormPanel3;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JScrollPane makananScrollPane;

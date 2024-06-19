@@ -17,7 +17,6 @@ import javax.swing.table.TableRowSorter;
 import model.Karyawan;
 
 public class laporanMainPanel extends javax.swing.JPanel {
-
     private final PesananControl pc=null;
     private final TransaksiControl tc;
     private Karyawan k = null;
@@ -26,8 +25,8 @@ public class laporanMainPanel extends javax.swing.JPanel {
     private Component rootPane;
 
     public laporanMainPanel() {
-        initComponents();
         tc = new TransaksiControl(new TransaksiDAO());
+        initComponents();
         showTransaksi();
     }
 
@@ -64,7 +63,6 @@ public class laporanMainPanel extends javax.swing.JPanel {
 
     private void showTransaksi() {
         tabelKaryawan.setModel(tc.showTableBySearch(""));
-        
         addHeaderClickListener(tabelKaryawan);
     }
 
