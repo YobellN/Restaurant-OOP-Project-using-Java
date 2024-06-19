@@ -2,6 +2,7 @@ package panelView;
 
 import control.ReservasiControl;
 import control.PelangganControl;
+import dao.PelangganDAO;
 
 import exception.InputKosongException;
 
@@ -118,7 +119,7 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
         setOpaque(false);
         
         junctionControl = new ReservasiControl();
-        singleDataControl = new PelangganControl();
+        singleDataControl = new PelangganControl(new PelangganDAO());
         
         setPelangganToDropdown();
         setRadioButtonValue();

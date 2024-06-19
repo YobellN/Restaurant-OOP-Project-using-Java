@@ -1,6 +1,7 @@
 package panelView;
 
 import control.PelangganControl;
+import dao.PelangganDAO;
 import java.awt.Component;
 import exception.InputKosongException;
 import exception.InputHarusAngkaException;
@@ -15,7 +16,7 @@ import model.Pelanggan;
 
 public class PelangganMainPanel extends javax.swing.JPanel {
 
-    private PelangganControl pc = new PelangganControl();
+    private PelangganControl pc;
     private Pelanggan p = null;
     String actionPelanggan = null;
 
@@ -23,6 +24,7 @@ public class PelangganMainPanel extends javax.swing.JPanel {
     private String selectedId = "";
 
     public PelangganMainPanel() {
+        pc = new PelangganControl(new PelangganDAO());
         initComponents();
         setOpaque(false);
         showPelanggan();
@@ -76,7 +78,7 @@ public class PelangganMainPanel extends javax.swing.JPanel {
     }
     
     public void showPelanggan(){
-        tabelPelanggan.setModel(pc.showTable(""));
+        tabelPelanggan.setModel(pc.showTableBySearch(""));
         addHeaderClickListener(tabelPelanggan);
     }
 
@@ -85,17 +87,8 @@ public class PelangganMainPanel extends javax.swing.JPanel {
             return;
         }
 
-        p = pc.searchDataPelanggan(searchKaryawanInputTextField.getText()); // mencari berdasarkan ID
-
         if (p != null) { // jika ketemu datanya
-            tabelPelanggan.setModel(pc.showTable(searchKaryawanInputTextField.getText()));
-//            setKaryawanEditDeleteButton(true); // maka tombol edit dan delete dibuka
-//            namaKaryawanInputTextField.setText(k.getNama_karyawan()); // // mencopy data yang ditemukan di field input
-//            gajiKaryawanInputTextfield.setText(Float.toString(k.getGaji()));
-//            usernameKaryawanInputTextField.setText(k.getUsername());
-//            passwordKaryawanInputTextField.setText(k.getPassword());
-//            jabatanInputButton.setText(k.getJabatan());
-//            idKaryawanInputTextField.setText(k.getId_karyawan());
+            tabelPelanggan.setModel(pc.showTableBySearch(searchKaryawanInputTextField.getText()));
         } else {
             JOptionPane.showMessageDialog(rootPane, "NOT FOUND !!!");
         }
@@ -441,7 +434,6 @@ public class PelangganMainPanel extends javax.swing.JPanel {
             }
         });
 
-        tabelPelanggan.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 14)); // NOI18N
         tabelPelanggan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -566,7 +558,7 @@ public class PelangganMainPanel extends javax.swing.JPanel {
             return;
         }
 
-        pc.deleteDataPelanggan(idPelangganInputTextField.getText()); // delete berdasarkan id
+        pc.delete(idPelangganInputTextField.getText()); // delete berdasarkan id
         clearText(); // bersihin field input
         setPelangganEditDeleteButton(false); 
         setComponentsPelanggan(false); // tutup field input
@@ -598,7 +590,7 @@ public class PelangganMainPanel extends javax.swing.JPanel {
             switch (actionPelanggan) {
                 case "add":
                     p = new Pelanggan (idPelangganInputTextField.getText(), namaPelangganInputTextfield.getText(), alamatInputTextField.getText(),nomorTeleponInputTextField.getText());
-                    pc.insertDataPelanggan(p);
+                    pc.insert(p);
                     clearText();
                     setPelangganEditDeleteButton(false);
                     setComponentsPelanggan(false);
@@ -606,7 +598,7 @@ public class PelangganMainPanel extends javax.swing.JPanel {
                     break;
                 case "update":
                     p = new Pelanggan (namaPelangganInputTextfield.getText(),alamatInputTextField.getText(),nomorTeleponInputTextField.getText());
-                    pc.updateDataPelanggan(p);
+                    pc.update(p);
                     clearText();
                     setPelangganEditDeleteButton(false);
                     setComponentsPelanggan(false);

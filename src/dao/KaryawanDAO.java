@@ -1,15 +1,15 @@
 package dao;
 
 import connection.DbConnection;
-import interfaceDAO.IDAO;
-import interfaceDAO.IGenerateID;
+import interface_DAO.IDAO;
+import interface_Control.IGenerateID;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Karyawan;
-import interfaceDAO.ISearchData;
+import interface_DAO.ISearchData;
 
 public class KaryawanDAO implements IDAO<Karyawan, String>, ISearchData<Karyawan, String>, IGenerateID { 
 

@@ -5,18 +5,18 @@
 package dao;
 
 import connection.DbConnection;
-import interfaceDAO.IDAO;
-import interfaceDAO.IGenerateID;
-import interfaceDAO.ISearchData;
+import interface_DAO.IDAO;
+import interface_Control.IGenerateID;
+import interface_DAO.ISearchData;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Pelanggan;
-import interfaceDAO.IShowForDropdown;
+import interface_DAO.IShowDataList;
 
-public class PelangganDAO implements IDAO<Pelanggan, String>, IShowForDropdown<Pelanggan>, ISearchData<Pelanggan, String>, IGenerateID{
+public class PelangganDAO implements IDAO<Pelanggan, String>, IShowDataList<Pelanggan>, ISearchData<Pelanggan, String>, IGenerateID{
     private DbConnection dbCon = new DbConnection();
     private Connection con;
     
@@ -147,7 +147,7 @@ public class PelangganDAO implements IDAO<Pelanggan, String>, IShowForDropdown<P
     }
     
 
-    public List<Pelanggan> IShowForDropdown(){
+    public List<Pelanggan> showDataList(){
         con = dbCon.makeConnection();
         
         String sql = "SELECT * FROM pelanggan";

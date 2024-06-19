@@ -3,7 +3,7 @@ package dao;
 import java.sql.Statement;
 import model.Menu;
 import model.Minuman;
-import interfaceDAO.IMenuDAO;
+import interface_DAO.IMenuDAO;
 
 public class MinumanDAO extends MenuDAO implements IMenuDAO{
     public void insert(Minuman mn){

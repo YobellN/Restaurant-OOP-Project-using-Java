@@ -1,42 +1,52 @@
 package control;
 
 import dao.KaryawanDAO;
+import interface_Control.IKaryawanControl;
 import java.util.List;
 import model.Karyawan;
 import table.TabelKaryawan;
 
-public class KaryawanControl {
-    KaryawanDAO kDao = new KaryawanDAO();
-    
-    public String generateId(){ // DIPAKAI UNTUK MEMBUAT ID KARYAWAN
-        return "K"+kDao.generateId();
-    } // Membuat Id dengan awal K dan angka terbesar
+public class KaryawanControl implements IKaryawanControl {
+    private KaryawanDAO kDao;
 
-    public void insertDataKaryawan(Karyawan K){ // DIPAKAI UNTUK MEMASUKKAN DATA DARI OBJEK KE mySQL
-        K.setId_karyawan(generateId());
-        kDao.insert(K);
-    } // memasukkan id dari generateID ke objek karyawan lalu insert K ke DAO
-    
-    public Karyawan searchDataKaryawan (String data){ // DIPAKAI UNTUK MENCARI DATA KARYAWAN
-        return kDao.search(data);
-    } // mencari karyawan berdasarkan id, nama, jabatan, username lalu return tipe data karyawan
+    public KaryawanControl(KaryawanDAO kDao) {
+        this.kDao = kDao;
+    }
 
-    public void updateDataKaryawan(Karyawan K){ // DIPAKAI UNTUK UPDATE DATA KARYAWAN
-        kDao.update(K, K.getId_karyawan());
-    } // update isi?
-    
-    public void deleteDataKaryawan(String id){ // DIPAKAI UNTUK MENGHAPUS DATA KARYAWAN
+    @Override
+    public void insert(Karyawan karyawan) {
+        karyawan.setId_karyawan(generateId());
+        kDao.insert(karyawan);
+    }
+
+    @Override
+    public void update(Karyawan karyawan) {
+        kDao.update(karyawan, karyawan.getId_karyawan());
+    }
+
+    @Override
+    public void delete(String id) {
         kDao.delete(id);
-    } // menghapus karyawan di database berdasarkan id
-    
-    public TabelKaryawan showTable(String target){ // DIPAKAI UNTUK SHOW TABLE
-        List<Karyawan> data = kDao.showData(target);
-        TabelKaryawan tabelKaryawan = new TabelKaryawan(data);
+    }
 
-        return tabelKaryawan;
+    @Override
+    public String generateId() {
+        return "K" + kDao.generateId();
+    }
+
+    @Override
+    public TabelKaryawan showTableBySearch(String search) {
+        List<Karyawan> data = kDao.showData(search);
+        return new TabelKaryawan(data);
+    }
+
+    @Override
+    public Karyawan searchDataKaryawan(String id) {
+        return kDao.search(id);
     }
     
-    public boolean loginKaryawan(String user, String pass, String id){ //DIPAKAI UNTUK LOGIN AWAL
+    @Override
+    public boolean loginKaryawan(String user, String pass, String id){
         return kDao.cekLogin(user, pass, id);
     }
 }

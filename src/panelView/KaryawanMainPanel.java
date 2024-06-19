@@ -1,6 +1,7 @@
 package panelView;
 
 import control.KaryawanControl;
+import dao.KaryawanDAO;
 import java.awt.Component;
 import exception.InputKosongException;
 import exception.InputHarusAngkaException;
@@ -16,7 +17,7 @@ import model.Karyawan;
 
 public class KaryawanMainPanel extends javax.swing.JPanel {
 
-    private final KaryawanControl kc = new KaryawanControl();
+    private final KaryawanControl kc;
     private Karyawan k = null;
     String actionKaryawan = null;
 
@@ -24,6 +25,7 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
 
     public KaryawanMainPanel() {
         initComponents();
+        kc = new KaryawanControl(new KaryawanDAO());
         showKaryawan();
         setComponentsKaryawan(false);
         idKaryawanInputTextField.setEnabled(false); // langsung false saja karena rencananya id gak bisa di ubah
@@ -95,7 +97,7 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
     }
 
     private void showKaryawan() {
-        tabelKaryawan.setModel(kc.showTable(""));
+        tabelKaryawan.setModel(kc.showTableBySearch(""));
         addHeaderClickListener(tabelKaryawan);
     }
 
@@ -103,11 +105,8 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
         if (searchKaryawanInputTextField.getText().isEmpty()) {
             return;
         }
-
-        k = kc.searchDataKaryawan(searchKaryawanInputTextField.getText()); // mencari berdasarkan ID
-
         if (k != null) { // jika ketemu datanya
-            tabelKaryawan.setModel(kc.showTable(searchKaryawanInputTextField.getText())); // maka akan show berdasarkan pencarian
+            tabelKaryawan.setModel(kc.showTableBySearch(searchKaryawanInputTextField.getText())); // maka akan show berdasarkan pencarian
         } else {
             JOptionPane.showMessageDialog(rootPane, "NOT FOUND !!!");
         }
@@ -516,7 +515,6 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
             }
         });
 
-        tabelKaryawan.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 14)); // NOI18N
         tabelKaryawan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -638,7 +636,7 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
             return;
         }
 
-        kc.deleteDataKaryawan(idKaryawanInputTextField.getText()); // delete berdasarkan id
+        kc.delete(idKaryawanInputTextField.getText()); // delete berdasarkan id
         clearText(); // bersihin field input
         setKaryawanEditDeleteButton(false);
         setComponentsKaryawan(false); // tutup field input
@@ -681,11 +679,11 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
             switch (actionKaryawan) {
                 case "add":
                     k = new Karyawan(idKaryawanInputTextField.getText(), namaKaryawanInputTextField.getText(), jabatanInputButton.getText(), Float.parseFloat(gajiKaryawanInputTextfield.getText()), usernameKaryawanInputTextField.getText(), passwordKaryawanInputTextField.getText());
-                    kc.insertDataKaryawan(k);
+                    kc.insert(k);
                     break;
                 case "update":
                     k = new Karyawan(idKaryawanInputTextField.getText(), namaKaryawanInputTextField.getText(), jabatanInputButton.getText(), Float.parseFloat(gajiKaryawanInputTextfield.getText()), usernameKaryawanInputTextField.getText(), passwordKaryawanInputTextField.getText());
-                    kc.updateDataKaryawan(k);
+                    kc.insert(k);
                     break;
                 default:
                     break;

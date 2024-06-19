@@ -5,6 +5,7 @@
 package control;
 
 import dao.PelangganDAO;
+import interface_Control.IPelangganControl;
 import java.util.List;
 import model.Pelanggan;
 import table.TabelPelanggan;
@@ -13,39 +14,47 @@ import table.TabelPelanggan;
  *
  * @author yobel
  */
-public class PelangganControl {
-    PelangganDAO pDao = new PelangganDAO();
-    
-    public String generateId(){
-        return "P-"+pDao.generateId();
-    } // Membuat Id dengan awal K dan angka terbesar
+public class PelangganControl implements IPelangganControl {
+    private PelangganDAO pDao;
 
-    public void insertDataPelanggan(Pelanggan P){
-        P.setId_pelanggan(generateId());
-        pDao.insert(P);
-    } // memasukkan id dari generateID ke objek karyawan lalu insert K ke DAO
-    
-    public Pelanggan searchDataPelanggan (String data){
-        return pDao.search(data);
-    } // mencari karyawan berdasarkan id, nama, jabatan, username lalu return tipe data karyawan
+    public PelangganControl(PelangganDAO pDao) {
+        this.pDao = pDao;
+    }
 
-    public void updateDataPelanggan(Pelanggan P){
-        pDao.update(P, P.getId_pelanggan());
-    } // update isi?
-    
-    public void deleteDataPelanggan(String id){
+    @Override
+    public void insert(Pelanggan pelanggan) {
+        pelanggan.setId_pelanggan(generateId());
+        pDao.insert(pelanggan);
+    }
+
+    @Override
+    public void update(Pelanggan pelanggan) {
+        pDao.update(pelanggan, pelanggan.getId_pelanggan());
+    }
+
+    @Override
+    public void delete(String id) {
         pDao.delete(id);
-    } // menghapus karyawan di database berdasarkan id
-    
-    public TabelPelanggan showTable(String target){
-        List<Pelanggan> data = pDao.showData(target);
-        TabelPelanggan tabelPelanggan = new TabelPelanggan(data);
+    }
 
-        return tabelPelanggan;
+    @Override
+    public String generateId() {
+        return "P-" + pDao.generateId();
+    }
+
+    @Override
+    public TabelPelanggan showTableBySearch(String search) {
+        List<Pelanggan> data = pDao.showData(search);
+        return new TabelPelanggan(data);
+    }
+
+    @Override
+    public Pelanggan searchDataPelanggan(String id) {
+        return pDao.search(id);
     }
     
     public List<Pelanggan> showListPelanggan(){
-        List<Pelanggan> dataPelanggan = pDao.IShowForDropdown();
+        List<Pelanggan> dataPelanggan = pDao.showDataList();
         return dataPelanggan;
     }
 }

@@ -1,10 +1,9 @@
 package dao;
 
 import connection.DbConnection;
-import interfaceDAO.IDAO;
-import interfaceDAO.IGenerateID;
-import interfaceDAO.ISearchData;
-import interfaceDAO.IShowForDropdown;
+import interface_DAO.IDAO;
+import interface_Control.IGenerateID;
+import interface_DAO.ISearchData;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -12,9 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 import model.*;
 
-public class ReservasiDAO implements IDAO<Reservasi, String>, IShowForDropdown<Reservasi>, IGenerateID, ISearchData<Reservasi, String>{
-    private DbConnection dbCon = new DbConnection();
-    private Connection con;
+/**
+ *
+ * @author Lenovo
+ */
+public class ReservasiDAO implements IDAO<Reservasi, String>, IGenerateID, ISearchData<Reservasi, String>{
+    protected DbConnection dbCon = new DbConnection();
+    protected Connection con;
     
     @Override
     public void insert(Reservasi R){
@@ -173,7 +176,7 @@ public class ReservasiDAO implements IDAO<Reservasi, String>, IShowForDropdown<R
         }
         dbCon.closeConnection();
     }
-
+    
     @Override
     public int generateId() {
         con = dbCon.makeConnection();
@@ -202,10 +205,5 @@ public class ReservasiDAO implements IDAO<Reservasi, String>, IShowForDropdown<R
         }
         dbCon.closeConnection();
         return id;
-    }
-    
-    @Override
-    public List<Reservasi> IShowForDropdown(){
-        return null;
     }
 }

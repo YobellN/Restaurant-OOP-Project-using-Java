@@ -2,28 +2,20 @@ package dao;
 
 import com.mysql.jdbc.PreparedStatement;
 import connection.DbConnection;
-import interfaceDAO.IDAO;
-import interfaceDAO.IGenerateID;
-import interfaceDAO.ISearchData;
-import interfaceDAO.ISearchDataMenu;
-import interfaceDAO.IShowForDropdown;
-import java.io.File;
+import interface_DAO.IDAO;
+import interface_Control.IGenerateID;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Menu;
 import model.Makanan;
 import model.Minuman;
+import interface_DAO.IShowDataList;
 
-public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, IGenerateID {
+public class MenuDAO implements IDAO<Menu, String>, IShowDataList<Menu>, IGenerateID {
 
     protected DbConnection dbCon = new DbConnection();
     protected Connection con;
@@ -250,7 +242,7 @@ public class MenuDAO implements IDAO<Menu, String>, IShowForDropdown<Menu>, IGen
     }
 
     @Override
-    public List<Menu> IShowForDropdown() {
+    public List<Menu> showDataList() {
         con = dbCon.makeConnection();
 
         String sql = "SELECT M.*, MK.catatan, MN.ukuran FROM menu M "

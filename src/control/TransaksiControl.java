@@ -5,6 +5,7 @@
 package control;
 
 import dao.TransaksiDAO;
+import interface_Control.ITransaksiControl;
 import java.util.List;
 import model.Transaksi;
 import table.TabelTransaksi;
@@ -13,38 +14,48 @@ import table.TabelTransaksi;
  *
  * @author Tok Se Ka 220711904
  */
-public class TransaksiControl {
-    TransaksiDAO kDao = new TransaksiDAO();
-    
-    public String generateId(){ // DIPAKAI UNTUK MEMBUAT ID BARU
-        return "T"+kDao.generateId();
+public class TransaksiControl implements ITransaksiControl {
+    private TransaksiDAO kDao;
+
+    public TransaksiControl(TransaksiDAO kDao) {
+        this.kDao = kDao;
     }
 
-    public void insertDataTransaksi(Transaksi K){ // DIPAKAI UNTUK MEMASUKKAN TRANSAKSI KE SQL
-        K.setId_pesanan(generateId());
-        kDao.insert(K);
-    } 
-    
-    public void insertTotalHarga(Transaksi K){ // DIPAKAI UNTUK INSERT HARGA 
-        kDao.updateHarga(K);
+    @Override
+    public String generateId() {
+        return "T" + kDao.generateId();
     }
 
-    public void updateDataTransaksi(Transaksi K){
-        kDao.update(K, K.getId_pesanan());
-    } // update isi?
-    
-    public void deleteDataTransaksi(String idTransaksi, String idMenu){
-        kDao.delete(idTransaksi);
-    } // menghapus karyawan di database berdasarkan id
-    
-    public TabelTransaksi showTable(String target){
-        List<Transaksi> data = kDao.showData(target);
-        TabelTransaksi tabelTransaksi = new TabelTransaksi(data);
+    @Override
+    public void insert(Transaksi transaksi) {
+        transaksi.setId_pesanan(generateId());
+        kDao.insert(transaksi);
+    }
 
-        return tabelTransaksi;
+    @Override
+    public void update(Transaksi transaksi) {
+        kDao.update(transaksi, transaksi.getId_pesanan());
+    }
+
+    @Override
+    public void delete(String id) {
+        kDao.delete(id);
+    }
+
+    @Override
+    public TabelTransaksi showTableBySearch(String search) {
+        List<Transaksi> data = kDao.showData(search);
+        return new TabelTransaksi(data);
+    }
+
+    public void createReceipt(String id_pesanan){
+        kDao.createReceipt(id_pesanan);
     }
     
-//    public void createReceipt(String id_pesanan){
-//        kDao.createReceipt(id_pesanan);
-//    }
+    @Override
+    public void insertTotalHarga(Transaksi transaksi) {
+        kDao.updateHarga(transaksi);
+    }
+
+    
 }

@@ -1,40 +1,56 @@
 package control;
 import dao.MinumanDAO;
+import interface_Control.IMinumanControl;
 import java.util.ArrayList;
 import java.util.List;
 import model.Menu;
 import model.Minuman;
-import table.TabelMakanan;
 import table.TabelMinuman;
 
-public class MinumanControl {
-    MinumanDAO mnDao = new MinumanDAO();
-    
-    public void insertDataMenu(Minuman mn){
-        mn.setId_menu("M"+mnDao.generateId());
-        mnDao.insert(mn);
+public class MinumanControl extends MenuControl<Minuman> implements IMinumanControl {
+
+    public MinumanControl(MinumanDAO mnDao) {
+        super(mnDao);
     }
-    
-    public TabelMinuman showTable() {
-        List<Menu> data = mnDao.showData("Minuman");
-        TabelMinuman tabelMinuman = new TabelMinuman(data);
-        
-        return tabelMinuman;
+
+    @Override
+    protected boolean cekJenis(Menu menu) {
+        return menu instanceof Minuman;
     }
-    
-    public TabelMinuman showTableBySearch(String search){
-        List<Menu> data = mnDao.showData(search);
-        List<Menu> temp = new ArrayList<>();
+
+    @Override
+    public void insert(Minuman mn) {
+        mn.setId_menu(generateId());
+        ((MinumanDAO) mDao).insert(mn);  // Cast to MinumanDAO
+    }
+
+    @Override
+    public void update(Minuman mn) {
+        ((MinumanDAO) mDao).update(mn, mn.getId_menu(), mn.getUkuran());  // Cast to MinumanDAO
+    }
+
+    @Override
+    public TabelMinuman showTableBySearch(String search) {
+        List<Menu> data = mDao.showData(search);
+        List<Minuman> temp = new ArrayList<>();
         for (Menu menu : data) {
-            if (menu.getJenis_menu().equals("Minuman")) {
-                temp.add(menu);
+            if (menu.getJenis_menu().equals("Minuman") && cekJenis(menu)) {
+                temp.add((Minuman) menu);
+                System.out.println("Adding Minuman");
             }
         }
-        TabelMinuman tabelMinuman = new TabelMinuman(temp);
-        return tabelMinuman;
+        return new TabelMinuman(temp);
     }
-    
-    public void updateDataProduk(Minuman mn){
-        mnDao.update(mn, mn.getId_menu(), mn.getUkuran());
+
+    @Override
+    public List<Minuman> showListMenu() {
+        List<Menu> data = mDao.showDataList();
+        List<Minuman> temp = new ArrayList<>();
+        for (Menu menu : data) {
+            if (cekJenis(menu)) {
+                temp.add((Minuman) menu);
+            }
+        }
+        return temp;
     }
 }

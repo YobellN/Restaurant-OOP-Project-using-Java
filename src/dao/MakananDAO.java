@@ -3,7 +3,7 @@ package dao;
 import java.sql.Statement;
 import model.Menu;
 import model.Makanan;
-import interfaceDAO.IMenuDAO;
+import interface_DAO.IMenuDAO;
 import java.util.List;
 
 public class MakananDAO extends MenuDAO implements IMenuDAO{

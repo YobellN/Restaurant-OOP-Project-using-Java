@@ -7,6 +7,8 @@ package panelView;
 import control.MenuControl;
 import control.MinumanControl;
 import control.MakananControl;
+import dao.MakananDAO;
+import dao.MinumanDAO;
 import java.awt.Component;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -36,9 +38,9 @@ import model.Minuman;
 import model.Makanan;
 
 public class MenuMainPanel extends javax.swing.JPanel {
-    private MenuControl menuControl = new MenuControl();
-    private MakananControl makananControl = new MakananControl();
-    private MinumanControl minumanControl = new MinumanControl();
+    private MenuControl menuControl;
+    private MinumanControl minumanControl = null;
+    private MakananControl makananControl = null;
     private Menu menu = null;
     private Minuman minuman = null;
     private Makanan makanan = null;
@@ -65,10 +67,11 @@ public class MenuMainPanel extends javax.swing.JPanel {
     
     public MenuMainPanel() {
         initComponents();
+        makananControl = new MakananControl(new MakananDAO());
+        minumanControl = new MinumanControl(new MinumanDAO());
         setComponentsData(false);
         showTableBySearch("");
         setEditDeleteButton(false);
-        
         clearTextData();
     }
     
@@ -180,8 +183,12 @@ public class MenuMainPanel extends javax.swing.JPanel {
 
     
     private void showTableBySearch(String target){
-        tabelMakanan.setModel(makananControl.showTableBySearch(target));
-        tabelMinuman.setModel(minumanControl.showTableBySearch(target));
+        if (makananControl != null) {
+            tabelMakanan.setModel(makananControl.showTableBySearch(target));
+        }
+        if (minumanControl != null) {
+            tabelMinuman.setModel(minumanControl.showTableBySearch(target));
+        }
         addHeaderClickListener(tabelMakanan);
         addHeaderClickListener(tabelMinuman);
     }
@@ -752,7 +759,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
         if( opsi == JOptionPane.NO_OPTION || opsi == JOptionPane.CLOSED_OPTION)
         return;
 
-        menuControl.deleteDataMenu(idProdukInputTextField.getText());
+        menuControl.delete(idProdukInputTextField.getText());
         clearTextData();
         setEditDeleteButton(false);
         setComponentsData(false);
@@ -815,11 +822,11 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 if(makananIsSelected()){
                     makanan = new Makanan(specialAtributeInputTextfield.getText(), namaProdukInputTextField.getText(),
                         jenisProdukInputButton.getText(), Float.parseFloat(hargaProdukInputTextfield.getText()), gambarBytes);
-                    makananControl.insertDataMenu(makanan);
+                    makananControl.insert(makanan);
                 }else{
                     minuman = new Minuman(specialAtributeInputTextfield.getText(), namaProdukInputTextField.getText(),
                         jenisProdukInputButton.getText(), Float.parseFloat(hargaProdukInputTextfield.getText()), gambarBytes);
-                    minumanControl.insertDataMenu(minuman);
+                    minumanControl.insert(minuman);
                 }
                 clearTextData();
                 setEditDeleteButton(false);
@@ -835,7 +842,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
                     } catch (IOException ex) {
                         Logger.getLogger(MenuMainPanel.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                        makananControl.updateDataProduk(makanan);
+                        makananControl.update(makanan);
                 }else{
                     try {
                         minuman = new Minuman(specialAtributeInputTextfield.getText(),idProdukInputTextField.getText(), namaProdukInputTextField.getText(),
@@ -843,7 +850,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
                     } catch (IOException ex) {
                         Logger.getLogger(MenuMainPanel.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    minumanControl.updateDataProduk(minuman);
+                    minumanControl.update(minuman);
                 }
                 clearTextData();
                 setEditDeleteButton(false);
