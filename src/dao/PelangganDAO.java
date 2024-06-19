@@ -113,7 +113,7 @@ public class PelangganDAO implements IDAO<Pelanggan, String>, IShowForDropdown<P
                 + "`nama_pelanggan`='" + c.getNama_pelanggan()+ "',"
                 + "`alamat`='" + c.getAlamat_pelanggan()+ "',"
                 + "`nomor_telepon`='" + c.getNomor_telepon()+ "' "
-                + "WHERE `id_pelanggan`='" + c.getAlamat_pelanggan() + "'";
+                + "WHERE `id_pelanggan`='" + id_pelanggan + "'";
         System.out.println("Updating pelanggan");
         
         try{
@@ -131,7 +131,7 @@ public class PelangganDAO implements IDAO<Pelanggan, String>, IShowForDropdown<P
     @Override
     public void delete(String id_pelanggan){
         con = dbCon.makeConnection();
-        String sql = "DELETE FROM `pelanggan` WHERE `id_pelanggan` = " + id_pelanggan + "";
+        String sql = "DELETE FROM `pelanggan` WHERE `id_pelanggan` = '" + id_pelanggan + "'";
         System.out.println("Deleting Pelanggan...");
         
         try{

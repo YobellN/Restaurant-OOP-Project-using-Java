@@ -4,7 +4,6 @@
  */
 package control;
 
-import dao.KaryawanDAO;
 import dao.PelangganDAO;
 import java.util.List;
 import model.Pelanggan;
@@ -43,5 +42,10 @@ public class PelangganControl {
         TabelPelanggan tabelPelanggan = new TabelPelanggan(data);
 
         return tabelPelanggan;
-    } 
+    }
+    
+    public List<Pelanggan> showListPelanggan(){
+        List<Pelanggan> dataPelanggan = pDao.IShowForDropdown();
+        return dataPelanggan;
+    }
 }

@@ -1097,7 +1097,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         // UNTUK SET AKSES FIELD
         setEditDeleteButton(false);
         setComponentsData(false);
-        tc.createReceipt(idPesananInputTextField.getText());
+//        tc.createReceipt(idPesananInputTextField.getText());
         pesananList.removeAll(pesananList); // membersihkan list
         showTabelPesanan();
         showTableMenuBySearch("");

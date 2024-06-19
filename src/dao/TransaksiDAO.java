@@ -20,11 +20,11 @@ import java.util.Map;
 import model.Pelanggan;
 import model.Pesanan;
 import model.Transaksi;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.view.JasperViewer;
+//import net.sf.jasperreports.engine.JasperCompileManager;
+//import net.sf.jasperreports.engine.JasperFillManager;
+//import net.sf.jasperreports.engine.JasperPrint;
+//import net.sf.jasperreports.engine.JasperReport;
+//import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -222,27 +222,27 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IGenerateID{
         dbCon.closeConnection();
     }
    
-    public void createReceipt(String id_pesanan) {
-        con = dbCon.makeConnection();
-        try {
-            String reportSrcFile = "C:\\Users\\yobel"
-                    + "\\OneDrive - Universitas Atma Jaya Yogyakarta\\"
-                    + "Documents\\tugas\\PBO\\TubesPBO\\"
-                    + "TubesPBO_Restoran\\src\\report\\transaksiReport.jrxml";
-            JasperReport jasperReport = JasperCompileManager.compileReport(reportSrcFile);
-
-            Map<String, Object> parameters = new HashMap<>();
-            parameters.put("id_pesanan", id_pesanan);
-
-            
-
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, con);
-
-            JasperViewer.viewReport(jasperPrint, false);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } 
-    }
+//    public void createReceipt(String id_pesanan) {
+//        con = dbCon.makeConnection();
+//        try {
+//            String reportSrcFile = "C:\\Users\\yobel"
+//                    + "\\OneDrive - Universitas Atma Jaya Yogyakarta\\"
+//                    + "Documents\\tugas\\PBO\\TubesPBO\\"
+//                    + "TubesPBO_Restoran\\src\\report\\transaksiReport.jrxml";
+//            JasperReport jasperReport = JasperCompileManager.compileReport(reportSrcFile);
+//
+//            Map<String, Object> parameters = new HashMap<>();
+//            parameters.put("id_pesanan", id_pesanan);
+//
+//            
+//
+//            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, con);
+//
+//            JasperViewer.viewReport(jasperPrint, false);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } 
+//    }
     
     
 }

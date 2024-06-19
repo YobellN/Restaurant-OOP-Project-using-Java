@@ -2,7 +2,6 @@ package control;
 import dao.MakananDAO;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.table.TableModel;
 import model.Makanan;
 import model.Menu;
 import table.TabelMakanan;

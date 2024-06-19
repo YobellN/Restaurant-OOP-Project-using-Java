@@ -32,6 +32,7 @@ public class MainViewForm extends javax.swing.JFrame {
         transaksiPanelDate.setBackground(new Color(0, 0, 0, 0));
         pesananPanelDate.setBackground(new Color(0, 0, 0, 0));
         laporanPanelDate.setBackground(new Color(0, 0, 0, 0));
+        reservasiPanel.setBackground(new Color(0, 0, 0, 0));
     }
     
     public MainViewForm() {
@@ -65,6 +66,8 @@ public class MainViewForm extends javax.swing.JFrame {
         pesananLabelDate = new javax.swing.JLabel();
         laporanPanelDate = new javax.swing.JPanel();
         pesananLabelDate1 = new javax.swing.JLabel();
+        reservasiPanel = new javax.swing.JPanel();
+        reservasiLabel = new javax.swing.JLabel();
         contentPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -289,14 +292,50 @@ public class MainViewForm extends javax.swing.JFrame {
             laporanPanelDateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(laporanPanelDateLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pesananLabelDate1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pesananLabelDate1, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
                 .addContainerGap())
         );
         laporanPanelDateLayout.setVerticalGroup(
             laporanPanelDateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(laporanPanelDateLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pesananLabelDate1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pesananLabelDate1, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        reservasiPanel.setBackground(new java.awt.Color(229, 171, 89));
+        reservasiPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reservasiPanelMouseClicked(evt);
+            }
+        });
+
+        reservasiLabel.setBackground(new java.awt.Color(229, 171, 89));
+        reservasiLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        reservasiLabel.setForeground(new java.awt.Color(137, 92, 3));
+        reservasiLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        reservasiLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/penitipanIcon.png"))); // NOI18N
+        reservasiLabel.setText("Reservasi");
+        reservasiLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reservasiLabelMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout reservasiPanelLayout = new javax.swing.GroupLayout(reservasiPanel);
+        reservasiPanel.setLayout(reservasiPanelLayout);
+        reservasiPanelLayout.setHorizontalGroup(
+            reservasiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(reservasiPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(reservasiLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        reservasiPanelLayout.setVerticalGroup(
+            reservasiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(reservasiPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(reservasiLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -313,12 +352,13 @@ public class MainViewForm extends javax.swing.JFrame {
                         .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(sidePanelLayout.createSequentialGroup()
                                 .addComponent(logoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(0, 4, Short.MAX_VALUE))
                             .addComponent(transaksiPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(transaksiPanelDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(pesananPanelDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(laporanPanelDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addComponent(reservasiPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         sidePanelLayout.setVerticalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,6 +377,8 @@ public class MainViewForm extends javax.swing.JFrame {
                 .addComponent(pesananPanelDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(laporanPanelDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(reservasiPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -402,7 +444,7 @@ public class MainViewForm extends javax.swing.JFrame {
                 .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(loginButton)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -419,7 +461,7 @@ public class MainViewForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(247, 247, 247)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(291, Short.MAX_VALUE))
+                .addContainerGap(316, Short.MAX_VALUE))
         );
 
         contentPanel.add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -550,6 +592,21 @@ public class MainViewForm extends javax.swing.JFrame {
        
     }//GEN-LAST:event_laporanPanelDateMouseClicked
 
+    private void reservasiLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reservasiLabelMouseClicked
+        if(selectedIndex == 8)
+            return;
+        
+        recolorDefaultSwitchPanel();
+        reservasiPanel.setBackground(new Color(255,204,51));
+        
+        setForm(new ReservasiMainPanel());
+        selectedIndex = 8;
+    }//GEN-LAST:event_reservasiLabelMouseClicked
+
+    private void reservasiPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reservasiPanelMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reservasiPanelMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -605,6 +662,8 @@ public class MainViewForm extends javax.swing.JFrame {
     private javax.swing.JLabel pesananLabelDate;
     private javax.swing.JLabel pesananLabelDate1;
     private javax.swing.JPanel pesananPanelDate;
+    private javax.swing.JLabel reservasiLabel;
+    private javax.swing.JPanel reservasiPanel;
     private javax.swing.JPanel sidePanel;
     private javax.swing.JPanel singlePanel;
     private javax.swing.JLabel transaksiLabel;

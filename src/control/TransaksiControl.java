@@ -44,7 +44,7 @@ public class TransaksiControl {
         return tabelTransaksi;
     }
     
-    public void createReceipt(String id_pesanan){
-        kDao.createReceipt(id_pesanan);
-    }
+//    public void createReceipt(String id_pesanan){
+//        kDao.createReceipt(id_pesanan);
+//    }
 }
