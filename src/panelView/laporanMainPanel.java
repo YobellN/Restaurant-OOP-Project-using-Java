@@ -311,7 +311,6 @@ public class laporanMainPanel extends javax.swing.JPanel {
         searchKendaraanInputPanel.setLayout(searchKendaraanInputPanelLayout);
         searchKendaraanInputPanelLayout.setHorizontalGroup(
             searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
             .addGroup(searchKendaraanInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -358,6 +357,9 @@ public class laporanMainPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(totalOmsetValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(searchKendaraanInputPanelLayout.createSequentialGroup()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         searchKendaraanInputPanelLayout.setVerticalGroup(
             searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

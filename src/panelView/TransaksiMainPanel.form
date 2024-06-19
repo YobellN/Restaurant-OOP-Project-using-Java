@@ -86,7 +86,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="minumanScrollPane" min="-2" pref="605" max="-2" attributes="0"/>
+                                  <Component id="minumanScrollPane" min="-2" pref="600" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
