@@ -238,7 +238,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         specialAtributeInputPanel1 = new javax.swing.JPanel();
         totalProdukInputTextfield = new javax.swing.JTextField();
         totalProdukInputLabel1 = new javax.swing.JLabel();
-        jDateChooser = new com.toedter.calendar.JDateChooser();
 
         mainPanel.setBackground(new java.awt.Color(255, 221, 186));
 
@@ -794,8 +793,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(152, 152, 152)
+                                .addGap(352, 352, 352)
                                 .addComponent(totalProdukInputLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(minumanScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(mainPanelLayout.createSequentialGroup()
@@ -827,12 +825,9 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(minumanScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addComponent(totalProdukInputLabel1)
-                                .addGap(9, 9, 9)
-                                .addComponent(totalProdukInputTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(totalProdukInputLabel1)
+                        .addGap(9, 9, 9)
+                        .addComponent(totalProdukInputTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addGap(21, 21, 21)
@@ -1147,7 +1142,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     private javax.swing.JPanel idProdukInputPanel4;
     private javax.swing.JPanel idProdukInputPanel5;
     private javax.swing.JTextField idProdukInputTextField;
-    private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPanel jenisProdukInputPanel;
     private javax.swing.JTextField jumlahProdukInputTextfield;
