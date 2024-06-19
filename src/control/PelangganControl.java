@@ -39,7 +39,7 @@ public class PelangganControl implements IPelangganControl {
 
     @Override
     public String generateId() {
-        return "P" + pDao.generateId();
+        return "P-" + pDao.generateId();
     }
 
     @Override

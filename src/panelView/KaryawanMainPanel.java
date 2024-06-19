@@ -105,11 +105,8 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
         if (searchKaryawanInputTextField.getText().isEmpty()) {
             return;
         }
-        if (k != null) { // jika ketemu datanya
-            tabelKaryawan.setModel(kc.showTableBySearch(searchKaryawanInputTextField.getText())); // maka akan show berdasarkan pencarian
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "NOT FOUND !!!");
-        }
+        tabelKaryawan.setModel(kc.showTableBySearch(searchKaryawanInputTextField.getText())); // maka akan show berdasarkan pencarian
+        addHeaderClickListener(tabelKaryawan);
     }
 
     /**

@@ -60,13 +60,13 @@ public class MainViewForm1 extends javax.swing.JFrame {
         karyawanPanel = new javax.swing.JPanel();
         menuKaryawan = new javax.swing.JLabel();
         pelangganPanel = new javax.swing.JPanel();
-        pelangganLabel = new javax.swing.JLabel();
         tampilMenuPanel = new javax.swing.JPanel();
-        tampilMenuLabel = new javax.swing.JLabel();
         pesananPanelDate = new javax.swing.JPanel();
-        pesananLabelDate = new javax.swing.JLabel();
         laporanPanelDate = new javax.swing.JPanel();
         pesananLabelDate1 = new javax.swing.JLabel();
+        pelangganLabel = new javax.swing.JLabel();
+        tampilMenuLabel = new javax.swing.JLabel();
+        pesananLabelDate = new javax.swing.JLabel();
         contentPanel = new javax.swing.JPanel();
         panelLogin = new javax.swing.JPanel();
         panelInputLogin = new javax.swing.JPanel();
@@ -182,97 +182,43 @@ public class MainViewForm1 extends javax.swing.JFrame {
         pelangganPanel.setBackground(new java.awt.Color(229, 171, 89));
         pelangganPanel.setPreferredSize(new java.awt.Dimension(78, 37));
 
-        pelangganLabel.setBackground(new java.awt.Color(20, 60, 60));
-        pelangganLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        pelangganLabel.setForeground(new java.awt.Color(137, 92, 3));
-        pelangganLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        pelangganLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-customer-30.png"))); // NOI18N
-        pelangganLabel.setText("Pelanggan");
-        pelangganLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pelangganLabelMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout pelangganPanelLayout = new javax.swing.GroupLayout(pelangganPanel);
         pelangganPanel.setLayout(pelangganPanelLayout);
         pelangganPanelLayout.setHorizontalGroup(
             pelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pelangganPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pelangganLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         pelangganPanelLayout.setVerticalGroup(
             pelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pelangganPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pelangganLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 37, Short.MAX_VALUE)
         );
 
         tampilMenuPanel.setBackground(new java.awt.Color(229, 171, 89));
         tampilMenuPanel.setPreferredSize(new java.awt.Dimension(78, 37));
 
-        tampilMenuLabel.setBackground(new java.awt.Color(229, 171, 89));
-        tampilMenuLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        tampilMenuLabel.setForeground(new java.awt.Color(137, 92, 3));
-        tampilMenuLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        tampilMenuLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-detail-30.png"))); // NOI18N
-        tampilMenuLabel.setText("Tampil Menu");
-        tampilMenuLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tampilMenuLabelMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout tampilMenuPanelLayout = new javax.swing.GroupLayout(tampilMenuPanel);
         tampilMenuPanel.setLayout(tampilMenuPanelLayout);
         tampilMenuPanelLayout.setHorizontalGroup(
             tampilMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tampilMenuPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(tampilMenuLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         tampilMenuPanelLayout.setVerticalGroup(
             tampilMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tampilMenuPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(tampilMenuLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 37, Short.MAX_VALUE)
         );
 
         pesananPanelDate.setBackground(new java.awt.Color(229, 171, 89));
         pesananPanelDate.setPreferredSize(new java.awt.Dimension(78, 37));
 
-        pesananLabelDate.setBackground(new java.awt.Color(229, 171, 89));
-        pesananLabelDate.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        pesananLabelDate.setForeground(new java.awt.Color(137, 92, 3));
-        pesananLabelDate.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        pesananLabelDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/penitipanIcon.png"))); // NOI18N
-        pesananLabelDate.setText("Pesanan");
-        pesananLabelDate.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pesananLabelDateMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout pesananPanelDateLayout = new javax.swing.GroupLayout(pesananPanelDate);
         pesananPanelDate.setLayout(pesananPanelDateLayout);
         pesananPanelDateLayout.setHorizontalGroup(
             pesananPanelDateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pesananPanelDateLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pesananLabelDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         pesananPanelDateLayout.setVerticalGroup(
             pesananPanelDateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pesananPanelDateLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pesananLabelDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 37, Short.MAX_VALUE)
         );
 
         laporanPanelDate.setBackground(new java.awt.Color(229, 171, 89));
@@ -312,6 +258,42 @@ public class MainViewForm1 extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        pelangganLabel.setBackground(new java.awt.Color(20, 60, 60));
+        pelangganLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        pelangganLabel.setForeground(new java.awt.Color(137, 92, 3));
+        pelangganLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        pelangganLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-customer-30.png"))); // NOI18N
+        pelangganLabel.setText("Pelanggan");
+        pelangganLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pelangganLabelMouseClicked(evt);
+            }
+        });
+
+        tampilMenuLabel.setBackground(new java.awt.Color(229, 171, 89));
+        tampilMenuLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        tampilMenuLabel.setForeground(new java.awt.Color(137, 92, 3));
+        tampilMenuLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        tampilMenuLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-detail-30.png"))); // NOI18N
+        tampilMenuLabel.setText("Tampil Menu");
+        tampilMenuLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tampilMenuLabelMouseClicked(evt);
+            }
+        });
+
+        pesananLabelDate.setBackground(new java.awt.Color(229, 171, 89));
+        pesananLabelDate.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        pesananLabelDate.setForeground(new java.awt.Color(137, 92, 3));
+        pesananLabelDate.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        pesananLabelDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/penitipanIcon.png"))); // NOI18N
+        pesananLabelDate.setText("Pesanan");
+        pesananLabelDate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pesananLabelDateMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout sidePanelLayout = new javax.swing.GroupLayout(sidePanel);
         sidePanel.setLayout(sidePanelLayout);
         sidePanelLayout.setHorizontalGroup(
@@ -321,13 +303,16 @@ public class MainViewForm1 extends javax.swing.JFrame {
                 .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(sidePanelLayout.createSequentialGroup()
                         .addComponent(logoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(pelangganPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                    .addComponent(pesananPanelDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                    .addComponent(laporanPanelDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                        .addGap(0, 12, Short.MAX_VALUE))
+                    .addComponent(pelangganPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                    .addComponent(laporanPanelDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
                     .addComponent(menuPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(karyawanPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                    .addComponent(tampilMenuPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
+                    .addComponent(karyawanPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                    .addComponent(tampilMenuPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                    .addComponent(pelangganLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tampilMenuLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pesananLabelDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pesananPanelDate, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
                 .addContainerGap())
         );
         sidePanelLayout.setVerticalGroup(
@@ -341,9 +326,15 @@ public class MainViewForm1 extends javax.swing.JFrame {
                 .addComponent(laporanPanelDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pesananLabelDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(pesananPanelDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(164, 164, 164)
+                .addGap(28, 28, 28)
+                .addComponent(pelangganLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tampilMenuLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(198, 198, 198)
                 .addComponent(pelangganPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(tampilMenuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

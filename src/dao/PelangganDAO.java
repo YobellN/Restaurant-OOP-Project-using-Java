@@ -24,7 +24,7 @@ public class PelangganDAO implements IDAO<Pelanggan, String>, IShowDataList<Pela
     public void insert(Pelanggan C){
         con = dbCon.makeConnection();
         
-    String sql = 
+        String sql = 
         "INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `alamat`, `nomor_telepon`) " +
         "VALUES ('"+C.getId_pelanggan()+"', '"+ C.getNama_pelanggan() +"', '"+ C.getAlamat_pelanggan() +"', '"+ C.getNomor_telepon() +"')";
     
@@ -46,7 +46,7 @@ public class PelangganDAO implements IDAO<Pelanggan, String>, IShowDataList<Pela
     public Pelanggan search(String id_pelanggan){
         con = dbCon.makeConnection();
         
-        String sql = "SELECT * FROM pelanggan WHEWE id_pelanggan ='"+id_pelanggan+"'";
+        String sql = "SELECT * FROM pelanggan WHERE id_pelanggan ='"+id_pelanggan+"'";
         System.out.println("Searching customer...");
         Pelanggan c = null;
         
@@ -76,7 +76,10 @@ public class PelangganDAO implements IDAO<Pelanggan, String>, IShowDataList<Pela
     public List<Pelanggan> showData(String data){
         con = dbCon.makeConnection();
         
-        String sql = "SELECT * FROM pelanggan";
+        String sql = "SELECT * FROM pelanggan WHERE "
+                + "`id_pelanggan` LIKE '%"+ data +"%' OR "
+                + "`nama_pelanggan` LIKE '%"+ data +"%' OR "
+                + "`alamat` LIKE '%"+ data +"%'";
         System.out.println("Fetching Data...");
         List<Pelanggan> c = new ArrayList();
         
@@ -113,7 +116,7 @@ public class PelangganDAO implements IDAO<Pelanggan, String>, IShowDataList<Pela
                 + "`nama_pelanggan`='" + c.getNama_pelanggan()+ "',"
                 + "`alamat`='" + c.getAlamat_pelanggan()+ "',"
                 + "`nomor_telepon`='" + c.getNomor_telepon()+ "' "
-                + "WHERE `id_pelanggan`='" + c.getAlamat_pelanggan() + "'";
+                + "WHERE `id_pelanggan`='" + id_pelanggan + "'";
         System.out.println("Updating pelanggan");
         
         try{
@@ -131,7 +134,7 @@ public class PelangganDAO implements IDAO<Pelanggan, String>, IShowDataList<Pela
     @Override
     public void delete(String id_pelanggan){
         con = dbCon.makeConnection();
-        String sql = "DELETE FROM `pelanggan` WHERE `id_pelanggan` = " + id_pelanggan + "";
+        String sql = "DELETE FROM `pelanggan` WHERE `id_pelanggan` = '" + id_pelanggan + "' ";
         System.out.println("Deleting Pelanggan...");
         
         try{

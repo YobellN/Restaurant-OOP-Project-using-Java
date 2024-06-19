@@ -35,7 +35,7 @@ public class PelangganMainPanel extends javax.swing.JPanel {
     }
 
     public void inputKosongPelangganException() throws InputKosongException {
-        if (idPelangganInputTextField.getText().isEmpty() || namaPelangganInputTextfield.getText().isEmpty()) {
+        if (idPelangganInputTextField.getText().isEmpty() || namaPelangganInputTextfield.getText().isEmpty() || alamatInputTextField.getText().isEmpty() || nomorTeleponInputTextField.getText().isEmpty()) {
             throw new InputKosongException();
         }
     }
@@ -82,16 +82,13 @@ public class PelangganMainPanel extends javax.swing.JPanel {
         addHeaderClickListener(tabelPelanggan);
     }
 
-    private void doSearchKaryawan() { // fungsi untuk search dipakai di : searchKaryawanInputButtonActionPerformed
+    private void doSearchPelanggan() { // fungsi untuk search dipakai di : searchKaryawanInputButtonActionPerformed
         if (searchKaryawanInputTextField.getText().isEmpty()) {
+            showPelanggan();
             return;
         }
-
-        if (p != null) { // jika ketemu datanya
-            tabelPelanggan.setModel(pc.showTableBySearch(searchKaryawanInputTextField.getText()));
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "NOT FOUND !!!");
-        }
+        tabelPelanggan.setModel(pc.showTableBySearch(searchKaryawanInputTextField.getText()));
+        addHeaderClickListener(tabelPelanggan);
     }
 
     private static void addHeaderClickListener(JTable table) {
@@ -544,7 +541,7 @@ public class PelangganMainPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_searchKaryawanInputTextFieldKeyPressed
 
     private void searchKaryawanInputButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchKaryawanInputButtonActionPerformed
-        doSearchKaryawan();
+        doSearchPelanggan();
     }//GEN-LAST:event_searchKaryawanInputButtonActionPerformed
 
     private void barukanKaryawanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barukanKaryawanButtonActionPerformed
@@ -560,6 +557,7 @@ public class PelangganMainPanel extends javax.swing.JPanel {
 
         pc.delete(idPelangganInputTextField.getText()); // delete berdasarkan id
         clearText(); // bersihin field input
+        tambahKaryawanButton.setEnabled(true);
         setPelangganEditDeleteButton(false); 
         setComponentsPelanggan(false); // tutup field input
         showPelanggan(); // melakukan show ulang
@@ -591,18 +589,10 @@ public class PelangganMainPanel extends javax.swing.JPanel {
                 case "add":
                     p = new Pelanggan (idPelangganInputTextField.getText(), namaPelangganInputTextfield.getText(), alamatInputTextField.getText(),nomorTeleponInputTextField.getText());
                     pc.insert(p);
-                    clearText();
-                    setPelangganEditDeleteButton(false);
-                    setComponentsPelanggan(false);
-                    showPelanggan();
                     break;
                 case "update":
-                    p = new Pelanggan (namaPelangganInputTextfield.getText(),alamatInputTextField.getText(),nomorTeleponInputTextField.getText());
+                    p = new Pelanggan (idPelangganInputTextField.getText(), namaPelangganInputTextfield.getText(), alamatInputTextField.getText(),nomorTeleponInputTextField.getText());
                     pc.update(p);
-                    clearText();
-                    setPelangganEditDeleteButton(false);
-                    setComponentsPelanggan(false);
-                    showPelanggan();
                     break;
                 default:
                     break;
@@ -613,6 +603,10 @@ public class PelangganMainPanel extends javax.swing.JPanel {
         } catch (InputHarusAngkaException e2) {
             JOptionPane.showMessageDialog(rootPane, e2.message());
         }
+        clearText();
+        setPelangganEditDeleteButton(false);
+        setComponentsPelanggan(false);
+        showPelanggan();
     }//GEN-LAST:event_simpanKaryawanButtonActionPerformed
 
     private void tabelPelangganMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelPelangganMouseClicked
