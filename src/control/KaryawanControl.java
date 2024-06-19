@@ -39,5 +39,4 @@ public class KaryawanControl {
     public boolean loginKaryawan(String user, String pass, String id){ //DIPAKAI UNTUK LOGIN AWAL
         return kDao.cekLogin(user, pass, id);
     }
-    
 }

@@ -4,6 +4,7 @@
  */
 package dao;
 
+import java.sql.DriverManager;
 import connection.DbConnection;
 import interfaceDAO.IDAO;
 import interfaceDAO.IGenerateID;
@@ -13,16 +14,23 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import model.Pelanggan;
 import model.Pesanan;
 import model.Transaksi;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
  * @author Tok Se Ka 220711904
  */
-public class TransaksiDAO implements IDAO<Transaksi, String>, IShowForDropdown<Transaksi>, IGenerateID, ISearchData<Transaksi, String>{
+public class TransaksiDAO implements IDAO<Transaksi, String>, IGenerateID{
     protected DbConnection dbCon = new DbConnection();
     protected Connection con;
     
@@ -132,81 +140,44 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IShowForDropdown<T
     }
     
     
-    @Override
-    public Transaksi search(String data){ 
-//        con = dbCon.makeConnection();
-//        
-//        String sql = "SELECT * FROM `transaksi` WHERE "
-//                + "id_pesanan LIKE '%" + data + "%' "
-//                + " OR id_karyawan LIKE '%" + data + "%' "
-//                + " OR id_pelanggan LIKE '%" + data + "%' "
-//                + " OR total_harga LIKE '%" + data + "%' "
-//                + " OR tanggal_pesanan LIKE '%" + data + "%' " + "";
-//        System.out.println("Searching Transaksi...");
-//        Transaksi c = null;
-//        
-//        try{
-//            Statement statement = con.createStatement();
-//            ResultSet rs = statement.executeQuery(sql);
-//            
-//            if(rs != null)
-//                while(rs.next())
-//                    c = new Transaksi( 
-//                        rs.getString("id_pesanan"),
-//                        rs.getString("id_karyawan"),
-//                        rs.getString("id_pelanggan"),
-//                        rs.getString("tanggal_pesanan"),
-//                        rs.getFloat("total_harga")
-//                    );
-//            
-//            rs.close();
-//            statement.close();
-//        }catch(Exception e){
-//            System.out.println("Error Fetching data...");
-//            System.out.println(e);
-//        }
-//        dbCon.closeConnection();
-//        return c;
-        return null;
-    }
+
     
     @Override
     public List<Transaksi> showData(String data){
-//        con = dbCon.makeConnection();
-//        
-//        String sql = "SELECT * FROM `transaksi` WHERE "
-//                + "id_pesanan LIKE '%" + data + "%' "
-//                + " OR id_karyawan LIKE '%" + data + "%' "
-//                + " OR id_pelanggan LIKE '%" + data + "%' "
-//                + " OR total_harga LIKE '%" + data + "%' "
-//                + " OR tanggal_transaksi LIKE '%" + data + "%' " + "";
-//        System.out.println("Fetching Data...");
-//        List<Transaksi> c = new ArrayList();
-//        
-//        try{
-//            Statement statement = con.createStatement();
-//            ResultSet rs = statement.executeQuery(sql);
-//            
-//            if(rs != null)
-//                while(rs.next())
-//                    c.add(new Transaksi(
-//                        rs.getString("id_pesanan"),
-//                        rs.getString("id_karyawan"),
-//                        rs.getString("id_pelanggan"),
-//                        rs.getString("tanggal_pesanan"),
-//                        rs.getFloat("total_harga")
-//                    )
-//                );
-//            
-//            rs.close();
-//            statement.close();
-//        }catch(Exception e){
-//            System.out.println("Error Fetching data...");
-//            System.out.println(e);
-//        }
-//        dbCon.closeConnection();
-//        return c;
-        return null;
+        con = dbCon.makeConnection();
+        
+        String sql = "SELECT * FROM `transaksi` WHERE "
+                + "id_pesanan LIKE '%" + data + "%' "
+                + " OR id_karyawan LIKE '%" + data + "%' "
+                + " OR id_pelanggan LIKE '%" + data + "%' "
+                + " OR total_harga LIKE '%" + data + "%' "
+                + " OR tanggal_transaksi LIKE '%" + data + "%' " + "";
+        System.out.println("Fetching Data...");
+        List<Transaksi> c = new ArrayList();
+        
+        try{
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            
+            if(rs != null)
+                while(rs.next())
+                    c.add(new Transaksi(
+                        rs.getString("id_pesanan"),
+                        rs.getString("id_karyawan"),
+                        rs.getString("id_pelanggan"),
+                        rs.getString("tanggal_pesanan"),
+                        rs.getFloat("total_harga")
+                    )
+                );
+            
+            rs.close();
+            statement.close();
+        }catch(Exception e){
+            System.out.println("Error Fetching data...");
+            System.out.println(e);
+        }
+        dbCon.closeConnection();
+        return c;
     }
     
     @Override
@@ -250,39 +221,28 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IShowForDropdown<T
         }
         dbCon.closeConnection();
     }
-    @Override
-    public List<Transaksi> IShowForDropdown() { // tidak override karena butuh kondisi where
-//        con = dbCon.makeConnection();
-//        
-//        String sql = "SELECT * FROM `transaksi` "; // hanya show sesuai id_pesanan saat ini
-//        System.out.println("Fetching Data...");
-//        List<Transaksi> data = new ArrayList();
-//        
-//        try{
-//            Statement statement = con.createStatement();
-//            ResultSet rs = statement.executeQuery(sql);
-//            
-//            if(rs != null)
-//                while(rs.next())
-//                    data.add(new Transaksi(
-//                        rs.getString("id_pesanan"),
-//                        rs.getString("id_karyawan"),
-//                        rs.getString("id_pelanggan"),
-//                        rs.getString("tanggal_pesanan"),
-//                        rs.getFloat("total_harga")
-//                        )
-//                    );
-//            
-//            rs.close();
-//            statement.close();
-//        }catch(Exception e){
-//            System.out.println("Error Fetching data...");
-//            System.out.println(e);
-//        }
-//        
-//        dbCon.closeConnection();
-//        return data;
-        return null;
+   
+    public void createReceipt(String id_pesanan) {
+        con = dbCon.makeConnection();
+        try {
+            String reportSrcFile = "C:\\Users\\yobel"
+                    + "\\OneDrive - Universitas Atma Jaya Yogyakarta\\"
+                    + "Documents\\tugas\\PBO\\TubesPBO\\"
+                    + "TubesPBO_Restoran\\src\\report\\transaksiReport.jrxml";
+            JasperReport jasperReport = JasperCompileManager.compileReport(reportSrcFile);
+
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("id_pesanan", id_pesanan);
+
+            
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, con);
+
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
     }
+    
     
 }

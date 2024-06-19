@@ -806,12 +806,12 @@ public class MenuMainPanel extends javax.swing.JPanel {
         if(action == null)
         return;
         
-            int dialog = JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan " + action + "?");
-            if(dialog == JOptionPane.CLOSED_OPTION || dialog == JOptionPane.NO_OPTION || dialog == JOptionPane.CANCEL_OPTION)
-            return;
+        int dialog = JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan " + action + "?");
+        if(dialog == JOptionPane.CLOSED_OPTION || dialog == JOptionPane.NO_OPTION || dialog == JOptionPane.CANCEL_OPTION)
+        return;
 
-            switch (action){
-                case "add":
+        switch (action){
+            case "add":
                 if(makananIsSelected()){
                     makanan = new Makanan(specialAtributeInputTextfield.getText(), namaProdukInputTextField.getText(),
                         jenisProdukInputButton.getText(), Float.parseFloat(hargaProdukInputTextfield.getText()), gambarBytes);
@@ -825,8 +825,9 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 setEditDeleteButton(false);
                 setComponentsData(false);
                 showTableBySearch("");
-                break;
-                case "update":        
+            break;
+            
+            case "update":        
                 if(makananIsSelected()){
                     try {
                         makanan = new Makanan(specialAtributeInputTextfield.getText(),idProdukInputTextField.getText(), namaProdukInputTextField.getText(),
@@ -848,10 +849,10 @@ public class MenuMainPanel extends javax.swing.JPanel {
                 setEditDeleteButton(false);
                 setComponentsData(false);
                 showTableBySearch("");
-                break;
-                default:
-                break;
-                
+            break;
+            
+            default:
+            break;   
             }
             showTableBySearch("");
             tambahProdukButton.setEnabled(true);
@@ -876,9 +877,8 @@ public class MenuMainPanel extends javax.swing.JPanel {
         
         int clickedRow = tabelMakanan.getSelectedRow();
         
-        if (tabelMakanan.getRowSorter() != null) {
+        if (tabelMakanan.getRowSorter() != null) 
             clickedRow = tabelMakanan.convertRowIndexToModel(clickedRow);
-        }
         
         TableModel tableModel = tabelMakanan.getModel();
 
@@ -922,9 +922,9 @@ public class MenuMainPanel extends javax.swing.JPanel {
         int clickedRow = tabelMinuman.getSelectedRow();
         TableModel tableModel = tabelMinuman.getModel();
         
-        if (tabelMinuman.getRowSorter() != null) {
+        if (tabelMinuman.getRowSorter() != null) 
             clickedRow = tabelMinuman.convertRowIndexToModel(clickedRow);
-        }
+
          
         selectedId = tableModel.getValueAt(clickedRow, 0).toString();
         
@@ -940,7 +940,8 @@ public class MenuMainPanel extends javax.swing.JPanel {
 
     private void tambahGambarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahGambarButtonActionPerformed
         if(action == null)
-        return;
+            return;
+        
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new FileNameExtensionFilter("Gambar", "jpg", "png", "jpeg"));
         int returnValue = fileChooser.showOpenDialog(null);

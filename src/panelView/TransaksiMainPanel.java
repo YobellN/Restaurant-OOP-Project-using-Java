@@ -1081,13 +1081,13 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         // DIPAKAI UNTUK MEMBUAT OBJEK
         pelanggan = new Pelanggan(pelangganControl.generateId(), namaPelangganInputTextField.getText(), "-", "-");
         transaksi = new Transaksi(idPesananInputTextField.getText(), karyawan.getId_karyawan(),
-                pelangganControl.generateId(), formattedDate, Float.parseFloat(totalProdukInputTextfield.getText()));
+                pelangganControl.generateId(), formattedDate, 0);
         
-        // DIPAKAI UNTUK MEMASUKKAN OBJEK KE SQL
+        // untuk insert sql
         pelangganControl.insertDataPelanggan(pelanggan);
         tc.insertDataTransaksi(transaksi);
         pesananControl.insertDataPesanan(pesananList);
-
+        tc.insertTotalHarga(transaksi);
         // UNTUK MEMBERSIHKAN FIELD
         clearTextData();
         namaPelangganInputTextField.setText("");
@@ -1097,8 +1097,8 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         // UNTUK SET AKSES FIELD
         setEditDeleteButton(false);
         setComponentsData(false);
-
-        // UNTUK SHOW ULANG TABEL 
+        tc.createReceipt(idPesananInputTextField.getText());
+        pesananList.removeAll(pesananList); // membersihkan list
         showTabelPesanan();
         showTableMenuBySearch("");
         

@@ -1,21 +1,16 @@
 package panelView;
 
-import control.KaryawanControl;
 import control.PelangganControl;
 import java.awt.Component;
 import exception.InputKosongException;
 import exception.InputHarusAngkaException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Comparator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import model.Karyawan;
 import model.Pelanggan;
 
 public class PelangganMainPanel extends javax.swing.JPanel {
