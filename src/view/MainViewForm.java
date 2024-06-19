@@ -282,7 +282,7 @@ public class MainViewForm extends javax.swing.JFrame {
         pesananLabelDate1.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         pesananLabelDate1.setForeground(new java.awt.Color(137, 92, 3));
         pesananLabelDate1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        pesananLabelDate1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/penitipanIcon.png"))); // NOI18N
+        pesananLabelDate1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-report-30.png"))); // NOI18N
         pesananLabelDate1.setText("Laporan");
         pesananLabelDate1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
