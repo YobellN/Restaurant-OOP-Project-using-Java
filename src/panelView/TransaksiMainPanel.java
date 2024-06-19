@@ -941,6 +941,12 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         if (action == null) {
             return;
         }
+        for (Pesanan p : pesananList) { // MENCARI DATA YANG AKAN DIHAPUS BERDASARKAN ID
+            if (p.getId_menu().equals(idProdukInputTextField.getText())) {
+                JOptionPane.showMessageDialog( null, "MENU TIDAK BOLEH SAMA!!", "Input Failure", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
         try {
             inputKosongPesananException(); // EXCEPTION
             

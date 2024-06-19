@@ -627,11 +627,15 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_barukanReservasiButtonActionPerformed
 
     private void hapusReservasiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusReservasiButtonActionPerformed
+        if (action == null) {
+            return;
+        }
+        int opsi = JOptionPane.showConfirmDialog(rootPane, "Yakin Ingin Hapus ?", "Hapus Data", JOptionPane.YES_NO_OPTION);
+        if (opsi == JOptionPane.NO_OPTION || opsi == JOptionPane.CLOSED_OPTION) {
+            return;
+        }
         action = "delete";
         
-        if(JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan " + action + "?") == JOptionPane.CLOSED_OPTION)
-            return;
-
         junctionControl.deleteDataReservasi(selectedId);
         
         clearText();
@@ -654,6 +658,11 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
             // EXCEPTION
             inputKosongReservasiException();
             
+            // Aksi
+            int dialog = JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan " + "Simpan Reservasi" + "?");
+            if (dialog == JOptionPane.CLOSED_OPTION || dialog == JOptionPane.NO_OPTION || dialog == JOptionPane.CANCEL_OPTION) {
+                return;
+            }
             // SET ATRIBUT DAN METODE PEMBAYARAN
             int counter = 0;
             String checkbox = "";
