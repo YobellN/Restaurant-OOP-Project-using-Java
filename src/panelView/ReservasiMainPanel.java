@@ -726,7 +726,7 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
                         checkbox, Float.parseFloat(totalHargaInputTextField.getText()), selectedSingle);
                 junctionControl.insertDataReservasi(dataNew);
             } else if(action.equals("update")){
-                Reservasi dataNew = new Reservasi(selectedSingle.getId_pelanggan(), formattedDate, radio, 
+                Reservasi dataNew = new Reservasi(selectedId, selectedSingle.getId_pelanggan(), formattedDate, radio, 
                         checkbox, Float.parseFloat(totalHargaInputTextField.getText()), selectedSingle);
                 junctionControl.updateDataReservasi(dataNew, selectedId);
                 selectedId = "";
