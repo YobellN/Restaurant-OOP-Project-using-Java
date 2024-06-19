@@ -9,9 +9,7 @@ import table.TabelMakanan;
 
 public class MakananControl extends MenuControl<Makanan> implements IMakananControl {
 
-    public MakananControl(MakananDAO mkDao) {
-        super(mkDao);
-    }
+    private MakananDAO mDdao = new MakananDAO();
 
     @Override
     protected boolean cekJenis(Menu menu) {

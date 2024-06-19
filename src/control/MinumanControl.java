@@ -9,9 +9,7 @@ import table.TabelMinuman;
 
 public class MinumanControl extends MenuControl<Minuman> implements IMinumanControl {
 
-    public MinumanControl(MinumanDAO mnDao) {
-        super(mnDao);
-    }
+    private MinumanDAO mDAO = new MinumanDAO();
 
     @Override
     protected boolean cekJenis(Menu menu) {

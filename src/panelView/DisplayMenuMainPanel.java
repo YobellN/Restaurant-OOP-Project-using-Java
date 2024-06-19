@@ -42,8 +42,8 @@ public class DisplayMenuMainPanel extends JPanel {
      * Creates new form DisplayMenuMainPanel
      */
     public DisplayMenuMainPanel() {
-        makananControl = new MakananControl(new MakananDAO());
-        minumanControl = new MinumanControl(new MinumanDAO());
+        makananControl = new MakananControl();
+        minumanControl = new MinumanControl();
         makananList = new ArrayList<>(makananControl.showListMenu());
         minumanList = new ArrayList<>(minumanControl.showListMenu());
 

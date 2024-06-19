@@ -372,9 +372,6 @@
                       <Font name="Berlin Sans FB" size="12" style="0"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="idProdukInputTextFieldActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -689,9 +686,6 @@
                       <Font name="Berlin Sans FB" size="12" style="0"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="specialAtributeInputTextfieldKeyTyped"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>

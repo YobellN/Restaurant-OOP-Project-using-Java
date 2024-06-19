@@ -665,13 +665,12 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
         if (actionKaryawan == null) {
             return;
         }
+        if (JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan " + actionKaryawan + "?") == JOptionPane.CLOSED_OPTION) {
+            return;
+        }
         try {
             InputHarusAngkaKaryawanException();
             inputKosongKaryawanException();
-
-            if (JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan " + actionKaryawan + "?") == JOptionPane.CLOSED_OPTION) {
-                return;
-            }
 
             switch (actionKaryawan) {
                 case "add":
@@ -680,7 +679,7 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
                     break;
                 case "update":
                     k = new Karyawan(idKaryawanInputTextField.getText(), namaKaryawanInputTextField.getText(), jabatanInputButton.getText(), Float.parseFloat(gajiKaryawanInputTextfield.getText()), usernameKaryawanInputTextField.getText(), passwordKaryawanInputTextField.getText());
-                    kc.insert(k);
+                    kc.update(k);
                     break;
                 default:
                     break;
