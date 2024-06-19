@@ -577,7 +577,6 @@ public class MainViewForm1 extends javax.swing.JFrame {
             k = kc.searchDataKaryawan(idKaryawanTextField.getText());
             login = true;
             JOptionPane.showMessageDialog(rootPane, "ANDA TELAH LOGIN");
-            singlePanelMouseClicked(evt);
         }else{
             JOptionPane.showMessageDialog(rootPane, "USERNAME/PASSWORD ANDA SALAH!!!");
             return;
