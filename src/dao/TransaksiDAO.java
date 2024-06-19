@@ -137,8 +137,6 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IGenerateID{
     }
     
     
-
-    
     @Override
     public List<Transaksi> showData(String data) {
         con = dbCon.makeConnection();
@@ -154,6 +152,61 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IGenerateID{
                  + "OR t.id_pelanggan LIKE '%" + data + "%' " 
                  + "OR k.nama_karyawan LIKE '%" + data + "%' " 
                  + "OR p.nama_pelanggan LIKE '%" + data + "%'"
+                 + "ORDER BY t.id_pesanan";
+        System.out.println("Fetching Data...");
+        List<Transaksi> c = new ArrayList<>();
+
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            if (rs != null) {
+                while (rs.next()) {
+                    Karyawan k = new Karyawan(
+                            rs.getString("id_karyawan"),
+                            rs.getString("nama_karyawan"),
+                            rs.getString("jabatan"),
+                            rs.getFloat("gaji")
+                    );
+                    Pelanggan p = new Pelanggan(
+                            rs.getString("id_pelanggan"),
+                            rs.getString("nama_pelanggan"),
+                            rs.getString("alamat"),
+                            rs.getString("nomor_telepon")
+                    );
+                    
+                    c.add(new Transaksi(
+                            rs.getString("id_pesanan"),
+                            rs.getString("id_karyawan"),
+                            rs.getString("id_pelanggan"),
+                            rs.getString("tanggal_pesanan"),
+                            rs.getFloat("total_harga"),
+                            k,
+                            p
+                    ));
+                }
+            }
+
+            rs.close();
+            statement.close();
+        } catch (Exception e) {
+            System.out.println("Error Fetching data...");
+            System.out.println(e);
+        }
+        dbCon.closeConnection();
+        return c;
+    }
+    
+    public List<Transaksi> showDatabyTanggal(String tanggalMulai, String tanggalSelesai) {
+        con = dbCon.makeConnection();
+
+        String sql = "SELECT t.id_pesanan, t.id_karyawan, t.id_pelanggan, t.tanggal_pesanan, t.total_harga, " 
+                 + "k.nama_karyawan, k.jabatan, k.gaji, " 
+                 + "p.nama_pelanggan, p.alamat, p.nomor_telepon " 
+                 + "FROM transaksi t " 
+                 + "JOIN karyawan k ON t.id_karyawan = k.id_karyawan " 
+                 + "JOIN pelanggan p ON t.id_pelanggan = p.id_pelanggan " 
+                 + "WHERE t.tanggal_pesanan BETWEEN '" + tanggalMulai + "' AND '" + tanggalSelesai + "'"
                  + "ORDER BY t.id_pesanan";
         System.out.println("Fetching Data...");
         List<Transaksi> c = new ArrayList<>();
