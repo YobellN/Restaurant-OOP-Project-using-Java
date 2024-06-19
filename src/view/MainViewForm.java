@@ -71,7 +71,7 @@ public class MainViewForm extends javax.swing.JFrame {
         pesananPanel.setBackground(new Color(0, 0, 0, 0));
         laporanPanel.setBackground(new Color(0, 0, 0, 0));
         logoutPanel.setBackground(new Color(0, 0, 0, 0));
-        reservasiLabel.setBackground(new Color(0, 0, 0, 0));
+        reservasiPanel.setBackground(new Color(0, 0, 0, 0));
     }
     
     private void initsidePanel(boolean value){

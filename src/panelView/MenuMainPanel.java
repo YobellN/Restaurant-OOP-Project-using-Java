@@ -8,6 +8,7 @@ import control.MenuControl;
 import control.MinumanControl;
 import control.MakananControl;
 import dao.MakananDAO;
+import dao.MenuDAO;
 import dao.MinumanDAO;
 import java.awt.Component;
 import java.awt.Graphics2D;
@@ -21,6 +22,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Comparator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -776,7 +778,11 @@ public class MenuMainPanel extends javax.swing.JPanel {
         setEditDeleteButton(false);
 
         idProdukInputTextField.setEnabled(false);
-        idProdukInputTextField.setText(menuControl.generateId());
+        if(makananIsSelected()){
+            idProdukInputTextField.setText(minumanControl.generateId());
+        }else{
+            idProdukInputTextField.setText(minumanControl.generateId());
+        }
         jenisProdukInputButton.setText("Minuman");
         setSpecialAtributeLabel();
     }//GEN-LAST:event_tambahProdukButtonActionPerformed

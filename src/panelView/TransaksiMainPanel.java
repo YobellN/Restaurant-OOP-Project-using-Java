@@ -1104,6 +1104,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         tc.insert(transaksi);
         pesananControl.insertDataPesanan(pesananList);
         tc.insertTotalHarga(transaksi);
+        tc.createReceipt(transaksi.getId_pesanan());
         // UNTUK MEMBERSIHKAN FIELD
         clearTextData();
         namaPelangganInputTextField.setText("");

@@ -656,9 +656,9 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
     private void jabatanInputButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jabatanInputButtonActionPerformed
         switch (jabatanInputButton.getText()) { // akan membalikkan nilai jika di pencet
             case "Kasir":
-                jabatanInputButton.setText("Manajer");
+                jabatanInputButton.setText("Manager");
                 break;
-            case "Manajer":
+            case "Manager":
                 jabatanInputButton.setText("Kasir");
                 break;
         }
