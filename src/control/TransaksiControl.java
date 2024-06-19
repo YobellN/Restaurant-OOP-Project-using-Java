@@ -6,7 +6,6 @@ package control;
 
 import dao.TransaksiDAO;
 import java.util.List;
-import model.Pelanggan;
 import model.Transaksi;
 import table.TabelTransaksi;
 
@@ -17,17 +16,16 @@ import table.TabelTransaksi;
 public class TransaksiControl {
     TransaksiDAO kDao = new TransaksiDAO();
     
-    public String generateId(){
+    public String generateId(){ // DIPAKAI UNTUK MEMBUAT ID BARU
         return "T"+kDao.generateId();
     }
 
-    public void insertDataTransaksi(Transaksi K){
+    public void insertDataTransaksi(Transaksi K){ // DIPAKAI UNTUK MEMASUKKAN TRANSAKSI KE SQL
         K.setId_pesanan(generateId());
         kDao.insert(K);
-    } // memasukkan id dari generateID ke objek karyawan lalu insert K ke DAO
+    } 
     
-    
-    public void insertTotalHarga(Transaksi K){
+    public void insertTotalHarga(Transaksi K){ // DIPAKAI UNTUK INSERT HARGA 
         kDao.updateHarga(K);
     }
     public Transaksi searchDataTransaksi (String data){
