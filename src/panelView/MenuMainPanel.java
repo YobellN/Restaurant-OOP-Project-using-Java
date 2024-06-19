@@ -42,8 +42,8 @@ import exception.InputHarusAngkaException;
 public class MenuMainPanel extends javax.swing.JPanel {
 
     private MenuControl menuControl;
-    private MinumanControl minumanControl = null;
-    private MakananControl makananControl = null;
+    private MinumanControl minumanControl = new MinumanControl();
+    private MakananControl makananControl = new MakananControl();
     private Menu menu = null;
     private Minuman minuman = null;
     private Makanan makanan = null;

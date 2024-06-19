@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package panelView;
 
 import control.MenuControl;
@@ -23,8 +19,6 @@ import model.Karyawan;
 import model.Pesanan;
 
 import control.TransaksiControl;
-import dao.MakananDAO;
-import dao.MinumanDAO;
 import dao.PelangganDAO;
 import dao.TransaksiDAO;
 import exception.InputKosongException;
@@ -47,10 +41,9 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     // CONTROL
     // FINAL KARENA TIDAK PERLU DI UBAH DI DALAM PANEL TRANSAKSI
     // DIPAKAI UNTUK MENCARI HARGA
-    private final MenuControl menuControl = null;
-    private final MakananControl makananControl;
-    private final MinumanControl minumanControl;
-    private final TransaksiControl tc; // DIPAKAI UNTUK generateID dan INSERT SQL
+    private final MakananControl makananControl = new MakananControl();
+    private final MinumanControl minumanControl = new MinumanControl();
+    private final TransaksiControl tc = new TransaksiControl(); // DIPAKAI UNTUK generateID dan INSERT SQL
     private final PesananControl pesananControl = new PesananControl(); // DIPAKAI UNTUK INSERT SQL PESANAN
     private final PelangganControl pelangganControl; // DIPAKAI UNTUK GenerateID dan INSERT SQL PELANGGAN
 
@@ -64,9 +57,6 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
      */
     public TransaksiMainPanel(Karyawan k) {
         initComponents();
-        tc = new TransaksiControl(new TransaksiDAO());
-        makananControl = new MakananControl();
-        minumanControl = new MinumanControl();
         pelangganControl = new PelangganControl((new PelangganDAO()));
         idPesananInputTextField.setText(tc.generateId());
         namaKaryawanInputTextField.setText(k.getNama_karyawan());
@@ -930,7 +920,13 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                             p.setId_menu(idProdukInputTextField.getText());
                             p.setNamaMenu(namaProdukInputTextField.getText());
                             p.setJumlah(Integer.parseInt(jumlahProdukInputTextfield.getText()));
-                            p.setSub_total(menuControl.searchHarga(idProdukInputTextField.getText()) * Integer.parseInt(jumlahProdukInputTextfield.getText()));
+                            if(minumanControl.searchHarga(idProdukInputTextField.getText()) != 0){
+                                p.setSub_total(minumanControl.searchHarga(idProdukInputTextField.getText()) * Integer.parseInt(jumlahProdukInputTextfield.getText()));
+                            }else{
+                                p.setSub_total(makananControl.searchHarga(idProdukInputTextField.getText()) * Integer.parseInt(jumlahProdukInputTextfield.getText()));
+                            }
+                            
+                            
                             break;
                         }
                     }
@@ -1059,7 +1055,11 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         namaProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
         specialAtributeInputLabel.setText("    ");
         jumlahProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 2).toString());
-        hargaProdukInputTextfield.setText("" + menuControl.searchHarga(idProdukInputTextField.getText()));
+        if(minumanControl.searchHarga(idProdukInputTextField.getText()) != 0){
+            hargaProdukInputTextfield.setText("" + minumanControl.searchHarga(idProdukInputTextField.getText()));
+        }else{
+            hargaProdukInputTextfield.setText("" + makananControl.searchHarga(idProdukInputTextField.getText()));
+        }
     }//GEN-LAST:event_tabelPesananMouseClicked
 
     private void simpanTransaksiProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanTransaksiProdukButtonActionPerformed

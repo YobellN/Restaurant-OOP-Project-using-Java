@@ -15,11 +15,7 @@ import table.TabelTransaksi;
  * @author Tok Se Ka 220711904
  */
 public class TransaksiControl implements ITransaksiControl {
-    private TransaksiDAO kDao;
-
-    public TransaksiControl(TransaksiDAO kDao) {
-        this.kDao = kDao;
-    }
+    private TransaksiDAO kDao = new TransaksiDAO();
 
     @Override
     public String generateId() {
