@@ -646,13 +646,10 @@ public class MenuMainPanel extends javax.swing.JPanel {
 
         tabelMakanan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID Menu", "Nama Menu", "Jenis Menu", "Catatan", "Harga"
             }
         ));
         tabelMakanan.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -664,13 +661,10 @@ public class MenuMainPanel extends javax.swing.JPanel {
 
         tabelMinuman.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID Menu", "Nama Menu", "Jenis Menu", "Ukuran", "Harga"
             }
         ));
         tabelMinuman.addMouseListener(new java.awt.event.MouseAdapter() {

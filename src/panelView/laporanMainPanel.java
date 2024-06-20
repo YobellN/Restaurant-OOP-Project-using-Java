@@ -16,14 +16,13 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import model.Karyawan;
-import table.TabelTransaksi;
 
 public class laporanMainPanel extends javax.swing.JPanel {
     private PesananControl pc;
     private final TransaksiControl tc;
     private Karyawan k = null;
     String actionKaryawan = null;
-
+    private String selectedId = null;
     private Component rootPane;
 
     public laporanMainPanel() {
@@ -31,19 +30,11 @@ public class laporanMainPanel extends javax.swing.JPanel {
         pc = new PesananControl();
         initComponents();
         showTransaksi("");
+        showPesanan("AWALAN TIDAK PERLU DIBUKA");
+        menuTerlarisValue.setText(tc.cariMenuTerlaris());
+        totalOmsetValue.setText("Rp" + String.valueOf(tc.hitungTotalOmset()));
+        totalTransaksiValue.setText(String.valueOf(tc.hitungTotalTransaksi())+" Transaksi");
     }
-
-
-
-    private boolean isFloat(String input) {
-        try {
-            Float.parseFloat(input);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
 
     private static void addHeaderClickListener(JTable table) {
         JTableHeader header = table.getTableHeader();
@@ -121,6 +112,13 @@ public class laporanMainPanel extends javax.swing.JPanel {
         searchKaryawanInputLabel2 = new javax.swing.JLabel();
         searchKaryawanInputButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
+        totalTransaksiTextField = new javax.swing.JTextField();
+        menuTerlarisTextField = new javax.swing.JTextField();
+        batalkanKaryawanButton1 = new javax.swing.JButton();
+        totalTransaksiValue = new javax.swing.JTextField();
+        menuTerlarisValue = new javax.swing.JTextField();
+        totalOmsetTextField = new javax.swing.JTextField();
+        totalOmsetValue = new javax.swing.JTextField();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -164,13 +162,10 @@ public class laporanMainPanel extends javax.swing.JPanel {
 
         tabelKaryawan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID Transaksi", "Nama Kasir", "Nama Pelanggan", "Tanggal Transaksi", "Total Transaksi"
             }
         ));
         tabelKaryawan.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -182,13 +177,10 @@ public class laporanMainPanel extends javax.swing.JPanel {
 
         tabelPesanan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID Menu", "Nama Menu", "Jumlah", "Sub Total"
             }
         ));
         minumanScrollPane1.setViewportView(tabelPesanan);
@@ -218,11 +210,79 @@ public class laporanMainPanel extends javax.swing.JPanel {
         jTextField1.setText("PESANAN");
         jTextField1.setBorder(null);
 
+        totalTransaksiTextField.setEditable(false);
+        totalTransaksiTextField.setBackground(new java.awt.Color(255, 218, 182));
+        totalTransaksiTextField.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        totalTransaksiTextField.setForeground(new java.awt.Color(137, 92, 3));
+        totalTransaksiTextField.setText("Total Transaksi:");
+        totalTransaksiTextField.setBorder(null);
+
+        menuTerlarisTextField.setEditable(false);
+        menuTerlarisTextField.setBackground(new java.awt.Color(255, 218, 182));
+        menuTerlarisTextField.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        menuTerlarisTextField.setForeground(new java.awt.Color(137, 92, 3));
+        menuTerlarisTextField.setText("Menu Terlaris:");
+        menuTerlarisTextField.setBorder(null);
+        menuTerlarisTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuTerlarisTextFieldActionPerformed(evt);
+            }
+        });
+
+        batalkanKaryawanButton1.setBackground(new java.awt.Color(51, 151, 56));
+        batalkanKaryawanButton1.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        batalkanKaryawanButton1.setForeground(new java.awt.Color(255, 255, 255));
+        batalkanKaryawanButton1.setText("Cetak");
+        batalkanKaryawanButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                batalkanKaryawanButton1ActionPerformed(evt);
+            }
+        });
+
+        totalTransaksiValue.setEditable(false);
+        totalTransaksiValue.setBackground(new java.awt.Color(255, 218, 182));
+        totalTransaksiValue.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
+        totalTransaksiValue.setForeground(new java.awt.Color(137, 92, 3));
+        totalTransaksiValue.setBorder(null);
+        totalTransaksiValue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                totalTransaksiValueActionPerformed(evt);
+            }
+        });
+
+        menuTerlarisValue.setEditable(false);
+        menuTerlarisValue.setBackground(new java.awt.Color(255, 218, 182));
+        menuTerlarisValue.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
+        menuTerlarisValue.setForeground(new java.awt.Color(137, 92, 3));
+        menuTerlarisValue.setBorder(null);
+        menuTerlarisValue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuTerlarisValueActionPerformed(evt);
+            }
+        });
+
+        totalOmsetTextField.setEditable(false);
+        totalOmsetTextField.setBackground(new java.awt.Color(255, 218, 182));
+        totalOmsetTextField.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        totalOmsetTextField.setForeground(new java.awt.Color(137, 92, 3));
+        totalOmsetTextField.setText("Total Omset:");
+        totalOmsetTextField.setBorder(null);
+
+        totalOmsetValue.setEditable(false);
+        totalOmsetValue.setBackground(new java.awt.Color(255, 218, 182));
+        totalOmsetValue.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
+        totalOmsetValue.setForeground(new java.awt.Color(137, 92, 3));
+        totalOmsetValue.setBorder(null);
+        totalOmsetValue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                totalOmsetValueActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout searchKendaraanInputPanelLayout = new javax.swing.GroupLayout(searchKendaraanInputPanel);
         searchKendaraanInputPanel.setLayout(searchKendaraanInputPanelLayout);
         searchKendaraanInputPanelLayout.setHorizontalGroup(
             searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
             .addGroup(searchKendaraanInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,9 +291,20 @@ public class laporanMainPanel extends javax.swing.JPanel {
                             .addComponent(searchKaryawanInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchKendaraanInputPanelLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(batalkanKaryawanButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(batalkanKaryawanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchKendaraanInputPanelLayout.createSequentialGroup()
-                                .addGap(385, 697, Short.MAX_VALUE)
+                                .addGroup(searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(searchKendaraanInputPanelLayout.createSequentialGroup()
+                                        .addComponent(totalTransaksiTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(totalTransaksiValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(searchKendaraanInputPanelLayout.createSequentialGroup()
+                                        .addComponent(menuTerlarisTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(menuTerlarisValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 351, Short.MAX_VALUE)
                                 .addComponent(minumanScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(searchKaryawanInputLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(searchKendaraanInputPanelLayout.createSequentialGroup()
@@ -252,7 +323,15 @@ public class laporanMainPanel extends javax.swing.JPanel {
                         .addComponent(searchKaryawanInputButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(167, 167, 167))))
+                        .addGap(167, 167, 167))
+                    .addGroup(searchKendaraanInputPanelLayout.createSequentialGroup()
+                        .addComponent(totalOmsetTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(totalOmsetValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(searchKendaraanInputPanelLayout.createSequentialGroup()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         searchKendaraanInputPanelLayout.setVerticalGroup(
             searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,10 +351,28 @@ public class laporanMainPanel extends javax.swing.JPanel {
                     .addComponent(tanggalSelesai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(searchKaryawanInputButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addComponent(minumanScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addComponent(batalkanKaryawanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(searchKendaraanInputPanelLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(minumanScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchKendaraanInputPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(menuTerlarisTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(menuTerlarisValue, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39)
+                        .addGroup(searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(totalTransaksiTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(totalTransaksiValue, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(45, 45, 45)
+                        .addGroup(searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(totalOmsetTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(totalOmsetValue, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(15, 15, 15)))
+                .addGroup(searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(batalkanKaryawanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(batalkanKaryawanButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -321,6 +418,7 @@ public class laporanMainPanel extends javax.swing.JPanel {
             clickedRow = tabelKaryawan.convertRowIndexToModel(clickedRow);
         }
         // Setter Data dari tabel
+        selectedId =  tableModel.getValueAt(clickedRow, 0).toString();
         showPesanan(tableModel.getValueAt(clickedRow, 0).toString());
     }//GEN-LAST:event_tabelKaryawanMouseClicked
 
@@ -328,6 +426,8 @@ public class laporanMainPanel extends javax.swing.JPanel {
         tabelKaryawan.clearSelection();
         tabelPesanan.clearSelection();
         searchKaryawanInputTextField.setText("");
+        showPesanan("TIDAK AKAN KETEMU"); // MENCARI ID YANG TIDAK ADA KARENA BATAL
+        selectedId = null;
     }//GEN-LAST:event_batalkanKaryawanButtonActionPerformed
 
     private void searchKaryawanInputTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKaryawanInputTextFieldKeyTyped
@@ -337,6 +437,11 @@ public class laporanMainPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_searchKaryawanInputTextFieldKeyTyped
 
     private void searchKaryawanInputButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchKaryawanInputButton1ActionPerformed
+        
+        if(tanggalMulai.getDate() == null){
+            JOptionPane.showMessageDialog(rootPane, "Tanggal tidak boleh kosong!!!");
+            return;
+        }
         String toDate1 = tanggalMulai.getDate().toString();
         SimpleDateFormat inputFormat1 = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
         Date date1 = null;
@@ -348,6 +453,10 @@ public class laporanMainPanel extends javax.swing.JPanel {
         SimpleDateFormat outputFormat1 = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate1 = outputFormat1.format(date1);
         
+        if(tanggalSelesai.getDate() == null){
+            JOptionPane.showMessageDialog(rootPane, "Tanggal tidak boleh kosong!!!");
+            return;
+        }
         String toDate2 = tanggalSelesai.getDate().toString();
         SimpleDateFormat inputFormat2 = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
         Date date2 = null;
@@ -371,13 +480,39 @@ public class laporanMainPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_searchKaryawanInputButton1ActionPerformed
 
+    private void menuTerlarisTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTerlarisTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuTerlarisTextFieldActionPerformed
+
+    private void batalkanKaryawanButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalkanKaryawanButton1ActionPerformed
+        if(selectedId == null){
+            return;
+        }
+        tc.createReceipt(selectedId);
+    }//GEN-LAST:event_batalkanKaryawanButton1ActionPerformed
+
+    private void totalTransaksiValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalTransaksiValueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_totalTransaksiValueActionPerformed
+
+    private void menuTerlarisValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTerlarisValueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuTerlarisValueActionPerformed
+
+    private void totalOmsetValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalOmsetValueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_totalOmsetValueActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton batalkanKaryawanButton;
+    private javax.swing.JButton batalkanKaryawanButton1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JTextField menuTerlarisTextField;
+    private javax.swing.JTextField menuTerlarisValue;
     private javax.swing.JScrollPane minumanScrollPane1;
     private javax.swing.JButton searchKaryawanInputButton;
     private javax.swing.JButton searchKaryawanInputButton1;
@@ -390,5 +525,9 @@ public class laporanMainPanel extends javax.swing.JPanel {
     private javax.swing.JTable tabelPesanan;
     private com.toedter.calendar.JDateChooser tanggalMulai;
     private com.toedter.calendar.JDateChooser tanggalSelesai;
+    private javax.swing.JTextField totalOmsetTextField;
+    private javax.swing.JTextField totalOmsetValue;
+    private javax.swing.JTextField totalTransaksiTextField;
+    private javax.swing.JTextField totalTransaksiValue;
     // End of variables declaration//GEN-END:variables
 }

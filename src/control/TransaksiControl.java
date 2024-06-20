@@ -62,4 +62,15 @@ public class TransaksiControl implements ITransaksiControl {
         return new TabelTransaksi(data);
     }
     
+    public String cariMenuTerlaris(){
+        return kDao.cariNamaMenuTerlaris() + " (Terjual " + kDao.cariJumlahProdukTerlaris() +" Item)";
+    }
+    
+    public double hitungTotalOmset(){
+        return kDao.hitungTotalOmset();
+    }
+    
+    public int hitungTotalTransaksi(){
+        return kDao.hitungTotalTransaksi();
+    }
 }

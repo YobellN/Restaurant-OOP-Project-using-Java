@@ -61,35 +61,6 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IGenerateID{
         return id;
     }
     
-    public double hitungTotalHarga(String id_pesanan) {
-        Connection con = dbCon.makeConnection();
-
-        String sql = "SELECT SUM(sub_total) AS sub " +
-                     "FROM pesanan " +
-                     "WHERE id_pesanan = '" + id_pesanan + "'";
-
-        System.out.println("Hitung Total Harga...");
-        double total = 0;
-
-        try {
-            Statement statement = con.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
-
-            if (rs.next()) {
-                total = rs.getDouble("sub");
-            }
-
-            rs.close();
-            statement.close();
-        } catch (Exception e) {
-            System.out.println("Error Fetching data...");
-            e.printStackTrace();
-        } finally {
-            dbCon.closeConnection();
-        }
-
-        return total;
-    }
 
     public void updateHarga(Transaksi C){
         con = dbCon.makeConnection();
@@ -197,6 +168,199 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IGenerateID{
         return c;
     }
     
+    @Override
+    public void update(Transaksi c, String id_pesanan){
+        con = dbCon.makeConnection();
+        
+        String sql = "UPDATE `transaksi` SET "
+                + "`id_pesanan`='"+ c.getId_pesanan()+"',"
+                + "`id_karyawan`='"+ c.getId_karyawan()+"',"
+                + "`id_pelanggan`='"+ c.getId_pelanggan()+"',"
+                + "`tanggal_pesanan`='"+ c.getTanggal_pesanan()+"' "
+                + "WHERE `id_pesanan`='" + id_pesanan + "'";
+        System.out.println("Updating transaksi");
+        
+        try{
+            Statement statement = con.createStatement();
+            int result = statement.executeUpdate(sql);
+            System.out.println("Edited" + result + " Transaksi " + id_pesanan);
+            statement.close();
+        }catch(Exception e){
+            System.out.println("Error Updating Transaksi...");
+            System.out.println(e);
+        }
+        dbCon.closeConnection();
+    }
+    
+    @Override
+    public void delete(String id_pesanan){
+        con = dbCon.makeConnection();
+        String sql = "DELETE FROM `transaksi` WHERE `id_pesanan`='" + id_pesanan + "'";
+        System.out.println("Deleting Transaksi...");
+        
+        try{
+            Statement statement = con.createStatement();
+            int result = statement.executeUpdate(sql);
+            System.out.println("Edited " + result + " Transaksi " + id_pesanan);
+            statement.close();
+        }catch(Exception e){
+            System.out.println("Error Deleting Transaksi...");
+            System.out.println(e);
+        }
+        dbCon.closeConnection();
+    }
+    
+    public double hitungTotalHarga(String id_pesanan) {
+        Connection con = dbCon.makeConnection();
+
+        String sql = "SELECT SUM(sub_total) AS sub " +
+                     "FROM pesanan " +
+                     "WHERE id_pesanan = '" + id_pesanan + "'";
+
+        System.out.println("Hitung Total Harga...");
+        double total = 0;
+
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            if (rs.next()) {
+                total = rs.getDouble("sub");
+            }
+
+            rs.close();
+            statement.close();
+        } catch (Exception e) {
+            System.out.println("Error Fetching data...");
+            e.printStackTrace();
+        } finally {
+            dbCon.closeConnection();
+        }
+
+        return total;
+    }
+    
+    public int cariJumlahProdukTerlaris(){
+        int jumlah = 0;
+        con = dbCon.makeConnection();
+        
+        String sql = "SELECT SUM(p.jumlah) AS jml " +
+                 "FROM transaksi t " +
+                 "JOIN pesanan p ON t.id_pesanan = p.id_pesanan " +
+                 "GROUP BY p.id_menu " +
+                 "ORDER BY jml DESC " +
+                 "LIMIT 1";
+        System.out.println("Fetching Data Mencari Produk dengan Penjualan Tertinggi...");
+        
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            if (rs.next()) {
+                jumlah = rs.getInt("jml");
+            }
+
+            rs.close();
+            statement.close();
+        } catch (Exception e) {
+            System.out.println("Error Fetching data...");
+            e.printStackTrace();
+        } finally {
+            dbCon.closeConnection();
+        }
+
+        return jumlah;
+    }
+    
+    public String cariNamaMenuTerlaris() {
+        String namaMenu = null;
+        con = dbCon.makeConnection();
+
+        String sql = "SELECT m.nama_menu, SUM(p.jumlah) AS jml " +
+                     "FROM transaksi t " +
+                     "JOIN pesanan p ON t.id_pesanan = p.id_pesanan " +
+                     "JOIN menu m ON p.id_menu = m.id_menu " +
+                     "GROUP BY p.id_menu " +
+                     "ORDER BY jml DESC " +
+                     "LIMIT 1";
+        System.out.println("Fetching Data Mencari Produk dengan Penjualan Tertinggi...");
+
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            if (rs.next()) {
+                namaMenu = rs.getString("nama_menu");
+            }
+
+            rs.close();
+            statement.close();
+        } catch (Exception e) {
+            System.out.println("Error Fetching data...");
+            e.printStackTrace();
+        } finally {
+            dbCon.closeConnection();
+        }
+
+        return namaMenu;
+    }
+    
+    public double hitungTotalOmset() {
+        double totalOmset = 0;
+        con = dbCon.makeConnection();
+
+        String sql = "SELECT SUM(t.total_harga) AS omset " +
+                     "FROM transaksi t";
+        System.out.println("Fetching Data Mencari Omset...");
+
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            if (rs.next()) {
+                totalOmset = rs.getDouble("omset");
+            }
+
+            rs.close();
+            statement.close();
+        } catch (Exception e) {
+            System.out.println("Error Fetching data...");
+            e.printStackTrace();
+        } finally {
+            dbCon.closeConnection();
+        }
+
+        return totalOmset;
+    }
+    
+    public int hitungTotalTransaksi() {
+        int totalTransaksi = 0;
+        con = dbCon.makeConnection();
+
+        String sql = "SELECT COUNT(t.id_pesanan) AS total " +
+                     "FROM transaksi t";
+        System.out.println("Fetching Data Mencari Total Transaksi...");
+
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            if (rs.next()) {
+                totalTransaksi = rs.getInt("total");
+            }
+
+            rs.close();
+            statement.close();
+        } catch (Exception e) {
+            System.out.println("Error Fetching data...");
+            e.printStackTrace();
+        } finally {
+            dbCon.closeConnection();
+        }
+
+        return totalTransaksi;
+    }
+    
     public List<Transaksi> showDatabyTanggal(String tanggalMulai, String tanggalSelesai) {
         con = dbCon.makeConnection();
 
@@ -252,50 +416,12 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IGenerateID{
         return c;
     }
     
-    @Override
-    public void update(Transaksi c, String id_pesanan){
-        con = dbCon.makeConnection();
-        
-        String sql = "UPDATE `transaksi` SET "
-                + "`id_pesanan`='"+ c.getId_pesanan()+"',"
-                + "`id_karyawan`='"+ c.getId_karyawan()+"',"
-                + "`id_pelanggan`='"+ c.getId_pelanggan()+"',"
-                + "`tanggal_pesanan`='"+ c.getTanggal_pesanan()+"' "
-                + "WHERE `id_pesanan`='" + id_pesanan + "'";
-        System.out.println("Updating transaksi");
-        
-        try{
-            Statement statement = con.createStatement();
-            int result = statement.executeUpdate(sql);
-            System.out.println("Edited" + result + " Transaksi " + id_pesanan);
-            statement.close();
-        }catch(Exception e){
-            System.out.println("Error Updating Transaksi...");
-            System.out.println(e);
-        }
-        dbCon.closeConnection();
-    }
     
-    @Override
-    public void delete(String id_pesanan){
-        con = dbCon.makeConnection();
-        String sql = "DELETE FROM `transaksi` WHERE `id_pesanan`='" + id_pesanan + "'";
-        System.out.println("Deleting Transaksi...");
-        
-        try{
-            Statement statement = con.createStatement();
-            int result = statement.executeUpdate(sql);
-            System.out.println("Edited " + result + " Transaksi " + id_pesanan);
-            statement.close();
-        }catch(Exception e){
-            System.out.println("Error Deleting Transaksi...");
-            System.out.println(e);
-        }
-        dbCon.closeConnection();
-    }
-   
     public void createReceipt(String id_pesanan) {
         con = dbCon.makeConnection();
+        
+        // path yobel : "C:\\Users\\yobel\\OneDrive - Universitas Atma Jaya Yogyakarta\\Documents\\tugas\\PBO\\TubesPBO\\TubesPBO_Restoran\\src\\report\\transaksiReport.jrxml";
+        // path seka  : "D:\\Semester 4\\PBOGuided\\TUBES\\TubesPBO\\src\\report\\transaksiReport.jrxml"
         try { // UBAH PATHNYA SESUAI JARXML MASING - MASING
             String reportSrcFile = "D:\\Semester 4\\PBOGuided\\TUBES\\TubesPBO\\src\\report\\transaksiReport.jrxml";
             JasperReport jasperReport = JasperCompileManager.compileReport(reportSrcFile);

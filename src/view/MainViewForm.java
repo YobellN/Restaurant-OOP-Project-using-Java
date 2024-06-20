@@ -139,6 +139,7 @@ public class MainViewForm extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1368, 795));
         setResizable(false);
 
         sidePanel.setBackground(new java.awt.Color(229, 171, 89));
@@ -451,7 +452,7 @@ public class MainViewForm extends javax.swing.JFrame {
                 .addComponent(reservasiPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(logoutPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addGap(58, 58, 58))
         );
 
         contentPanel.setBackground(new java.awt.Color(153, 255, 153));
@@ -597,14 +598,14 @@ public class MainViewForm extends javax.swing.JFrame {
             .addGroup(panelLoginLayout.createSequentialGroup()
                 .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLoginLayout.createSequentialGroup()
+                        .addGap(370, 370, 370)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelLoginLayout.createSequentialGroup()
                         .addGap(333, 333, 333)
                         .addComponent(panelInputLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelLoginLayout.createSequentialGroup()
                         .addGap(293, 293, 293)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelLoginLayout.createSequentialGroup()
-                        .addGap(351, 351, 351)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(335, Short.MAX_VALUE))
         );
         panelLoginLayout.setVerticalGroup(
@@ -623,7 +624,7 @@ public class MainViewForm extends javax.swing.JFrame {
         loginMenuPanel.setLayout(loginMenuPanelLayout);
         loginMenuPanelLayout.setHorizontalGroup(
             loginMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1190, Short.MAX_VALUE)
+            .addGap(0, 1356, Short.MAX_VALUE)
             .addGroup(loginMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(loginMenuPanelLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -665,7 +666,7 @@ public class MainViewForm extends javax.swing.JFrame {
             .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(mainPanelLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(loginMenuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 795, Short.MAX_VALUE)
+                    .addComponent(loginMenuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 793, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
@@ -749,6 +750,7 @@ public class MainViewForm extends javax.swing.JFrame {
             }else if(k.getJabatan().equalsIgnoreCase("Kasir")){
                 setKasirPanel(true);
             }
+            logoPanelMouseClicked(evt);
         }else{
             JOptionPane.showMessageDialog(rootPane, "USERNAME/PASSWORD ANDA SALAH!!!");
             return;
@@ -783,10 +785,6 @@ public class MainViewForm extends javax.swing.JFrame {
         setForm(new DisplayMenuMainPanel());
         selectedIndex = 4;
     }//GEN-LAST:event_logoPanelMouseClicked
-
-    private void reservasiLabelMouseClicked(java.awt.event.MouseEvent evt) {                                            
-        
-    }                                           
 
     private void logoutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabelMouseClicked
         login = false;
