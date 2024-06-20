@@ -517,27 +517,28 @@ public class MainViewForm extends javax.swing.JFrame {
                         .addGap(205, 205, 205)
                         .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelInputLoginLayout.createSequentialGroup()
-                        .addGap(208, 208, 208)
-                        .addGroup(panelInputLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelInputLoginLayout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(iconLogin))
-                            .addComponent(loginLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(220, 220, 220)
+                        .addComponent(iconLogin)))
                 .addContainerGap(191, Short.MAX_VALUE))
             .addGroup(panelInputLoginLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
                 .addGroup(panelInputLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(userIDLabel)
                     .addGroup(panelInputLoginLayout.createSequentialGroup()
+                        .addGap(48, 48, 48)
                         .addGroup(panelInputLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(usernameLabel)
-                            .addComponent(passwordLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(panelInputLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(usernameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
-                            .addComponent(idKaryawanTextField, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(passwordTextField))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(userIDLabel)
+                            .addGroup(panelInputLoginLayout.createSequentialGroup()
+                                .addGroup(panelInputLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(usernameLabel)
+                                    .addComponent(passwordLabel))
+                                .addGap(18, 18, 18)
+                                .addGroup(panelInputLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(usernameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                                    .addComponent(idKaryawanTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(passwordTextField)))))
+                    .addGroup(panelInputLoginLayout.createSequentialGroup()
+                        .addGap(206, 206, 206)
+                        .addComponent(loginLabel)))
+                .addGap(0, 25, Short.MAX_VALUE))
         );
         panelInputLoginLayout.setVerticalGroup(
             panelInputLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -664,7 +665,7 @@ public class MainViewForm extends javax.swing.JFrame {
             .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(mainPanelLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(loginMenuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE)
+                    .addComponent(loginMenuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 795, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
@@ -676,7 +677,7 @@ public class MainViewForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 799, Short.MAX_VALUE)
         );
 
         pack();
