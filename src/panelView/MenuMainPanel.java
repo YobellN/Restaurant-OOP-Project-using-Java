@@ -4,11 +4,9 @@
  */
 package panelView;
 
-import control.MenuControl;
 import control.MinumanControl;
 import control.MakananControl;
 import dao.MakananDAO;
-import dao.MenuDAO;
 import dao.MinumanDAO;
 import java.awt.Component;
 import java.awt.Graphics2D;
@@ -22,7 +20,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Comparator;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -39,7 +36,7 @@ import model.Menu;
 import model.Minuman;
 import model.Makanan;
 import exception.InputKosongException;
-import exception.InputHarusAngkaException;
+import exception.InputSpecialAtributeException;
 
 public class MenuMainPanel extends javax.swing.JPanel {
 
@@ -67,9 +64,9 @@ public class MenuMainPanel extends javax.swing.JPanel {
         }
     }
 
-    private void InputHarusAngkaSpecialException() throws InputHarusAngkaException { // exception khusus untuk jumlah
-        if (!isInteger(specialAtributeInputTextfield.getText()) && jenisProdukInputButton.getText().equals("Minuman")) {
-            throw new InputHarusAngkaException();
+    private void InputUkuranSpecialException() throws InputSpecialAtributeException { // exception khusus untuk jumlah
+        if (!(specialAtributeInputTextfield.getText()).equals("M") || !(specialAtributeInputTextfield.getText()).equals("L") || !(specialAtributeInputTextfield.getText()).equals("S") && jenisProdukInputButton.getText().equals("Minuman")) {
+            throw new InputSpecialAtributeException();
         }
     }
 
@@ -810,7 +807,7 @@ public class MenuMainPanel extends javax.swing.JPanel {
         }
         try {
             inputKosongMenuException();
-            InputHarusAngkaSpecialException();
+            InputUkuranSpecialException();
             
             int dialog = JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan " + action + "?");
             if (dialog == JOptionPane.CLOSED_OPTION || dialog == JOptionPane.NO_OPTION || dialog == JOptionPane.CANCEL_OPTION) {
@@ -855,8 +852,8 @@ public class MenuMainPanel extends javax.swing.JPanel {
             }
         } catch (InputKosongException e) {
             JOptionPane.showMessageDialog(rootPane, e.message());
-        } catch (InputHarusAngkaException e2) { // MENGECEK UKURAN MINUMAN YANG HARUS ANGKA
-            JOptionPane.showMessageDialog(rootPane, e2.message());
+        } catch (InputSpecialAtributeException e2) { // MENGECEK UKURAN MINUMAN YANG HARUS ANGKA
+            JOptionPane.showMessageDialog(rootPane, e2.message("Ukuran Hanya :  S / M / L"));
         }
         clearTextData();
         setEditDeleteButton(false);
