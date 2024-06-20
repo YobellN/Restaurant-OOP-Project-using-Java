@@ -181,13 +181,10 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
 
         tabelReservasi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID Reservasi", "ID Pelanggan", "Nama Pelanggan", "No Telepon Pelanggan", "Alamat Pelanggan", "Jenis", "Paket", "Tanggal", "Total Harga"
             }
         ));
         tabelReservasi.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -840,7 +837,7 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
         setComponent(false);
         setEditDeleteBtn(false);
         setRadioComponent(false);
-        
+        showTableBySearch("");
         tambahReservasiButton.setEnabled(true);
     }//GEN-LAST:event_batalkanReservasiButtonActionPerformed
 

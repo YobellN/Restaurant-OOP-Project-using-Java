@@ -16,7 +16,6 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import model.Karyawan;
-import table.TabelTransaksi;
 
 public class laporanMainPanel extends javax.swing.JPanel {
     private PesananControl pc;
@@ -31,22 +30,11 @@ public class laporanMainPanel extends javax.swing.JPanel {
         pc = new PesananControl();
         initComponents();
         showTransaksi("");
+        showPesanan("AWALAN TIDAK PERLU DIBUKA");
         menuTerlarisValue.setText(tc.cariMenuTerlaris());
         totalOmsetValue.setText("Rp" + String.valueOf(tc.hitungTotalOmset()));
         totalTransaksiValue.setText(String.valueOf(tc.hitungTotalTransaksi())+" Transaksi");
     }
-
-
-
-    private boolean isFloat(String input) {
-        try {
-            Float.parseFloat(input);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
 
     private static void addHeaderClickListener(JTable table) {
         JTableHeader header = table.getTableHeader();
@@ -174,13 +162,10 @@ public class laporanMainPanel extends javax.swing.JPanel {
 
         tabelKaryawan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID Transaksi", "Nama Kasir", "Nama Pelanggan", "Tanggal Transaksi", "Total Transaksi"
             }
         ));
         tabelKaryawan.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -192,13 +177,10 @@ public class laporanMainPanel extends javax.swing.JPanel {
 
         tabelPesanan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID Menu", "Nama Menu", "Jumlah", "Sub Total"
             }
         ));
         minumanScrollPane1.setViewportView(tabelPesanan);
@@ -234,11 +216,6 @@ public class laporanMainPanel extends javax.swing.JPanel {
         totalTransaksiTextField.setForeground(new java.awt.Color(137, 92, 3));
         totalTransaksiTextField.setText("Total Transaksi:");
         totalTransaksiTextField.setBorder(null);
-        totalTransaksiTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                totalTransaksiTextFieldActionPerformed(evt);
-            }
-        });
 
         menuTerlarisTextField.setEditable(false);
         menuTerlarisTextField.setBackground(new java.awt.Color(255, 218, 182));
@@ -290,11 +267,6 @@ public class laporanMainPanel extends javax.swing.JPanel {
         totalOmsetTextField.setForeground(new java.awt.Color(137, 92, 3));
         totalOmsetTextField.setText("Total Omset:");
         totalOmsetTextField.setBorder(null);
-        totalOmsetTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                totalOmsetTextFieldActionPerformed(evt);
-            }
-        });
 
         totalOmsetValue.setEditable(false);
         totalOmsetValue.setBackground(new java.awt.Color(255, 218, 182));
@@ -454,6 +426,8 @@ public class laporanMainPanel extends javax.swing.JPanel {
         tabelKaryawan.clearSelection();
         tabelPesanan.clearSelection();
         searchKaryawanInputTextField.setText("");
+        showPesanan("TIDAK AKAN KETEMU"); // MENCARI ID YANG TIDAK ADA KARENA BATAL
+        selectedId = null;
     }//GEN-LAST:event_batalkanKaryawanButtonActionPerformed
 
     private void searchKaryawanInputTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKaryawanInputTextFieldKeyTyped
@@ -463,6 +437,11 @@ public class laporanMainPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_searchKaryawanInputTextFieldKeyTyped
 
     private void searchKaryawanInputButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchKaryawanInputButton1ActionPerformed
+        
+        if(tanggalMulai.getDate() == null){
+            JOptionPane.showMessageDialog(rootPane, "Tanggal tidak boleh kosong!!!");
+            return;
+        }
         String toDate1 = tanggalMulai.getDate().toString();
         SimpleDateFormat inputFormat1 = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
         Date date1 = null;
@@ -474,6 +453,10 @@ public class laporanMainPanel extends javax.swing.JPanel {
         SimpleDateFormat outputFormat1 = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate1 = outputFormat1.format(date1);
         
+        if(tanggalSelesai.getDate() == null){
+            JOptionPane.showMessageDialog(rootPane, "Tanggal tidak boleh kosong!!!");
+            return;
+        }
         String toDate2 = tanggalSelesai.getDate().toString();
         SimpleDateFormat inputFormat2 = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
         Date date2 = null;
@@ -497,16 +480,14 @@ public class laporanMainPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_searchKaryawanInputButton1ActionPerformed
 
-    private void totalTransaksiTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalTransaksiTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_totalTransaksiTextFieldActionPerformed
-
     private void menuTerlarisTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTerlarisTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuTerlarisTextFieldActionPerformed
 
     private void batalkanKaryawanButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalkanKaryawanButton1ActionPerformed
-         
+        if(selectedId == null){
+            return;
+        }
         tc.createReceipt(selectedId);
     }//GEN-LAST:event_batalkanKaryawanButton1ActionPerformed
 
@@ -517,10 +498,6 @@ public class laporanMainPanel extends javax.swing.JPanel {
     private void menuTerlarisValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTerlarisValueActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuTerlarisValueActionPerformed
-
-    private void totalOmsetTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalOmsetTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_totalOmsetTextFieldActionPerformed
 
     private void totalOmsetValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalOmsetValueActionPerformed
         // TODO add your handling code here:

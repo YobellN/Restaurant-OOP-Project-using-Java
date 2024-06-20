@@ -511,13 +511,10 @@ public class KaryawanMainPanel extends javax.swing.JPanel {
 
         tabelKaryawan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID Karyawan", "Nama Karyawan", "Jabatan", "Gaji", "Username", "Password"
             }
         ));
         tabelKaryawan.addMouseListener(new java.awt.event.MouseAdapter() {
