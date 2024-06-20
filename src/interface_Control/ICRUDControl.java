@@ -12,5 +12,6 @@ public interface ICRUDControl<T, ID> {
     void insert(T entity);
     void update(T entity);
     void delete(ID id);
+    
     ID generateId();
 }

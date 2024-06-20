@@ -3,7 +3,7 @@ package dao;
 import com.mysql.jdbc.PreparedStatement;
 import connection.DbConnection;
 import interface_DAO.IDAO;
-import interface_Control.IGenerateID;
+import interface_DAO.IGenerateID;
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;

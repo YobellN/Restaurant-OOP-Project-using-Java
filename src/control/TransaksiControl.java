@@ -5,7 +5,8 @@
 package control;
 
 import dao.TransaksiDAO;
-import interface_Control.ITransaksiControl;
+import interface_Control.ICRUDControl;
+import interface_Control.IShowTableBySearch;
 import java.util.List;
 import model.Transaksi;
 import table.TabelTransaksi;
@@ -14,7 +15,7 @@ import table.TabelTransaksi;
  *
  * @author Tok Se Ka 220711904
  */
-public class TransaksiControl implements ITransaksiControl {
+public class TransaksiControl implements ICRUDControl<Transaksi, String>, IShowTableBySearch<TabelTransaksi, String> {
     private TransaksiDAO kDao;
     
     public TransaksiControl(TransaksiDAO tDao) {
@@ -52,7 +53,7 @@ public class TransaksiControl implements ITransaksiControl {
         kDao.createReceipt(id_pesanan);
     }
     
-    @Override
+    
     public void insertTotalHarga(Transaksi transaksi) {
         kDao.updateHarga(transaksi);
     }

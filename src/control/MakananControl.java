@@ -1,13 +1,14 @@
 package control;
 import dao.MakananDAO;
-import interface_Control.IMakananControl;
+import interface_Control.ICRUDControl;
+import interface_Control.IShowTableBySearch;
 import java.util.ArrayList;
 import java.util.List;
 import model.Makanan;
 import model.Menu;
 import table.TabelMakanan;
 
-public class MakananControl extends MenuControl<Makanan> implements IMakananControl {
+public class MakananControl extends MenuControl<Makanan> implements ICRUDControl<Makanan, String>, IShowTableBySearch<TabelMakanan, String>{
     private MakananDAO mkDao;
     
     public MakananControl(MakananDAO mDao) {

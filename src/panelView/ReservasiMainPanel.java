@@ -57,7 +57,7 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
     
     // TABLE SHOW
     public void showTableBySearch(String target){
-        tabelReservasi.setModel(junctionControl.showTable(target));
+        tabelReservasi.setModel(junctionControl.showTableBySearch(target));
     }
     // TABLE SHOW    
 
@@ -634,7 +634,7 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
         }
         action = "delete";
         
-        junctionControl.deleteDataReservasi(selectedId);
+        junctionControl.delete(selectedId);
         
         clearText();
         setComponent(false);
@@ -717,11 +717,11 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
             if(action.equals("add")){
                 Reservasi dataNew = new Reservasi(selectedSingle.getId_pelanggan(), formattedDate, radio, 
                         checkbox, Float.parseFloat(totalHargaInputTextField.getText()), selectedSingle);
-                junctionControl.insertDataReservasi(dataNew);
+                junctionControl.insert(dataNew);
             } else if(action.equals("update")){
                 Reservasi dataNew = new Reservasi(selectedId, selectedSingle.getId_pelanggan(), formattedDate, radio, 
                         checkbox, Float.parseFloat(totalHargaInputTextField.getText()), selectedSingle);
-                junctionControl.updateDataReservasi(dataNew, selectedId);
+                junctionControl.update(dataNew);
                 selectedId = "";
             }
         }catch(InputKosongException e){

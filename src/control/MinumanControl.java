@@ -1,13 +1,14 @@
 package control;
 import dao.MinumanDAO;
-import interface_Control.IMinumanControl;
+import interface_Control.ICRUDControl;
+import interface_Control.IShowTableBySearch;
 import java.util.ArrayList;
 import java.util.List;
 import model.Menu;
 import model.Minuman;
 import table.TabelMinuman;
 
-public class MinumanControl extends MenuControl<Minuman> implements IMinumanControl {
+public class MinumanControl extends MenuControl<Minuman> implements ICRUDControl<Minuman, String>, IShowTableBySearch<TabelMinuman, String> {
     private MinumanDAO mDAO;
     
     public MinumanControl(MinumanDAO mDao) {
