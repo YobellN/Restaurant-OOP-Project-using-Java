@@ -11,6 +11,8 @@ import java.awt.Color;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import model.Karyawan;
+import exception.InputKosongException;
+import exception.inputLoginSalahException;
 
 public class MainViewForm extends javax.swing.JFrame {
     private int selectedIndex = -1;
@@ -84,6 +86,17 @@ public class MainViewForm extends javax.swing.JFrame {
         setOwnerPanel(value);
         setManagerPanel(value);
         setKasirPanel(value);
+    }
+    
+    private void inputKosongLoginException() throws InputKosongException {
+        if (idKaryawanTextField.getText().isEmpty() || usernameTextField.getText().isEmpty() || passwordTextField.getText().isEmpty()) {
+            throw new InputKosongException();
+        }
+    }
+    private void inputLoginException() throws inputLoginSalahException {
+        if (!kc.loginKaryawan(usernameTextField.getText(), passwordTextField.getText(), idKaryawanTextField.getText())) {
+            throw new inputLoginSalahException();
+        }
     }
     
     public MainViewForm() {
@@ -481,12 +494,6 @@ public class MainViewForm extends javax.swing.JFrame {
         loginLabel.setForeground(new java.awt.Color(255, 255, 255));
         loginLabel.setText("MASUK");
 
-        idKaryawanTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idKaryawanTextFieldActionPerformed(evt);
-            }
-        });
-
         iconLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-login-30.png"))); // NOI18N
 
         userIDLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 14)); // NOI18N
@@ -665,7 +672,7 @@ public class MainViewForm extends javax.swing.JFrame {
             .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(mainPanelLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(loginMenuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 793, Short.MAX_VALUE)
+                    .addComponent(loginMenuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 793, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
@@ -736,10 +743,13 @@ public class MainViewForm extends javax.swing.JFrame {
     }//GEN-LAST:event_pesananLabelDateMouseClicked
 
     private void loginButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseClicked
-        if(kc.loginKaryawan(usernameTextField.getText(), passwordTextField.getText(), idKaryawanTextField.getText())){
+        try {
+            inputKosongLoginException();
+            inputLoginException();
+            
             k = kc.searchDataKaryawan(idKaryawanTextField.getText());
             login = true;
-            
+
             JOptionPane.showMessageDialog(rootPane, "ANDA TELAH LOGIN");
             setLoginPanel(false, true);
             if(k.getJabatan().equals("Owner")){
@@ -749,16 +759,14 @@ public class MainViewForm extends javax.swing.JFrame {
             }else if(k.getJabatan().equalsIgnoreCase("Kasir")){
                 setKasirPanel(true);
             }
+            
             logoPanelMouseClicked(evt);
-        }else{
-            JOptionPane.showMessageDialog(rootPane, "USERNAME/PASSWORD ANDA SALAH!!!");
-            return;
+        } catch (InputKosongException e) {
+            JOptionPane.showMessageDialog(rootPane, e.message());
+        } catch(inputLoginSalahException e2){
+            JOptionPane.showMessageDialog(rootPane, e2.message());
         }
     }//GEN-LAST:event_loginButtonMouseClicked
-
-    private void idKaryawanTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idKaryawanTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_idKaryawanTextFieldActionPerformed
 
     private void pesananLabelDate1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pesananLabelDate1MouseClicked
         if(selectedIndex == 7)
@@ -786,6 +794,10 @@ public class MainViewForm extends javax.swing.JFrame {
     }//GEN-LAST:event_logoPanelMouseClicked
 
     private void logoutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabelMouseClicked
+        int dialog = JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan Logout ?");
+        if (dialog == JOptionPane.CLOSED_OPTION || dialog == JOptionPane.NO_OPTION || dialog == JOptionPane.CANCEL_OPTION) {
+            return;
+        }
         login = false;
         setLoginPanel(true, false);
         initsidePanel(false);
@@ -804,6 +816,10 @@ public class MainViewForm extends javax.swing.JFrame {
     }//GEN-LAST:event_reservasiPanelMouseClicked
 
     private void logoutPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutPanelMouseClicked
+        int dialog = JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan Logout ?");
+        if (dialog == JOptionPane.CLOSED_OPTION || dialog == JOptionPane.NO_OPTION || dialog == JOptionPane.CANCEL_OPTION) {
+            return;
+        }
         login = false;
         setLoginPanel(true, false);
         initsidePanel(false);

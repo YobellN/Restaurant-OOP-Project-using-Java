@@ -806,6 +806,10 @@ public class MainViewForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_reservasiPanelMouseClicked
 
     private void logoutPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutPanelMouseClicked
+        int dialog = JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan Logout ?");
+        if (dialog == JOptionPane.CLOSED_OPTION || dialog == JOptionPane.NO_OPTION || dialog == JOptionPane.CANCEL_OPTION) {
+            return;
+        }
         login = false;
         setLoginPanel(true, false);
         initsidePanel(false);
