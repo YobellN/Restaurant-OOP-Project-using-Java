@@ -5,7 +5,8 @@
 package control;
 
 import dao.PelangganDAO;
-import interface_Control.IPelangganControl;
+import interface_Control.ICRUDControl;
+import interface_Control.IShowTableBySearch;
 import java.util.List;
 import model.Pelanggan;
 import table.TabelPelanggan;
@@ -14,7 +15,7 @@ import table.TabelPelanggan;
  *
  * @author yobel
  */
-public class PelangganControl implements IPelangganControl {
+public class PelangganControl implements ICRUDControl<Pelanggan, String>, IShowTableBySearch<TabelPelanggan, String> {
     private PelangganDAO pDao;
 
     public PelangganControl(PelangganDAO pDao) {
@@ -48,7 +49,6 @@ public class PelangganControl implements IPelangganControl {
         return new TabelPelanggan(data);
     }
 
-    @Override
     public Pelanggan searchDataPelanggan(String id) {
         return pDao.search(id);
     }

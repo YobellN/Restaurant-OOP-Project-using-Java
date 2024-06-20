@@ -2,7 +2,7 @@ package dao;
 
 import connection.DbConnection;
 import interface_DAO.IDAO;
-import interface_Control.IGenerateID;
+import interface_DAO.IGenerateID;
 import interface_DAO.ISearchData;
 import java.sql.Connection;
 import java.sql.ResultSet;

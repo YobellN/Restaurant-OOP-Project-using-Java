@@ -6,6 +6,7 @@ package control;
 
 import dao.PesananDAO;
 import interface_Control.IPesananControl;
+import interface_Control.IShowTableBySearch;
 import java.util.List;
 import model.Pesanan;
 import table.TabelPesanan;
@@ -14,7 +15,7 @@ import table.TabelPesanan;
  *
  * @author Tok Se Ka 220711904
  */
-public class PesananControl implements IPesananControl{
+public class PesananControl implements IPesananControl, IShowTableBySearch<TabelPesanan, String>{
     PesananDAO pDao = new PesananDAO();
     
     public void insertDataPesanan(List<Pesanan> pesananList) {
@@ -30,10 +31,11 @@ public class PesananControl implements IPesananControl{
         pDao.delete(idPesanan, idMenu);
     } // menghapus karyawan di database berdasarkan id
     
-    public TabelPesanan showTable(String target){
+    public TabelPesanan showTableBySearch(String target){
         List<Pesanan> data = pDao.showData(target);
         return new TabelPesanan(data);
     }
+
     
 
 }

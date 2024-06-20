@@ -16,5 +16,4 @@ public interface IPesananControl {
     void insertDataPesanan(List<Pesanan> pesananList);
     void updateDataPesanan(Pesanan pesanan);
     void deleteDataPesanan(String idPesanan, String idMenu);
-    TabelPesanan showTable(String target);
 }

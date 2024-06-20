@@ -207,7 +207,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="3" green="5c" red="89" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Pencarian Produk"/>
+                <Property name="text" type="java.lang.String" value="Pencarian Menu"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="searchProdukInputTextField">
@@ -547,7 +547,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Simpan"/>
+                    <Property name="text" type="java.lang.String" value="Tambah"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[81, 21]"/>
                     </Property>
@@ -599,7 +599,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="3" green="5c" red="89" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="ID Produk"/>
+                    <Property name="text" type="java.lang.String" value="ID Menu"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="idProdukInputTextField">

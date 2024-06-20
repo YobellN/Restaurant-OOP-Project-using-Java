@@ -12,7 +12,7 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import model.Karyawan;
 
-public class MainViewForm extends javax.swing.JFrame {
+public class MainViewForm1 extends javax.swing.JFrame {
     private int selectedIndex = -1;
     private Karyawan k = null;
     private KaryawanControl kc;
@@ -86,7 +86,7 @@ public class MainViewForm extends javax.swing.JFrame {
         setKasirPanel(value);
     }
     
-    public MainViewForm() {
+    public MainViewForm1() {
         initComponents();
         recolorDefaultSwitchPanel();
         kc = new KaryawanControl(new KaryawanDAO());
@@ -139,7 +139,6 @@ public class MainViewForm extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1368, 795));
 
         sidePanel.setBackground(new java.awt.Color(229, 171, 89));
         sidePanel.setEnabled(false);
@@ -517,28 +516,27 @@ public class MainViewForm extends javax.swing.JFrame {
                         .addGap(205, 205, 205)
                         .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelInputLoginLayout.createSequentialGroup()
-                        .addGap(220, 220, 220)
-                        .addComponent(iconLogin)))
+                        .addGap(208, 208, 208)
+                        .addGroup(panelInputLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelInputLoginLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(iconLogin))
+                            .addComponent(loginLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(191, Short.MAX_VALUE))
             .addGroup(panelInputLoginLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
                 .addGroup(panelInputLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(userIDLabel)
                     .addGroup(panelInputLoginLayout.createSequentialGroup()
-                        .addGap(48, 48, 48)
                         .addGroup(panelInputLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(userIDLabel)
-                            .addGroup(panelInputLoginLayout.createSequentialGroup()
-                                .addGroup(panelInputLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(usernameLabel)
-                                    .addComponent(passwordLabel))
-                                .addGap(18, 18, 18)
-                                .addGroup(panelInputLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(usernameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
-                                    .addComponent(idKaryawanTextField, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(passwordTextField)))))
-                    .addGroup(panelInputLoginLayout.createSequentialGroup()
-                        .addGap(206, 206, 206)
-                        .addComponent(loginLabel)))
-                .addGap(0, 25, Short.MAX_VALUE))
+                            .addComponent(usernameLabel)
+                            .addComponent(passwordLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelInputLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(usernameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                            .addComponent(idKaryawanTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(passwordTextField))))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelInputLoginLayout.setVerticalGroup(
             panelInputLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -677,7 +675,7 @@ public class MainViewForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 799, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE)
         );
 
         pack();
@@ -785,6 +783,10 @@ public class MainViewForm extends javax.swing.JFrame {
         selectedIndex = 4;
     }//GEN-LAST:event_logoPanelMouseClicked
 
+    private void reservasiLabelMouseClicked(java.awt.event.MouseEvent evt) {                                            
+        
+    }                                           
+
     private void logoutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabelMouseClicked
         login = false;
         setLoginPanel(true, false);
@@ -835,14 +837,46 @@ public class MainViewForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainViewForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainViewForm1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainViewForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainViewForm1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainViewForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainViewForm1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainViewForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainViewForm1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -879,7 +913,7 @@ public class MainViewForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainViewForm().setVisible(true);
+                new MainViewForm1().setVisible(true);
             }
         });
     }

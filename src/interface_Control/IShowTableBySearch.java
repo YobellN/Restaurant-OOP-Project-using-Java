@@ -4,14 +4,10 @@
  */
 package interface_Control;
 
-import model.Pelanggan;
-import table.TabelPelanggan;
-
 /**
  *
  * @author yobel
  */
-public interface IPelangganControl extends ICRUDControl<Pelanggan, String> {
-    TabelPelanggan showTableBySearch(String search);
-    Pelanggan searchDataPelanggan(String id);
+public interface IShowTableBySearch <T, I> {
+     T showTableBySearch(I data);
 }

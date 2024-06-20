@@ -1,12 +1,13 @@
 package control;
 
 import dao.KaryawanDAO;
-import interface_Control.IKaryawanControl;
+import interface_Control.ICRUDControl;
+import interface_Control.IShowTableBySearch;
 import java.util.List;
 import model.Karyawan;
 import table.TabelKaryawan;
 
-public class KaryawanControl implements IKaryawanControl {
+public class KaryawanControl implements ICRUDControl<Karyawan, String>, IShowTableBySearch<TabelKaryawan, String>{
     private KaryawanDAO kDao;
 
     public KaryawanControl(KaryawanDAO kDao) { 
@@ -40,12 +41,10 @@ public class KaryawanControl implements IKaryawanControl {
         return new TabelKaryawan(data);
     }
 
-    @Override 
     public Karyawan searchDataKaryawan(String id) { // DIPAKAI UNTUK MENCARI KARYAWAN SETELAH LOGIN
         return kDao.search(id);
     }
-    
-    @Override
+  
     public boolean loginKaryawan(String user, String pass, String id){  // DIPAKAI UNTUK LOGIN
         return kDao.cekLogin(user, pass, id);
     }

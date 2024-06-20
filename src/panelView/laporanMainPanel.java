@@ -81,7 +81,7 @@ public class laporanMainPanel extends javax.swing.JPanel {
     }
     
     private void showPesanan(String id_pesanan) {
-        tabelPesanan.setModel(pc.showTable(id_pesanan));
+        tabelPesanan.setModel(pc.showTableBySearch(id_pesanan));
         addHeaderClickListenerPesanan(tabelPesanan);
     }
     

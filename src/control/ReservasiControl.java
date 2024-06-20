@@ -1,18 +1,20 @@
 package control;
 
 import dao.ReservasiDAO;
+import interface_Control.ICRUDControl;
+import interface_Control.IShowTableBySearch;
 import java.util.List;
 import model.Reservasi;
 import table.TabelReservasi;
 
-public class ReservasiControl {
+public class ReservasiControl implements ICRUDControl<Reservasi, String>, IShowTableBySearch<TabelReservasi, String>{
     private ReservasiDAO rDao = new ReservasiDAO();
     
     public String generateId(){
         return "R"+rDao.generateId();
     }
     
-    public void insertDataReservasi(Reservasi R){
+    public void insert(Reservasi R){
         R.setId_reservasi(generateId());
         rDao.insert(R);
     }
@@ -21,19 +23,19 @@ public class ReservasiControl {
         return rDao.search(data);
     }
     
-    public void updateDataReservasi(Reservasi R, String id){
-        rDao.update(R, id);
+    public void update(Reservasi R){
+        rDao.update(R, R.getId_reservasi());
     }
     
-    public void deleteDataReservasi(String id){
+    public void delete(String id){
         rDao.delete(id);
     }
     
-    public TabelReservasi showTable(String target){
+    public TabelReservasi showTableBySearch(String target){
         List<Reservasi> data = rDao.showData(target);
         TabelReservasi tabelReservasi = new TabelReservasi(data);
 
         return tabelReservasi;
     }
-    
+
 }

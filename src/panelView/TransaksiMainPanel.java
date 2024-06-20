@@ -253,7 +253,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         searchProdukInputLabel.setBackground(new java.awt.Color(255, 221, 186));
         searchProdukInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         searchProdukInputLabel.setForeground(new java.awt.Color(137, 92, 3));
-        searchProdukInputLabel.setText("Pencarian Produk");
+        searchProdukInputLabel.setText("Pencarian Menu");
 
         searchProdukInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         searchProdukInputTextField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -425,7 +425,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         simpanProdukButton.setBackground(new java.awt.Color(51, 151, 56));
         simpanProdukButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         simpanProdukButton.setForeground(new java.awt.Color(255, 255, 255));
-        simpanProdukButton.setText("Simpan");
+        simpanProdukButton.setText("Tambah");
         simpanProdukButton.setPreferredSize(new java.awt.Dimension(81, 21));
         simpanProdukButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -462,7 +462,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
 
         idProdukInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         idProdukInputLabel.setForeground(new java.awt.Color(137, 92, 3));
-        idProdukInputLabel.setText("ID Produk");
+        idProdukInputLabel.setText("ID Menu");
 
         idProdukInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
 

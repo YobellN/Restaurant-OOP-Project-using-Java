@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package interface_Control;
+package interface_DAO;
 
 /**
  *
  * @author yobel
  */
 public interface IGenerateID {
-    public int generateId();
+    int generateId();
 }
