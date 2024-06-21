@@ -161,6 +161,7 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
         namaPelangganDropDown = new javax.swing.JComboBox<>();
         tanggalReservasiPanel = new javax.swing.JPanel();
         tanggalReservasiLabel = new javax.swing.JLabel();
+        tanggalReservasiInput = new com.toedter.calendar.JDateChooser();
         checkboxPanel = new javax.swing.JPanel();
         checkboxLabel = new javax.swing.JLabel();
         checkboxData1 = new javax.swing.JCheckBox();
@@ -341,15 +342,18 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
             tanggalReservasiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tanggalReservasiPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tanggalReservasiLabel)
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addGroup(tanggalReservasiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tanggalReservasiLabel)
+                    .addComponent(tanggalReservasiInput, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         tanggalReservasiPanelLayout.setVerticalGroup(
             tanggalReservasiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tanggalReservasiPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tanggalReservasiLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tanggalReservasiInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         checkboxPanel.setBackground(new java.awt.Color(255, 218, 182));
@@ -874,6 +878,7 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
     private javax.swing.JButton simpanReservasiButton;
     private javax.swing.JTable tabelReservasi;
     private javax.swing.JButton tambahReservasiButton;
+    private com.toedter.calendar.JDateChooser tanggalReservasiInput;
     private javax.swing.JLabel tanggalReservasiLabel;
     private javax.swing.JPanel tanggalReservasiPanel;
     private javax.swing.JTextField totalHargaInputTextField;

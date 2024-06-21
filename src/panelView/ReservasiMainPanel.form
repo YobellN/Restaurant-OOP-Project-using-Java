@@ -505,8 +505,11 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="tanggalReservasiLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="222" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="tanggalReservasiLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tanggalReservasiInput" min="-2" pref="268" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="41" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -516,6 +519,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="tanggalReservasiLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
+                              <Component id="tanggalReservasiInput" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -531,6 +535,8 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Tanggal Titipan"/>
                       </Properties>
+                    </Component>
+                    <Component class="com.toedter.calendar.JDateChooser" name="tanggalReservasiInput">
                     </Component>
                   </SubComponents>
                 </Container>

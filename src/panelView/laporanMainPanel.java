@@ -117,6 +117,8 @@ public class laporanMainPanel extends javax.swing.JPanel {
         menuTerlarisValue = new javax.swing.JTextField();
         totalOmsetTextField = new javax.swing.JTextField();
         totalOmsetValue = new javax.swing.JTextField();
+        tanggalMulai = new com.toedter.calendar.JDateChooser();
+        tanggalSelesai = new com.toedter.calendar.JDateChooser();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -312,11 +314,14 @@ public class laporanMainPanel extends javax.swing.JPanel {
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(searchKendaraanInputPanelLayout.createSequentialGroup()
-                        .addGap(163, 163, 163)
+                        .addComponent(tanggalMulai, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(searchKaryawanInputLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(175, 175, 175)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tanggalSelesai, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(searchKaryawanInputButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 401, Short.MAX_VALUE)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(167, 167, 167))
                     .addGroup(searchKendaraanInputPanelLayout.createSequentialGroup()
@@ -343,7 +348,9 @@ public class laporanMainPanel extends javax.swing.JPanel {
                 .addGroup(searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(searchKaryawanInputLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchKaryawanInputButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tanggalMulai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tanggalSelesai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(searchKendaraanInputPanelLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
@@ -516,6 +523,8 @@ public class laporanMainPanel extends javax.swing.JPanel {
     private javax.swing.JPanel searchKendaraanInputPanel;
     private javax.swing.JTable tabelKaryawan;
     private javax.swing.JTable tabelPesanan;
+    private com.toedter.calendar.JDateChooser tanggalMulai;
+    private com.toedter.calendar.JDateChooser tanggalSelesai;
     private javax.swing.JTextField totalOmsetTextField;
     private javax.swing.JTextField totalOmsetValue;
     private javax.swing.JTextField totalTransaksiTextField;
