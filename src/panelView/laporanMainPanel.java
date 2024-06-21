@@ -106,8 +106,6 @@ public class laporanMainPanel extends javax.swing.JPanel {
         tabelKaryawan = new javax.swing.JTable();
         minumanScrollPane1 = new javax.swing.JScrollPane();
         tabelPesanan = new javax.swing.JTable();
-        tanggalMulai = new com.toedter.calendar.JDateChooser();
-        tanggalSelesai = new com.toedter.calendar.JDateChooser();
         searchKaryawanInputLabel1 = new javax.swing.JLabel();
         searchKaryawanInputLabel2 = new javax.swing.JLabel();
         searchKaryawanInputButton1 = new javax.swing.JButton();
@@ -314,12 +312,9 @@ public class laporanMainPanel extends javax.swing.JPanel {
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(searchKendaraanInputPanelLayout.createSequentialGroup()
-                        .addComponent(tanggalMulai, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(163, 163, 163)
                         .addComponent(searchKaryawanInputLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tanggalSelesai, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(175, 175, 175)
                         .addComponent(searchKaryawanInputButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -345,11 +340,9 @@ public class laporanMainPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(searchKaryawanInputLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tanggalMulai, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addGroup(searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(searchKaryawanInputLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tanggalSelesai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(searchKaryawanInputButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchKaryawanInputButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(searchKendaraanInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(searchKendaraanInputPanelLayout.createSequentialGroup()
@@ -523,8 +516,6 @@ public class laporanMainPanel extends javax.swing.JPanel {
     private javax.swing.JPanel searchKendaraanInputPanel;
     private javax.swing.JTable tabelKaryawan;
     private javax.swing.JTable tabelPesanan;
-    private com.toedter.calendar.JDateChooser tanggalMulai;
-    private com.toedter.calendar.JDateChooser tanggalSelesai;
     private javax.swing.JTextField totalOmsetTextField;
     private javax.swing.JTextField totalOmsetValue;
     private javax.swing.JTextField totalTransaksiTextField;
